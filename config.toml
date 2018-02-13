@@ -6,7 +6,7 @@
 baseurl = "/"
 
 # Title of your site
-title = "Academic"
+title = "Daniel Hadley"
 
 # Your copyright notice - appears in site footer.
 # To display a copyright symbol, type `&copy;`.
@@ -50,20 +50,20 @@ defaultContentLanguageInSubdir = false
   font = "default"
 
   # Your details.
-  name = "Lena Smith"
-  role = "Professor of Artificial Intelligence"
+  # name = "Daniel Hadley"
+  role = "SLC-Based Data Scientist"
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
-  organizations = [ { name = "Stanford University", url = "" } ]
+  organizations = [ { name = "Sorenson Impact", url = "https://sorensonimpact.com/" } ]
 
   gravatar = false  # Get your avatar from Gravatar.com? (true/false)
-  avatar = "portrait.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
-  email = "test@example.org"
-  address = "Building 1 Room 1, Stanford University, California, 90210, USA"
-  office_hours = "Monday 10:00 to 13:00 or email for appointment"
-  phone = "888 888 88 88"
-  skype = "echo123"
+  avatar = "Daniel_Hadley_2016.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
+  email = "dphnrome@gmail.com"
+  address = "85 Fort Douglas Blvd building 602, Salt Lake City, UT 84112"
+  office_hours = ""
+  phone = ""
+  skype = ""
   telegram = ""
 
   # Enable Keybase in Contact widget by entering your keybase.io username.
@@ -217,22 +217,17 @@ defaultContentLanguageInSubdir = false
   [[params.social]]
     icon = "envelope"
     icon_pack = "fa"
-    link = "mailto:test@example.org"
+    link = "mailto:dphnrome@gmail.com"
 
   [[params.social]]
     icon = "twitter"
     icon_pack = "fa"
-    link = "//twitter.com/GeorgeCushen"
-
-  [[params.social]]
-    icon = "google-scholar"
-    icon_pack = "ai"
-    link = "https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ"
+    link = "//twitter.com/danielphadley"
 
   [[params.social]]
     icon = "github"
     icon_pack = "fa"
-    link = "//github.com/gcushen"
+    link = "//github.com/DanielHadley"
 
 
 # Navigation Links
