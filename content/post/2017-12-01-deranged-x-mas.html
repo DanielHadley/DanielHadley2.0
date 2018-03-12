@@ -1,0 +1,78 @@
+---
+title: "Deranged X-Mas - a Gift Exchange Puzzle"
+date: 2018-12-01
+categories: ["R"]
+tags: ["probability", "puzzle", "combinatronics"]
+---
+
+
+
+<p>While planning a holiday gift exchange this week, my wife casually challenged me with a sort of tricky probability puzzle:</p>
+<blockquote>
+<p>Sara and I were talking today and realized that we were off by one on the rotation because last year we went sledding instead of buying gifts.</p>
+</blockquote>
+<blockquote>
+<p>It should actually be: * Sara gives to Jonny * Jimmy gives to Thurop * Amy gives to Lisa * Jonny gives to Sara * Thurop gives to Jimmy * Lisa gives to Amy</p>
+</blockquote>
+<blockquote>
+<p>So everyone is giving to the same person that is giving to them. How often will this phenomenon happen? Dan, give us a statistical analysis ASAP!</p>
+</blockquote>
+<p>(Note: they do a rotation, but we will pretend it’s random. Also, names <em>not</em> changed for privacy. I actually have a brother-in-law named Thurop, which is pretty cool.)</p>
+<p>I fumbled around with permutations for a while before reading that situations like these are actually <a href="http://mathworld.wolfram.com/Derangement.html">derangements</a> - permutations of sets where no element appears in its original position. In the case of a six sibling gift exchange, there are 265 derangements. So now we have the denominator.</p>
+<p>The question is, of these derangements (I will never get tired of using that word, now that I know it), how many contain combinations where the siblings are mirrored, where each is assigned to the same person? To solve the puzzle, my friend Andrew and I took a three phase approach that we often use:</p>
+<ol style="list-style-type: decimal">
+<li>I try analytically and fail</li>
+<li>Andrew succeeds</li>
+<li>I confirm his answer with brute-force programming</li>
+</ol>
+<p>Andrew wrote, “I think the answer is 15/265. The denominator is a derangement, which are confusing as hell, but it is a type of permutation that is calculated: n! * Sum i = 0 -&gt; n of ((-i)^n)/i!. The numerator I’m less sure about.I just counted the total ways that the matches would be mirrored. For person 1 and 6 to be matched there are 3 possibilities, and then there are 5 different people 1 could be matched with, so 5*3.&quot;</p>
+<p>The combinations with person 1, aka Sara, and person 6, aka Lisa, look like this:</p>
+<ul>
+<li>[(1,6)(2,5)(3,4)]</li>
+<li>[(1,6)(2,4)(3,5)]</li>
+<li>[(1,6)(2,3)(4,5)]</li>
+</ul>
+<p>You can then repeat that chain with siblings 2, 3, 4, and 5.</p>
+<p>To confirm, I started with all derangements and wrote a nested for-loop that looked for cases where the siblings are mirrored. The answer: 15/265, or approximately 5% of the time the gift exchange will work out the way it did this year. It’s another festivus miracle!!</p>
+<pre class="r"><code>library(gtools)
+library(tidyverse)
+
+# First we get the derangements from the permutations
+r &lt;- 6
+S &lt;- 1:r
+ders &lt;- permutations(r, r, S)  
+ders &lt;- ders[apply(ders, 1, function(x) !any(x==S)),]
+
+# This df is like a table 
+# where the column name recieves from the row
+ders &lt;- as.data.frame(ders)
+names(ders) &lt;- c(1,2,3,4,5,6)
+
+# start the counter
+sibling_mirror &lt;- 0
+
+# iterate over rows of derangements
+# and columns representing the recipient
+for (giver in 1:nrow(ders)) {
+  
+  all_pairs &lt;- list()
+  
+  for (recipient in names(ders)) {
+    
+    pair &lt;- sort(c(ders[giver, recipient], recipient))
+    
+    all_pairs[[recipient]] &lt;- pair
+    
+  }
+  
+  unique_pairs &lt;- length(unique(all_pairs))
+  
+  # because I sort the pairs, 
+  # if there are only 3 unique ones, that&#39;s a mirror
+  if (unique_pairs == 3) {
+    sibling_mirror = sibling_mirror + 1
+  }
+  
+}
+
+sibling_mirror / nrow(ders)</code></pre>

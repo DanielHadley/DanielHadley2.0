@@ -80,7 +80,7 @@
   <meta property="og:description" content="SLC-Based Data Scientist">
   <meta property="og:locale" content="en-us">
   
-  <meta property="og:updated_time" content="2014-12-22T00:00:00&#43;00:00">
+  <meta property="og:updated_time" content="2017-07-11T00:00:00&#43;00:00">
   
 
   
@@ -248,6 +248,36 @@
   
 
   
+  
+  <div>
+    <h2><a href="/post/2017-07-11-ggplot-logo/">How to Add a Logo to ggplot by Magick</a></h2>
+    <div class="article-style">
+      
+      We recently wanted to brand several of our plots for publication in the local press. I looked around and found a couple suggestions on how to add images to plots, but nothing that seemed modular or customizable. My colleague reccomended the relatively new Magick package, which provided all of the functionality I needed (plus a lot more). Here is a simple example along with the code to replicate it:
+ library(ggplot2) library(magick) library(here) # For making the script run without a wd library(magrittr) # For piping the logo # Make a simple plot and save it ggplot(mpg, aes(displ, hwy, colour = class)) + geom_point() + ggtitle(&quot;Cars&quot;) + ggsave(filename = paste0(here(&quot;/&quot;), last_plot()$labels$title, &quot;.
+      
+    </div>
+  </div>
+  
+  <div>
+    <h2><a href="/post/2017-05-31-recidiviz/">The Prison Analyst&#39;s Dilemma - Using R to Model Recidivism</a></h2>
+    <div class="article-style">
+      
+      Recidivism, the rate at which those released from incarceration return or commit new crimes, is one of society’s most difficult social problems. The official estimate is that 55% of former prisoners will return within 60 months.
+ Recidivism is also, I discovered, one of the most challenging things to model and understand statistically. In this blog post, I describe our efforts to build this simulation, including how we settled on some fairly basic control structures (for loops) without giving up too much in terms of efficiency and readability.
+      
+    </div>
+  </div>
+  
+  <div>
+    <h2><a href="/post/2015-10-21-statwars/">What the Critics Got Wrong About Star Wars</a></h2>
+    <div class="article-style">
+      
+      A friend recently emailed a group of us to say that his opinion is indeed backed up by data: Star Wars Episode 3, “Revenge of the Sith”, is better than Episode 6, “Return of the Jedi.”
+ Like most right-headed people, I disagree. While I am cautiously optimistic about Episode 7, I have not truly loved a Star Wars movie since the originals. And as it turns out, many of the millions of people on Rotten Tomatoes agree:
+      
+    </div>
+  </div>
   
   <div>
     <h2><a href="/post/2014-12-22-time-covers/">The Most Magazine Covers of All Time</a></h2>

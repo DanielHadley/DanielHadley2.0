@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.36" />
+  
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="Somerville, MA has been fighting a war against rats for months, and now we have the data to show that it’s working: reported sightings have dropped 66% year-to-date; some of that is due to weather patterns and random fluctuation, but a Bayesian model of the data estimates that the City’s policies have reduced calls by 40%.
+Three years ago, the city where I work was dealing with an onslaught of rats.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/2015-06-05-data-science-vs-city-rats/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+      
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Daniel Hadley">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Daniel Hadley">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/2015-06-05-data-science-vs-city-rats/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@danielphadley">
+  <meta property="twitter:creator" content="@danielphadley">
+  
+  <meta property="og:site_name" content="Daniel Hadley">
+  <meta property="og:url" content="/post/2015-06-05-data-science-vs-city-rats/">
+  <meta property="og:title" content="Data Science vs City Rats | Daniel Hadley">
+  <meta property="og:description" content="Somerville, MA has been fighting a war against rats for months, and now we have the data to show that it’s working: reported sightings have dropped 66% year-to-date; some of that is due to weather patterns and random fluctuation, but a Bayesian model of the data estimates that the City’s policies have reduced calls by 40%.
+Three years ago, the city where I work was dealing with an onslaught of rats.">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2015-06-05T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2015-06-05T00:00:00&#43;00:00">
+  
+
+  
+
+  <title>Data Science vs City Rats | Daniel Hadley</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Daniel Hadley</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#teaching">
+            
+            <span>Teaching</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Data Science vs City Rats</h1>
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2015-06-05 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      Jun 5, 2015
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/data-science">Data Science</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Data%20Science%20vs%20City%20Rats&amp;url=%2fpost%2f2015-06-05-data-science-vs-city-rats%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2015-06-05-data-science-vs-city-rats%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2015-06-05-data-science-vs-city-rats%2f&amp;title=Data%20Science%20vs%20City%20Rats"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2015-06-05-data-science-vs-city-rats%2f&amp;title=Data%20Science%20vs%20City%20Rats"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Data%20Science%20vs%20City%20Rats&amp;body=%2fpost%2f2015-06-05-data-science-vs-city-rats%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <p><em>Somerville, MA has been fighting a war against rats for months, and now we have the data to show that it’s working: reported sightings have dropped 66% year-to-date; some of that is due to weather patterns and random fluctuation, but a Bayesian model of the data estimates that the City’s policies have reduced calls by 40%.</em></p>
+<p>Three years ago, the city where I work was dealing with an onslaught of rats. Like its neighbor Boston, Somerville had just emerged from one of its mildest winters in history. <a href="http://en.wikipedia.org/wiki/January_2015_North_American_blizzard">Winter Storm Juno</a> alone dumped more than three times as much snow on the region than was recorded during the entire winter of 2011-2012. And as a result, the rodent population seemed to grow out of hand that spring.</p>
+<p>At the time, I directed the Mayor’s Office of Innovation and Analytics. Calls to Somerville’s 311 line complaining about rodents were up 65%. Residents looked to Mayor Curtatone for help.</p>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/DanielHadley/2015_Rats_Boston_Somerville/master/plots/Fig1_Somerville_Calls.png" />
+
+</div>
+<p>I recall riding in the back seat of a vehicle while the Mayor rode shotgun. He would say things like, “My friend John told me they have a problem on Pearl Street.” And, “my barber saw an infested dumpster over there.”</p>
+<p>With each stop, we would compare our findings with maps from the 311 calls, making note of the hot spots.</p>
+<div id="rat" class="section level2">
+<h2>RAT</h2>
+<p>Having data from the 311 line made a huge difference. The calls don’t tell you everything; but when we combined that data with information from our health inspectors, a clearer picture emerged.</p>
+<p>We convened a group we called the Rodent Action Taskforce (yes, “RAT”). There were public health professionals, data analysts, ISD and DPW workers, and strong support from the Mayor and other elected officials. Data was central to these meetings.</p>
+<p>As Denise Taylor the communications director put it, “every city has a rat problem. We have a rat plan.”</p>
+</div>
+<div id="some-solutions-that-worked" class="section level2">
+<h2>Some Solutions that Worked</h2>
+<p>At RAT meetings, participants would look at maps and charts to determine where the problem properties were located.</p>
+<p>It was clear we had to cut off food supplies. The inspectional services director ramped up trash tickets, and made a case for adding new personnel to inspect and certify dumpsters more often. This alone seems to have had a significant impact. Private dumpsters that once remained unchecked for weeks or even months were now being issued tickets for overflowing trash.</p>
+<p>In addition, we purchased <a href="https://thesomervillenewsweekly.files.wordpress.com/2014/05/20140515-144539.jpg">specialized 64-gallon barrels</a> for every property in the City. Before, trash day meant seeing a hodgepodge of cans and barrels, many too small for the amount of trash they were holding. We did a visual survey of random streets on trash day, and then used that along with data on total tonnage to model the distribution of gallons per household. We estimated that while the average load is more like 33 gallons, there were enough outliers (~ 10% of households &gt; 65) that we needed larger barrels to accommodate everyone. The estimates proved correct, and we were glad that we chose 64-gallon barrels as the default.</p>
+<p>We even considered testing a rat sterilization program. But between the trash inspections, cleaning, and a major outreach effort, it was difficult to find infested sites by the time a team of sterilization experts had arrived.</p>
+</div>
+<div id="the-results" class="section level2">
+<h2>The Results</h2>
+<p>In an ideal world, we would have been able to choose neighborhoods at random and perform controlled trials of our interventions. There is a maxim, often associated with the <a href="http://en.wikipedia.org/wiki/Rubin_causal_model">Rubin causal model</a>, “no causation without manipulation.” And while I agree in principal, in practice this was a case where it was more important to act on a citywide scale and hope to see results.</p>
+<p>Fortunately, we had an excellent counterfactual. They were right across the river, and subject to many of the same variables, creating time-series data that was closely correlated. In the absence of an RCT, the best way to test whether our program worked or not was to compare our data to that of Boston.</p>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/DanielHadley/2015_Rats_Boston_Somerville/master/plots/Fig2_Somerville_v_Boston_Calls.png" />
+
+</div>
+<p>I used a specialized tool developed by data scientists at Google called “CausalImpact.” Using Bayesian structural time-series models, this R package predicts what the data would have looked like in the absence of an intervention (in this case, our policies). I’m not certain the assumptions were strictly met, but I think we came as close <a href="http://google-opensource.blogspot.com/2014/09/causalimpact-new-open-source-package.html">as possible</a>.</p>
+<p>The results were amazing. After implementing our new programs, calls dropped by an estimated 40%. There is a large confidence interval, meaning it’s possible the effect was much larger or smaller, but it does appear very likely that the set of policies Somerville enacted were effective.</p>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/DanielHadley/2015_Rats_Boston_Somerville/master/plots/Fig3_CausalImpact.png" />
+
+</div>
+</div>
+<div id="takeaways" class="section level2">
+<h2>Takeaways</h2>
+<p>Like every city in the region, Somerville will always have a rat problem. But these results show that a city can fight back by using data-informed policies.</p>
+<p>Because we did not test individual interventions, we cannot be certain which one of our policies had the greatest impact. My colleague Skye Stewart and I think that dumpster enforcement and certification along with the uniform trash barrels played the largest part. But outreach efforts from the elected officials and city communications department were also critical. Either way, we feel one lesson is clear for cities who wish to get rid of rodents: try to eliminate food sources.</p>
+<p>You can view the data and code I used <a href="https://github.com/DanielHadley/2015_Rats_Boston_Somerville">here</a>.</p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/urban-planning">urban planning</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/bayesian">bayesian</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/2015-03-05-optimize-street-repairs/">How to Optimize Street Repair Spending</a></li>
+        
+        <li><a href="/post/2015-02-12-r-in-govt/">Putting the R in Government</a></li>
+        
+        <li><a href="/post/2015-01-02-top-planning/">The Top Urban Planning Articles of 2014</a></li>
+        
+        <li><a href="/post/2014-10-28-hello-world/">Hello World</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+
