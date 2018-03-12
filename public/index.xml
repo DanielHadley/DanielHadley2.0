@@ -294,6 +294,229 @@ Figure 1: A fancy pie chart.
     </item>
     
     <item>
+      <title>Data Analysis of the 2014 Mass. Gubernatorial Election</title>
+      <link>/post/2014-11-15-mass-election-analysis/</link>
+      <pubDate>Sat, 15 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2014-11-15-mass-election-analysis/</guid>
+      <description>&lt;p&gt;Coakley received a lot of votes from residents of Massachusetts’s major cities. This is evident in the maps I posted &lt;a href=&#34;/Mass-Election-Maps/&#34;&gt;last week&lt;/a&gt;, and in the charts below. What may be surprising is how many votes Baker received in cities, including Boston:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot24.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot23.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;Baker received nearly 10,000 more votes in Boston than he did in 2010. If those had gone to Coakley instead, the spread between them would have been cut roughly in half.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot09.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;That is the raw vote count, here are the places where Baker saw the largest increase in percentage points:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot12.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;It’s interesting that Quincy is the second highest in the Commonwealth on this measure. That is probably due in large part to Tim Cahill dropping from the 2014 race, although it may also have something to do with the democratic mayor’s endorsement of Baker:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot10.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;The only places where Baker lost percentage points relative to 2010 are in the northwest where Lively grabbed some votes, and on the Vineyard.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot11.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div id=&#34;partisan-cities-and-towns&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Partisan Cities and Towns&lt;/h3&gt;
+&lt;p&gt;Baker received a plurality of votes in the majority of towns.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot01.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;But it was still a close call because Coakley won big in certain places, including a few where she received close to 80% of the vote. This histogram is the inverse of Baker’s (above), but the bins are weighted by population:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot05.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;Nearly eight in ten people in Cambridge voted for Coakley. That is remarkable for such a large, diverse city.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot03.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;In order to analyze this divide, I came up with a naive measure of each city and town’s partisanship. I did this by taking the absolute value of the divide between Coakley and Baker, multiplying it by -1, and then adding the average percentage points for all independent candidates from the last two elections. There are probably more commonly used methods that work better, but this gives an idea of where the most “independent” cities and towns are (and, conversely, which places are the most partisan.)&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot13.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;Here are the top 15 by population:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot14.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;You can see that this is just as much a measure of a strong divide within the place as it is a measure of “independence.” Nonetheless, it does shed some light on which places could be said to be the most partisan:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot15.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot16.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;The top republican strongholds all have populations under 20,000, while democratic places are a mix of inner cities and small towns. Interestingly, Boston did not make the top 15.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;aside-social-qualities-that-correlate&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Aside: Social Qualities that Correlate&lt;/h3&gt;
+&lt;p&gt;Just for fun, I checked results against census data. There are not too many qualities of a municipality that have a detectable correlation to how that place votes, but here are a couple that I noticed.&lt;/p&gt;
+&lt;p&gt;Baker tended to do better in places with a high percentage of households with children under 18 …&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot17.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;… and in wealthier municipalities:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot20.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;But higher education was not correlated at all on the municipal level (sorry to anyone who wanted to ascribe the election results to education levels of towns and cities):&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/plot19.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;Election data is always enjoyable to analyze. There is nothing too novel in these results. I believe that most of the nuanced, actionable analysis comes from drilling deeper into surveys and trends at the local level. But it is still fun to see how the Commonwealth breaks down along party and class lines. Code and data to replicate my results can be found &lt;a href=&#34;https://github.com/DanielHadley/MassElections&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How To Automate Map Making in R</title>
+      <link>/post/2014-11-10-automate-map-making/</link>
+      <pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2014-11-10-automate-map-making/</guid>
+      <description>&lt;p&gt;In my &lt;a href=&#34;/Mass-Election-Maps/&#34;&gt;last post&lt;/a&gt;, I displayed a series of maps from the 2014 Massachusetts midterm election. In all, I created 17 maps, all with fewer than 20 lines of code. Here’s how…&lt;/p&gt;
+&lt;p&gt;The basic idea is to use a For Loop with ggmap to iterate through columns of a data frame. In my example, the code for which can be found &lt;a href=&#34;https://github.com/DanielHadley/MassElections/blob/master/MassElectionsFourteen.R&#34;&gt;here&lt;/a&gt;, I first read shapefiles from MassGIS into R, and then combine them with election data. The rationale for these steps can be seen in Hadley’s excellent &lt;a href=&#34;https://github.com/hadley/ggplot2/wiki/plotting-polygon-shapefiles&#34;&gt;shapefile tutorial&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# First prepare the parcel df
+mass &amp;lt;- readOGR(dsn=&amp;quot;./shapefiles&amp;quot;, layer=&amp;quot;GISDATA_CENSUS2010TOWNS_POLY&amp;quot;)
+mass@data$id = rownames(mass@data)
+names(mass)
+mass.points &amp;lt;- fortify(mass, region=&amp;quot;id&amp;quot;)
+mass.df &amp;lt;- join(mass.points, mass@data, by=&amp;quot;id&amp;quot;)
+
+
+# Prepare data to match with MassGis layer
+d$TOWN &amp;lt;- toupper(d$Municipality)
+
+# Combine data
+mass.df &amp;lt;- merge(mass.df, d, by=&amp;quot;TOWN&amp;quot;)
+
+# Map
+map &amp;lt;- get_map(location = &amp;quot;Grafton, Massachusetts&amp;quot;, zoom=8, maptype=&amp;quot;roadmap&amp;quot;, color = &amp;quot;bw&amp;quot;)
+ggmap(map)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we have merged election data to the shapefile and prepared a Google base map in black and white that is focused on Grafton, MA (which happens to be close to the center of Massachusetts). Next, we will use this to make multiple choropleth maps of the election data.&lt;/p&gt;
+&lt;div id=&#34;iteration-let-1000-maps-flourish&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Iteration: Let 1,000 maps flourish&lt;/h3&gt;
+&lt;p&gt;This next part may not be too novel to people who are used to writing for loops, but by the time I had created my 5th map, I was glad it occurred to me. 27:46 are all columns (with descriptive names - you’ll see why that is important in a moment) that I would like to see visualized on a map. The following loop uses the index from the column number to fill each city and town with a color representing the percent of votes received by the candidate. The gradient is chosen by ggmap based on the distribution of datapoints, but I set the color palette with the package RColorBrewer.&lt;/p&gt;
+&lt;p&gt;For the title, the loop pastes the description along with the column names from the index number: {% raw %} colnames(mass.df)[[i]] {% endraw %}. Thus, the map is generated automatically for all columns from 27 to 46. It replaces “i” with the relevant number.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;for(i in 27 : 46){
+  ggmap(map) +
+    geom_polygon(data=mass.df, aes(x=long, y=lat, group=group, fill=mass.df[,i]), colour=NA, alpha=0.7) +
+    scale_fill_gradientn(colours=(brewer.pal(9,&amp;quot;YlGnBu&amp;quot;)),labels=percent) +
+    labs(fill=&amp;quot;&amp;quot;) +
+    theme_nothing(legend=TRUE) + ggtitle(paste(&amp;quot;Percent of Votes for &amp;quot;,colnames(mass.df)[[i]],sep=&amp;quot;&amp;quot;))
+  
+  ggsave(paste(&amp;quot;./plots/Map&amp;quot;,i,&amp;quot;.png&amp;quot;,sep=&amp;quot;&amp;quot;), dpi=300, width=6, height=5)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The final step in this loop is to save the map to a “plots” subdirectory, again with “i” to index the column number.&lt;/p&gt;
+&lt;div id=&#34;scalability&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Scalability&lt;/h4&gt;
+&lt;p&gt;I have done this with choropleth maps using ggmap, but in theory you could do it with point maps, heat maps, density maps, or any type of map that can take data from a column and iterate through subsequent columns. My next plan is to see whether I could make hundreds of maps of time-series data and combine them into a gif. I have always wanted to see how crime trends have shifted throughout the city over the last several years.&lt;/p&gt;
+&lt;p&gt;I hope you also find this helpful.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Maps of the 2014 Massachusetts Elections</title>
+      <link>/post/2014-11-06-mass-election-maps/</link>
+      <pubDate>Thu, 06 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2014-11-06-mass-election-maps/</guid>
+      <description>&lt;p&gt;Most of the maps I have seen so far color each city or town either red or blue based on the majority outcome. That works fine, for the most part, but I prefer to see the range of voting patterns. These heat maps go from light yellow to dark blue. The scale changes on each one in order to show the full spectrum. I managed to automate their creation in R.&lt;/p&gt;
+&lt;p&gt;When you see the maps back to back, definite geographic patterns begin to emerge. If I have time over the weekend, I may go in an analyze the data further. In the meantime, you can see the maps below, and my code &lt;a href=&#34;https://github.com/DanielHadley/MassElections&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map27.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map28.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map29.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map30.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map31.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map32.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map34.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map36.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map38.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map40.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map41.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map42.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map43.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map44.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map45.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2014_Elections/Map46.png&#34; /&gt;
+
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Using Machine Learning to Detect Stylometric Differences Between Nick and Amy in Gone Girl</title>
       <link>/post/2014-11-02-gone-girl-prediction/</link>
       <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
