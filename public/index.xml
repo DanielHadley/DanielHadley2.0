@@ -294,6 +294,137 @@ Figure 1: A fancy pie chart.
     </item>
     
     <item>
+      <title>The Top Urban Planning Articles of 2014</title>
+      <link>/post/2015-01-02-top-planning/</link>
+      <pubDate>Fri, 02 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2015-01-02-top-planning/</guid>
+      <description>&lt;p&gt;For my job, I read a lot of articles on urban policy and planning. I believe that the best policies are usually borrowed from other cities rather than fabricated from nothing. In that spirit, I even borrowed from other top ten lists to create this post. I like to think that my list is more comprehensive than some of the others since I have no incentive to link to my own content. &lt;em&gt;Caveat emptor&lt;/em&gt;: I use the term planning loosely. Some of these are more inspirational than germane.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.theguardian.com/cities/2014/sep/30/-sp-shinkansen-bullet-train-tokyo-rail-japan-50-years&#34;&gt;How the Shinkansen bullet train made Tokyo into the monster it is today&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.theonion.com/articles/city-planner-gets-halfway-through-designing-city-b,35611/&#34;&gt;City Planner Gets Halfway Through Designing City Before Realizing He’s Just Doing Philadelphia Again&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slate.com/articles/arts/architecture/2014/12/architecture_in_review_the_worst_buildings_of_2014.html&#34;&gt;The 11 Worst Buildings of 2014&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://tmagazine.blogs.nytimes.com/2014/11/10/london-taxi-test-knowledge/?_r=0&#34;&gt;The Knowledge, London’s Legendary Taxi-Driver Test, Puts Up a Fight in the Age of GPS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.planetizen.com/node/69263&#34;&gt;The Fall of Planning Expertise&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.theguardian.com/cities/2014/dec/18/lego-toys-urban-planning-tool-architects-mit&#34;&gt;Lego: can this most analogue of toys really be a modern urban planning tool?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cbcny.org/sites/default/files/REPORT_HousingAffordabilityVsLocation_08122014.pdf&#34;&gt;The Rent’s Too Damn High! But the Metrocard Is a Pretty Good Deal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.citylab.com/cityfixer/2014/09/why-the-people-in-charge-of-transit-systems-should-be-required-to-actually-ride-transit/379931/&#34;&gt;Why the People in Charge of Transit Systems Should Be Required to Actually Ride Transit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://thisoldcity.com/advocacy/photos-what-snow-tells-us-about-creating-better-public-spaces-e-passyunk-avenue#.VKboACvF_bA&#34;&gt;What Snow Tells Us About Creating Better Public Spaces&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://nextcity.org/features/view/the-new-cartographers&#34;&gt;The New Cartographers: How a Mapping Renaissance Is Changing the Way We See Cities&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.nytimes.com/newsgraphics/2013/08/18/reshaping-new-york/&#34;&gt;This&lt;/a&gt; multimedia feature about Mayor Bloomberg’s legacy is still my favorite planning related article (if you can call it that) of all time. But overall, 2013 was a good year.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Most Magazine Covers of All Time</title>
+      <link>/post/2014-12-22-time-covers/</link>
+      <pubDate>Mon, 22 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2014-12-22-time-covers/</guid>
+      <description>&lt;p&gt;Time is a weekly news magazine that was first published in New York City in 1923. After my last post, a generous redditor offered to share with me a dataset of every person who has appeared on the cover since its first issue. It turns out he had painstakingly collected this data for a very cool website he created called hugequiz.com, where there are multiple quizzes on &lt;a href=&#34;http://hugequiz.com/?s=time+magazine&#34;&gt;this subject&lt;/a&gt;. Fortunately, I don’t think it will spoil any of the quizzes to see this chart of the most frequently featured people:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/TimeCovers/master/plots/covers.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;Given that Time often features people posthumously, it is significant that Bill Clinton is the third on this list. Between Bill and Hillary, they have also created a Time dynasty that beats the Kennedys and Bushs. The last name list is a reminder of how important those few families are in American political life - a point which I am sure will become increasingly obvious as Jeb Bush and Hillary begin to set up their presidential campaigns.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/TimeCovers/master/plots/covers5.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;I tried &lt;a href=&#34;https://raw.githubusercontent.com/DanielHadley/TimeCovers/master/plots/covers7.png&#34;&gt;many&lt;/a&gt; &lt;a href=&#34;https://raw.githubusercontent.com/DanielHadley/TimeCovers/master/plots/covers9.png&#34;&gt;different&lt;/a&gt; ways to normalize the data so as not to favor figures from the more distant past. When none of those worked to my satisfaction, I ended up charting just people whose first cover appeared after 1989.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/TimeCovers/master/plots/covers10.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;Again, Bill’s legacy is apparent. Monica Lewinsky received more covers than some of the most important political operatives of the century.&lt;/p&gt;
+&lt;p&gt;One test of the Clintons’ legacy will be if they can make it on to this chart of timeless people (sorry for all of the puns). For good and bad, this is the list of actors, politicians and scientists whose legacy extends far beyond their initial coverage:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/TimeCovers/master/plots/covers6.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;If this has intrigued you at all, I encourage you to play one of the quizzes on hugequiz, or check out the &lt;a href=&#34;http://content.time.com/time/coversearch/&#34;&gt;online repository&lt;/a&gt; of covers.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Grammy Counts Favor Musicians From the Aughts</title>
+      <link>/post/2014-12-10-grammys/</link>
+      <pubDate>Wed, 10 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2014-12-10-grammys/</guid>
+      <description>&lt;p&gt;The 57th annual Grammy nominations were recently announced, cementing Beyonce as the most nominated female artist in history. She is now &lt;a href=&#34;https://raw.githubusercontent.com/DanielHadley/Grammys/master/plots/grammyNoms.png&#34;&gt;tied with Kanye&lt;/a&gt; for a career total of 53 nominations. This news made me curious enough to plot the top award winners of all time.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/Grammys/master/plots/grammyWins.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;I did not recognize the knight at the top of the list (turns out he is an amazing conductor with a storied history as director of the CSO); but I sort of expected that. The Grammys have been around since 1958, so I figured that many of its top honorees would be dead or unfamiliar to philistines like me. In fact, I was surprised by how many of the musicians and composers I did recognize. Why were there so many young artists? How did Jay-Z beat three of the four Beatles?&lt;/p&gt;
+&lt;p&gt;I had a hunch this had something to do with how the award categories changed over time, so I aggregated all awards and plotted them by year as a time series:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/Grammys/master/plots/grammyAwards.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;This explains a lot. With a few exceptions, the Recording Academy added awards every year between 1970 and 2011. It doesn’t tell us whether the Grammys are &lt;a href=&#34;http://blogs.wsj.com/speakeasy/2014/01/27/were-other-rappers-snubbed-by-macklemores-grammy-sweep/&#34;&gt;racist&lt;/a&gt; or sexist, but it does tell us that musicians who were popular in the 90s and early 2000s were more likely to receive a Grammy than previous generations, or even musicians of today.&lt;/p&gt;
+&lt;p&gt;My favorite addition is the award for Best Disco Recording, which only lasted one year (1980). By changing the award categories, the Academy has been able to stay current with trends in popular culture. But they have effectively made it impossible to compare artists by total Grammy counts. That’s why statistics like the one I mentioned in the beginning of this post are dubious.&lt;/p&gt;
+&lt;div id=&#34;always-the-bridesmaid&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Always the Bridesmaid&lt;/h2&gt;
+&lt;p&gt;Although diminished in value, I still find charts like this one interesting:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/Grammys/master/plots/grammyNomswo.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;It’s sort of a ratio of nominations to wins - in this case with all 0s in the denominator - making ‘grade inflation’ less relevant.&lt;/p&gt;
+&lt;p&gt;As it happens, the Academy cut the number of awards from 109 to 78, stacking the deck against new artists, the same year that Snoop Dog was “reincarnated” as Snoop Lion. Coincidence?&lt;/p&gt;
+&lt;div id=&#34;note&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Note&lt;/h3&gt;
+&lt;p&gt;All data and code can be found &lt;a href=&#34;https://github.com/DanielHadley/Grammys&#34;&gt;here&lt;/a&gt;. Data came from &lt;a href=&#34;http://en.wikipedia.org/wiki/Grammy_Award_records&#34;&gt;this&lt;/a&gt; Wikipedia article and the official &lt;a href=&#34;http://www.grammy.com/&#34;&gt;Grammy website&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The most-viewed non-music YouTube videos</title>
+      <link>/post/2014-12-06-youtube/</link>
+      <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2014-12-06-youtube/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.randalolson.com/2014/12/03/the-most-viewed-youtube-videos/&#34;&gt;Randal Olson&lt;/a&gt; just posted a terrific explanation of the storage significance of Psy’s massive view count along with a chart of the top YouTube videos, which prompted a &lt;a href=&#34;http://www.reddit.com/r/dataisbeautiful/comments/2oging/the_mostviewed_youtube_videos_oc/cmmwldb&#34;&gt;popular comment&lt;/a&gt; from u/promyy: “I’d love to see a chart of most viewed, non-music videos on YouTube.”&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;script async src=&#34;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&#34;&gt;&lt;/script&gt;
+&lt;!-- dhYouTube --&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+.adslot_1 { max-width: 720px;}
+&lt;/style&gt;
+&lt;center&gt;
+&lt;ins class=&#34;adsbygoogle&#34; style=&#34;display:block&#34; data-ad-client=&#34;ca-pub-1797875853846481&#34; data-ad-slot=&#34;6160251851&#34; data-ad-format=&#34;auto&#34;&gt;
+&lt;/ins&gt;
+&lt;script&gt;
+(adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;
+&lt;/center&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;I didn’t have a special coding solution for this; Instead, I just went through &lt;a href=&#34;https://www.youtube.com/playlist?list=PLirAqAtl_h2r5g8xGajEwdXd3x1sZh8hC&#34;&gt;a list&lt;/a&gt; linked from the Wikipedia article and copy-pasted videos that I felt qualified.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/YouTubeNotMusic/master/YouTube.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;Some contain music, but are not music videos per se. As I was going through the list, I was amazed at the sorts of videos that compete with Bieber and the other professional musicians. For instance, I had no idea that Kinder unwrapping videos were such a phenomenon, or that a massage video could reach 270 m. with the right thumbnail. But my most valuable takeaway is that someone needs to translate Masha and the Bear into English for western audiences.&lt;/p&gt;
+&lt;div id=&#34;bonus-reddits-favorites&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bonus: Reddit’s Favorites&lt;/h2&gt;
+&lt;p&gt;Somewhere along the way I learned a trick to view all of the Reddit posts from a specific domain, e.g., &lt;a href=&#34;http://www.reddit.com/domain/youtube.com/top/&#34; class=&#34;uri&#34;&gt;http://www.reddit.com/domain/youtube.com/top/&lt;/a&gt;. This is a chart of Reddit’s favorite Youtube videos and the up-votes they received. Somehow this list made more sense to me:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/YouTubeNotMusic/master/YouTubeR.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;As Randal notes, it’s possible that old videos will fade into total obscurity on YouTube’s top lists. That’s why it’s reassuring (at least to me) that the Reddit community is active in finding and posting some of the best, most obscure content. Otherwise, we are all forced to rely on the YouTube recommendation engines and search algos to find content. We know where &lt;a href=&#34;https://www.youtube.com/watch?v=dQw4w9WgXcQ&#34;&gt;that leads&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Data Analysis of the 2014 Mass. Gubernatorial Election</title>
       <link>/post/2014-11-15-mass-election-analysis/</link>
       <pubDate>Sat, 15 Nov 2014 00:00:00 +0000</pubDate>
@@ -517,6 +648,78 @@ ggmap(map)&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
+      <title>The Political and Public Opinion of Same-Sex Marriage, by State</title>
+      <link>/post/2014-12-3-15-same-sex-marriage/</link>
+      <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2014-12-3-15-same-sex-marriage/</guid>
+      <description>&lt;p&gt;According to polling data, this is a current map of popular support for same-sex marriage:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/SameSexMarriage/master/plotsForBlog/GMapPopSupportFinal.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;It is important to note that this map shows where people say they support same-sex marriage, but each state also contains a significant proportion of voters who are either indifferent or unsure.&lt;/p&gt;
+&lt;p&gt;Compare that map to this one of political support in congress and the governor’s office:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/SameSexMarriage/master/plotsForBlog/GMapSupportFinal.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;As you would expect, political support is correlated to public opinion, but not perfectly.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/SameSexMarriage/master/plotsForBlog/plot11.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;The distributions look quite different:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/SameSexMarriage/master/plotsForBlog/plot05.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/SameSexMarriage/master/plotsForBlog/plot06.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;The politicians plot has more weight on the tails of the distribution, which would indicate that most try to line themselves up with the majority of their constituents.&lt;/p&gt;
+&lt;div id=&#34;public-vs.political&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Public vs. Political&lt;/h2&gt;
+&lt;p&gt;Nevertheless, the data indicate that statewide politicians appear to be more conservative than their constituents in many cases. There are at least six places where the governor’s stance runs counter to his or her constituents’ views.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/SameSexMarriage/master/plotsForBlog/plot07.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;The same is true of some senators.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/SameSexMarriage/master/plotsForBlog/plot08.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;The only place I could find where the opposite is true - a senator approves while the majority opposes - is Louisiana, where Sen. Landrieu is careful to point out that she honors the voters’ choice to ban gay marriage. The question is, how much will this change with the incoming 114th Congress?&lt;/p&gt;
+&lt;p&gt;Finally, there’s this:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/SameSexMarriage/master/plotsForBlog/plot12.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;On one hand, it is not surprising that there are 22 states where public opposition is below 50% and yet one or more statewide politicians oppose same-sex marriage. This graph shows that many of these states are hovering close to 50%, so coming out in favor could be a risky political move. Also, there are 14 states where the opposite is true (a statewide politician is supportive in a place where less than 50% say they support same-sex marriage). On the other hand, given the &lt;a href=&#34;http://www.gallup.com/poll/169640/sex-marriage-support-reaches-new-high.aspx&#34;&gt;rapid shift&lt;/a&gt; in public opinion, one might expect a smaller number of opponents in these states.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;political-vs-legal&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Political vs Legal&lt;/h2&gt;
+&lt;p&gt;On another thread, &lt;a href=&#34;http://www.reddit.com/r/MapPorn/comments/2o7ixt/percent_of_politicians_who_support_samesex/cmkno4d&#34;&gt;one redditor&lt;/a&gt; made a helpful table of places with and without a state ban compared to the percent of politicians who support gay marriage. This shows the importance of the courts in deciding who has access to marriage rights:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/DanielHadley/SameSexMarriage/master/plotsForBlog/tableReddit.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;In light of these data, I think it is fair to conclude that in 2014 many statewide politicians were more conservative about gay marriage than their constituents. In some cases, though, the difference was insignificant, because court rulings superseded politics as a mechanism for bringing change to marriage laws.&lt;/p&gt;
+&lt;p&gt;If you found this analysis interesting, I would encourage you to edit the wikipedia articles on the incoming governors and 114th Congress members. When those appear to be complete, I will update the data and analysis using code I created &lt;a href=&#34;https://github.com/DanielHadley/SameSexMarriage&#34;&gt;here&lt;/a&gt;. In the meantime, feel free to replicate my results and expand on them.&lt;/p&gt;
+&lt;div id=&#34;notes&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;p&gt;All data were scraped from Wikipedia on November 15th, 2014. In cases where wikipedia contained two different poll results, I used an average of the two.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Using Machine Learning to Detect Stylometric Differences Between Nick and Amy in Gone Girl</title>
       <link>/post/2014-11-02-gone-girl-prediction/</link>
       <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
@@ -567,26 +770,6 @@ prop.table(table(authorship.test$author, authorship.test$pred.author.rf),1)  &lt
 &lt;p&gt;As I mentioned in the opening paragraph, the randomForest model correctly selected Nick 93% of the time and Amy 91%. This was even better than I expected at the outset. It essentially means that if you were to strip the novel of all of its text, except for the ten or so filler words I trained on, a computer could still tell the fictional authors apart. It seems that the “wordprint” is not an immutable characteristic of the novel’s actual author, Gillian Flynn, but rather something that changes in subtle, yet detectable ways, when the author is channeling her different characters.&lt;/p&gt;
 &lt;p&gt;My code is available &lt;a href=&#34;https://github.com/DanielHadley/WordprintAuthorPrediction&#34;&gt;here&lt;/a&gt; for replication.&lt;/p&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Experiential Learning</title>
-      <link>/post/2014-10-29-experiential-learning/</link>
-      <pubDate>Wed, 29 Oct 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2014-10-29-experiential-learning/</guid>
-      <description>&lt;p&gt;One of the most enjoyable aspects of my job is to partner with Harvard and other local universities to teach students through project-based experience. The City gets free consulting, which is ordinarily very high caliber; and the students get a chance use their skills in a real-world environment. I just received &lt;a href=&#34;/documents/hksmag_14su_14-23_teaching2.pdf&#34;&gt;this copy&lt;/a&gt; of a recent magazine article on one of our oldest, and most mutually beneficial partnerships: Linda Bilmes’s Advanced Budgeting course.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Mobile visual clothing search</title>
-      <link>/publication/clothing-search/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/clothing-search/</guid>
-      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
