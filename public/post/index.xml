@@ -36,6 +36,16 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
     </item>
     
     <item>
+      <title>Using Machine Learning to Detect Stylometric Differences Between Nick and Amy in Gone Girl</title>
+      <link>/post/2014-11-02-gone-girl-prediction/</link>
+      <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2014-11-02-gone-girl-prediction/</guid>
+      <description>I wanted to see if it was possible to train a model to detect the difference between two fictional authors created by the same novelist based only on the frequency of common stop words, e.g., “the.” It worked: The randomForest model correctly selected Nick 93% of the time and Amy 91%.
+Background When I first started using R for data analysis, I was mesmerized by all of the packages and what they made possible.</description>
+    </item>
+    
+    <item>
       <title>Experiential Learning</title>
       <link>/post/2014-10-29-experiential-learning/</link>
       <pubDate>Wed, 29 Oct 2014 00:00:00 +0000</pubDate>
