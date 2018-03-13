@@ -1,0 +1,26 @@
+---
+title: "Putting the R in Government"
+date: 2015-02-12
+categories: ["Data Science"]
+tags: ["urban planning"]
+---
+
+When I first started as an analyst in local government, I wasted a lot of time repeating tasks that had been done dozens of times before in Excel. SomerStat, the office where I worked and later became director, is one of the oldest local government divisions dedicated to crunching data. Inspired by the CitiStat model, which itself was inspired by CompStat, the idea was to use data to improve efficiency. And yet here I was, with fairly inefficient work routines that included pulling data into spreadsheets, munging one step at a time, and then repeating it all for the next 'stat' meeting.
+
+Enter [R](http://en.wikipedia.org/wiki/R_%28programming_language%29). After using Stata for a short time, I settled on R because there seemed to be a package for everything I could ever need to do. It was a steep learning curve going from a GUI-based spreadsheet program to writing code, but ultimately I feel like the effort was worthwhile. Now I use it for everything from [creating maps](http://danielphadley.com/Automate-Map-Making/) to performing advanced machine learning tasks.
+
+The primary advantage R has over Excel is the ability to repeat common data munging tasks instantaneously. Automation is critical in local government, where there tend to be a few key datasets (police, fire, 311) that analysts return to again and again. But there are other advantages, such as reproducibility and versatility. R can do much more than Excel, and it can do it in a way that will leave a breadcrumb trail for your colleagues. Finally, R is free.   
+
+# R vs Python
+I have read a lot of the debates over whether R or Python is a better language for budding data scientists. Ultimately, I concluded that while both have benefits, R is better for government both because the learning curve is not as steep, and because government analysts do not have to plug into a production environment - it's rare to need to share code with software engineers.
+
+The R packaging system is easier, and there are even resources aimed at government analysts.
+
+# How to begin
+If you are making the switch from Excel, I actually recommend against most beginner R tutorials. A lot of them tend to assume a computer science background, and focus too much on data structures. The first thing to do is [download R](http://www.r-project.org/). Second, download [RStudio](http://www.rstudio.com/), a terrific program for keeping your R sessions organized. 
+
+<del>Ok, now take a breath and read part two of this post.</del> Part two coming after the snow melts.   
+
+
+
+

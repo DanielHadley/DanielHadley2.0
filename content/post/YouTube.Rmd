@@ -1,0 +1,47 @@
+---
+title: "The most-viewed non-music YouTube videos"
+date: 2014-12-06
+categories: ["R"]
+tags: ["personal"]
+---
+
+[Randal Olson](http://www.randalolson.com/2014/12/03/the-most-viewed-youtube-videos/) just posted a terrific explanation of the storage significance of Psy's massive view count along with a chart of the top YouTube videos, which prompted a [popular comment](http://www.reddit.com/r/dataisbeautiful/comments/2oging/the_mostviewed_youtube_videos_oc/cmmwldb) from u/promyy: "I'd love to see a chart of most viewed, non-music videos on YouTube."   
+
+<br>
+
+****
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- dhYouTube -->
+<style type="text/css">
+.adslot_1 { max-width: 720px;}
+</style>
+<center>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1797875853846481"
+     data-ad-slot="6160251851"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</center>
+
+****   
+
+<br> 
+
+
+I didn't have a special coding solution for this; Instead, I just went through [a list](https://www.youtube.com/playlist?list=PLirAqAtl_h2r5g8xGajEwdXd3x1sZh8hC) linked from the Wikipedia article and copy-pasted videos that I felt qualified.
+
+![](https://raw.githubusercontent.com/DanielHadley/YouTubeNotMusic/master/YouTube.png)
+
+Some contain music, but are not music videos per se. As I was going through the list, I was amazed at the sorts of videos that compete with Bieber and the other professional musicians. For instance, I had no idea that Kinder unwrapping videos were such a phenomenon, or that a massage video could reach 270 m. with the right thumbnail. But my most valuable takeaway is that someone needs to translate Masha and the Bear into English for western audiences.
+
+## Bonus: Reddit's Favorites
+
+Somewhere along the way I learned a trick to view all of the Reddit posts from a specific domain, e.g., http://www.reddit.com/domain/youtube.com/top/. This is a chart of Reddit's favorite Youtube videos and the up-votes they received. Somehow this list made more sense to me:
+
+![](https://raw.githubusercontent.com/DanielHadley/YouTubeNotMusic/master/YouTubeR.png)
+
+As Randal notes, it's possible that old videos will fade into total obscurity on YouTube's top lists. That's why it's reassuring (at least to me) that the Reddit community is active in finding and posting some of the best, most obscure content. Otherwise, we are all forced to rely on the YouTube recommendation engines and search algos to find content. We know where [that leads](https://www.youtube.com/watch?v=dQw4w9WgXcQ).   
