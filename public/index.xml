@@ -11,12 +11,537 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Bayes&#39; Puzzle Powers</title>
+      <link>/post/bayes-538/</link>
+      <pubDate>Fri, 28 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/bayes-538/</guid>
+      <description>&lt;p&gt;A while ago, the popular data journalism site 538 posted a challenging &lt;a href=&#34;http://fivethirtyeight.com/features/rock-paper-scissors-double-scissors/&#34;&gt;probability puzzle&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;On the table in front of you are two coins. They look and feel identical, but you know one of them has been doctored. The fair coin comes up heads half the time while the doctored coin comes up heads 60 percent of the time. How many flips — you must flip both coins at once, one with each hand — would you need to give yourself a 95 percent chance of correctly identifying the doctored coin?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The question proved so difficult, in fact, that 538’s talented puzzle master Oliver Roeder gave an &lt;a href=&#34;https://fivethirtyeight.com/features/can-you-beat-the-game-show/&#34;&gt;incorrect answer&lt;/a&gt;. Someone smarter than me noticed this, and then we worked together to verify with &lt;a href=&#34;https://www.reddit.com/r/statistics/&#34;&gt;r/statistics&lt;/a&gt; and notify those who may have cared (but didn’t), including the authors of a paper Oliver cited. &lt;a href=&#34;https://www.reddit.com/r/statistics/comments/76ul99/is_this_538_puzzle_correct_how_many_coins_flips/&#34;&gt;My question to Reddit&lt;/a&gt; contains R code that traces exactly where they went wrong.&lt;/p&gt;
+&lt;p&gt;This kind of puzzle is a classic in statistics text books because it uses a trivial problem - flipping coins - as an example of more meaningful questions. The solutions are often given by comparing hypothetical distributions.&lt;/p&gt;
+&lt;p&gt;But I wanted to think of this less abstractly: what if you really were sitting in front of two coins, knowing that one has a slight bias? What would be the most efficient way to find out and how long would it take?&lt;/p&gt;
+&lt;div id=&#34;reverend-bayes-confronts-the-coins&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Reverend Bayes Confronts the Coins&lt;/h3&gt;
+&lt;p&gt;The first thought I had reading the 538 post was, “this is perfect for sequential Bayesian updating.” The idea undergirding most of &lt;a href=&#34;https://en.wikipedia.org/wiki/Bayesian_statistics&#34;&gt;Bayesian statistics&lt;/a&gt; is to update your prior probabilities with new data, e.g., start with a belief and then change it on every coin toss.&lt;/p&gt;
+&lt;p&gt;In this case, we can begin with a fairly strong prior. We know that at least one of the two coins is biased, so the odds are 50/50. If we quickly used Bayes’ Theorem after each flip, how long would it take us to choose the biased coin with 95% confidence?&lt;/p&gt;
+&lt;p&gt;This is not a trivial simulation. In theory, you could go on flipping the same side of both coins in perpetuity. Given that, and the subtle difference in the coins, I opted for a simulation that lasted 2 million games. Each game consisted of a speedy specter of Bayes, who flipped coins and updated probabilities until he was certain which one was fair.&lt;/p&gt;
+&lt;p&gt;As it turns out, this method took Bayes-bot an average of 74 flips. The cool thing, however, is that it is possible to be 96% confident in as few as eight flips, if the coins land a certain way. The median is 60, and the max in this simulation was 704.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/coin_flipping_hist.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;Notice that the correct answer to the original question is 134 flips, which are needed given that the distribution has a long right tail. But it’s neat to see how often in practice Bayes could beat the theoretical number of flips needed. In this case, 88% of the time, Bayes knew before 134 flips.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+
+#### Method two: Bayesian updating simulation ####
+# H = coin1 = fair 
+
+update &amp;lt;- function(prior, coin_randomizer) {
+  # This function updates our prior probabilities after looking at both coins
+  
+  # Flip
+  # The biased coin is randomly selected. 
+  # They both return .4 or .6 because we plug these figures into Bayes&amp;#39; theorem below
+  # But actual heads/tails probabilities are either 50/50 or 60/40
+  flip_coin1 &amp;lt;- sample(c(.4,.6), 1, prob = c(coin_randomizer[1], 1 - coin_randomizer[1]))
+  flip_coin2 &amp;lt;- sample(c(.4,.6), 1, prob = c(coin_randomizer[2], 1 - coin_randomizer[2]))
+  
+  # Hypothesis given the data
+  # Bayes Theorum = prob(A|X) =
+  # Numerator
+  # P(X|A)*P(A) /
+  # Denominator
+  # P(X) = P(X|A)*P(A) + P(X|not A) * P(not A)
+  
+  # Prob coin1 is fair given flip1
+  posterior_after_flip1 &amp;lt;- (.50 * prior) / ((.50 * prior) + flip_coin1 * (1 - prior))
+  
+  # Prob coin1 is fair given flip2 and the priors informed by flip1
+  posterior_after_flip2 &amp;lt;- (flip_coin2 * posterior_after_flip1) / 
+    ((flip_coin2 * posterior_after_flip1) + .50 * (1 - posterior_after_flip1))
+  
+  return(posterior_after_flip2)
+}
+
+
+simulate &amp;lt;- function(x) {
+  
+  # We randomly assign the coins 1x per simulation
+  coin_randomizer &amp;lt;- sample(c(.5, .4), 2)
+  
+  # Keep track for checking later
+  is_fair_coin1 &amp;lt;- if_else(coin_randomizer[1] == .5, 1, .1)
+  
+  # Start here
+  n_flips &amp;lt;- 0
+  prior &amp;lt;- .5
+  
+  while(prior &amp;gt;= .05 &amp;amp; prior &amp;lt;= .95){
+    prior &amp;lt;- update(prior, coin_randomizer)
+    n_flips &amp;lt;- n_flips + 1
+  }
+  
+  # Just for updating progress
+  print(x)
+  # Return how long it took to be 95% sure
+  return(n_flips)
+  
+}
+
+n_sims &amp;lt;- 2e6
+
+sim_results &amp;lt;- 1:n_sims %&amp;gt;% 
+  map(function(x) simulate(x)) %&amp;gt;% 
+  unlist()
+
+summary(sim_results)
+hist(sim_results)
+sum(sim_results &amp;lt; 134)
+
+
+
+# Let&amp;#39;s make sure we get the right # of true positives
+test_the_sim &amp;lt;- function(x) {
+  
+  # We randomly assign the coins 1x per simulation
+  coin_randomizer &amp;lt;- sample(c(.5, .4), 2)
+  
+  # Keep track for checking later
+  is_fair_coin1 &amp;lt;- if_else(coin_randomizer[1] == .5, 1, .1)
+  
+  # Start here
+  n_flips &amp;lt;- 0
+  prior &amp;lt;- .5
+  
+  while(prior &amp;gt;= .05 &amp;amp; prior &amp;lt;= .95){
+    prior &amp;lt;- update(prior, coin_randomizer)
+    n_flips &amp;lt;- n_flips + 1
+  }
+  
+  # Just for updating progress
+  print(x)
+  return(prior * is_fair_coin1)
+  
+}
+
+
+# Don&amp;#39;t need as many tests
+n_tests &amp;lt;- 20000
+
+test_results &amp;lt;- 1:n_tests %&amp;gt;% 
+  map(function(x) test_the_sim(x)) %&amp;gt;% 
+  unlist()
+
+
+true_positivies &amp;lt;- sum(test_results &amp;gt; .95)
+true_negatives &amp;lt;- sum(test_results &amp;lt; .004)
+
+(true_negatives + true_positivies) / n_tests
+
+# !It works 96% of the time&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deranged X-Mas - a Gift Exchange Puzzle</title>
+      <link>/post/deranged-x-mas/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/deranged-x-mas/</guid>
+      <description>&lt;p&gt;While planning a holiday gift exchange this week, my wife casually challenged me with a sort of tricky probability puzzle:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Sara and I were talking today and realized that we were off by one on the rotation because last year we went sledding instead of buying gifts.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It should actually be: * Sara gives to Jonny * Jimmy gives to Thurop * Amy gives to Lisa * Jonny gives to Sara * Thurop gives to Jimmy * Lisa gives to Amy&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;So everyone is giving to the same person that is giving to them. How often will this phenomenon happen? Dan, give us a statistical analysis ASAP!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;(Note: they do a rotation, but we will pretend it’s random. Also, names &lt;em&gt;not&lt;/em&gt; changed for privacy. I actually have a brother-in-law named Thurop, which is pretty cool.)&lt;/p&gt;
+&lt;p&gt;I fumbled around with permutations for a while before reading that situations like these are actually &lt;a href=&#34;http://mathworld.wolfram.com/Derangement.html&#34;&gt;derangements&lt;/a&gt; - permutations of sets where no element appears in its original position. In the case of a six sibling gift exchange, there are 265 derangements. So now we have the denominator.&lt;/p&gt;
+&lt;p&gt;The question is, of these derangements (I will never get tired of using that word, now that I know it), how many contain combinations where the siblings are mirrored, where each is assigned to the same person? To solve the puzzle, my friend Andrew and I took a three phase approach that we often use:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;I try analytically and fail&lt;/li&gt;
+&lt;li&gt;Andrew succeeds&lt;/li&gt;
+&lt;li&gt;I confirm his answer with brute-force programming&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Andrew wrote, “I think the answer is 15/265. The denominator is a derangement, which are confusing as hell, but it is a type of permutation that is calculated: n! * Sum i = 0 -&amp;gt; n of ((-i)^n)/i!. The numerator I’m less sure about.I just counted the total ways that the matches would be mirrored. For person 1 and 6 to be matched there are 3 possibilities, and then there are 5 different people 1 could be matched with, so 5*3.&amp;quot;&lt;/p&gt;
+&lt;p&gt;The combinations with person 1, aka Sara, and person 6, aka Lisa, look like this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[(1,6)(2,5)(3,4)]&lt;/li&gt;
+&lt;li&gt;[(1,6)(2,4)(3,5)]&lt;/li&gt;
+&lt;li&gt;[(1,6)(2,3)(4,5)]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can then repeat that chain with siblings 2, 3, 4, and 5.&lt;/p&gt;
+&lt;p&gt;To confirm, I started with all derangements and wrote a nested for-loop that looked for cases where the siblings are mirrored. The answer: 15/265, or approximately 5% of the time the gift exchange will work out the way it did this year. It’s another festivus miracle!!&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(gtools)
+library(tidyverse)
+
+# First we get the derangements from the permutations
+r &amp;lt;- 6
+S &amp;lt;- 1:r
+ders &amp;lt;- permutations(r, r, S)  
+ders &amp;lt;- ders[apply(ders, 1, function(x) !any(x==S)),]
+
+# This df is like a table 
+# where the column name recieves from the row
+ders &amp;lt;- as.data.frame(ders)
+names(ders) &amp;lt;- c(1,2,3,4,5,6)
+
+# start the counter
+sibling_mirror &amp;lt;- 0
+
+# iterate over rows of derangements
+# and columns representing the recipient
+for (giver in 1:nrow(ders)) {
+  
+  all_pairs &amp;lt;- list()
+  
+  for (recipient in names(ders)) {
+    
+    pair &amp;lt;- sort(c(ders[giver, recipient], recipient))
+    
+    all_pairs[[recipient]] &amp;lt;- pair
+    
+  }
+  
+  unique_pairs &amp;lt;- length(unique(all_pairs))
+  
+  # because I sort the pairs, 
+  # if there are only 3 unique ones, that&amp;#39;s a mirror
+  if (unique_pairs == 3) {
+    sibling_mirror = sibling_mirror + 1
+  }
+  
+}
+
+sibling_mirror / nrow(ders)&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Branding and Automating with R Markdown</title>
+      <link>/post/branding-rmarkdown/</link>
+      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/branding-rmarkdown/</guid>
+      <description>&lt;p&gt;Last week was the 2018 RStudio conference in San Diego, where my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://rpubs.com/jzadra/rconf2018&#34;&gt;Here&lt;/a&gt; are the slides&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Sorenson-Impact/rmarkdown-branding-talk/&#34;&gt;Here&lt;/a&gt; is the repo with a short and long version&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?time_continue=21329&amp;amp;v=ogy7rHWlsQ8&#34;&gt;Here&lt;/a&gt; is a video (complete with my cringeworthy Hadley joke)&lt;/li&gt;
+&lt;li&gt;And &lt;a href=&#34;https://github.com/Sorenson-Impact/sorensonimpact&#34;&gt;here&lt;/a&gt; is the package we describe&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;ten-years-ago&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Ten Years Ago&lt;/h2&gt;
+&lt;p&gt;These talks describe our current workflow, but I like to compare the present to the past. I have no way to quantify this, but I feel like R is uniqe in how quickly its packages and IDE have evolved the last few years. I’m sure there are other examples of this, but R must be in the upper quartile of ancillary developments, e.g., the Tidyverse, RStudio v1, Shiny, and our topic, R Markdown. In evolutionary terms, we skipped from Nintendo to Xbox One.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://media.giphy.com/media/l41YlnP9H2SFPCdPi/giphy.gif&#34; alt=&#34;Alt Text&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Alt Text&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;When I began as an analyst in local government, there was no easy way to go from code to output. It was common to create a bunch of graphs with a vanilla R script and then painstakingly add them to either a word document or powerpoint. There were, of course, those who mastered LaTeX as part a painful dissertation writing process, but most people divided workflows between coding and presentation.&lt;/p&gt;
+&lt;p&gt;Then came Knitr. Yihui’s work to integrate R with HTML, LaTeX, Markdown and other formats opened up a plethora of possiblities. For instance, &lt;a href=&#34;http://danielphadley.com/How-To-Dashboard-R/&#34;&gt;I found a way&lt;/a&gt; to create a dashboard by knitting analysis into Rhtml. It was difficult to integrate the two, writing &lt;code&gt;&amp;lt;!--rinline I(data) --&amp;gt;&lt;/code&gt; everywhere that took a vector. But that simple method has sustained a &lt;a href=&#34;http://archive.somervillema.gov//dashboard/daily.html&#34;&gt;city dashboard&lt;/a&gt; for years now. Without Yihui, I don’t think any of this would have been possible.&lt;/p&gt;
+&lt;p&gt;Simultaneously, data science was advancing with iPython notebooks. For the first time, the notebook format closely integrated code and output, allowing analysts to see results in-line and easily share their work as HTML files. Modeled after the scientific process, notebooks took off, despite their challenges. When R Markdown Notebooks came along and &lt;a href=&#34;http://danielphadley.com/Jupyter-to-Rmarkdown/&#34;&gt;solved things&lt;/a&gt; like version control, it was a monumental improvement.&lt;/p&gt;
+&lt;p&gt;We recently wanted to brand several of our plots for publication in the local press. I looked around and found a &lt;a href=&#34;https://stackoverflow.com/questions/12463691/inserting-an-image-to-ggplot-outside-the-chart-area&#34;&gt;couple&lt;/a&gt; &lt;a href=&#34;https://stackoverflow.com/questions/41574732/how-to-add-logo-on-ggplot2-footer&#34;&gt;suggestions&lt;/a&gt; on how to add images to plots, but nothing that seemed modular or customizable. My colleague reccomended the relatively new &lt;a href=&#34;https://cran.r-project.org/web/packages/magick/vignettes/intro.html&#34;&gt;Magick package&lt;/a&gt;, which provided all of the functionality I needed (plus a lot more). Here is a simple example along with the code to replicate it:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/Cars.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+library(magick)
+library(here) # For making the script run without a wd
+library(magrittr) # For piping the logo
+
+# Make a simple plot and save it
+ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point() + 
+  ggtitle(&amp;quot;Cars&amp;quot;) +
+  ggsave(filename = paste0(here(&amp;quot;/&amp;quot;), last_plot()$labels$title, &amp;quot;.png&amp;quot;),
+         width = 5, height = 4, dpi = 300)
+
+# Call back the plot
+plot &amp;lt;- image_read(paste0(here(&amp;quot;/&amp;quot;), &amp;quot;Cars.png&amp;quot;))
+# And bring in a logo
+logo_raw &amp;lt;- image_read(&amp;quot;http://hexb.in/hexagons/ggplot2.png&amp;quot;) 
+
+# Scale down the logo and give it a border and annotation
+# This is the cool part because you can do a lot to the image/logo before adding it
+logo &amp;lt;- logo_raw %&amp;gt;%
+  image_scale(&amp;quot;100&amp;quot;) %&amp;gt;% 
+  image_background(&amp;quot;grey&amp;quot;, flatten = TRUE) %&amp;gt;%
+  image_border(&amp;quot;grey&amp;quot;, &amp;quot;600x10&amp;quot;) %&amp;gt;%
+  image_annotate(&amp;quot;Powered By R&amp;quot;, color = &amp;quot;white&amp;quot;, size = 30, 
+                 location = &amp;quot;+10+50&amp;quot;, gravity = &amp;quot;northeast&amp;quot;)
+
+# Stack them on top of each other
+final_plot &amp;lt;- image_append(image_scale(c(plot, logo), &amp;quot;500&amp;quot;), stack = TRUE)
+# And overwrite the plot without a logo
+image_write(final_plot, paste0(here(&amp;quot;/&amp;quot;), last_plot()$labels$title, &amp;quot;.png&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can see that this creates a logo centered on a grey background with an annotation originating in the northwest of the band. I wanted to put our logo on the bottom right, 538 style, so I added some superfulous canvas on the right of the png and then croped it to fit our plots with Magick. The point is, Magick is highly customizable and opens up a lot of options that were previously closed to all but the undaunted photoshoppers. Want Vincent Vega to point at your x-axis? Go for it! Now, if you’ll excuse me, I’m going to go home and have a heart attack.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/Cars_Travolta.gif&#34; /&gt;
+
+&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Now call back the plot
+background &amp;lt;- image_read(paste0(here(&amp;quot;/&amp;quot;), &amp;quot;Cars.png&amp;quot;))
+# And bring in a logo
+logo_raw &amp;lt;- image_read(&amp;quot;https://i.imgur.com/e1IneGq.jpg&amp;quot;) 
+
+frames &amp;lt;- lapply(logo_raw, function(frame) {
+  image_composite(background, frame, offset = &amp;quot;+70+800&amp;quot;)
+})
+
+animation &amp;lt;- image_animate(image_join(frames))
+
+
+image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rayid Ghani on Data Science for Social Good</title>
+      <link>/post/interview-rayid-ghani/</link>
+      <pubDate>Fri, 25 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/interview-rayid-ghani/</guid>
+      <description>&lt;p&gt;I had a chance to sit down with Rayid Ghani, the Director of the Center for Data Science and Public Policy at the University of Chicago. I have admired Rayid’s work ever since he became the Chief Scientist for the 2012 Barack Obama campaign. His strategic use of analytics set the precedent for a new era of data science in political campaigns. At the time, others were trying to reverse engineer his tactics, which meant he was always one step ahead of the other campaigns. The fact that he has stayed in the field and used data to produce positive social outcomes is truly admirable.&lt;/p&gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/XHDuN_2WP7o&#34; frameborder=&#34;0&#34; allowfullscreen&gt;
+&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to Add a Logo to ggplot by Magick</title>
+      <link>/post/ggplot-logo/</link>
+      <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/ggplot-logo/</guid>
+      <description>&lt;p&gt;We recently wanted to brand several of our plots for publication in the local press. I looked around and found a &lt;a href=&#34;https://stackoverflow.com/questions/12463691/inserting-an-image-to-ggplot-outside-the-chart-area&#34;&gt;couple&lt;/a&gt; &lt;a href=&#34;https://stackoverflow.com/questions/41574732/how-to-add-logo-on-ggplot2-footer&#34;&gt;suggestions&lt;/a&gt; on how to add images to plots, but nothing that seemed modular or customizable. My colleague reccomended the relatively new &lt;a href=&#34;https://cran.r-project.org/web/packages/magick/vignettes/intro.html&#34;&gt;Magick package&lt;/a&gt;, which provided all of the functionality I needed (plus a lot more). Here is a simple example along with the code to replicate it:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/Cars.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+library(magick)
+library(here) # For making the script run without a wd
+library(magrittr) # For piping the logo
+
+# Make a simple plot and save it
+ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point() + 
+  ggtitle(&amp;quot;Cars&amp;quot;) +
+  ggsave(filename = paste0(here(&amp;quot;/&amp;quot;), last_plot()$labels$title, &amp;quot;.png&amp;quot;),
+         width = 5, height = 4, dpi = 300)
+
+# Call back the plot
+plot &amp;lt;- image_read(paste0(here(&amp;quot;/&amp;quot;), &amp;quot;Cars.png&amp;quot;))
+# And bring in a logo
+logo_raw &amp;lt;- image_read(&amp;quot;http://hexb.in/hexagons/ggplot2.png&amp;quot;) 
+
+# Scale down the logo and give it a border and annotation
+# This is the cool part because you can do a lot to the image/logo before adding it
+logo &amp;lt;- logo_raw %&amp;gt;%
+  image_scale(&amp;quot;100&amp;quot;) %&amp;gt;% 
+  image_background(&amp;quot;grey&amp;quot;, flatten = TRUE) %&amp;gt;%
+  image_border(&amp;quot;grey&amp;quot;, &amp;quot;600x10&amp;quot;) %&amp;gt;%
+  image_annotate(&amp;quot;Powered By R&amp;quot;, color = &amp;quot;white&amp;quot;, size = 30, 
+                 location = &amp;quot;+10+50&amp;quot;, gravity = &amp;quot;northeast&amp;quot;)
+
+# Stack them on top of each other
+final_plot &amp;lt;- image_append(image_scale(c(plot, logo), &amp;quot;500&amp;quot;), stack = TRUE)
+# And overwrite the plot without a logo
+image_write(final_plot, paste0(here(&amp;quot;/&amp;quot;), last_plot()$labels$title, &amp;quot;.png&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can see that this creates a logo centered on a grey background with an annotation originating in the northwest of the band. I wanted to put our logo on the bottom right, 538 style, so I added some superfulous canvas on the right of the png and then croped it to fit our plots with Magick. The point is, Magick is highly customizable and opens up a lot of options that were previously closed to all but the undaunted photoshoppers. Want Vincent Vega to point at your x-axis? Go for it! Now, if you’ll excuse me, I’m going to go home and have a heart attack.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/Cars_Travolta.gif&#34; /&gt;
+
+&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Now call back the plot
+background &amp;lt;- image_read(paste0(here(&amp;quot;/&amp;quot;), &amp;quot;Cars.png&amp;quot;))
+# And bring in a logo
+logo_raw &amp;lt;- image_read(&amp;quot;https://i.imgur.com/e1IneGq.jpg&amp;quot;) 
+
+frames &amp;lt;- lapply(logo_raw, function(frame) {
+  image_composite(background, frame, offset = &amp;quot;+70+800&amp;quot;)
+})
+
+animation &amp;lt;- image_animate(image_join(frames))
+
+
+image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Prison Analyst&#39;s Dilemma - Using R to Model Recidivism</title>
+      <link>/post/recidiviz/</link>
+      <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/recidiviz/</guid>
+      <description>&lt;p&gt;Recidivism, the rate at which those released from incarceration return or commit new crimes, is one of society’s most difficult social problems. The official estimate is that 55% of former prisoners will return within 60 months.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://static1.squarespace.com/static/57e1fc9c20099e1414dc6070/t/592890393e00bedb90f8b8da/1495830599102/?format=1000w&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;Recidivism is also, I discovered, one of the most challenging things to model and understand statistically. In this blog post, I describe our efforts to build &lt;a href=&#34;https://daniel-hadley.shinyapps.io/Recidivism_App/&#34;&gt;this simulation&lt;/a&gt;, including how we settled on some fairly basic control structures (for loops) without giving up too much in terms of efficiency and readability.&lt;/p&gt;
+&lt;div id=&#34;a-common-problem&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;A Common Problem&lt;/h3&gt;
+&lt;p&gt;Recidivism is similar to many other types of social and ecological trends. There is a basic measurement - return to prison in our case, but it could also be website visits, weather patterns, bankruptcy, etc. But unlike, say, mortality rates, which can be modeled using &lt;a href=&#34;https://en.wikipedia.org/wiki/Survivorship_curve&#34;&gt;survivorship curves&lt;/a&gt;, a return to prison is not the end. The vast majority of people who recidivate will return to society, and then a portion of that group will return to prison again, and so on for many cycles.&lt;/p&gt;
+&lt;p&gt;If this phenomenon sounds familiar, you may have thought of some type of model you have used in the past. And we looked at many of these, from &lt;a href=&#34;http://setosa.io/ev/markov-chains/&#34;&gt;Markov chains&lt;/a&gt; to state-based models. What we settled on is similar to an agent-based model, but is as simple as two for loops. In pseudocode, it looks like,&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;for(agent in 1:number_of_agents) {
+  for(month in 1:number_of_months) {
+    Keep track of how long the person has been free
+    Calculate the odds of recidivating conditional on months free
+    If the agent recidivates, assign a prison sentence 
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see, this oversimplifies a lot. The “agents” don’t interact, and the probability of recidivating is conditional only on the time someone is free. But it does allow for multiple states, from freedom to prison and back again. And this - combined with the legibility of for loops - makes it easy to add complexity. In another variant of this model, for example, we also added parole sentences, adverse health outcomes, and many other variables.&lt;/p&gt;
+&lt;p&gt;The basic functionality can be visualized in this tweenr plot created by my colleague, Sam Nelson:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/Sorenson-Impact/Recidivism_App/master/www/model_output.gif&#34; /&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;for-hate&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;For Hate&lt;/h3&gt;
+&lt;p&gt;For loops are often pooh-poohed in the R community. They are thought of as slow and inferior to vectorized alternatives. Initially, I could see why. One of our more complex versions with 10,000 agents had build times of “let’s go out to lunch and see where it is when we get back.” When I wanted to do sensitivity analysis with multiple iterations, it was more like, “let’s sleep on it.” Even pared down, our initial version took 13 seconds.&lt;/p&gt;
+&lt;p&gt;That’s why I was grateful for Grolemund and Wickham’s chapter on iteration in “R for Data Science.” First, they eased my [r]eligious guilt about our model structure: “Some people will tell you to avoid for loops because they are slow. They’re wrong! (Well at least they’re rather out of date, as for loops haven’t been slow for many years).”&lt;/p&gt;
+&lt;p&gt;Then they provided some useful tips that allowed me to reduce the build time from 13 seconds to 3, without which we could not have built an interactive app. These were simple, but effective: preallocate the output, declare the type of the vector, and save the results in a list, waiting to combine them into a single vector until after the loop is done.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;from-simple-to-complex&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;From Simple to Complex&lt;/h3&gt;
+&lt;p&gt;I like this quote by the abolitionist Elizur Wright, “while nothing is more uncertain than a single life, nothing is more certain than the average duration of a thousand lives.” Recidivism trends are not as predictable, but I think that the same principle applies. That is why I like to build models that begin with very simple and uncertain functions, but that build to more tangible outcomes.&lt;/p&gt;
+&lt;p&gt;I know that for loops do not come close to capturing the complexity inherent in social systems, but I like that that they mimic the hierarchy, from agents to averages.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/Sorenson-Impact/Recidivism_App&#34;&gt;Code&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Example Talk</title>
       <link>/talk/example-talk/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 -0700</pubDate>
       
       <guid>/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Big Data to Solve Big Problems</title>
+      <link>/post/big-data-big-problems/</link>
+      <pubDate>Mon, 17 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/big-data-big-problems/</guid>
+      <description>&lt;p&gt;In the marketing world, big data is used to answer ostensibly minute questions every day: are computer mouse movements predictive of purchasing? Does an orange background increase user engagement? In every &lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_places_with_%22Silicon%22_names&#34;&gt;place with Silicon in its name&lt;/a&gt;, there are teams of data scientists asking these questions.&lt;/p&gt;
+&lt;p&gt;In the social sector, by contrast, answering helpful questions is more difficult. For instance, is our program reducing homelessness? How is health spending distributed across the state? Part of the difficulty is the nature of the problems we are trying to solve. Lowering rates of recidivism is far more complex than driving ad clicks.&lt;/p&gt;
+&lt;p&gt;But there is another reason that governments, nonprofits, and philanthropists find it difficult to answer basic questions about social services: missing data. We simply do not have the infrastructure to collect and analyze data that reveals true social outcomes.&lt;/p&gt;
+&lt;p&gt;We at the Sorenson Impact Center are excited to help address this problem. Alongside &lt;a href=&#34;http://news.stanford.edu/2016/10/17/center-poverty-inequality-lead-program-measure-success-social-programs/&#34;&gt;Raj Chetty&lt;/a&gt; and some excellent organizations, we received a federal grant to help free up, merge, and analyze data to create better social policies. As part of the &lt;a href=&#34;https://nationalservice.tumblr.com/post/151761667357/how-data-and-innovation-can-help-people&#34;&gt;Pay for Success initiative&lt;/a&gt;, the White House has challenged us to assist service providers who will be paid &lt;em&gt;only if&lt;/em&gt; they produce good outcomes.&lt;/p&gt;
+&lt;p&gt;The exciting part, from our perspective, is the possibility of using the same tools that were created to optimize things like ad performance in a totally different context. Silicon Valley’s emphasis on data science has led to a proliferation of free, open-source software, a great deal of which can be repurposed in support of Pay for Success projects. The trick is to know how to work with it.&lt;/p&gt;
+&lt;p&gt;For instance, data scientists at Google, Twitter and Airbnb have released software that can help &lt;a href=&#34;https://google.github.io/CausalImpact/CausalImpact.html&#34;&gt;estimate causal impacts&lt;/a&gt;, &lt;a href=&#34;https://github.com/twitter/AnomalyDetection&#34;&gt;detect anomalies in time series data&lt;/a&gt;, and interactively &lt;a href=&#34;https://github.com/airbnb/caravel&#34;&gt;visualize large datasets&lt;/a&gt;, respectively. This is part of a broader movement to share code and create tools that others can use. Ultimately, this movement towards open source could give cash-strapped governments and nonprofits access to the same software resources as billion-dollar tech companies.&lt;/p&gt;
+&lt;div id=&#34;the-bazaar&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;The Bazaar&lt;/h3&gt;
+&lt;p&gt;Open-source software has been described as a &lt;a href=&#34;https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar&#34;&gt;metaphorical bazaar&lt;/a&gt;. As opposed to a Cathedral — where top-down decisions drive proprietary software — the Bazaar is a place where people from all over the globe can help fix bugs and generate a final product that is free thereafter. In our proposal to the federal government, we volunteered to serve as “guides to the Bazaar,” helping governments and nonprofits identify and learn how to utilize these rich resources.&lt;/p&gt;
+&lt;p&gt;At the risk of sounding like techno-utopians, we think this approach of using big data tools has the potential to help solve some of our biggest social problems. One can imagine employing Artificial Neural Networks to identify the parolees who are most in need of social work, or the students who need advanced tutoring. At the very least, we can use packages in the programming languages Python and R to transfer and merge data so that it is useful to service providers.&lt;/p&gt;
+&lt;p&gt;If this work sounds appealing to you, please reach out. We are hiring data scientists.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>From Jupyter Notebooks to R Markdown</title>
+      <link>/post/jupyter-to-rmarkdown/</link>
+      <pubDate>Thu, 08 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/jupyter-to-rmarkdown/</guid>
+      <description>&lt;p&gt;I started using Jupyter Notebooks back when they were called IPython. I even remember having to set up a virtual Linux environment because they were not available on Windows. As much as I have enjoyed their functionality, I recently switched entirely to R Markdown in an RStudio environment. Here’s why.&lt;/p&gt;
+&lt;div id=&#34;exporting-to-github&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exporting to Github&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&#34;http://rmarkdown.rstudio.com/github_document_format.html&#34;&gt;github_document&lt;/a&gt; option in R Markdown is the perfect way to share your analysis over the web. Just write the markdown with R chunks, “knit” it, and commit everything to a repository, and RStudio will create a directory with all plots and outputs ready to view. One advantage Jupyter Notebooks used to hold was the aesthetic formatting of tables and dataframes on Github. But with the kable function in the knitr package, I have been able to output HTML tables that look just as clean.&lt;/p&gt;
+&lt;p&gt;I updated a previous Gist to show how this works &lt;a href=&#34;https://github.com/DanielHadley/Example-R-Markdown-on-Github/blob/master/Example.md&#34;&gt;on Github&lt;/a&gt;. Compare that finished product with the raw code &lt;a href=&#34;https://raw.githubusercontent.com/DanielHadley/Example-R-Markdown-on-Github/master/Example.Rmd&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;exporting-to-word-is-a-breeze&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exporting to Word is a breeze&lt;/h3&gt;
+&lt;p&gt;A lot of my analysis is for non-technical clients, many of whom are most comfortable with a Word doc. I have found the process of translating code to .docx to be exquisitely easy. The hardest part was inserting page breaks, but thankfully someone come up with a &lt;a href=&#34;https://scriptsandstatistics.wordpress.com/2015/12/18/rmarkdown-how-to-inserts-page-breaks-in-a-ms-word-document/&#34;&gt;clever hack&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;version-control&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Version control&lt;/h3&gt;
+&lt;p&gt;As &lt;a href=&#34;http://opiateforthemass.es/articles/why-i-dont-like-jupyter-fka-ipython-notebook/&#34;&gt;others&lt;/a&gt; have pointed out, version control of a Jupyther Notebook is not a straightforward process. R Markdown is all plain text, so changes are easy to track in Git. For the first time, I feel in control of changes made to my Word documents.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;rstudio&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;RStudio&lt;/h3&gt;
+&lt;p&gt;I had the R kernel working nicely in Jupyter Notebooks. I did not encounter a lot of errors. But the entire time I was developing, I missed all of the features of RStudio. In particular, I missed having tab completion and the correct indentation on dplyr chains. But I also missed the layout with my environment, history, console, etc., not to mention the View() function on dataframes, and running code line-by-line. RStudio has become an amazing, feature-rich IDE, which I am not anxious to trade for another environment.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;python-is-here-sort-of&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Python is here (sort of)&lt;/h3&gt;
+&lt;p&gt;At least since &lt;a href=&#34;https://ironholds.org/blog/python-now-in-rstudio/&#34;&gt;2004&lt;/a&gt;, it is possible to run Python scripts in RStudio. There is even syntax highlighting and other IDE features. The nice thing is, the knitr library has support for &lt;a href=&#34;http://yihui.name/knitr/demo/engines/&#34;&gt;other languages&lt;/a&gt;, so you can include Python chunks in, for example, your Word doc.&lt;/p&gt;
+&lt;p&gt;There are problems with this, as &lt;a href=&#34;https://www.reddit.com/r/rstats/comments/51tzcb/why_i_switched_from_jupyter_notebooks_to_r/d7k3zvd&#34;&gt;u/_Wintermute noted&lt;/a&gt;. Apparently, the variables do not transfer between “chunks,” let alone languages. The docs for the Python &lt;a href=&#34;http://rmarkdown.rstudio.com/authoring_knitr_engines.html&#34;&gt;language engine&lt;/a&gt; describe a data exchange, which is exciting, but it looks like you have to write the dataframe in one language and then read it in the other. These are not exactly seamless transitions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;unknown-unknowns&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Unknown Unknowns&lt;/h3&gt;
+&lt;p&gt;I’m certain there are a lot of great features of both platforms that I am totally unaware of. And I still think Jupyter is doing more to integrate the various data science languages. It’s possible I will switch back, but for now I seem to be getting more locked in to RStudio. At the moment I am researching how to convert my website into R Markdown. It just works really well.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lessons From My First Kaggle Contest</title>
+      <link>/post/kaggle-thoughts/</link>
+      <pubDate>Thu, 09 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/kaggle-thoughts/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.kaggle.com&#34;&gt;Kaggle&lt;/a&gt; is a forum for interacting with other data scientists and competing to see who can write code that will best predict features of data. It’s a way to test your skills at statistics and machine learning, and to do a lot of human learning in the process (sorry, bad pun).&lt;/p&gt;
+&lt;p&gt;When I entered the contest to categorize crimes that occurred in San Francisco, my initial goal was to do better than random chance. I had some domain expertise from my time working with the Somerville Police Department, but I still worried that I would not be able to beat basic benchmarks for crime prediction. Over time, my goals shifted from making it out of the bottom quartile, to scoring above the median, until I finally made it into the top 10% and set my sights on winning. In the end, I ranked 7th out of 2,335 competitors.&lt;/p&gt;
+&lt;p&gt;There was no prize money in this contest, and I borrowed liberally from others’ ideas, so more than the ranking, I got involved to learn new things about data science.&lt;/p&gt;
+&lt;div id=&#34;feature-engineering&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Feature Engineering&lt;/h3&gt;
+&lt;p&gt;Put simply, this is the process of taking rows and columns of data, and making new ones that make the predictive models more powerful. For example, one of the most important features in the contest to categorize crime is when it was reported. Did it take place on a week, or weekend? Was it reported at the same time as another crime? Did it occur during the day, or at night? Answers to these questions were hiding in rows and columns of data, and my most productive time was spent discovering them.&lt;/p&gt;
+&lt;p&gt;It’s cliche, but feature engineering ended up mattering much more than model selection or parameter tuning. This is also where I had a slight edge, having sat through dozens of CompStat meetings with the Chief, his command staff, and a really good crime analyst.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;models&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Models&lt;/h3&gt;
+&lt;p&gt;In the end, I broke my task up into two R scripts:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;engineer_features.R&lt;/li&gt;
+&lt;li&gt;build_models.R&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;XGBoost (which a work friend pointed out sounds like a bad energy drink) ended up being every bit as powerful and simple as many data scientists describe it. From the time I started to use it instead of other popular algorithms, my errors started to decrease significantly.&lt;/p&gt;
+&lt;p&gt;I created a method of iterating through a list of each crime and building a separate model to predict only that crime. This would often work better than the models that I trained on the entire set of categories. Here is some pseudocode to demonstrate the concept:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# The list to iterate over
+crime_categories &amp;lt;- c(levels(train$Category))
+
+for (crime in 1:length(crime_categories)) {
+  
+  category_to_model &amp;lt;- crime_categories[crime]
+  
+  # Get it ready for the model
+  train_final %&amp;gt;% 
+    mutate(category_binary = ifelse(Category == category_to_model, 1, 0))
+    
+  
+  xgboost_model &amp;lt;- xgboost(param = param, data = train_final[, -c(26)], label = train_final[, c(26)], 
+                           nrounds = nrounds_vector[crime])
+  
+  # Predict
+  pred &amp;lt;- predict(xgboost_model, test_final)
+  
+  prob &amp;lt;- matrix(pred, ncol = 1, byrow = T)
+  prob &amp;lt;- as.data.frame(prob)
+  colnames(prob)  &amp;lt;- category_to_model
+  prob$Id &amp;lt;- as.numeric(seq(1 : 884262) -1)
+  
+  final_predictions[,crime + 1] &amp;lt;- prob[,1]
+  
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the final hours of the contest, I also combined the results of several different submissions. Together, they did better than any single submission.&lt;/p&gt;
+&lt;p&gt;I made a lot of mistakes along the way, from overfitting dozens of models to accidentally purchasing a surfeit of storage on Amazon Web Services. These were instructive, though, and I feel that the process gave me a more nuanced view of how computers learn from the code and data that we feed them.&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
@@ -236,70 +761,135 @@ git submodule update --init --recursive
     </item>
     
     <item>
-      <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>/publication/person-re-identification/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
+      <title>How to Build a Data Dashboard using R (knitr), HTML, and Javascript (e.g.,Highcharts)</title>
+      <link>/post/how-to-dashboard-r/</link>
+      <pubDate>Fri, 05 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>/publication/person-re-identification/</guid>
-      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
-      <description>&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;R Markdown&lt;/h1&gt;
-&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(cars)
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-fit &amp;lt;- lm(dist ~ speed, data = cars)
-fit
-## 
-## Call:
-## lm(formula = dist ~ speed, data = cars)
-## 
-## Coefficients:
-## (Intercept)        speed  
-##     -17.579        3.932&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Including Plots&lt;/h1&gt;
-&lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c(&amp;#39;Sky&amp;#39;, &amp;#39;Sunny side of pyramid&amp;#39;, &amp;#39;Shady side of pyramid&amp;#39;),
-  col = c(&amp;#39;#0292D8&amp;#39;, &amp;#39;#F7EA39&amp;#39;, &amp;#39;#C4B632&amp;#39;),
-  init.angle = -50, border = NA
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;
-Figure 1: A fancy pie chart.
+      <guid>/post/how-to-dashboard-r/</guid>
+      <description>&lt;p&gt;R has been the perfect language for the back end of &lt;a href=&#34;http://www.somervillema.gov/dashboard/daily.html&#34;&gt;this&lt;/a&gt; government data dashboard I am developing.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It has excellent packages to pipe in data from every significant source&lt;/li&gt;
+&lt;li&gt;Tools like dplyr and tidyr make cleaning and munging data trivial&lt;/li&gt;
+&lt;li&gt;It is ideal for automating analysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days. (Today that happens to include an uptick in reports of dead animals on the streets and sidewalks, which is disgusting but useful to know).&lt;/p&gt;
+&lt;p&gt;The reason I am writing this tutorial is to outline a method in the “knitr” package that I want to share because it opens up dozens of new tech stack combinations. The basic idea is to perform all of the data manipulations and analysis in R, and then “weave” it into popular Javascript visualization tools, like Highcharts, D3, and Leaflet. This is in contrast to the more traditional way of developing an R dashboard using Shiny.&lt;/p&gt;
+&lt;p&gt;Here is an example in its simplest form. First, I will show some analysis in R, and then I will show how that fits into a .Rhtml file, which can be “woven” into HTML/Javascript and finally uploaded to your web server.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(knitr)
+
+
+# Load Data
+dates &amp;lt;- c(&amp;#39;Jan&amp;#39;, &amp;#39;Feb&amp;#39;, &amp;#39;Mar&amp;#39;, &amp;#39;Apr&amp;#39;, &amp;#39;May&amp;#39;, &amp;#39;Jun&amp;#39;, &amp;#39;Jul&amp;#39;, &amp;#39;Aug&amp;#39;, &amp;#39;Sep&amp;#39;, &amp;#39;Oct&amp;#39;, &amp;#39;Nov&amp;#39;, &amp;#39;Dec&amp;#39;)
+Tokyo &amp;lt;- c(7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6)
+London &amp;lt;- c(3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8)
+
+# Calculate an average
+mean_of_Tokyo &amp;lt;- mean(Tokyo)
+mean_of_London &amp;lt;- mean(London)
+
+
+## Now knit together the data and HTML ##
+knit(&amp;quot;./index.Rhtml&amp;quot;, output = &amp;quot;./index.html&amp;quot;)
+
+# Now you can upload index.html to your server &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now this is what your index.Rhtml file will look like, in it’s most basic form. Here I am using Highcharts, but this could just as easily be D3 or any other charting library.&lt;/p&gt;
+&lt;p&gt;{% highlight HTML %}&lt;/p&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;
+Page Title: Daily Dashboard
+&lt;/title&gt;
+&lt;!-- Highcharts scripts --&gt;
+&lt;script src=&#34;https://code.highcharts.com/highcharts.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://code.highcharts.com/modules/exporting.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;script&gt;
+$(function() {
+    $(&#39;#container&#39;).highcharts({
+        title: {
+            text: &#39;Monthly Average Temperature&#39;,
+            x: -20 //center
+        },
+        subtitle: {
+            text: &#39;Source: WorldClimate.com&#39;,
+            x: -20
+        },
+        xAxis: {
+            categories: [&lt;!--rinline I(shQuote(dates)) --&gt;]
+        },
+        yAxis: {
+            title: {
+                text: &#39;Temperature (°C)&#39;
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: &#39;#808080&#39;
+            }]
+        },
+        tooltip: {
+            valueSuffix: &#39;°C&#39;
+        },
+        legend: {
+            layout: &#39;vertical&#39;,
+            align: &#39;right&#39;,
+            verticalAlign: &#39;middle&#39;,
+            borderWidth: 0
+        },
+        series: [{
+            name: &#39;Tokyo&#39;,
+            data: [&lt;!--rinline I(Tokyo) --&gt;]
+        }, {
+            name: &#39;London&#39;,
+            data: [&lt;!--rinline I(London) --&gt;]
+        }]
+    });
+});  
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;
+This is a Heading: Check out These Average Temperatures!
+&lt;/h1&gt;
+&lt;p&gt;
+This is a paragraph. Check out this timeseries. Over the last 12 months, London had an average temperature of &lt;!--rinline I(mean_of_London) --&gt; while Tokyo had an average of &lt;!--rinline I(mean_of_Tokyo) --&gt;. Now here is a chart:
 &lt;/p&gt;
+&lt;div id=&#34;container&#34; style=&#34;min-width: 310px; height: 400px; margin: 0 auto&#34;&gt;
+
 &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;p&gt;```&lt;/p&gt;
+&lt;p&gt;The parts to pay attention to are the ones in the HTML that say &lt;code&gt;rinline I(X)&lt;/code&gt;. These are the values from your R analysis that will get “woven in” to regular HTML using the Rhtml file. &lt;a href=&#34;http://yihui.name/knitr/&#34;&gt;Yihui Xie&lt;/a&gt;, knitr’s heroic creator, describes this method &lt;a href=&#34;http://yihui.name/knitr/demo/output/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I created a repository &lt;a href=&#34;https://github.com/DanielHadley/DashboardTutorialR&#34;&gt;here&lt;/a&gt; that contains the simple example outlined above, plus the slightly redacted files that I use to power &lt;a href=&#34;http://www.somervillema.gov/dashboard/daily.html&#34;&gt;our dashboard&lt;/a&gt;. The great thing is that Yihui has created a system where you can easily combine the analytical horsepower of R with virtually any charting library.&lt;/p&gt;
+&lt;div id=&#34;bonus-automate-it&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bonus: Automate It&lt;/h2&gt;
+&lt;p&gt;So now you have an R file for the analysis, which ends by creating HTML and uploading it to your web server. There are, of course, dozens of ways to set things up so that your R script gets called each day, hour, or however often you want your dashboard to update. At home, I use cron on a Raspberry Pi. But at work, I have found that the Task Scheduler program on Windows accomplishes this painlessly. I just schedule it to run the following .bat file every night at around 2 am: “C:Files-3.1.2.exe” CMD BATCH –vanilla –slave “C:.R”&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
     
     <item>
-      <title>Mobile visual clothing search</title>
-      <link>/publication/clothing-search/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
+      <title>The Top Urban Planning Articles of 2015</title>
+      <link>/post/top-planning-2016/</link>
+      <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>/publication/clothing-search/</guid>
-      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+      <guid>/post/top-planning-2016/</guid>
+      <description>&lt;p&gt;As I did &lt;a href=&#34;http://danielphadley.com/Top-Planning/&#34;&gt;last year&lt;/a&gt;, I went through several of my favorite sites and curated what I consider to be the best writing on urban issues from 2015. One thing I love about planning, and that drew me to the profession in the first place, is that it encompasses many skills and areas of interest. I think that diversity is reflected in this year’s list. &lt;em&gt;Caveat emptor&lt;/em&gt;: I use the term planning loosely. Some of these are more inspirational than germane.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.citylab.com/housing/2015/07/whats-the-matter-with-san-francisco/399506/&#34;&gt;What’s the Matter With San Francisco?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.vox.com/2015/8/10/9118199/public-transportation-subway-buses&#34;&gt;The real reason American public transportation is such a disaster&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.theonion.com/article/decaying-city-just-wants-skip-part-where-it-gets-r-50409&#34;&gt;Decaying City Just Wants To Skip To Part Where It Gets Revitalized Restaurant Scene&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.citylab.com/politics/2015/11/the-time-republicans-helped-build-an-all-black-town-called-soul-city/414585/&#34;&gt;The Time Republicans Helped Build an All-Black Town Called ‘Soul City’&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.slate.com/articles/health_and_science/science/2015/11/psychology_of_boring_architecture_the_damaging_impact_of_big_ugly_buildings.single.html&#34;&gt;The Generic City: Boring landscapes impede on our biological need for intrigue&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://motherboard.vice.com/read/the-real-mayors-of-simcity&#34;&gt;The Real Mayors of ‘SimCity’&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.theguardian.com/cities/ng-interactive/2015/jun/05/history-cities-50-buildings-interactive&#34;&gt;A history of cities in 50 buildings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://fortune.com/2015/11/29/pope-francis-urban-planning/&#34;&gt;Pope Francis Preaches Urban Planning&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://urbanedge.blogs.rice.edu/2015/10/29/does-urban-planning-have-a-race-problem/#.VnMJ-0qDFBc&#34;&gt;Does Urban Planning Have a Race Problem?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.bostonglobe.com/magazine/2015/12/29/years-later-did-big-dig-deliver/tSb8PIMS4QJUETsMpA7SpI/story.html&#34;&gt;10 years later, did the Big Dig deliver?&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Runner Up: &lt;a href=&#34;http://imgur.com/a/WdJim&#34;&gt;This&lt;/a&gt; is not an article in the traditional sense, but is a clear and insightful series of tips on transportation planning made for players of the popular game “Cities: Skylines.”&lt;/p&gt;
 </description>
     </item>
     

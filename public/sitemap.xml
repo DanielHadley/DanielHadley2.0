@@ -5,6 +5,60 @@
     
     <url>
     
+      <loc>/post/bayes-538/</loc>
+      <lastmod>2018-12-28T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/deranged-x-mas/</loc>
+      <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/branding-rmarkdown/</loc>
+      <lastmod>2018-02-08T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/interview-rayid-ghani/</loc>
+      <lastmod>2017-08-25T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/ggplot-logo/</loc>
+      <lastmod>2017-07-11T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/recidiviz/</loc>
+      <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/talk/example-talk/</loc>
       <lastmod>2017-01-01T00:00:00-07:00</lastmod>
     </url>
@@ -50,6 +104,33 @@
     
     <url>
     
+      <loc>/post/big-data-big-problems/</loc>
+      <lastmod>2016-10-17T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/jupyter-to-rmarkdown/</loc>
+      <lastmod>2016-09-08T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/kaggle-thoughts/</loc>
+      <lastmod>2016-06-09T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/project/deep-learning/</loc>
       <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     </url>
@@ -77,6 +158,42 @@
     
     <url>
     
+      <loc>/post/how-to-dashboard-r/</loc>
+      <lastmod>2016-02-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/top-planning-2016/</loc>
+      <lastmod>2016-01-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/planning-for-driverless/</loc>
+      <lastmod>2015-11-25T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/statwars/</loc>
+      <lastmod>2015-10-21T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/publication/person-re-identification/</loc>
       <lastmod>2015-09-01T00:00:00+00:00</lastmod>
     </url>
@@ -88,6 +205,150 @@
     
       <loc>/post/2015-07-23-r-rmarkdown/</loc>
       <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/r-rmarkdown/</loc>
+      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/data-science-vs-city-rats/</loc>
+      <lastmod>2015-06-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/optimize-street-repairs/</loc>
+      <lastmod>2015-03-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/r-in-govt/</loc>
+      <lastmod>2015-02-12T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/new-mit-prof/</loc>
+      <lastmod>2015-01-19T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/top-planning/</loc>
+      <lastmod>2015-01-02T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/time-covers/</loc>
+      <lastmod>2014-12-22T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/grammys/</loc>
+      <lastmod>2014-12-10T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/youtube/</loc>
+      <lastmod>2014-12-06T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/mass-election-analysis/</loc>
+      <lastmod>2014-11-15T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/automate-map-making/</loc>
+      <lastmod>2014-11-10T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/mass-election-maps/</loc>
+      <lastmod>2014-11-06T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/15-same-sex-marriage/</loc>
+      <lastmod>2014-11-02T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/gone-girl-prediction/</loc>
+      <lastmod>2014-11-02T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/experiential-learning/</loc>
+      <lastmod>2014-10-29T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/hello-world/</loc>
+      <lastmod>2014-10-28T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -124,7 +385,47 @@
     
     <url>
     
+      <loc>/tags/automation/</loc>
+      <lastmod>2018-02-08T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/bayesian/</loc>
+      <lastmod>2018-12-28T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/categories/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/combinatronics/</loc>
+      <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/dssg/</loc>
+      <lastmod>2017-08-25T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -135,6 +436,26 @@
     
       <loc>/</loc>
       <lastmod>2017-10-15T00:00:00-06:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/dashboard/</loc>
+      <lastmod>2016-02-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/categories/data-science/</loc>
+      <lastmod>2017-08-25T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -163,8 +484,88 @@
     
     <url>
     
+      <loc>/tags/education/</loc>
+      <lastmod>2014-10-29T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/machine-learning/</loc>
+      <lastmod>2016-06-09T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/maps/</loc>
+      <lastmod>2014-11-15T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/optimization/</loc>
+      <lastmod>2015-03-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/personal/</loc>
+      <lastmod>2015-10-21T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/plot/</loc>
       <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/plots/</loc>
+      <lastmod>2017-07-11T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/prediction/</loc>
+      <lastmod>2016-06-09T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/probability/</loc>
+      <lastmod>2018-12-28T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -193,8 +594,28 @@
     
     <url>
     
+      <loc>/tags/puzzle/</loc>
+      <lastmod>2018-12-28T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/python/</loc>
+      <lastmod>2016-09-08T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/categories/r/</loc>
-      <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+      <lastmod>2018-12-28T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -223,8 +644,58 @@
     
     <url>
     
+      <loc>/tags/rmarkdown/</loc>
+      <lastmod>2018-02-08T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/shiny/</loc>
+      <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/urban-planning/</loc>
+      <lastmod>2016-01-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/work/</loc>
+      <lastmod>2018-02-08T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/categories/work/</loc>
+      <lastmod>2014-10-29T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

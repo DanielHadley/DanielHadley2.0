@@ -1,0 +1,49 @@
+---
+title: "How To Automate Map Making in R"
+date: 2014-11-10
+categories: ["R"]
+tags: ["maps", "work"]
+---
+
+
+
+<p>In my <a href="/Mass-Election-Maps/">last post</a>, I displayed a series of maps from the 2014 Massachusetts midterm election. In all, I created 17 maps, all with fewer than 20 lines of code. Here’s how…</p>
+<p>The basic idea is to use a For Loop with ggmap to iterate through columns of a data frame. In my example, the code for which can be found <a href="https://github.com/DanielHadley/MassElections/blob/master/MassElectionsFourteen.R">here</a>, I first read shapefiles from MassGIS into R, and then combine them with election data. The rationale for these steps can be seen in Hadley’s excellent <a href="https://github.com/hadley/ggplot2/wiki/plotting-polygon-shapefiles">shapefile tutorial</a>.</p>
+<pre class="r"><code># First prepare the parcel df
+mass &lt;- readOGR(dsn=&quot;./shapefiles&quot;, layer=&quot;GISDATA_CENSUS2010TOWNS_POLY&quot;)
+mass@data$id = rownames(mass@data)
+names(mass)
+mass.points &lt;- fortify(mass, region=&quot;id&quot;)
+mass.df &lt;- join(mass.points, mass@data, by=&quot;id&quot;)
+
+
+# Prepare data to match with MassGis layer
+d$TOWN &lt;- toupper(d$Municipality)
+
+# Combine data
+mass.df &lt;- merge(mass.df, d, by=&quot;TOWN&quot;)
+
+# Map
+map &lt;- get_map(location = &quot;Grafton, Massachusetts&quot;, zoom=8, maptype=&quot;roadmap&quot;, color = &quot;bw&quot;)
+ggmap(map)</code></pre>
+<p>Now we have merged election data to the shapefile and prepared a Google base map in black and white that is focused on Grafton, MA (which happens to be close to the center of Massachusetts). Next, we will use this to make multiple choropleth maps of the election data.</p>
+<div id="iteration-let-1000-maps-flourish" class="section level3">
+<h3>Iteration: Let 1,000 maps flourish</h3>
+<p>This next part may not be too novel to people who are used to writing for loops, but by the time I had created my 5th map, I was glad it occurred to me. 27:46 are all columns (with descriptive names - you’ll see why that is important in a moment) that I would like to see visualized on a map. The following loop uses the index from the column number to fill each city and town with a color representing the percent of votes received by the candidate. The gradient is chosen by ggmap based on the distribution of datapoints, but I set the color palette with the package RColorBrewer.</p>
+<p>For the title, the loop pastes the description along with the column names from the index number: {% raw %} colnames(mass.df)[[i]] {% endraw %}. Thus, the map is generated automatically for all columns from 27 to 46. It replaces “i” with the relevant number.</p>
+<pre class="r"><code>for(i in 27 : 46){
+  ggmap(map) +
+    geom_polygon(data=mass.df, aes(x=long, y=lat, group=group, fill=mass.df[,i]), colour=NA, alpha=0.7) +
+    scale_fill_gradientn(colours=(brewer.pal(9,&quot;YlGnBu&quot;)),labels=percent) +
+    labs(fill=&quot;&quot;) +
+    theme_nothing(legend=TRUE) + ggtitle(paste(&quot;Percent of Votes for &quot;,colnames(mass.df)[[i]],sep=&quot;&quot;))
+  
+  ggsave(paste(&quot;./plots/Map&quot;,i,&quot;.png&quot;,sep=&quot;&quot;), dpi=300, width=6, height=5)
+}</code></pre>
+<p>The final step in this loop is to save the map to a “plots” subdirectory, again with “i” to index the column number.</p>
+<div id="scalability" class="section level4">
+<h4>Scalability</h4>
+<p>I have done this with choropleth maps using ggmap, but in theory you could do it with point maps, heat maps, density maps, or any type of map that can take data from a column and iterate through subsequent columns. My next plan is to see whether I could make hundreds of maps of time-series data and combine them into a gif. I have always wanted to see how crime trends have shifted throughout the city over the last several years.</p>
+<p>I hope you also find this helpful.</p>
+</div>
+</div>

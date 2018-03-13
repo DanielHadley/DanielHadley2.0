@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.36" />
+  
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="A while ago, the popular data journalism site 538 posted a challenging probability puzzle:
+ On the table in front of you are two coins. They look and feel identical, but you know one of them has been doctored. The fair coin comes up heads half the time while the doctored coin comes up heads 60 percent of the time. How many flips — you must flip both coins at once, one with each hand — would you need to give yourself a 95 percent chance of correctly identifying the doctored coin?">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/bayes-538/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+      
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Daniel Hadley">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Daniel Hadley">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/bayes-538/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@danielphadley">
+  <meta property="twitter:creator" content="@danielphadley">
+  
+  <meta property="og:site_name" content="Daniel Hadley">
+  <meta property="og:url" content="/post/bayes-538/">
+  <meta property="og:title" content="Bayes&#39; Puzzle Powers | Daniel Hadley">
+  <meta property="og:description" content="A while ago, the popular data journalism site 538 posted a challenging probability puzzle:
+ On the table in front of you are two coins. They look and feel identical, but you know one of them has been doctored. The fair coin comes up heads half the time while the doctored coin comes up heads 60 percent of the time. How many flips — you must flip both coins at once, one with each hand — would you need to give yourself a 95 percent chance of correctly identifying the doctored coin?">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2018-12-28T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2018-12-28T00:00:00&#43;00:00">
+  
+
+  
+
+  <title>Bayes&#39; Puzzle Powers | Daniel Hadley</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Daniel Hadley</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#teaching">
+            
+            <span>Teaching</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Bayes&#39; Puzzle Powers</h1>
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2018-12-28 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      Dec 28, 2018
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/r">R</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Bayes%27%20Puzzle%20Powers&amp;url=%2fpost%2fbayes-538%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fbayes-538%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fbayes-538%2f&amp;title=Bayes%27%20Puzzle%20Powers"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fbayes-538%2f&amp;title=Bayes%27%20Puzzle%20Powers"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Bayes%27%20Puzzle%20Powers&amp;body=%2fpost%2fbayes-538%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <p>A while ago, the popular data journalism site 538 posted a challenging <a href="http://fivethirtyeight.com/features/rock-paper-scissors-double-scissors/">probability puzzle</a>:</p>
+<blockquote>
+<p>On the table in front of you are two coins. They look and feel identical, but you know one of them has been doctored. The fair coin comes up heads half the time while the doctored coin comes up heads 60 percent of the time. How many flips — you must flip both coins at once, one with each hand — would you need to give yourself a 95 percent chance of correctly identifying the doctored coin?</p>
+</blockquote>
+<p>The question proved so difficult, in fact, that 538’s talented puzzle master Oliver Roeder gave an <a href="https://fivethirtyeight.com/features/can-you-beat-the-game-show/">incorrect answer</a>. Someone smarter than me noticed this, and then we worked together to verify with <a href="https://www.reddit.com/r/statistics/">r/statistics</a> and notify those who may have cared (but didn’t), including the authors of a paper Oliver cited. <a href="https://www.reddit.com/r/statistics/comments/76ul99/is_this_538_puzzle_correct_how_many_coins_flips/">My question to Reddit</a> contains R code that traces exactly where they went wrong.</p>
+<p>This kind of puzzle is a classic in statistics text books because it uses a trivial problem - flipping coins - as an example of more meaningful questions. The solutions are often given by comparing hypothetical distributions.</p>
+<p>But I wanted to think of this less abstractly: what if you really were sitting in front of two coins, knowing that one has a slight bias? What would be the most efficient way to find out and how long would it take?</p>
+<div id="reverend-bayes-confronts-the-coins" class="section level3">
+<h3>Reverend Bayes Confronts the Coins</h3>
+<p>The first thought I had reading the 538 post was, “this is perfect for sequential Bayesian updating.” The idea undergirding most of <a href="https://en.wikipedia.org/wiki/Bayesian_statistics">Bayesian statistics</a> is to update your prior probabilities with new data, e.g., start with a belief and then change it on every coin toss.</p>
+<p>In this case, we can begin with a fairly strong prior. We know that at least one of the two coins is biased, so the odds are 50/50. If we quickly used Bayes’ Theorem after each flip, how long would it take us to choose the biased coin with 95% confidence?</p>
+<p>This is not a trivial simulation. In theory, you could go on flipping the same side of both coins in perpetuity. Given that, and the subtle difference in the coins, I opted for a simulation that lasted 2 million games. Each game consisted of a speedy specter of Bayes, who flipped coins and updated probabilities until he was certain which one was fair.</p>
+<p>As it turns out, this method took Bayes-bot an average of 74 flips. The cool thing, however, is that it is possible to be 96% confident in as few as eight flips, if the coins land a certain way. The median is 60, and the max in this simulation was 704.</p>
+<div class="figure">
+<img src="/images/coin_flipping_hist.png" />
+
+</div>
+<p>Notice that the correct answer to the original question is 134 flips, which are needed given that the distribution has a long right tail. But it’s neat to see how often in practice Bayes could beat the theoretical number of flips needed. In this case, 88% of the time, Bayes knew before 134 flips.</p>
+<pre class="r"><code>library(tidyverse)
+
+#### Method two: Bayesian updating simulation ####
+# H = coin1 = fair 
+
+update &lt;- function(prior, coin_randomizer) {
+  # This function updates our prior probabilities after looking at both coins
+  
+  # Flip
+  # The biased coin is randomly selected. 
+  # They both return .4 or .6 because we plug these figures into Bayes&#39; theorem below
+  # But actual heads/tails probabilities are either 50/50 or 60/40
+  flip_coin1 &lt;- sample(c(.4,.6), 1, prob = c(coin_randomizer[1], 1 - coin_randomizer[1]))
+  flip_coin2 &lt;- sample(c(.4,.6), 1, prob = c(coin_randomizer[2], 1 - coin_randomizer[2]))
+  
+  # Hypothesis given the data
+  # Bayes Theorum = prob(A|X) =
+  # Numerator
+  # P(X|A)*P(A) /
+  # Denominator
+  # P(X) = P(X|A)*P(A) + P(X|not A) * P(not A)
+  
+  # Prob coin1 is fair given flip1
+  posterior_after_flip1 &lt;- (.50 * prior) / ((.50 * prior) + flip_coin1 * (1 - prior))
+  
+  # Prob coin1 is fair given flip2 and the priors informed by flip1
+  posterior_after_flip2 &lt;- (flip_coin2 * posterior_after_flip1) / 
+    ((flip_coin2 * posterior_after_flip1) + .50 * (1 - posterior_after_flip1))
+  
+  return(posterior_after_flip2)
+}
+
+
+simulate &lt;- function(x) {
+  
+  # We randomly assign the coins 1x per simulation
+  coin_randomizer &lt;- sample(c(.5, .4), 2)
+  
+  # Keep track for checking later
+  is_fair_coin1 &lt;- if_else(coin_randomizer[1] == .5, 1, .1)
+  
+  # Start here
+  n_flips &lt;- 0
+  prior &lt;- .5
+  
+  while(prior &gt;= .05 &amp; prior &lt;= .95){
+    prior &lt;- update(prior, coin_randomizer)
+    n_flips &lt;- n_flips + 1
+  }
+  
+  # Just for updating progress
+  print(x)
+  # Return how long it took to be 95% sure
+  return(n_flips)
+  
+}
+
+n_sims &lt;- 2e6
+
+sim_results &lt;- 1:n_sims %&gt;% 
+  map(function(x) simulate(x)) %&gt;% 
+  unlist()
+
+summary(sim_results)
+hist(sim_results)
+sum(sim_results &lt; 134)
+
+
+
+# Let&#39;s make sure we get the right # of true positives
+test_the_sim &lt;- function(x) {
+  
+  # We randomly assign the coins 1x per simulation
+  coin_randomizer &lt;- sample(c(.5, .4), 2)
+  
+  # Keep track for checking later
+  is_fair_coin1 &lt;- if_else(coin_randomizer[1] == .5, 1, .1)
+  
+  # Start here
+  n_flips &lt;- 0
+  prior &lt;- .5
+  
+  while(prior &gt;= .05 &amp; prior &lt;= .95){
+    prior &lt;- update(prior, coin_randomizer)
+    n_flips &lt;- n_flips + 1
+  }
+  
+  # Just for updating progress
+  print(x)
+  return(prior * is_fair_coin1)
+  
+}
+
+
+# Don&#39;t need as many tests
+n_tests &lt;- 20000
+
+test_results &lt;- 1:n_tests %&gt;% 
+  map(function(x) test_the_sim(x)) %&gt;% 
+  unlist()
+
+
+true_positivies &lt;- sum(test_results &gt; .95)
+true_negatives &lt;- sum(test_results &lt; .004)
+
+(true_negatives + true_positivies) / n_tests
+
+# !It works 96% of the time</code></pre>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/probability">probability</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/puzzle">puzzle</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/bayesian">bayesian</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/deranged-x-mas/">Deranged X-Mas - a Gift Exchange Puzzle</a></li>
+        
+        <li><a href="/post/data-science-vs-city-rats/">Data Science vs City Rats</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+

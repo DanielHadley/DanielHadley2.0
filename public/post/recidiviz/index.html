@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.36" />
+  
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="Recidivism, the rate at which those released from incarceration return or commit new crimes, is one of society’s most difficult social problems. The official estimate is that 55% of former prisoners will return within 60 months.
+ Recidivism is also, I discovered, one of the most challenging things to model and understand statistically. In this blog post, I describe our efforts to build this simulation, including how we settled on some fairly basic control structures (for loops) without giving up too much in terms of efficiency and readability.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/recidiviz/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+      
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Daniel Hadley">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Daniel Hadley">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/recidiviz/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@danielphadley">
+  <meta property="twitter:creator" content="@danielphadley">
+  
+  <meta property="og:site_name" content="Daniel Hadley">
+  <meta property="og:url" content="/post/recidiviz/">
+  <meta property="og:title" content="The Prison Analyst&#39;s Dilemma - Using R to Model Recidivism | Daniel Hadley">
+  <meta property="og:description" content="Recidivism, the rate at which those released from incarceration return or commit new crimes, is one of society’s most difficult social problems. The official estimate is that 55% of former prisoners will return within 60 months.
+ Recidivism is also, I discovered, one of the most challenging things to model and understand statistically. In this blog post, I describe our efforts to build this simulation, including how we settled on some fairly basic control structures (for loops) without giving up too much in terms of efficiency and readability.">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2017-05-31T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2017-05-31T00:00:00&#43;00:00">
+  
+
+  
+
+  <title>The Prison Analyst&#39;s Dilemma - Using R to Model Recidivism | Daniel Hadley</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Daniel Hadley</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#teaching">
+            
+            <span>Teaching</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">The Prison Analyst&#39;s Dilemma - Using R to Model Recidivism</h1>
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2017-05-31 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      May 31, 2017
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/r">R</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=The%20Prison%20Analyst%27s%20Dilemma%20-%20Using%20R%20to%20Model%20Recidivism&amp;url=%2fpost%2frecidiviz%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2frecidiviz%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2frecidiviz%2f&amp;title=The%20Prison%20Analyst%27s%20Dilemma%20-%20Using%20R%20to%20Model%20Recidivism"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2frecidiviz%2f&amp;title=The%20Prison%20Analyst%27s%20Dilemma%20-%20Using%20R%20to%20Model%20Recidivism"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=The%20Prison%20Analyst%27s%20Dilemma%20-%20Using%20R%20to%20Model%20Recidivism&amp;body=%2fpost%2frecidiviz%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <p>Recidivism, the rate at which those released from incarceration return or commit new crimes, is one of society’s most difficult social problems. The official estimate is that 55% of former prisoners will return within 60 months.</p>
+<div class="figure">
+<img src="https://static1.squarespace.com/static/57e1fc9c20099e1414dc6070/t/592890393e00bedb90f8b8da/1495830599102/?format=1000w" />
+
+</div>
+<p>Recidivism is also, I discovered, one of the most challenging things to model and understand statistically. In this blog post, I describe our efforts to build <a href="https://daniel-hadley.shinyapps.io/Recidivism_App/">this simulation</a>, including how we settled on some fairly basic control structures (for loops) without giving up too much in terms of efficiency and readability.</p>
+<div id="a-common-problem" class="section level3">
+<h3>A Common Problem</h3>
+<p>Recidivism is similar to many other types of social and ecological trends. There is a basic measurement - return to prison in our case, but it could also be website visits, weather patterns, bankruptcy, etc. But unlike, say, mortality rates, which can be modeled using <a href="https://en.wikipedia.org/wiki/Survivorship_curve">survivorship curves</a>, a return to prison is not the end. The vast majority of people who recidivate will return to society, and then a portion of that group will return to prison again, and so on for many cycles.</p>
+<p>If this phenomenon sounds familiar, you may have thought of some type of model you have used in the past. And we looked at many of these, from <a href="http://setosa.io/ev/markov-chains/">Markov chains</a> to state-based models. What we settled on is similar to an agent-based model, but is as simple as two for loops. In pseudocode, it looks like,</p>
+<pre class="r"><code>for(agent in 1:number_of_agents) {
+  for(month in 1:number_of_months) {
+    Keep track of how long the person has been free
+    Calculate the odds of recidivating conditional on months free
+    If the agent recidivates, assign a prison sentence 
+  }
+}</code></pre>
+<p>As you can see, this oversimplifies a lot. The “agents” don’t interact, and the probability of recidivating is conditional only on the time someone is free. But it does allow for multiple states, from freedom to prison and back again. And this - combined with the legibility of for loops - makes it easy to add complexity. In another variant of this model, for example, we also added parole sentences, adverse health outcomes, and many other variables.</p>
+<p>The basic functionality can be visualized in this tweenr plot created by my colleague, Sam Nelson:</p>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/Sorenson-Impact/Recidivism_App/master/www/model_output.gif" />
+
+</div>
+</div>
+<div id="for-hate" class="section level3">
+<h3>For Hate</h3>
+<p>For loops are often pooh-poohed in the R community. They are thought of as slow and inferior to vectorized alternatives. Initially, I could see why. One of our more complex versions with 10,000 agents had build times of “let’s go out to lunch and see where it is when we get back.” When I wanted to do sensitivity analysis with multiple iterations, it was more like, “let’s sleep on it.” Even pared down, our initial version took 13 seconds.</p>
+<p>That’s why I was grateful for Grolemund and Wickham’s chapter on iteration in “R for Data Science.” First, they eased my [r]eligious guilt about our model structure: “Some people will tell you to avoid for loops because they are slow. They’re wrong! (Well at least they’re rather out of date, as for loops haven’t been slow for many years).”</p>
+<p>Then they provided some useful tips that allowed me to reduce the build time from 13 seconds to 3, without which we could not have built an interactive app. These were simple, but effective: preallocate the output, declare the type of the vector, and save the results in a list, waiting to combine them into a single vector until after the loop is done.</p>
+</div>
+<div id="from-simple-to-complex" class="section level3">
+<h3>From Simple to Complex</h3>
+<p>I like this quote by the abolitionist Elizur Wright, “while nothing is more uncertain than a single life, nothing is more certain than the average duration of a thousand lives.” Recidivism trends are not as predictable, but I think that the same principle applies. That is why I like to build models that begin with very simple and uncertain functions, but that build to more tangible outcomes.</p>
+<p>I know that for loops do not come close to capturing the complexity inherent in social systems, but I like that that they mimic the hierarchy, from agents to averages.</p>
+<p><a href="https://github.com/Sorenson-Impact/Recidivism_App">Code</a></p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/shiny">Shiny</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/plots">plots</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/statwars/">What the Critics Got Wrong About Star Wars</a></li>
+        
+        <li><a href="/post/time-covers/">The Most Magazine Covers of All Time</a></li>
+        
+        <li><a href="/post/grammys/">Grammy Counts Favor Musicians From the Aughts</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+
