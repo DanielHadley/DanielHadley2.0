@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.36" />
+  
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="R has been the perfect language for the back end of this government data dashboard I am developing.
+ It has excellent packages to pipe in data from every significant source Tools like dplyr and tidyr make cleaning and munging data trivial It is ideal for automating analysis  In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/how-to-dashboard-r/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+      
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Daniel Hadley">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Daniel Hadley">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/how-to-dashboard-r/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@danielphadley">
+  <meta property="twitter:creator" content="@danielphadley">
+  
+  <meta property="og:site_name" content="Daniel Hadley">
+  <meta property="og:url" content="/how-to-dashboard-r/">
+  <meta property="og:title" content="How to Build a Data Dashboard using R (knitr), HTML, and Javascript (e.g.,Highcharts) | Daniel Hadley">
+  <meta property="og:description" content="R has been the perfect language for the back end of this government data dashboard I am developing.
+ It has excellent packages to pipe in data from every significant source Tools like dplyr and tidyr make cleaning and munging data trivial It is ideal for automating analysis  In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days.">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2016-02-05T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2016-02-05T00:00:00&#43;00:00">
+  
+
+  
+
+  <title>How to Build a Data Dashboard using R (knitr), HTML, and Javascript (e.g.,Highcharts) | Daniel Hadley</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Daniel Hadley</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#teaching">
+            
+            <span>Teaching</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">How to Build a Data Dashboard using R (knitr), HTML, and Javascript (e.g.,Highcharts)</h1>
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2016-02-05 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      Feb 5, 2016
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/r">R</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=How%20to%20Build%20a%20Data%20Dashboard%20using%20R%20%28knitr%29%2c%20HTML%2c%20and%20Javascript%20%28e.g.%2cHighcharts%29&amp;url=%2fhow-to-dashboard-r%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fhow-to-dashboard-r%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fhow-to-dashboard-r%2f&amp;title=How%20to%20Build%20a%20Data%20Dashboard%20using%20R%20%28knitr%29%2c%20HTML%2c%20and%20Javascript%20%28e.g.%2cHighcharts%29"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fhow-to-dashboard-r%2f&amp;title=How%20to%20Build%20a%20Data%20Dashboard%20using%20R%20%28knitr%29%2c%20HTML%2c%20and%20Javascript%20%28e.g.%2cHighcharts%29"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=How%20to%20Build%20a%20Data%20Dashboard%20using%20R%20%28knitr%29%2c%20HTML%2c%20and%20Javascript%20%28e.g.%2cHighcharts%29&amp;body=%2fhow-to-dashboard-r%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <p>R has been the perfect language for the back end of <a href="http://www.somervillema.gov/dashboard/daily.html">this</a> government data dashboard I am developing.</p>
+<ul>
+<li>It has excellent packages to pipe in data from every significant source</li>
+<li>Tools like dplyr and tidyr make cleaning and munging data trivial</li>
+<li>It is ideal for automating analysis</li>
+</ul>
+<p>In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days. (Today that happens to include an uptick in reports of dead animals on the streets and sidewalks, which is disgusting but useful to know).</p>
+<p>The reason I am writing this tutorial is to outline a method in the “knitr” package that I want to share because it opens up dozens of new tech stack combinations. The basic idea is to perform all of the data manipulations and analysis in R, and then “weave” it into popular Javascript visualization tools, like Highcharts, D3, and Leaflet. This is in contrast to the more traditional way of developing an R dashboard using Shiny.</p>
+<p>Here is an example in its simplest form. First, I will show some analysis in R, and then I will show how that fits into a .Rhtml file, which can be “woven” into HTML/Javascript and finally uploaded to your web server.</p>
+<pre class="r"><code>library(knitr)
+
+
+# Load Data
+dates &lt;- c(&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, &#39;May&#39;, &#39;Jun&#39;, &#39;Jul&#39;, &#39;Aug&#39;, &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;)
+Tokyo &lt;- c(7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6)
+London &lt;- c(3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8)
+
+# Calculate an average
+mean_of_Tokyo &lt;- mean(Tokyo)
+mean_of_London &lt;- mean(London)
+
+
+## Now knit together the data and HTML ##
+knit(&quot;./index.Rhtml&quot;, output = &quot;./index.html&quot;)
+
+# Now you can upload index.html to your server </code></pre>
+<p>Now this is what your index.Rhtml file will look like, in it’s most basic form. Here I am using Highcharts, but this could just as easily be D3 or any other charting library.</p>
+<p>{% highlight HTML %}</p>
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+Page Title: Daily Dashboard
+</title>
+<!-- Highcharts scripts -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$(function() {
+    $('#container').highcharts({
+        title: {
+            text: 'Monthly Average Temperature',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Source: WorldClimate.com',
+            x: -20
+        },
+        xAxis: {
+            categories: [<!--rinline I(shQuote(dates)) -->]
+        },
+        yAxis: {
+            title: {
+                text: 'Temperature (°C)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Tokyo',
+            data: [<!--rinline I(Tokyo) -->]
+        }, {
+            name: 'London',
+            data: [<!--rinline I(London) -->]
+        }]
+    });
+});  
+</script>
+</head>
+<body>
+<h1>
+This is a Heading: Check out These Average Temperatures!
+</h1>
+<p>
+This is a paragraph. Check out this timeseries. Over the last 12 months, London had an average temperature of <!--rinline I(mean_of_London) --> while Tokyo had an average of <!--rinline I(mean_of_Tokyo) -->. Now here is a chart:
+</p>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
+
+</div>
+</body>
+</html>
+<p>```</p>
+<p>The parts to pay attention to are the ones in the HTML that say <code>rinline I(X)</code>. These are the values from your R analysis that will get “woven in” to regular HTML using the Rhtml file. <a href="http://yihui.name/knitr/">Yihui Xie</a>, knitr’s heroic creator, describes this method <a href="http://yihui.name/knitr/demo/output/">here</a>.</p>
+<p>I created a repository <a href="https://github.com/DanielHadley/DashboardTutorialR">here</a> that contains the simple example outlined above, plus the slightly redacted files that I use to power <a href="http://www.somervillema.gov/dashboard/daily.html">our dashboard</a>. The great thing is that Yihui has created a system where you can easily combine the analytical horsepower of R with virtually any charting library.</p>
+<div id="bonus-automate-it" class="section level2">
+<h2>Bonus: Automate It</h2>
+<p>So now you have an R file for the analysis, which ends by creating HTML and uploading it to your web server. There are, of course, dozens of ways to set things up so that your R script gets called each day, hour, or however often you want your dashboard to update. At home, I use cron on a Raspberry Pi. But at work, I have found that the Task Scheduler program on Windows accomplishes this painlessly. I just schedule it to run the following .bat file every night at around 2 am: “C:Files-3.1.2.exe” CMD BATCH –vanilla –slave “C:.R”</p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/dashboard">dashboard</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/automation">automation</a>
+  
+</div>
+
+
+
+
+    
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+
