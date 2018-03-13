@@ -12,10 +12,10 @@
     
     <item>
       <title>Bayes&#39; Puzzle Powers</title>
-      <link>/post/bayes-538/</link>
+      <link>/bayes-538/</link>
       <pubDate>Fri, 28 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/bayes-538/</guid>
+      <guid>/bayes-538/</guid>
       <description>&lt;p&gt;A while ago, the popular data journalism site 538 posted a challenging &lt;a href=&#34;http://fivethirtyeight.com/features/rock-paper-scissors-double-scissors/&#34;&gt;probability puzzle&lt;/a&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;On the table in front of you are two coins. They look and feel identical, but you know one of them has been doctored. The fair coin comes up heads half the time while the doctored coin comes up heads 60 percent of the time. How many flips — you must flip both coins at once, one with each hand — would you need to give yourself a 95 percent chance of correctly identifying the doctored coin?&lt;/p&gt;
@@ -148,10 +148,10 @@ true_negatives &amp;lt;- sum(test_results &amp;lt; .004)
     
     <item>
       <title>Deranged X-Mas - a Gift Exchange Puzzle</title>
-      <link>/post/deranged-x-mas/</link>
+      <link>/deranged-x-mas/</link>
       <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/deranged-x-mas/</guid>
+      <guid>/deranged-x-mas/</guid>
       <description>&lt;p&gt;While planning a holiday gift exchange this week, my wife casually challenged me with a sort of tricky probability puzzle:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Sara and I were talking today and realized that we were off by one on the rotation because last year we went sledding instead of buying gifts.&lt;/p&gt;
@@ -226,10 +226,10 @@ sibling_mirror / nrow(ders)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Branding and Automating with R Markdown</title>
-      <link>/post/branding-rmarkdown/</link>
+      <link>/branding-rmarkdown/</link>
       <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/branding-rmarkdown/</guid>
+      <guid>/branding-rmarkdown/</guid>
       <description>&lt;p&gt;Last week was the 2018 RStudio conference in San Diego, where my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://rpubs.com/jzadra/rconf2018&#34;&gt;Here&lt;/a&gt; are the slides&lt;/li&gt;
@@ -306,10 +306,10 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>Rayid Ghani on Data Science for Social Good</title>
-      <link>/post/interview-rayid-ghani/</link>
+      <link>/interview-rayid-ghani/</link>
       <pubDate>Fri, 25 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/interview-rayid-ghani/</guid>
+      <guid>/interview-rayid-ghani/</guid>
       <description>&lt;p&gt;I had a chance to sit down with Rayid Ghani, the Director of the Center for Data Science and Public Policy at the University of Chicago. I have admired Rayid’s work ever since he became the Chief Scientist for the 2012 Barack Obama campaign. His strategic use of analytics set the precedent for a new era of data science in political campaigns. At the time, others were trying to reverse engineer his tactics, which meant he was always one step ahead of the other campaigns. The fact that he has stayed in the field and used data to produce positive social outcomes is truly admirable.&lt;/p&gt;
 &lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/XHDuN_2WP7o&#34; frameborder=&#34;0&#34; allowfullscreen&gt;
 &lt;/iframe&gt;
@@ -318,10 +318,10 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>How to Add a Logo to ggplot by Magick</title>
-      <link>/post/ggplot-logo/</link>
+      <link>/ggplot-logo/</link>
       <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/ggplot-logo/</guid>
+      <guid>/ggplot-logo/</guid>
       <description>&lt;p&gt;We recently wanted to brand several of our plots for publication in the local press. I looked around and found a &lt;a href=&#34;https://stackoverflow.com/questions/12463691/inserting-an-image-to-ggplot-outside-the-chart-area&#34;&gt;couple&lt;/a&gt; &lt;a href=&#34;https://stackoverflow.com/questions/41574732/how-to-add-logo-on-ggplot2-footer&#34;&gt;suggestions&lt;/a&gt; on how to add images to plots, but nothing that seemed modular or customizable. My colleague reccomended the relatively new &lt;a href=&#34;https://cran.r-project.org/web/packages/magick/vignettes/intro.html&#34;&gt;Magick package&lt;/a&gt;, which provided all of the functionality I needed (plus a lot more). Here is a simple example along with the code to replicate it:&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
 &lt;img src=&#34;/images/Cars.png&#34; /&gt;
@@ -380,10 +380,10 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>The Prison Analyst&#39;s Dilemma - Using R to Model Recidivism</title>
-      <link>/post/recidiviz/</link>
+      <link>/recidiviz/</link>
       <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/recidiviz/</guid>
+      <guid>/recidiviz/</guid>
       <description>&lt;p&gt;Recidivism, the rate at which those released from incarceration return or commit new crimes, is one of society’s most difficult social problems. The official estimate is that 55% of former prisoners will return within 60 months.&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
 &lt;img src=&#34;https://static1.squarespace.com/static/57e1fc9c20099e1414dc6070/t/592890393e00bedb90f8b8da/1495830599102/?format=1000w&#34; /&gt;
@@ -435,10 +435,10 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>Big Data to Solve Big Problems</title>
-      <link>/post/big-data-big-problems/</link>
+      <link>/big-data-big-problems/</link>
       <pubDate>Mon, 17 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/big-data-big-problems/</guid>
+      <guid>/big-data-big-problems/</guid>
       <description>&lt;p&gt;In the marketing world, big data is used to answer ostensibly minute questions every day: are computer mouse movements predictive of purchasing? Does an orange background increase user engagement? In every &lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_places_with_%22Silicon%22_names&#34;&gt;place with Silicon in its name&lt;/a&gt;, there are teams of data scientists asking these questions.&lt;/p&gt;
 &lt;p&gt;In the social sector, by contrast, answering helpful questions is more difficult. For instance, is our program reducing homelessness? How is health spending distributed across the state? Part of the difficulty is the nature of the problems we are trying to solve. Lowering rates of recidivism is far more complex than driving ad clicks.&lt;/p&gt;
 &lt;p&gt;But there is another reason that governments, nonprofits, and philanthropists find it difficult to answer basic questions about social services: missing data. We simply do not have the infrastructure to collect and analyze data that reveals true social outcomes.&lt;/p&gt;
@@ -456,10 +456,10 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>From Jupyter Notebooks to R Markdown</title>
-      <link>/post/jupyter-to-rmarkdown/</link>
+      <link>/jupyter-to-rmarkdown/</link>
       <pubDate>Thu, 08 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/jupyter-to-rmarkdown/</guid>
+      <guid>/jupyter-to-rmarkdown/</guid>
       <description>&lt;p&gt;I started using Jupyter Notebooks back when they were called IPython. I even remember having to set up a virtual Linux environment because they were not available on Windows. As much as I have enjoyed their functionality, I recently switched entirely to R Markdown in an RStudio environment. Here’s why.&lt;/p&gt;
 &lt;div id=&#34;exporting-to-github&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Exporting to Github&lt;/h3&gt;
@@ -492,10 +492,10 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>Lessons From My First Kaggle Contest</title>
-      <link>/post/kaggle-thoughts/</link>
+      <link>/kaggle-thoughts/</link>
       <pubDate>Thu, 09 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/kaggle-thoughts/</guid>
+      <guid>/kaggle-thoughts/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://www.kaggle.com&#34;&gt;Kaggle&lt;/a&gt; is a forum for interacting with other data scientists and competing to see who can write code that will best predict features of data. It’s a way to test your skills at statistics and machine learning, and to do a lot of human learning in the process (sorry, bad pun).&lt;/p&gt;
 &lt;p&gt;When I entered the contest to categorize crimes that occurred in San Francisco, my initial goal was to do better than random chance. I had some domain expertise from my time working with the Somerville Police Department, but I still worried that I would not be able to beat basic benchmarks for crime prediction. Over time, my goals shifted from making it out of the bottom quartile, to scoring above the median, until I finally made it into the top 10% and set my sights on winning. In the end, I ranked 7th out of 2,335 competitors.&lt;/p&gt;
 &lt;p&gt;There was no prize money in this contest, and I borrowed liberally from others’ ideas, so more than the ranking, I got involved to learn new things about data science.&lt;/p&gt;
@@ -573,199 +573,11 @@ for (crime in 1:length(crime_categories)) {
     </item>
     
     <item>
-      <title>Academic: the website designer for Hugo</title>
-      <link>/post/getting-started/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 -0600</pubDate>
-      
-      <guid>/post/getting-started/</guid>
-      <description>
-
-&lt;p&gt;&lt;strong&gt;Academic&lt;/strong&gt; is a framework to help you create a beautiful website quickly. Perfect for personal sites, blogs, or business/project sites. &lt;a href=&#34;https://themes.gohugo.io/theme/academic/&#34; target=&#34;_blank&#34;&gt;Check out the latest demo&lt;/a&gt; of what you&amp;rsquo;ll get in less than 10 minutes. Then head on over to the &lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Quick Start guide&lt;/a&gt; or take a look at the &lt;a href=&#34;https://sourcethemes.com/academic/updates/&#34; target=&#34;_blank&#34;&gt;Release Notes&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/gcushen/hugo-academic/&#34; target=&#34;_blank&#34;&gt;&lt;img src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png&#34; alt=&#34;Screenshot&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Key features:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Easily manage various content including homepage, blog posts, publications, talks, and projects&lt;/li&gt;
-&lt;li&gt;Extensible via &lt;strong&gt;color themes&lt;/strong&gt; and &lt;strong&gt;widgets/plugins&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Write in &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;Markdown&lt;/a&gt; for easy formatting and code highlighting, with &lt;a href=&#34;https://en.wikibooks.org/wiki/LaTeX/Mathematics&#34; target=&#34;_blank&#34;&gt;LaTeX&lt;/a&gt; for mathematical expressions&lt;/li&gt;
-&lt;li&gt;Social/academic network linking, &lt;a href=&#34;https://analytics.google.com&#34; target=&#34;_blank&#34;&gt;Google Analytics&lt;/a&gt;, and &lt;a href=&#34;https://disqus.com&#34; target=&#34;_blank&#34;&gt;Disqus&lt;/a&gt; comments&lt;/li&gt;
-&lt;li&gt;Responsive and mobile friendly&lt;/li&gt;
-&lt;li&gt;Simple and refreshing one page design&lt;/li&gt;
-&lt;li&gt;Multilingual and easy to customize&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;color-themes&#34;&gt;Color Themes&lt;/h2&gt;
-
-&lt;p&gt;Academic is available in different color themes and font themes.&lt;/p&gt;
-
-
-
-&lt;div class=&#34;gallery&#34;&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;Default&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-default.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-default.png&#34;&gt;
-  &lt;/a&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;Ocean&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-ocean.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-ocean.png&#34;&gt;
-  &lt;/a&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;Dark&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-dark.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-dark.png&#34;&gt;
-  &lt;/a&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;Default&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-forest.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-forest.png&#34;&gt;
-  &lt;/a&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;Coffee theme with Playfair font&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-coffee-playfair.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-coffee-playfair.png&#34;&gt;
-  &lt;/a&gt;
-  
-  
-  
-  
-    
-  
-  &lt;a data-fancybox=&#34;gallery-1&#34; data-caption=&#34;1950s&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-1950s.png&#34;&gt;
-    &lt;img alt=&#34;&#34; src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/images/theme-1950s.png&#34;&gt;
-  &lt;/a&gt;
-  
-&lt;/div&gt;
-
-&lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
-
-&lt;p&gt;You can choose from one of the following four methods to install:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;one-click install using your web browser (recommended)&lt;/li&gt;
-&lt;li&gt;install on your computer using Git with the Command Prompt/Terminal app&lt;/li&gt;
-&lt;li&gt;install on your computer by downloading the ZIP files&lt;/li&gt;
-&lt;li&gt;install on your computer with RStudio&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;quick-install-using-your-web-browser&#34;&gt;Quick install using your web browser&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://app.netlify.com/start/deploy?repository=https://github.com/sourcethemes/academic-kickstart&#34; target=&#34;_blank&#34;&gt;Install Academic with Netlify&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Netlify will provide you with a customizable URL to access your new site&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;On GitHub, go to your newly created &lt;code&gt;academic-kickstart&lt;/code&gt; repository and edit &lt;code&gt;config.toml&lt;/code&gt; to personalize your site. Shortly after saving the file, your site will automatically update&lt;/li&gt;
-&lt;li&gt;Read the &lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Quick Start Guide&lt;/a&gt; to learn how to add Markdown content. For inspiration, refer to the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/tree/master/exampleSite&#34; target=&#34;_blank&#34;&gt;Markdown content&lt;/a&gt; which powers the &lt;a href=&#34;https://themes.gohugo.io/theme/academic/&#34; target=&#34;_blank&#34;&gt;Demo&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;install-with-git&#34;&gt;Install with Git&lt;/h3&gt;
-
-&lt;p&gt;Prerequisites:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://git-scm.com/downloads&#34; target=&#34;_blank&#34;&gt;Download and install Git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://gohugo.io/getting-started/installing/#quick-install&#34; target=&#34;_blank&#34;&gt;Download and install Hugo&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/sourcethemes/academic-kickstart#fork-destination-box&#34; target=&#34;_blank&#34;&gt;Fork&lt;/a&gt; the &lt;em&gt;Academic Kickstart&lt;/em&gt; repository and clone your fork with Git:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/sourcethemes/academic-kickstart.git My_Website
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;Note that if you forked Academic Kickstart, the above command should be edited to clone your fork, i.e. replace &lt;code&gt;sourcethemes&lt;/code&gt; with your GitHub username.&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Initialize the theme:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd My_Website
-git submodule update --init --recursive
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;install-with-zip&#34;&gt;Install with ZIP&lt;/h3&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/sourcethemes/academic-kickstart/archive/master.zip&#34; target=&#34;_blank&#34;&gt;Download&lt;/a&gt; and extract &lt;em&gt;Academic Kickstart&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/gcushen/hugo-academic/archive/master.zip&#34; target=&#34;_blank&#34;&gt;Download&lt;/a&gt; and extract the &lt;em&gt;Academic theme&lt;/em&gt; to the &lt;code&gt;themes/academic/&lt;/code&gt; folder from the above step&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&#34;install-with-rstudio&#34;&gt;Install with RStudio&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-rstudio&#34; target=&#34;_blank&#34;&gt;View the guide to installing Academic with RStudio&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;quick-start&#34;&gt;Quick start&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;If you installed on your computer, view your new website by running the following command:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hugo server
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now visit &lt;a href=&#34;http://localhost:1313&#34; target=&#34;_blank&#34;&gt;localhost:1313&lt;/a&gt; and your new Academic powered website will appear. Otherwise, if using Netlify, they will provide you with your URL.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Read the &lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Quick Start Guide&lt;/a&gt; to learn how to add Markdown content, customize your site, and deploy it. For inspiration, refer to the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/tree/master/exampleSite&#34; target=&#34;_blank&#34;&gt;Markdown content&lt;/a&gt; which powers the &lt;a href=&#34;https://themes.gohugo.io/theme/academic/&#34; target=&#34;_blank&#34;&gt;Demo&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Build your site by running the &lt;code&gt;hugo&lt;/code&gt; command. Then &lt;a href=&#34;https://georgecushen.com/create-your-website-with-hugo/&#34; target=&#34;_blank&#34;&gt;host it for free using Github Pages&lt;/a&gt; or Netlify (refer to the first installation method). Alternatively, copy the generated &lt;code&gt;public/&lt;/code&gt; directory (by FTP, Rsync, etc.) to your production web server (such as a university&amp;rsquo;s hosting service).&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;updating&#34;&gt;Updating&lt;/h2&gt;
-
-&lt;p&gt;Feel free to &lt;em&gt;star&lt;/em&gt; the project on &lt;a href=&#34;https://github.com/gcushen/hugo-academic/&#34; target=&#34;_blank&#34;&gt;Github&lt;/a&gt; to help keep track of updates and check out the &lt;a href=&#34;https://sourcethemes.com/academic/updates&#34; target=&#34;_blank&#34;&gt;release notes&lt;/a&gt; prior to updating your site.&lt;/p&gt;
-
-&lt;p&gt;Before updating the framework, it is recommended to make a backup of your entire website directory (or at least your &lt;code&gt;themes/academic&lt;/code&gt; directory) and record your current version number.&lt;/p&gt;
-
-&lt;p&gt;By default, Academic is installed as a Git submodule which can be updated by running the following command:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;git submodule update --remote --merge
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/update/&#34; target=&#34;_blank&#34;&gt;Check out the update guide&lt;/a&gt; for full instructions and alternative methods.&lt;/p&gt;
-
-&lt;h2 id=&#34;feedback-contributing&#34;&gt;Feedback &amp;amp; Contributing&lt;/h2&gt;
-
-&lt;p&gt;Please use the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/issues&#34; target=&#34;_blank&#34;&gt;issue tracker&lt;/a&gt; to let me know about any bugs or feature requests, or alternatively make a pull request.&lt;/p&gt;
-
-&lt;p&gt;For support, head over to the &lt;a href=&#34;http://discuss.gohugo.io&#34; target=&#34;_blank&#34;&gt;Hugo discussion forum&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;license&#34;&gt;License&lt;/h2&gt;
-
-&lt;p&gt;Copyright 2016-present &lt;a href=&#34;https://georgecushen.com&#34; target=&#34;_blank&#34;&gt;George Cushen&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Released under the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/blob/master/LICENSE.md&#34; target=&#34;_blank&#34;&gt;MIT&lt;/a&gt; license.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>How to Build a Data Dashboard using R (knitr), HTML, and Javascript (e.g.,Highcharts)</title>
-      <link>/post/how-to-dashboard-r/</link>
+      <link>/how-to-dashboard-r/</link>
       <pubDate>Fri, 05 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/how-to-dashboard-r/</guid>
+      <guid>/how-to-dashboard-r/</guid>
       <description>&lt;p&gt;R has been the perfect language for the back end of &lt;a href=&#34;http://www.somervillema.gov/dashboard/daily.html&#34;&gt;this&lt;/a&gt; government data dashboard I am developing.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;It has excellent packages to pipe in data from every significant source&lt;/li&gt;
@@ -872,10 +684,10 @@ This is a paragraph. Check out this timeseries. Over the last 12 months, London 
     
     <item>
       <title>The Top Urban Planning Articles of 2015</title>
-      <link>/post/top-planning-2016/</link>
+      <link>/top-planning-2016/</link>
       <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/top-planning-2016/</guid>
+      <guid>/top-planning-2016/</guid>
       <description>&lt;p&gt;As I did &lt;a href=&#34;http://danielphadley.com/Top-Planning/&#34;&gt;last year&lt;/a&gt;, I went through several of my favorite sites and curated what I consider to be the best writing on urban issues from 2015. One thing I love about planning, and that drew me to the profession in the first place, is that it encompasses many skills and areas of interest. I think that diversity is reflected in this year’s list. &lt;em&gt;Caveat emptor&lt;/em&gt;: I use the term planning loosely. Some of these are more inspirational than germane.&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.citylab.com/housing/2015/07/whats-the-matter-with-san-francisco/399506/&#34;&gt;What’s the Matter With San Francisco?&lt;/a&gt;&lt;/li&gt;
@@ -890,6 +702,32 @@ This is a paragraph. Check out this timeseries. Over the last 12 months, London 
 &lt;li&gt;&lt;a href=&#34;https://www.bostonglobe.com/magazine/2015/12/29/years-later-did-big-dig-deliver/tSb8PIMS4QJUETsMpA7SpI/story.html&#34;&gt;10 years later, did the Big Dig deliver?&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Runner Up: &lt;a href=&#34;http://imgur.com/a/WdJim&#34;&gt;This&lt;/a&gt; is not an article in the traditional sense, but is a clear and insightful series of tips on transportation planning made for players of the popular game “Cities: Skylines.”&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Urban Planning in the Dawn of the Driverless Car</title>
+      <link>/planning-for-driverless/</link>
+      <pubDate>Wed, 25 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/planning-for-driverless/</guid>
+      <description>&lt;p&gt;Mayor Curtatone and I recently returned from the Smart Cities Expo in Barcelona Spain, where we unveiled a &lt;a href=&#34;http://audi-urban-future-initiative.com/blog/somerville-test-laboratory-future-urban-mobility&#34;&gt;new partnership&lt;/a&gt; between the City of Somerville and the car manufacturer Audi. We will be testing how autonomous vehicles work in an actual urban environment.&lt;/p&gt;
+&lt;p&gt;Driverless cars predominating city streets is in the realm of what &lt;a href=&#34;http://www.amazon.com/Where-Good-Ideas-Come-From/dp/1594485380&#34;&gt;Steven Johnson&lt;/a&gt; calls the “adjacent possible.” Uber just &lt;a href=&#34;http://www.nytimes.com/2015/09/13/magazine/uber-would-like-to-buy-your-robotics-department.html?_r=0&#34;&gt;made headlines&lt;/a&gt; by purchasing a large chunk of Carnegie Melon’s robotics department. Several car manufacturers including Audi have indicated that autonomous vehicles are on the way, and Google has driven its fleet over 1.2 million miles.&lt;/p&gt;
+&lt;p&gt;Yet, despite all this, a &lt;a href=&#34;http://www.nlc.org/Documents/Find%20City%20Solutions/Research%20Innovation/City%20of%20the%20Future/City%20of%20the%20Future%20FINAL%20WEB.pdf&#34;&gt;recent study&lt;/a&gt; found that only 6% of large cities’ transportation plans consider the effects of driverless technology. Municipal governments are not preparing for what will likely be the most disruptive technology since the internet, at least in terms of its effects on cities.&lt;/p&gt;
+&lt;div id=&#34;driving-blindfolded&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Driving Blindfolded&lt;/h2&gt;
+&lt;p&gt;Mayor Curtatone often compares running a city without data to driving a car blindfolded. While this analogy will be outmoded in a few years, in the meantime it also describes how transportation and land-use planners are preparing for changes in transportation policy. Somerville’s experiment should be one of thousands happening around the world; yet it seems most of the planning and testing is done by car companies without involvement from the cities they drive in.&lt;/p&gt;
+&lt;p&gt;People who are thinking about this are often considering it from a macro level: will the convenience of these cars induce demand for more vehicle travel and exurban living? Will access to fleets eclipse individual ownership of cars? Is it possible that a super-intelligent A.I. will weaponize smart vehicles, and then use them to transport the last living humans to a massive desert prison? (Ok, that last one is just something I wondered after reading &lt;a href=&#34;http://www.newyorker.com/magazine/2015/11/23/doomsday-invention-artificial-intelligence-nick-bostrom&#34;&gt;this piece&lt;/a&gt; on the transhumanist philosopher, Nick Bostrom).&lt;/p&gt;
+&lt;p&gt;The most important questions, it seems to me, are more about the micro scale: should cities ditch parking minimums for new development? How can zoning incentivize fleet ownership? Should it? Assuming that machine learning algorithms will outperform human drivers, can cities plan to dedicate less space to travel lanes and parking spaces? Can we be more optimistic about Vision Zero goals - perhaps even calling for zero collisions? Will consolidated parking open up new public spaces and help to solve the affordability crisis?&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/images/2015/union_square_presentation_chart15.jpg&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;Somerville will not be a static lab. One of the most exciting and intriguing aspects of our partnership with Audi is that we expect to test driverless cars in an area that will one day have unprecedented access to public transportation. The extension of the Green Line from Boston into Union Square will put a higher proportion of people within a 5-minute walk of the subway than almost anywhere in the country.&lt;/p&gt;
+&lt;p&gt;Somerville may help to solve one of the most pressing questions that driverless vehicles pose: how will they integrate with public transportation, cycling, walking, and other modes of transportation?&lt;/p&gt;
+&lt;p&gt;It’s not difficult to envision a future where you tap your wallet to hop on the green line, get off to an expectant Audi, and then have it drive you to the edge of Davis Square, where your smartphone tells you it will be faster to walk the final mile to your job at the hoverboard shop (at which point you will curse yourself for forgetting your hoverboard at work in the first place).&lt;/p&gt;
+&lt;p&gt;In any case, it &lt;em&gt;is&lt;/em&gt; difficult to envision a future in which the practice of urban design is unchanged by driverless technology. Planners are usually very good at, well, planning. Why we are not planning for this is a mystery.&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
