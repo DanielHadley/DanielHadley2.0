@@ -22,7 +22,7 @@ weight = 3
 
 +++
 
-Hi! I'm an R programmer based in Salt Lake City, UT.  :snowboarder:
+Hi! I help organizations across the US to better utilize data.  :snowboarder:
 <br>
 <small><a id="blog" href="https://danielphadley.com/#posts">Latest post</a></small>
 <br><br>
