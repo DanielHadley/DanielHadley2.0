@@ -13,12 +13,30 @@
     
     
     <item>
-      <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 -0700</pubDate>
+      <title>Branding and automating your work with R Markdown</title>
+      <link>/talk/rstudio/</link>
+      <pubDate>Fri, 02 Feb 2018 00:00:00 -0700</pubDate>
       
-      <guid>/talk/example-talk/</guid>
-      <description>Embed your slides or video here using shortcodes. Further details can easily be added using Markdown and $\rm \LaTeX$ math code.</description>
+      <guid>/talk/rstudio/</guid>
+      <description> Here are the slides Here is the repo with a short and long version Here is a video (complete with my cringeworthy Hadley joke) And here is the package we describe  </description>
+    </item>
+    
+    <item>
+      <title>Branding your work with R Markdown</title>
+      <link>/talk/rug/</link>
+      <pubDate>Thu, 11 Jan 2018 00:00:00 -0700</pubDate>
+      
+      <guid>/talk/rug/</guid>
+      <description> Here are the slides Here is the repo with a short and long version And here is the package we describe  </description>
+    </item>
+    
+    <item>
+      <title>Analyzing Criminal Justice Reform: the Case of Utah</title>
+      <link>/talk/dssg/</link>
+      <pubDate>Sun, 29 Oct 2017 00:00:00 -0600</pubDate>
+      
+      <guid>/talk/dssg/</guid>
+      <description></description>
     </item>
     
   </channel>
