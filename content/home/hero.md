@@ -22,7 +22,7 @@ weight = 3
 
 +++
 
-The website of Daniel Hadley, an R programmer based in Salt Lake City, UT.  :snowboarder:
+Hi! I'm an R programmer based in Salt Lake City, UT.  :snowboarder:
 <br>
 <small><a id="blog" href="https://danielphadley.com/#posts">Latest post</a></small>
 <br><br>
