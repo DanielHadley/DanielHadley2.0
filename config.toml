@@ -159,33 +159,10 @@ defaultContentLanguageInSubdir = false
   custom_css = []
   custom_js  = []
 
-  # Publication types.
-  #   Used to categorize publications.
-  #   The index of the publication type in the list is used as its unique numerical identifier.
-  #   The numeric ID is used in a publication's frontmatter to categorize it.
-  #   The language can be edited below.
-  #   For multilingual sites, `publication_types` can be copied to each language section at the end of this file and
-  #   translated.
-  publication_types = [
-    'Uncategorized',  # 0
-    'Conference paper',  # 1
-    'Journal article',  # 2
-    'Manuscript',  # 3
-    'Report',  # 4
-    'Book',  # 5
-    'Book section'  # 6
-  ]
-
   # Configuration of talk pages.
   [params.talks]
     # Show talk time?
     time = true
-
-  # Configuration of publication pages.
-  [params.publications]
-    # Date format (refer to Go's date format: http://fuckinggodateformat.com )
-    #   Examples: "Mon, Jan 2, 2006" or "2006-01-02"
-    date_format = "January, 2006"
 
   # Configuration of project pages.
   [params.projects]
@@ -247,29 +224,24 @@ defaultContentLanguageInSubdir = false
   weight = 1
 
 [[menu.main]]
-  name = "Publications"
-  url = "#publications_selected"
-  weight = 2
-
-[[menu.main]]
   name = "Posts"
   url = "#posts"
-  weight = 3
+  weight = 2
 
 [[menu.main]]
   name = "Projects"
   url = "#projects"
-  weight = 4
+  weight = 3
 
 [[menu.main]]
   name = "Teaching"
   url = "#teaching"
-  weight = 5
+  weight = 4
 
 [[menu.main]]
   name = "Contact"
   url = "#contact"
-  weight = 6
+  weight = 5
 
 # Taxonomies.
 [taxonomies]
