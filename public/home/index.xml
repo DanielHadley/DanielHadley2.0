@@ -59,14 +59,17 @@ Previously, I served as the Chief of Staff and Chief Data Scientist to Mayor Joe
     </item>
     
     <item>
-      <title>Teaching</title>
-      <link>/home/teaching/</link>
+      <title>Selected Press</title>
+      <link>/home/press/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>/home/teaching/</guid>
-      <description>This is an example of using the custom widget to create your own homepage section.
-I am a teaching instructor for the following courses at University X:
- CS101: An intro to computer science CS102: An intro to computer science CS103: An intro to computer science CS104: An intro to computer science CS105: An intro to computer science CS106: An intro to computer science CS107: An intro to computer science  </description>
+      <guid>/home/press/</guid>
+      <description>&amp;ldquo;What This Salt Lake City Heatmap Tells Us About Drug Crime&amp;rdquo;, CityLab, August 11, 2017.
+&amp;ldquo;Is Utah&amp;rsquo;s prison reform working?&amp;rdquo;, Deseret News, August 5th, 2017.
+&amp;ldquo;What the Mayor of Somerville Can Do With His Smartphone&amp;rdquo;, Next City, July 13, 2016.
+&amp;ldquo;Survey says: Happiness grows in Somerville&amp;rdquo;, the Boston Globe, February 9, 2016.
+&amp;ldquo;A Medium-Size City’s Approach to Data&amp;rdquo;, Route Fifty, November 5, 2015.
+&amp;ldquo;This City Used Big Data to Beat a Big Rat Problem&amp;rdquo;, Next City, June 23, 2015.</description>
     </item>
     
     <item>
