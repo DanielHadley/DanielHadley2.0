@@ -33,12 +33,12 @@ filter_default = 0
   tag = "*"
 
 [[filter]]
-  name = "Deep Learning"
-  tag = ".deep-learning"
+  name = "Machine Learning"
+  tag = ".machine-learning"
 
 [[filter]]
-  name = "Other"
-  tag = ".demo"
+  name = "Simulation"
+  tag = ".simulation"
 
 +++
 

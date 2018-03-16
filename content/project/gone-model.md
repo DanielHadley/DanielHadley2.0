@@ -13,7 +13,7 @@ image_preview = "/recidiviz.png"
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["machine-learning", "deep-learning"]`
-tags = ["machine-learning", "R", "deep-learning"]
+tags = ["machine-learning", "R"]
 
 # Optional external URL for project (replaces project detail page).
 external_link = "https://daniel-hadley.shinyapps.io/Recidivism_App/"
