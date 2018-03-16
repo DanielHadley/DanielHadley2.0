@@ -77,6 +77,15 @@
     
     <url>
     
+      <loc>/project/gone-model/</loc>
+      <lastmod>2017-05-31T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/recidiviz/</loc>
       <lastmod>2017-05-31T00:00:00+00:00</lastmod>
     </url>
@@ -122,6 +131,15 @@
     
     <url>
     
+      <loc>/project/dashboards/</loc>
+      <lastmod>2016-10-15T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/jupyter-to-rmarkdown/</loc>
       <lastmod>2016-09-08T00:00:00+00:00</lastmod>
     </url>
@@ -133,24 +151,6 @@
     
       <loc>/kaggle-thoughts/</loc>
       <lastmod>2016-06-09T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/project/deep-learning/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/project/example-external-project/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -293,7 +293,7 @@
     
     <url>
     
-      <loc>/project/gone-model/</loc>
+      <loc>/project/recidiviz/</loc>
       <lastmod>2014-11-02T00:00:00+00:00</lastmod>
     </url>
     
@@ -418,17 +418,7 @@
     <url>
     
       <loc>/tags/deep-learning/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/tags/demo/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <lastmod>2017-05-31T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -528,7 +518,7 @@
     <url>
     
       <loc>/project/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <lastmod>2017-05-31T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -567,7 +557,7 @@
     <url>
     
       <loc>/tags/r/</loc>
-      <lastmod>2014-11-02T00:00:00+00:00</lastmod>
+      <lastmod>2017-05-31T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
