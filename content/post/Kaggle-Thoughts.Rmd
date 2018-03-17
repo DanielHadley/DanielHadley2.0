@@ -2,7 +2,7 @@
 title: "Lessons From My First Kaggle Contest"
 date: 2016-06-09
 categories: ["R"]
-tags: ["machine learning", "prediction"]
+tags: ["machine-learning", "prediction"]
 ---
 
 [Kaggle](https://www.kaggle.com) is a forum for interacting with other data scientists and competing to see who can write code that will best predict features of data. It's a way to test your skills at statistics and machine learning, and to do a lot of human learning in the process (sorry, bad pun). 

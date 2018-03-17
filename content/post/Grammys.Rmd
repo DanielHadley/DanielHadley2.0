@@ -2,7 +2,7 @@
 title: "Grammy Counts Favor Musicians From the Aughts"
 date: 2014-12-10
 categories: ["R"]
-tags: ["plots", "personal"]
+tags: ["plots"]
 ---
 
 The 57th annual Grammy nominations were recently announced, cementing Beyonce as the most nominated female artist in history. She is now [tied with Kanye](https://raw.githubusercontent.com/DanielHadley/Grammys/master/plots/grammyNoms.png) for a career total of 53 nominations. This news made me curious enough to plot the top award winners of all time. 

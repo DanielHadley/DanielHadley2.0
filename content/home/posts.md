@@ -15,7 +15,7 @@ weight = 40
 #  By default, show all recent posts.
 #  Filtering example: `tags_include = ["hugo", "academic"]`
 tags_include = []
-tags_exclude = []
+tags_exclude = ["personal"]
 
 # Number of posts to list.
 count = 50
