@@ -14,10 +14,10 @@
     
     <item>
       <title>RecidiViz: Analyzing Reincarceration</title>
-      <link>/project/gone-model/</link>
+      <link>/project/recidiviz/</link>
       <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/project/gone-model/</guid>
+      <guid>/project/recidiviz/</guid>
       <description>Recidivism is one of society&amp;rsquo;s most persistent yet misunderstood problems. Everyone from politicians to Supreme Court Justices seem to get it wrong. This model uses data from the Bureau of Justice Statistics to simulate 1,000 parolees released on the same day.</description>
     </item>
     
@@ -33,10 +33,10 @@
     
     <item>
       <title>Can Machine Learning Tell Two Fictional Characters Apart?</title>
-      <link>/project/recidiviz/</link>
+      <link>/project/gone-model/</link>
       <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
       
-      <guid>/project/recidiviz/</guid>
+      <guid>/project/gone-model/</guid>
       <description>I wanted to see if it was possible to train a model to detect the difference between two fictional authors created by the same novelist based only on the frequency of common stop words, e.g., &amp;ldquo;the.&amp;rdquo; It worked: The randomForest model correctly selected Nick 93% of the time and Amy 91%.
 Background When I first started using R for data analysis, I was mesmerized by all of the packages and what they made possible.</description>
     </item>

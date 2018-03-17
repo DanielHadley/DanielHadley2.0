@@ -418,10 +418,10 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>RecidiViz: Analyzing Reincarceration</title>
-      <link>/project/gone-model/</link>
+      <link>/project/recidiviz/</link>
       <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/project/gone-model/</guid>
+      <guid>/project/recidiviz/</guid>
       <description>&lt;p&gt;Recidivism is one of society&amp;rsquo;s most persistent yet misunderstood problems. Everyone from politicians to Supreme Court Justices seem to get it wrong. This model uses data from the Bureau of Justice Statistics to simulate 1,000 parolees released on the same day.&lt;/p&gt;
 </description>
     </item>
