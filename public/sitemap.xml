@@ -5,26 +5,8 @@
     
     <url>
     
-      <loc>/bayes-538/</loc>
-      <lastmod>2018-12-28T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/deranged-x-mas/</loc>
-      <lastmod>2018-12-01T00:00:00+00:00</lastmod>
-    </url>
-    
-  
-    
-    
-    <url>
-    
       <loc>/branding-rmarkdown/</loc>
-      <lastmod>2018-02-08T00:00:00+00:00</lastmod>
+      <lastmod>2018-03-22T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -43,6 +25,24 @@
     
       <loc>/talk/rug/</loc>
       <lastmod>2018-01-11T00:00:00-07:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/bayes-538/</loc>
+      <lastmod>2017-12-28T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/deranged-x-mas/</loc>
+      <lastmod>2017-12-01T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -339,7 +339,7 @@
     <url>
     
       <loc>/tags/automation/</loc>
-      <lastmod>2018-02-08T00:00:00+00:00</lastmod>
+      <lastmod>2018-03-22T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -349,7 +349,7 @@
     <url>
     
       <loc>/tags/bayesian/</loc>
-      <lastmod>2018-12-28T00:00:00+00:00</lastmod>
+      <lastmod>2017-12-28T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -368,7 +368,7 @@
     <url>
     
       <loc>/tags/combinatronics/</loc>
-      <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+      <lastmod>2017-12-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -488,7 +488,7 @@
     <url>
     
       <loc>/tags/probability/</loc>
-      <lastmod>2018-12-28T00:00:00+00:00</lastmod>
+      <lastmod>2017-12-28T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -517,7 +517,7 @@
     <url>
     
       <loc>/tags/puzzle/</loc>
-      <lastmod>2018-12-28T00:00:00+00:00</lastmod>
+      <lastmod>2017-12-28T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -537,7 +537,7 @@
     <url>
     
       <loc>/categories/r/</loc>
-      <lastmod>2018-12-28T00:00:00+00:00</lastmod>
+      <lastmod>2018-03-22T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -557,7 +557,7 @@
     <url>
     
       <loc>/tags/rmarkdown/</loc>
-      <lastmod>2018-02-08T00:00:00+00:00</lastmod>
+      <lastmod>2018-03-22T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -617,7 +617,7 @@
     <url>
     
       <loc>/tags/work/</loc>
-      <lastmod>2018-02-08T00:00:00+00:00</lastmod>
+      <lastmod>2018-03-22T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

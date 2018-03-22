@@ -13,9 +13,18 @@
     
     
     <item>
+      <title>Branding and Automating with R Markdown</title>
+      <link>/branding-rmarkdown/</link>
+      <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/branding-rmarkdown/</guid>
+      <description>At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,</description>
+    </item>
+    
+    <item>
       <title>Bayes&#39; Puzzle Powers</title>
       <link>/bayes-538/</link>
-      <pubDate>Fri, 28 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/bayes-538/</guid>
       <description>A while ago, the popular data journalism site 538 posted a challenging probability puzzle:
@@ -25,21 +34,12 @@
     <item>
       <title>Deranged X-Mas - a Gift Exchange Puzzle</title>
       <link>/deranged-x-mas/</link>
-      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/deranged-x-mas/</guid>
       <description>While planning a holiday gift exchange this week, my wife casually challenged me with a sort of tricky probability puzzle:
  Sara and I were talking today and realized that we were off by one on the rotation because last year we went sledding instead of buying gifts.
   It should actually be: * Sara gives to Jonny * Jimmy gives to Thurop * Amy gives to Lisa * Jonny gives to Sara * Thurop gives to Jimmy * Lisa gives to Amy</description>
-    </item>
-    
-    <item>
-      <title>Branding and Automating with R Markdown</title>
-      <link>/branding-rmarkdown/</link>
-      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/branding-rmarkdown/</guid>
-      <description>Last week was the 2018 RStudio conference in San Diego, where my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,</description>
     </item>
     
     <item>

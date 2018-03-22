@@ -17,7 +17,7 @@
       
     
   
-  <meta name="description" content="Last week was the 2018 RStudio conference in San Diego, where my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,">
+  <meta name="description" content="At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,">
 
   
   <link rel="alternate" hreflang="en-us" href="/branding-rmarkdown/">
@@ -79,12 +79,12 @@
   <meta property="og:site_name" content="Daniel Hadley">
   <meta property="og:url" content="/branding-rmarkdown/">
   <meta property="og:title" content="Branding and Automating with R Markdown | Daniel Hadley">
-  <meta property="og:description" content="Last week was the 2018 RStudio conference in San Diego, where my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,">
+  <meta property="og:description" content="At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,">
   <meta property="og:locale" content="en-us">
   
-  <meta property="article:published_time" content="2018-02-08T00:00:00&#43;00:00">
+  <meta property="article:published_time" content="2018-03-22T00:00:00&#43;00:00">
   
-  <meta property="article:modified_time" content="2018-02-08T00:00:00&#43;00:00">
+  <meta property="article:modified_time" content="2018-03-22T00:00:00&#43;00:00">
   
 
   
@@ -237,8 +237,8 @@
 
   <span class="article-date">
     
-    <time datetime="2018-02-08 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
-      Feb 8, 2018
+    <time datetime="2018-03-22 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      Mar 22, 2018
     </time>
   </span>
   <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
@@ -317,7 +317,7 @@
 
 
     <div class="article-style" itemprop="articleBody">
-      <p>Last week was the 2018 RStudio conference in San Diego, where my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,</p>
+      <p>At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,</p>
 <ul>
 <li><a href="http://rpubs.com/jzadra/rconf2018">Here</a> are the slides</li>
 <li><a href="https://github.com/Sorenson-Impact/rmarkdown-branding-talk/">Here</a> is the repo with a short and long version</li>
@@ -328,65 +328,43 @@
 <h2>Ten Years Ago</h2>
 <p>These talks describe our current workflow, but I like to compare the present to the past. I have no way to quantify this, but I feel like R is uniqe in how quickly its packages and IDE have evolved the last few years. I’m sure there are other examples of this, but R must be in the upper quartile of ancillary developments, e.g., the Tidyverse, RStudio v1, Shiny, and our topic, R Markdown. In evolutionary terms, we skipped from Nintendo to Xbox One.</p>
 <div class="figure">
-<img src="https://media.giphy.com/media/l41YlnP9H2SFPCdPi/giphy.gif" alt="Alt Text" />
-<p class="caption">Alt Text</p>
+<img src="https://media.giphy.com/media/l41YlnP9H2SFPCdPi/giphy.gif" />
+
 </div>
-<p>When I began as an analyst in local government, there was no easy way to go from code to output. It was common to create a bunch of graphs with a vanilla R script and then painstakingly add them to either a word document or powerpoint. There were, of course, those who mastered LaTeX as part a painful dissertation writing process, but most people divided workflows between coding and presentation.</p>
-<p>Then came Knitr. Yihui’s work to integrate R with HTML, LaTeX, Markdown and other formats opened up a plethora of possiblities. For instance, <a href="http://danielphadley.com/How-To-Dashboard-R/">I found a way</a> to create a dashboard by knitting analysis into Rhtml. It was difficult to integrate the two, writing <code>&lt;!--rinline I(data) --&gt;</code> everywhere that took a vector. But that simple method has sustained a <a href="http://archive.somervillema.gov//dashboard/daily.html">city dashboard</a> for years now. Without Yihui, I don’t think any of this would have been possible.</p>
+<p>When I began as an analyst in local government, there was no easy way to go from code to output. It was common to create a bunch of graphs with a vanilla R script and then painstakingly add them to either a word document or PowerPoint. There were, of course, those who mastered LaTeX as part a painful dissertation writing process, but most people divided workflows between coding and presentation.</p>
+<p>Then came Knitr. Yihui’s work to integrate R with HTML, LaTeX, Markdown and other formats opened up a plethora of possibilities. For instance, <a href="http://danielphadley.com/How-To-Dashboard-R/">I found a way</a> to create a dashboard by knitting analysis into Rhtml. It was difficult to integrate the two, writing <code>&lt;!--rinline I(data) --&gt;</code> everywhere that took a vector. But that simple method has sustained a <a href="http://archive.somervillema.gov//dashboard/daily.html">city dashboard</a> for years now. Without Yihui, I don’t think any of this would have been possible.</p>
 <p>Simultaneously, data science was advancing with iPython notebooks. For the first time, the notebook format closely integrated code and output, allowing analysts to see results in-line and easily share their work as HTML files. Modeled after the scientific process, notebooks took off, despite their challenges. When R Markdown Notebooks came along and <a href="http://danielphadley.com/Jupyter-to-Rmarkdown/">solved things</a> like version control, it was a monumental improvement.</p>
-<p>We recently wanted to brand several of our plots for publication in the local press. I looked around and found a <a href="https://stackoverflow.com/questions/12463691/inserting-an-image-to-ggplot-outside-the-chart-area">couple</a> <a href="https://stackoverflow.com/questions/41574732/how-to-add-logo-on-ggplot2-footer">suggestions</a> on how to add images to plots, but nothing that seemed modular or customizable. My colleague reccomended the relatively new <a href="https://cran.r-project.org/web/packages/magick/vignettes/intro.html">Magick package</a>, which provided all of the functionality I needed (plus a lot more). Here is a simple example along with the code to replicate it:</p>
-<div class="figure">
-<img src="/images/Cars.png" />
-
 </div>
-<pre class="r"><code>library(ggplot2)
-library(magick)
-library(here) # For making the script run without a wd
-library(magrittr) # For piping the logo
-
-# Make a simple plot and save it
-ggplot(mpg, aes(displ, hwy, colour = class)) + 
-  geom_point() + 
-  ggtitle(&quot;Cars&quot;) +
-  ggsave(filename = paste0(here(&quot;/&quot;), last_plot()$labels$title, &quot;.png&quot;),
-         width = 5, height = 4, dpi = 300)
-
-# Call back the plot
-plot &lt;- image_read(paste0(here(&quot;/&quot;), &quot;Cars.png&quot;))
-# And bring in a logo
-logo_raw &lt;- image_read(&quot;http://hexb.in/hexagons/ggplot2.png&quot;) 
-
-# Scale down the logo and give it a border and annotation
-# This is the cool part because you can do a lot to the image/logo before adding it
-logo &lt;- logo_raw %&gt;%
-  image_scale(&quot;100&quot;) %&gt;% 
-  image_background(&quot;grey&quot;, flatten = TRUE) %&gt;%
-  image_border(&quot;grey&quot;, &quot;600x10&quot;) %&gt;%
-  image_annotate(&quot;Powered By R&quot;, color = &quot;white&quot;, size = 30, 
-                 location = &quot;+10+50&quot;, gravity = &quot;northeast&quot;)
-
-# Stack them on top of each other
-final_plot &lt;- image_append(image_scale(c(plot, logo), &quot;500&quot;), stack = TRUE)
-# And overwrite the plot without a logo
-image_write(final_plot, paste0(here(&quot;/&quot;), last_plot()$labels$title, &quot;.png&quot;))</code></pre>
-<p>You can see that this creates a logo centered on a grey background with an annotation originating in the northwest of the band. I wanted to put our logo on the bottom right, 538 style, so I added some superfulous canvas on the right of the png and then croped it to fit our plots with Magick. The point is, Magick is highly customizable and opens up a lot of options that were previously closed to all but the undaunted photoshoppers. Want Vincent Vega to point at your x-axis? Go for it! Now, if you’ll excuse me, I’m going to go home and have a heart attack.</p>
-<div class="figure">
-<img src="/images/Cars_Travolta.gif" />
-
+<div id="branding" class="section level2">
+<h2>Branding</h2>
+<p>Today with RMarkdown in RStudio, it is easy to turn your analysis into a presentation. We use <a href="https://rmarkdown.rstudio.com/ioslides_presentation_format.html">ioslides</a> with a <a href="https://github.com/Sorenson-Impact/rmarkdown-branding-talk/blob/master/SI_Rmarkdown_Talk_Rconf/SI_Rmarkdown_Talk_Rconf.Rmd">little javascript</a> to brand them. But in San Diego, Yihui said that they are close to adding PowerPoint as an output format.</p>
+<p>For reports, we use Word because it is very simple to customize things like headers, fonts, and colors. In the talk we gave, I went over an example of how to use a <a href="https://stackoverflow.com/questions/24672111/how-to-add-a-page-break-in-word-document-generated-by-rstudio-markdown">Word template</a> to include page breaks. This is part of a <a href="https://rmarkdown.rstudio.com/articles_docx.html">more general</a> approach to branding.</p>
 </div>
-<pre class="r"><code># Now call back the plot
-background &lt;- image_read(paste0(here(&quot;/&quot;), &quot;Cars.png&quot;))
-# And bring in a logo
-logo_raw &lt;- image_read(&quot;https://i.imgur.com/e1IneGq.jpg&quot;) 
-
-frames &lt;- lapply(logo_raw, function(frame) {
-  image_composite(background, frame, offset = &quot;+70+800&quot;)
-})
-
-animation &lt;- image_animate(image_join(frames))
-
-
-image_write(animation, &quot;~/Cars_Travolta.gif&quot;)</code></pre>
+<div id="automating" class="section level2">
+<h2>Automating</h2>
+<p>After all of the customizations to our Rmd documents, we found that the document headers were growing out of control. There were more than 100 lines that did the following:</p>
+<ul>
+<li>Load libraries</li>
+<li>Set knitr/rmarkdown options</li>
+<li>Set directories</li>
+<li>Define branded color names</li>
+<li>Customize ggplot themes and geoms</li>
+<li>Define custom functions</li>
+</ul>
+<p>This made it difficult to create a single report, let alone automate dozens of them.</p>
+<p>To remedy the problem, my colleague Jon created an R package with all of our branding and custom functions. This allowed us to take advantage of the <code>draft</code> function and the <a href="https://rmarkdown.rstudio.com/developer_document_templates.html">RStudio features</a> that support document templates.</p>
+<p>This video shows how quickly and easily we can create a new report now:</p>
+<video width="320" height="240" controls>
+<source src="/img/draft_functions_large.mp4" type="video/mp4">
+</video>
+<p><img src="/img/draft_functions_large.mp4" style="width: 200px;"/></p>
+<p>With all of that in place, it is much easier to use a single template to create a series of reports. This <code>for</code> loop is what we used when we were requested to build a unique report showing data trends in every county in Utah.</p>
+<pre class="r"><code>for (county in unique(utah$County)) {
+  try(render(&#39;./county_report.Rmd&#39;,
+             output_file = paste(county, &quot;County Report.docx&quot;),
+             output_dir = &quot;./County_Reports/&quot;))
+}</code></pre>
+<p>To summarize, it is easier than ever to brand your analysis with Rmarkdown. Creating a custom package will allow you to cut down on clutter, and make templates easily accessible. From there, it is simple to automate reports that output to Word, Ioslides, HTML, or any of a dozen other formats.</p>
 </div>
 
     </div>
