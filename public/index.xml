@@ -13,7 +13,7 @@
     <item>
       <title>Branding and Automating with R Markdown</title>
       <link>/branding-rmarkdown/</link>
-      <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/branding-rmarkdown/</guid>
       <description>&lt;p&gt;At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,&lt;/p&gt;
@@ -37,11 +37,16 @@
 &lt;div id=&#34;branding&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Branding&lt;/h2&gt;
 &lt;p&gt;Today with RMarkdown in RStudio, it is easy to turn your analysis into a presentation. We use &lt;a href=&#34;https://rmarkdown.rstudio.com/ioslides_presentation_format.html&#34;&gt;ioslides&lt;/a&gt; with a &lt;a href=&#34;https://github.com/Sorenson-Impact/rmarkdown-branding-talk/blob/master/SI_Rmarkdown_Talk_Rconf/SI_Rmarkdown_Talk_Rconf.Rmd&#34;&gt;little javascript&lt;/a&gt; to brand them. But in San Diego, Yihui said that they are close to adding PowerPoint as an output format.&lt;/p&gt;
-&lt;p&gt;For reports, we use Word because it is very simple to customize things like headers, fonts, and colors. In the talk we gave, I went over an example of how to use a &lt;a href=&#34;https://stackoverflow.com/questions/24672111/how-to-add-a-page-break-in-word-document-generated-by-rstudio-markdown&#34;&gt;Word template&lt;/a&gt; to include page breaks. This is part of a &lt;a href=&#34;https://rmarkdown.rstudio.com/articles_docx.html&#34;&gt;more general&lt;/a&gt; approach to branding.&lt;/p&gt;
+&lt;p&gt;For reports, we use Word because it is very simple to customize things like headers, fonts, and colors. In the talk we gave, I went over an example of how to use a &lt;a href=&#34;https://stackoverflow.com/questions/24672111/how-to-add-a-page-break-in-word-document-generated-by-rstudio-markdown&#34;&gt;Word template&lt;/a&gt; to include page breaks. This is part of a &lt;a href=&#34;https://rmarkdown.rstudio.com/articles_docx.html&#34;&gt;more general&lt;/a&gt; approach to branding that involves iterating on a template until your document looks just right.&lt;/p&gt;
+&lt;div id=&#34;branding-a-website&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Branding a Website&lt;/h3&gt;
+&lt;p&gt;Blogdown is the apotheosis of branding with Rmd. Granted, my site looks similar to the thousands of other websites based on &lt;a href=&#34;https://themes.gohugo.io/academic/&#34;&gt;Hugo Academic&lt;/a&gt;. But that’s only because it is insanely easy to get started with Blogdown, in general, and the Academic theme in particular. All it takes is this line of code: &lt;code&gt;blogdown::new_site(theme = &amp;quot;gcushen/hugo-academic&amp;quot;)&lt;/code&gt;. So far, I have not made any changes to CSS - just a replaced a few hero images and icons - and it already feels unique.&lt;/p&gt;
+&lt;p&gt;There are others who have done a much better job at putting their own mark on Hugo themes. My favorite is [Amber Thomas’ site])(&lt;a href=&#34;https://amber.rbind.io/&#34; class=&#34;uri&#34;&gt;https://amber.rbind.io/&lt;/a&gt;). She is a contributing author to the Blogdown book with a keen eye for design.&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;automating&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Automating&lt;/h2&gt;
-&lt;p&gt;After all of the customizations to our Rmd documents, we found that the document headers were growing out of control. There were more than 100 lines that did the following:&lt;/p&gt;
+&lt;p&gt;For presentations at work, my colleagues and I fell into a routine. We would copy and paste Rmd documents, adding customizations to the header every time we wanted a new feature. After a while, though, we found that the document headers were growing out of control. There were more than 100 lines that did things like,&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Load libraries&lt;/li&gt;
 &lt;li&gt;Set knitr/rmarkdown options&lt;/li&gt;
@@ -56,7 +61,6 @@
 &lt;video width=&#34;320&#34; height=&#34;240&#34; controls&gt;
 &lt;source src=&#34;/img/draft_functions_large.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
-&lt;p&gt;&lt;img src=&#34;/img/draft_functions_large.mp4&#34; style=&#34;width: 200px;&#34;/&gt;&lt;/p&gt;
 &lt;p&gt;With all of that in place, it is much easier to use a single template to create a series of reports. This &lt;code&gt;for&lt;/code&gt; loop is what we used when we were requested to build a unique report showing data trends in every county in Utah.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;for (county in unique(utah$County)) {
   try(render(&amp;#39;./county_report.Rmd&amp;#39;,

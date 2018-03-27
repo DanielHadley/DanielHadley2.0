@@ -15,7 +15,7 @@
     <item>
       <title>Branding and Automating with R Markdown</title>
       <link>/branding-rmarkdown/</link>
-      <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/branding-rmarkdown/</guid>
       <description>At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,</description>

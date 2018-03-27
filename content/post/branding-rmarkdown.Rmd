@@ -1,6 +1,6 @@
 ---
 title: "Branding and Automating with R Markdown"
-date: 2018-03-22
+date: 2018-03-27
 categories: ["R"]
 tags: ["Rmarkdown", "work", "automation"]
 ---
@@ -29,12 +29,19 @@ Simultaneously, data science was advancing with iPython notebooks. For the first
 
 Today with RMarkdown in RStudio, it is easy to turn your analysis into a presentation. We use [ioslides](https://rmarkdown.rstudio.com/ioslides_presentation_format.html) with a [little javascript](https://github.com/Sorenson-Impact/rmarkdown-branding-talk/blob/master/SI_Rmarkdown_Talk_Rconf/SI_Rmarkdown_Talk_Rconf.Rmd) to brand them. But in San Diego, Yihui said that they are close to adding PowerPoint as an output format. 
 
-For reports, we use Word because it is very simple to customize things like headers, fonts, and colors. In the talk we gave, I went over an example of how to use a [Word template](https://stackoverflow.com/questions/24672111/how-to-add-a-page-break-in-word-document-generated-by-rstudio-markdown) to include page breaks. This is part of a [more general](https://rmarkdown.rstudio.com/articles_docx.html) approach to branding. 
+For reports, we use Word because it is very simple to customize things like headers, fonts, and colors. In the talk we gave, I went over an example of how to use a [Word template](https://stackoverflow.com/questions/24672111/how-to-add-a-page-break-in-word-document-generated-by-rstudio-markdown) to include page breaks. This is part of a [more general](https://rmarkdown.rstudio.com/articles_docx.html) approach to branding that involves iterating on a template until your document looks just right. 
+
+
+### Branding a Website
+
+Blogdown is the apotheosis of branding with Rmd. Granted, my site looks similar to the thousands of other websites based on [Hugo Academic](https://themes.gohugo.io/academic/). But that's only because it is insanely easy to get started with Blogdown, in general, and the Academic theme in particular. All it takes is this line of code: `blogdown::new_site(theme = "gcushen/hugo-academic")`. So far, I have not made any changes to CSS - just a replaced a few hero images and icons - and it already feels unique. 
+
+There are others who have done a much better job at putting their own mark on Hugo themes. My favorite is [Amber Thomas' site])(https://amber.rbind.io/). She is a contributing author to the Blogdown book with a keen eye for design.
 
 
 ## Automating
 
-After all of the customizations to our Rmd documents, we found that the document headers were growing out of control. There were more than 100 lines that did the following:
+For presentations at work, my colleagues and I fell into a routine. We would copy and paste Rmd documents, adding customizations to the header every time we wanted a new feature. After a while, though, we found that the document headers were growing out of control. There were more than 100 lines that did things like,
 
 - Load libraries
 - Set knitr/rmarkdown options
