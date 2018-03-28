@@ -20,12 +20,12 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://rpubs.com/jzadra/rconf2018&#34;&gt;Here&lt;/a&gt; are the slides&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/Sorenson-Impact/rmarkdown-branding-talk/&#34;&gt;Here&lt;/a&gt; is the repo with a short and long version&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?time_continue=21329&amp;amp;v=ogy7rHWlsQ8&#34;&gt;Here&lt;/a&gt; is a video (complete with my cringeworthy Hadley joke)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.rstudio.com/resources/videos/branding-and-automating-your-work-with-r-markdown/&#34;&gt;Here&lt;/a&gt; is a video (complete with my cringeworthy Hadley joke)&lt;/li&gt;
 &lt;li&gt;And &lt;a href=&#34;https://github.com/Sorenson-Impact/sorensonimpact&#34;&gt;here&lt;/a&gt; is the package we describe&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;ten-years-ago&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Ten Years Ago&lt;/h2&gt;
-&lt;p&gt;These talks describe our current workflow, but I like to compare the present to the past. I have no way to quantify this, but I feel like R is uniqe in how quickly its packages and IDE have evolved the last few years. I’m sure there are other examples of this, but R must be in the upper quartile of ancillary developments, e.g., the Tidyverse, RStudio v1, Shiny, and our topic, R Markdown. In evolutionary terms, we skipped from Nintendo to Xbox One.&lt;/p&gt;
+&lt;p&gt;These talks describe our current workflow, but I like to compare the present to the past. I have no way to quantify this, but I feel like R is uniqe in how quickly its packages and IDE have evolved the last few years. I’m sure there are other examples of this, but R must be in the upper quartile of ancillary developments, e.g., the Tidyverse, RStudio v1, Shiny, and our topic, R Markdown. In evolutionary terms, we skipped from Xbox to Xbox One X.&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
 &lt;img src=&#34;https://media.giphy.com/media/l41YlnP9H2SFPCdPi/giphy.gif&#34; /&gt;
 
@@ -41,7 +41,7 @@
 &lt;div id=&#34;branding-a-website&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Branding a Website&lt;/h3&gt;
 &lt;p&gt;Blogdown is the apotheosis of branding with Rmd. Granted, my site looks similar to the thousands of other websites based on &lt;a href=&#34;https://themes.gohugo.io/academic/&#34;&gt;Hugo Academic&lt;/a&gt;. But that’s only because it is insanely easy to get started with Blogdown, in general, and the Academic theme in particular. All it takes is this line of code: &lt;code&gt;blogdown::new_site(theme = &amp;quot;gcushen/hugo-academic&amp;quot;)&lt;/code&gt;. So far, I have not made any changes to CSS - just a replaced a few hero images and icons - and it already feels unique.&lt;/p&gt;
-&lt;p&gt;There are others who have done a much better job at putting their own mark on Hugo themes. My favorite is [Amber Thomas’ site])(&lt;a href=&#34;https://amber.rbind.io/&#34; class=&#34;uri&#34;&gt;https://amber.rbind.io/&lt;/a&gt;). She is a contributing author to the Blogdown book with a keen eye for design.&lt;/p&gt;
+&lt;p&gt;There are others who have done a much better job at putting their own mark on Hugo themes. My favorite is &lt;a href=&#34;https://amber.rbind.io/&#34;&gt;Amber Thomas’ site&lt;/a&gt;. She is a contributing author to the Blogdown book with a keen eye for design.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;automating&#34; class=&#34;section level2&#34;&gt;
@@ -500,7 +500,11 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
       <pubDate>Thu, 08 Sep 2016 00:00:00 +0000</pubDate>
       
       <guid>/jupyter-to-rmarkdown/</guid>
-      <description>&lt;p&gt;I started using Jupyter Notebooks back when they were called IPython. I even remember having to set up a virtual Linux environment because they were not available on Windows. As much as I have enjoyed their functionality, I recently switched entirely to R Markdown in an RStudio environment. Here’s why.&lt;/p&gt;
+      <description>&lt;p&gt;Edit, 3/28/18: RStudio just announced Python interoperability through the &lt;a href=&#34;https://blog.rstudio.com/2018/03/26/reticulate-r-interface-to-python/&#34;&gt;reticulate package&lt;/a&gt;. Rmd Notebooks are unbeatable, in my opinion.&lt;/p&gt;
+&lt;div id=&#34;original-post&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Original Post:&lt;/h3&gt;
+&lt;p&gt;I started using Jupyter Notebooks back when they were called IPython. I even remember having to set up a virtual Linux environment because they were not available on Windows. As much as I have enjoyed their functionality, I recently switched entirely to R Markdown in an RStudio environment. Here’s why.&lt;/p&gt;
+&lt;/div&gt;
 &lt;div id=&#34;exporting-to-github&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Exporting to Github&lt;/h3&gt;
 &lt;p&gt;The &lt;a href=&#34;http://rmarkdown.rstudio.com/github_document_format.html&#34;&gt;github_document&lt;/a&gt; option in R Markdown is the perfect way to share your analysis over the web. Just write the markdown with R chunks, “knit” it, and commit everything to a repository, and RStudio will create a directory with all plots and outputs ready to view. One advantage Jupyter Notebooks used to hold was the aesthetic formatting of tables and dataframes on Github. But with the kable function in the knitr package, I have been able to output HTML tables that look just as clean.&lt;/p&gt;

@@ -9,12 +9,12 @@ At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk 
 
 * [Here](http://rpubs.com/jzadra/rconf2018) are the slides
 * [Here](https://github.com/Sorenson-Impact/rmarkdown-branding-talk/) is the repo with a short and long version
-* [Here](https://www.youtube.com/watch?time_continue=21329&v=ogy7rHWlsQ8) is a video (complete with my cringeworthy Hadley joke)
+* [Here](https://www.rstudio.com/resources/videos/branding-and-automating-your-work-with-r-markdown/) is a video (complete with my cringeworthy Hadley joke)
 * And [here](https://github.com/Sorenson-Impact/sorensonimpact) is the package we describe
 
 ## Ten Years Ago
 
-These talks describe our current workflow, but I like to compare the present to the past. I have no way to quantify this, but I feel like R is uniqe in how quickly its packages and IDE have evolved the last few years. I'm sure there are other examples of this, but R must be in the upper quartile of ancillary developments, e.g., the Tidyverse, RStudio v1, Shiny, and our topic, R Markdown. In evolutionary terms, we skipped from Nintendo to Xbox One. 
+These talks describe our current workflow, but I like to compare the present to the past. I have no way to quantify this, but I feel like R is uniqe in how quickly its packages and IDE have evolved the last few years. I'm sure there are other examples of this, but R must be in the upper quartile of ancillary developments, e.g., the Tidyverse, RStudio v1, Shiny, and our topic, R Markdown. In evolutionary terms, we skipped from Xbox to Xbox One X. 
 
 ![](https://media.giphy.com/media/l41YlnP9H2SFPCdPi/giphy.gif)
 
@@ -36,7 +36,7 @@ For reports, we use Word because it is very simple to customize things like head
 
 Blogdown is the apotheosis of branding with Rmd. Granted, my site looks similar to the thousands of other websites based on [Hugo Academic](https://themes.gohugo.io/academic/). But that's only because it is insanely easy to get started with Blogdown, in general, and the Academic theme in particular. All it takes is this line of code: `blogdown::new_site(theme = "gcushen/hugo-academic")`. So far, I have not made any changes to CSS - just a replaced a few hero images and icons - and it already feels unique. 
 
-There are others who have done a much better job at putting their own mark on Hugo themes. My favorite is [Amber Thomas' site])(https://amber.rbind.io/). She is a contributing author to the Blogdown book with a keen eye for design.
+There are others who have done a much better job at putting their own mark on Hugo themes. My favorite is [Amber Thomas' site](https://amber.rbind.io/). She is a contributing author to the Blogdown book with a keen eye for design.
 
 
 ## Automating

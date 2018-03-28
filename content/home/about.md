@@ -19,17 +19,14 @@ weight = 5
 [[education.courses]]
   course = "Master of Urban Planning"
   institution = "Harvard University"
-  year = 2010
 
 [[education.courses]]
   course = "Master of Theological Studies"
   institution = "Harvard University"
-  year = 2008
 
 [[education.courses]]
   course = "B.A."
   institution = "University of Utah"
-  year = 2006
  
 +++
 
