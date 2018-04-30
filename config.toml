@@ -20,7 +20,8 @@ preserveTaxonomyNames = true
 paginate = 10
 
 # Enable comments by entering your Disqus shortname
-disqusShortname = "danielphadley"
+# Taking this off because they started using ads.
+disqusShortname = ""
 
 # Enable analytics by entering your Google Analytics tracking ID
 googleAnalytics = "UA-56284042-1"
