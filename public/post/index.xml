@@ -2,41 +2,41 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Daniel Hadley</title>
-    <link>https://www.danielphadley.com/post/</link>
+    <link>/post/</link>
     <description>Recent content in Posts on Daniel Hadley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 00:00:00 -0700</lastBuildDate>
     
-	<atom:link href="https://www.danielphadley.com/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Branding and Automating with R Markdown</title>
-      <link>https://www.danielphadley.com/branding-rmarkdown/</link>
+      <link>/branding-rmarkdown/</link>
       <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/branding-rmarkdown/</guid>
+      <guid>/branding-rmarkdown/</guid>
       <description>At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,</description>
     </item>
     
     <item>
       <title>Bayes&#39; Puzzle Powers</title>
-      <link>https://www.danielphadley.com/bayes-538/</link>
+      <link>/bayes-538/</link>
       <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/bayes-538/</guid>
+      <guid>/bayes-538/</guid>
       <description>A while ago, the popular data journalism site 538 posted a challenging probability puzzle:
  On the table in front of you are two coins. They look and feel identical, but you know one of them has been doctored. The fair coin comes up heads half the time while the doctored coin comes up heads 60 percent of the time. How many flips — you must flip both coins at once, one with each hand — would you need to give yourself a 95 percent chance of correctly identifying the doctored coin?</description>
     </item>
     
     <item>
       <title>Deranged X-Mas - a Gift Exchange Puzzle</title>
-      <link>https://www.danielphadley.com/deranged-x-mas/</link>
+      <link>/deranged-x-mas/</link>
       <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/deranged-x-mas/</guid>
+      <guid>/deranged-x-mas/</guid>
       <description>While planning a holiday gift exchange this week, my wife casually challenged me with a sort of tricky probability puzzle:
  Sara and I were talking today and realized that we were off by one on the rotation because last year we went sledding instead of buying gifts.
   It should actually be: * Sara gives to Jonny * Jimmy gives to Thurop * Amy gives to Lisa * Jonny gives to Sara * Thurop gives to Jimmy * Lisa gives to Amy</description>
@@ -44,175 +44,175 @@
     
     <item>
       <title>Rayid Ghani on Data Science for Social Good</title>
-      <link>https://www.danielphadley.com/interview-rayid-ghani/</link>
+      <link>/interview-rayid-ghani/</link>
       <pubDate>Fri, 25 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/interview-rayid-ghani/</guid>
+      <guid>/interview-rayid-ghani/</guid>
       <description>I had a chance to sit down with Rayid Ghani, the Director of the Center for Data Science and Public Policy at the University of Chicago. I have admired Rayid’s work ever since he became the Chief Scientist for the 2012 Barack Obama campaign. His strategic use of analytics set the precedent for a new era of data science in political campaigns. At the time, others were trying to reverse engineer his tactics, which meant he was always one step ahead of the other campaigns.</description>
     </item>
     
     <item>
       <title>How to Add a Logo to ggplot by Magick</title>
-      <link>https://www.danielphadley.com/ggplot-logo/</link>
+      <link>/ggplot-logo/</link>
       <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/ggplot-logo/</guid>
+      <guid>/ggplot-logo/</guid>
       <description>We recently wanted to brand several of our plots for publication in the local press. I looked around and found a couple suggestions on how to add images to plots, but nothing that seemed modular or customizable. My colleague reccomended the relatively new Magick package, which provided all of the functionality I needed (plus a lot more). Here is a simple example along with the code to replicate it:
  library(ggplot2) library(magick) library(here) # For making the script run without a wd library(magrittr) # For piping the logo # Make a simple plot and save it ggplot(mpg, aes(displ, hwy, colour = class)) + geom_point() + ggtitle(&amp;quot;Cars&amp;quot;) + ggsave(filename = paste0(here(&amp;quot;/&amp;quot;), last_plot()$labels$title, &amp;quot;.</description>
     </item>
     
     <item>
       <title>The Prison Analyst&#39;s Dilemma - Using R to Model Recidivism</title>
-      <link>https://www.danielphadley.com/recidiviz/</link>
+      <link>/recidiviz/</link>
       <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/recidiviz/</guid>
+      <guid>/recidiviz/</guid>
       <description>Recidivism, the rate at which those released from incarceration return or commit new crimes, is one of society’s most difficult social problems. The official estimate is that 55% of former prisoners will return within 60 months.
  Recidivism is also, I discovered, one of the most challenging things to model and understand statistically. In this blog post, I describe our efforts to build this simulation, including how we settled on some fairly basic control structures (for loops) without giving up too much in terms of efficiency and readability.</description>
     </item>
     
     <item>
       <title>Big Data to Solve Big Problems</title>
-      <link>https://www.danielphadley.com/big-data-big-problems/</link>
+      <link>/big-data-big-problems/</link>
       <pubDate>Mon, 17 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/big-data-big-problems/</guid>
+      <guid>/big-data-big-problems/</guid>
       <description>In the marketing world, big data is used to answer ostensibly minute questions every day: are computer mouse movements predictive of purchasing? Does an orange background increase user engagement? In every place with Silicon in its name, there are teams of data scientists asking these questions.
 In the social sector, by contrast, answering helpful questions is more difficult. For instance, is our program reducing homelessness? How is health spending distributed across the state?</description>
     </item>
     
     <item>
       <title>From Jupyter Notebooks to R Markdown</title>
-      <link>https://www.danielphadley.com/jupyter-to-rmarkdown/</link>
+      <link>/jupyter-to-rmarkdown/</link>
       <pubDate>Thu, 08 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/jupyter-to-rmarkdown/</guid>
+      <guid>/jupyter-to-rmarkdown/</guid>
       <description>Edit, 3/28/18: RStudio just announced Python interoperability through the reticulate package. Rmd Notebooks are unbeatable, in my opinion.
 Original Post: I started using Jupyter Notebooks back when they were called IPython. I even remember having to set up a virtual Linux environment because they were not available on Windows. As much as I have enjoyed their functionality, I recently switched entirely to R Markdown in an RStudio environment. Here’s why.</description>
     </item>
     
     <item>
       <title>Lessons From My First Kaggle Contest</title>
-      <link>https://www.danielphadley.com/kaggle-thoughts/</link>
+      <link>/kaggle-thoughts/</link>
       <pubDate>Thu, 09 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/kaggle-thoughts/</guid>
+      <guid>/kaggle-thoughts/</guid>
       <description>Kaggle is a forum for interacting with other data scientists and competing to see who can write code that will best predict features of data. It’s a way to test your skills at statistics and machine learning, and to do a lot of human learning in the process (sorry, bad pun).
 When I entered the contest to categorize crimes that occurred in San Francisco, my initial goal was to do better than random chance.</description>
     </item>
     
     <item>
       <title>How to Build a Data Dashboard using R (knitr), HTML, and Javascript (e.g.,Highcharts)</title>
-      <link>https://www.danielphadley.com/how-to-dashboard-r/</link>
+      <link>/how-to-dashboard-r/</link>
       <pubDate>Fri, 05 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/how-to-dashboard-r/</guid>
+      <guid>/how-to-dashboard-r/</guid>
       <description>R has been the perfect language for the back end of this government data dashboard I am developing.
  It has excellent packages to pipe in data from every significant source Tools like dplyr and tidyr make cleaning and munging data trivial It is ideal for automating analysis  In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days.</description>
     </item>
     
     <item>
       <title>The Top Urban Planning Articles of 2015</title>
-      <link>https://www.danielphadley.com/top-planning-2016/</link>
+      <link>/top-planning-2016/</link>
       <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/top-planning-2016/</guid>
+      <guid>/top-planning-2016/</guid>
       <description>As I did last year, I went through several of my favorite sites and curated what I consider to be the best writing on urban issues from 2015. One thing I love about planning, and that drew me to the profession in the first place, is that it encompasses many skills and areas of interest. I think that diversity is reflected in this year’s list. Caveat emptor: I use the term planning loosely.</description>
     </item>
     
     <item>
       <title>Urban Planning in the Dawn of the Driverless Car</title>
-      <link>https://www.danielphadley.com/planning-for-driverless/</link>
+      <link>/planning-for-driverless/</link>
       <pubDate>Wed, 25 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/planning-for-driverless/</guid>
+      <guid>/planning-for-driverless/</guid>
       <description>Mayor Curtatone and I recently returned from the Smart Cities Expo in Barcelona Spain, where we unveiled a new partnership between the City of Somerville and the car manufacturer Audi. We will be testing how autonomous vehicles work in an actual urban environment.
 Driverless cars predominating city streets is in the realm of what Steven Johnson calls the “adjacent possible.” Uber just made headlines by purchasing a large chunk of Carnegie Melon’s robotics department.</description>
     </item>
     
     <item>
       <title>What the Critics Got Wrong About Star Wars</title>
-      <link>https://www.danielphadley.com/statwars/</link>
+      <link>/statwars/</link>
       <pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/statwars/</guid>
+      <guid>/statwars/</guid>
       <description>A friend recently emailed a group of us to say that his opinion is indeed backed up by data: Star Wars Episode 3, “Revenge of the Sith”, is better than Episode 6, “Return of the Jedi.”
  Like most right-headed people, I disagree. While I am cautiously optimistic about Episode 7, I have not truly loved a Star Wars movie since the originals. And as it turns out, many of the millions of people on Rotten Tomatoes agree:</description>
     </item>
     
     <item>
       <title>Data Science vs City Rats</title>
-      <link>https://www.danielphadley.com/data-science-vs-city-rats/</link>
+      <link>/data-science-vs-city-rats/</link>
       <pubDate>Fri, 05 Jun 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/data-science-vs-city-rats/</guid>
+      <guid>/data-science-vs-city-rats/</guid>
       <description>Somerville, MA has been fighting a war against rats for months, and now we have the data to show that it’s working: reported sightings have dropped 66% year-to-date; some of that is due to weather patterns and random fluctuation, but a Bayesian model of the data estimates that the City’s policies have reduced calls by 40%.
 Three years ago, the city where I work was dealing with an onslaught of rats.</description>
     </item>
     
     <item>
       <title>How to Optimize Street Repair Spending</title>
-      <link>https://www.danielphadley.com/optimize-street-repairs/</link>
+      <link>/optimize-street-repairs/</link>
       <pubDate>Thu, 05 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/optimize-street-repairs/</guid>
+      <guid>/optimize-street-repairs/</guid>
       <description>Here’s a problem governments are faced with every day: you have a limited amount of resources to maintain aging infrastructure, in this case streets. Do you spend more on crack sealing and preventive maintenance, or full depth reclamation? Which streets should you fix first?
 I am not an engineer (in fact, part of the reason I am writing this post is to get feedback from engineers); but I have thought a lot about this, and I think I have a decent method for prioritizing roadway repairs that anyone could implement using the open-source program R.</description>
     </item>
     
     <item>
       <title>Putting the R in Government</title>
-      <link>https://www.danielphadley.com/r-in-govt/</link>
+      <link>/r-in-govt/</link>
       <pubDate>Thu, 12 Feb 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/r-in-govt/</guid>
+      <guid>/r-in-govt/</guid>
       <description>When I first started as an analyst in local government, I wasted a lot of time repeating tasks that had been done dozens of times before in Excel. SomerStat, the office where I worked and later became director, is one of the oldest local government divisions dedicated to crunching data. Inspired by the CitiStat model, which itself was inspired by CompStat, the idea was to use data to improve efficiency. And yet here I was, with fairly inefficient work routines that included pulling data into spreadsheets, munging one step at a time, and then repeating it all for the next ‘stat’ meeting.</description>
     </item>
     
     <item>
       <title>How a New MIT Professor Spent His Year</title>
-      <link>https://www.danielphadley.com/new-mit-prof/</link>
+      <link>/new-mit-prof/</link>
       <pubDate>Mon, 19 Jan 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/new-mit-prof/</guid>
+      <guid>/new-mit-prof/</guid>
       <description>Last year, my friend pulled 34 all-nighters, surfed 37 days, swam 62, helped to raise two kids, did 12,920 push ups, worked a total of 3,008 hours as a new poli-sci professor, and tracked all of it in a spreadsheet. He averaged 8.2 hours of work per day, including weekends and holidays. As this heatmap shows, though, his hours varied a lot compared to us regular nine-to-fivers:
  It’s interesting to read this chart both left to right, as an indicator of what weekdays he works hardest, and top to bottom, to see the days when he would push hard against a deadline and then give himself some time off to surf.</description>
     </item>
     
     <item>
       <title>The Top Urban Planning Articles of 2014</title>
-      <link>https://www.danielphadley.com/top-planning/</link>
+      <link>/top-planning/</link>
       <pubDate>Fri, 02 Jan 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/top-planning/</guid>
+      <guid>/top-planning/</guid>
       <description>For my job, I read a lot of articles on urban policy and planning. I believe that the best policies are usually borrowed from other cities rather than fabricated from nothing. In that spirit, I even borrowed from other top ten lists to create this post. I like to think that my list is more comprehensive than some of the others since I have no incentive to link to my own content.</description>
     </item>
     
     <item>
       <title>The Most Magazine Covers of All Time</title>
-      <link>https://www.danielphadley.com/time-covers/</link>
+      <link>/time-covers/</link>
       <pubDate>Mon, 22 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/time-covers/</guid>
+      <guid>/time-covers/</guid>
       <description>Time is a weekly news magazine that was first published in New York City in 1923. After my last post, a generous redditor offered to share with me a dataset of every person who has appeared on the cover since its first issue. It turns out he had painstakingly collected this data for a very cool website he created called hugequiz.com, where there are multiple quizzes on this subject. Fortunately, I don’t think it will spoil any of the quizzes to see this chart of the most frequently featured people:</description>
     </item>
     
     <item>
       <title>Grammy Counts Favor Musicians From the Aughts</title>
-      <link>https://www.danielphadley.com/grammys/</link>
+      <link>/grammys/</link>
       <pubDate>Wed, 10 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/grammys/</guid>
+      <guid>/grammys/</guid>
       <description>The 57th annual Grammy nominations were recently announced, cementing Beyonce as the most nominated female artist in history. She is now tied with Kanye for a career total of 53 nominations. This news made me curious enough to plot the top award winners of all time.
  I did not recognize the knight at the top of the list (turns out he is an amazing conductor with a storied history as director of the CSO); but I sort of expected that.</description>
     </item>
     
     <item>
       <title>The most-viewed non-music YouTube videos</title>
-      <link>https://www.danielphadley.com/youtube/</link>
+      <link>/youtube/</link>
       <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/youtube/</guid>
+      <guid>/youtube/</guid>
       <description>Randal Olson just posted a terrific explanation of the storage significance of Psy’s massive view count along with a chart of the top YouTube videos, which prompted a popular comment from u/promyy: “I’d love to see a chart of most viewed, non-music videos on YouTube.”
 
  .adslot_1 { max-width: 720px;}     (adsbygoogle = window.adsbygoogle || []).push({});   
@@ -221,39 +221,39 @@ I didn’t have a special coding solution for this; Instead, I just went through
     
     <item>
       <title>Data Analysis of the 2014 Mass. Gubernatorial Election</title>
-      <link>https://www.danielphadley.com/mass-election-analysis/</link>
+      <link>/mass-election-analysis/</link>
       <pubDate>Sat, 15 Nov 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/mass-election-analysis/</guid>
+      <guid>/mass-election-analysis/</guid>
       <description>Coakley received a lot of votes from residents of Massachusetts’s major cities. This is evident in the maps I posted last week, and in the charts below. What may be surprising is how many votes Baker received in cities, including Boston:
   Baker received nearly 10,000 more votes in Boston than he did in 2010. If those had gone to Coakley instead, the spread between them would have been cut roughly in half.</description>
     </item>
     
     <item>
       <title>How To Automate Map Making in R</title>
-      <link>https://www.danielphadley.com/automate-map-making/</link>
+      <link>/automate-map-making/</link>
       <pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/automate-map-making/</guid>
+      <guid>/automate-map-making/</guid>
       <description>In my last post, I displayed a series of maps from the 2014 Massachusetts midterm election. In all, I created 17 maps, all with fewer than 20 lines of code. Here’s how…
 The basic idea is to use a For Loop with ggmap to iterate through columns of a data frame. In my example, the code for which can be found here, I first read shapefiles from MassGIS into R, and then combine them with election data.</description>
     </item>
     
     <item>
       <title>Maps of the 2014 Massachusetts Elections</title>
-      <link>https://www.danielphadley.com/mass-election-maps/</link>
+      <link>/mass-election-maps/</link>
       <pubDate>Thu, 06 Nov 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/mass-election-maps/</guid>
+      <guid>/mass-election-maps/</guid>
       <description>Most of the maps I have seen so far color each city or town either red or blue based on the majority outcome. That works fine, for the most part, but I prefer to see the range of voting patterns. These heat maps go from light yellow to dark blue. The scale changes on each one in order to show the full spectrum. I managed to automate their creation in R.</description>
     </item>
     
     <item>
       <title>The Political and Public Opinion of Same-Sex Marriage, by State</title>
-      <link>https://www.danielphadley.com/15-same-sex-marriage/</link>
+      <link>/15-same-sex-marriage/</link>
       <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/15-same-sex-marriage/</guid>
+      <guid>/15-same-sex-marriage/</guid>
       <description>According to polling data, this is a current map of popular support for same-sex marriage:
  It is important to note that this map shows where people say they support same-sex marriage, but each state also contains a significant proportion of voters who are either indifferent or unsure.
 Compare that map to this one of political support in congress and the governor’s office:
@@ -262,29 +262,29 @@ Compare that map to this one of political support in congress and the governor�
     
     <item>
       <title>Using Machine Learning to Detect Stylometric Differences Between Nick and Amy in Gone Girl</title>
-      <link>https://www.danielphadley.com/gone-girl-prediction/</link>
+      <link>/gone-girl-prediction/</link>
       <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/gone-girl-prediction/</guid>
+      <guid>/gone-girl-prediction/</guid>
       <description>I wanted to see if it was possible to train a model to detect the difference between two fictional authors created by the same novelist based only on the frequency of common stop words, e.g., “the.” It worked: The randomForest model correctly selected Nick 93% of the time and Amy 91%.
 Background When I first started using R for data analysis, I was mesmerized by all of the packages and what they made possible.</description>
     </item>
     
     <item>
       <title>Experiential Learning</title>
-      <link>https://www.danielphadley.com/experiential-learning/</link>
+      <link>/experiential-learning/</link>
       <pubDate>Wed, 29 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/experiential-learning/</guid>
+      <guid>/experiential-learning/</guid>
       <description>One of the most enjoyable aspects of my job is to partner with Harvard and other local universities to teach students through project-based experience. The City gets free consulting, which is ordinarily very high caliber; and the students get a chance use their skills in a real-world environment. I just received this copy of a recent magazine article on one of our oldest, and most mutually beneficial partnerships: Linda Bilmes’s Advanced Budgeting course.</description>
     </item>
     
     <item>
       <title>Hello World</title>
-      <link>https://www.danielphadley.com/hello-world/</link>
+      <link>/hello-world/</link>
       <pubDate>Tue, 28 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.danielphadley.com/hello-world/</guid>
+      <guid>/hello-world/</guid>
       <description>For my inaugural post I just want to share a photo from TRAX, the light-rail system in Salt Lake City, UT.
  </description>
     </item>

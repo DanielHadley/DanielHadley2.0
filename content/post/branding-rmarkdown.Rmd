@@ -16,7 +16,7 @@ At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk 
 
 These talks describe our current workflow, but I like to compare the present to the past. I have no way to quantify this, but I feel like R is uniqe in how quickly its packages and IDE have evolved the last few years. I'm sure there are other examples of this, but R must be in the upper quartile of ancillary developments, e.g., the Tidyverse, RStudio v1, Shiny, and our topic, R Markdown. In evolutionary terms, we skipped from Xbox to Xbox One X. 
 
-![](https://media.giphy.com/media/l41YlnP9H2SFPCdPi/giphy.gif)
+![](https://media0.giphy.com/media/RluM0kvZXkLS0/source.gif)
 
 When I began as an analyst in local government, there was no easy way to go from code to output. It was common to create a bunch of graphs with a vanilla R script and then painstakingly add them to either a word document or PowerPoint. There were, of course, those who mastered LaTeX as part a painful dissertation writing process, but most people divided workflows between coding and presentation. 
 
