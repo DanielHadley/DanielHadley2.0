@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -15,10 +13,15 @@
   
   
   
-  <meta name="description" content="SLC-Based Data Scientist">
+    
+      
+    
+  
+  <meta name="description" content="The confetti has barely settled on the Golden State Warriors’ victory parade, and there are already people saying that the comparison is over: Michael Jordan is better than LeBron James at basketball. LeBron cannot be considered the Greatest Of All Time. Jordan left with six rings, while LeBron has only three.
+My own feeling is that when the stats are this close, there is no objective way to pick a GOAT.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/categories/r/">
+  <link rel="alternate" hreflang="en-us" href="/lebron-v-jordan/">
 
   
 
@@ -80,7 +83,7 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/categories/r/">
+  <link rel="canonical" href="/lebron-v-jordan/">
 
   <meta property="twitter:card" content="summary_large_image">
   
@@ -88,17 +91,20 @@
   <meta property="twitter:creator" content="@danielphadley">
   
   <meta property="og:site_name" content="Daniel Hadley">
-  <meta property="og:url" content="/categories/r/">
-  <meta property="og:title" content="R | Daniel Hadley">
-  <meta property="og:description" content="SLC-Based Data Scientist">
+  <meta property="og:url" content="/lebron-v-jordan/">
+  <meta property="og:title" content="15 Seasons of LeBron vs. Jordan | Daniel Hadley">
+  <meta property="og:description" content="The confetti has barely settled on the Golden State Warriors’ victory parade, and there are already people saying that the comparison is over: Michael Jordan is better than LeBron James at basketball. LeBron cannot be considered the Greatest Of All Time. Jordan left with six rings, while LeBron has only three.
+My own feeling is that when the stats are this close, there is no objective way to pick a GOAT.">
   <meta property="og:locale" content="en-us">
   
-  <meta property="og:updated_time" content="2018-06-14T00:00:00&#43;00:00">
+  <meta property="article:published_time" content="2018-06-14T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2018-06-14T00:00:00&#43;00:00">
   
 
   
 
-  <title>R | Daniel Hadley</title>
+  <title>15 Seasons of LeBron vs. Jordan | Daniel Hadley</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -232,130 +238,163 @@
 </nav>
 
 
-
-
-
-<div class="universal-wrapper">
-
-  <h1>R</h1>
+<article class="article" itemscope itemtype="http://schema.org/Article">
 
   
 
-  
-  
-  <div>
-    <h2><a href="/lebron-v-jordan/">15 Seasons of LeBron vs. Jordan</a></h2>
-    <div class="article-style">
-      
-      The confetti has barely settled on the Golden State Warriors’ victory parade, and there are already people saying that the comparison is over: Michael Jordan is better than LeBron James at basketball. LeBron cannot be considered the Greatest Of All Time. Jordan left with six rings, while LeBron has only three.
-My own feeling is that when the stats are this close, there is no objective way to pick a GOAT.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/branding-rmarkdown/">Branding and Automating with R Markdown</a></h2>
-    <div class="article-style">
-      
-      At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/bayes-538/">Bayes&#39; Puzzle Powers</a></h2>
-    <div class="article-style">
-      
-      A while ago, the popular data journalism site 538 posted a challenging probability puzzle:
- On the table in front of you are two coins. They look and feel identical, but you know one of them has been doctored. The fair coin comes up heads half the time while the doctored coin comes up heads 60 percent of the time. How many flips — you must flip both coins at once, one with each hand — would you need to give yourself a 95 percent chance of correctly identifying the doctored coin?
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/deranged-x-mas/">Deranged X-Mas - a Gift Exchange Puzzle</a></h2>
-    <div class="article-style">
-      
-      While planning a holiday gift exchange this week, my wife casually challenged me with a sort of tricky probability puzzle:
- Sara and I were talking today and realized that we were off by one on the rotation because last year we went sledding instead of buying gifts.
-  It should actually be: * Sara gives to Jonny * Jimmy gives to Thurop * Amy gives to Lisa * Jonny gives to Sara * Thurop gives to Jimmy * Lisa gives to Amy
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/ggplot-logo/">How to Add a Logo to ggplot by Magick</a></h2>
-    <div class="article-style">
-      
-      We recently wanted to brand several of our plots for publication in the local press. I looked around and found a couple suggestions on how to add images to plots, but nothing that seemed modular or customizable. My colleague reccomended the relatively new Magick package, which provided all of the functionality I needed (plus a lot more). Here is a simple example along with the code to replicate it:
- library(ggplot2) library(magick) library(here) # For making the script run without a wd library(magrittr) # For piping the logo # Make a simple plot and save it ggplot(mpg, aes(displ, hwy, colour = class)) + geom_point() + ggtitle(&quot;Cars&quot;) + ggsave(filename = paste0(here(&quot;/&quot;), last_plot()$labels$title, &quot;.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/recidiviz/">The Prison Analyst&#39;s Dilemma - Using R to Model Recidivism</a></h2>
-    <div class="article-style">
-      
-      Recidivism, the rate at which those released from incarceration return or commit new crimes, is one of society’s most difficult social problems. The official estimate is that 55% of former prisoners will return within 60 months.
- Recidivism is also, I discovered, one of the most challenging things to model and understand statistically. In this blog post, I describe our efforts to build this simulation, including how we settled on some fairly basic control structures (for loops) without giving up too much in terms of efficiency and readability.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/jupyter-to-rmarkdown/">From Jupyter Notebooks to R Markdown</a></h2>
-    <div class="article-style">
-      
-      Edit, 3/28/18: RStudio just announced Python interoperability through the reticulate package. Rmd Notebooks are unbeatable, in my opinion.
-Original Post: I started using Jupyter Notebooks back when they were called IPython. I even remember having to set up a virtual Linux environment because they were not available on Windows. As much as I have enjoyed their functionality, I recently switched entirely to R Markdown in an RStudio environment. Here’s why.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/kaggle-thoughts/">Lessons From My First Kaggle Contest</a></h2>
-    <div class="article-style">
-      
-      Kaggle is a forum for interacting with other data scientists and competing to see who can write code that will best predict features of data. It’s a way to test your skills at statistics and machine learning, and to do a lot of human learning in the process (sorry, bad pun).
-When I entered the contest to categorize crimes that occurred in San Francisco, my initial goal was to do better than random chance.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/how-to-dashboard-r/">How to Build a Data Dashboard using R (knitr), HTML, and Javascript (e.g.,Highcharts)</a></h2>
-    <div class="article-style">
-      
-      R has been the perfect language for the back end of this government data dashboard I am developing.
- It has excellent packages to pipe in data from every significant source Tools like dplyr and tidyr make cleaning and munging data trivial It is ideal for automating analysis  In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/top-planning/">The Top Urban Planning Articles of 2014</a></h2>
-    <div class="article-style">
-      
-      For my job, I read a lot of articles on urban policy and planning. I believe that the best policies are usually borrowed from other cities rather than fabricated from nothing. In that spirit, I even borrowed from other top ten lists to create this post. I like to think that my list is more comprehensive than some of the others since I have no incentive to link to my own content.
-      
-    </div>
-  </div>
-  
 
-  
-<nav>
-  <ul class="pager">
+  <div class="article-container">
+    <h1 itemprop="name">15 Seasons of LeBron vs. Jordan</h1>
+
     
+
+<div class="article-metadata">
+
+  <span class="article-date">
     
-    <li><a href="/categories/r/page/2/">&gt;</a></li>
+    <time datetime="2018-06-14 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      Jun 14, 2018
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
     
+    <a href="/categories/r">R</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=15%20Seasons%20of%20LeBron%20vs.%20Jordan&amp;url=%2flebron-v-jordan%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2flebron-v-jordan%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2flebron-v-jordan%2f&amp;title=15%20Seasons%20of%20LeBron%20vs.%20Jordan"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2flebron-v-jordan%2f&amp;title=15%20Seasons%20of%20LeBron%20vs.%20Jordan"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=15%20Seasons%20of%20LeBron%20vs.%20Jordan&amp;body=%2flebron-v-jordan%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
   </ul>
-</nav>
+</div>
 
 
+  
 
 </div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <p>The confetti has barely settled on the Golden State Warriors’ victory parade, and there are already people saying that the comparison is over: Michael Jordan is better than LeBron James at basketball. LeBron cannot be considered the Greatest Of All Time. Jordan left with six rings, while LeBron has only three.</p>
+<p>My own feeling is that when the stats are this close, there is no objective way to pick a GOAT. We have a <a href="https://en.wikipedia.org/wiki/Rubin_causal_model#The_fundamental_problem_of_causal_inference">missing data problem</a>: it’s impossible to see Jordan play on the 2005 Cavs, or watch LeBron go up against a team of space aliens. One must simply pick a side based on favorable stats from below, and then dig in.</p>
+<p>Either way, now is an ideal time to compare the two. They have both played 15 seasons in the NBA. These are not advanced statistics - just a few season career totals of basic measures. The first, and arguably most important, is points. Here, Jordan edges out LeBron’s 31,038 with 32,292</p>
+<p><img src="/post/lebron-v-jordan_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>It’s worth noting that while they played a similar number of minutes, Michael Jordan took a break for part of his 9th season to <a href="https://www.tarheelblog.com/2018/6/15/17462422/michael-jordans-break-unc-tarheels-baseball-nba-basketball-legacy-questions-goat">play baseball</a>. All of the comparisons have this blip in the data.</p>
+<p><img src="/post/lebron-v-jordan_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Despite the difference in minutes, there is a clear winner in some of the individual categories.</p>
+<p><img src="/post/lebron-v-jordan_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/post/lebron-v-jordan_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/post/lebron-v-jordan_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/lebron-v-jordan_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/post/lebron-v-jordan_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/post/lebron-v-jordan_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>LeBron is better. At rebounds, assists, and threes. Jordan wins at scoring, steals, and turnovers. Lebron has 888 blocks and Jordan has 893, so that is a little too close for comfort. Like I said, pick a side and dig in.</p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/plots">plots</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/sports">sports</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/ggplot-logo/">How to Add a Logo to ggplot by Magick</a></li>
+        
+        <li><a href="/recidiviz/">The Prison Analyst&#39;s Dilemma - Using R to Model Recidivism</a></li>
+        
+        <li><a href="/statwars/">What the Critics Got Wrong About Star Wars</a></li>
+        
+        <li><a href="/new-mit-prof/">How a New MIT Professor Spent His Year</a></li>
+        
+        <li><a href="/time-covers/">The Most Magazine Covers of All Time</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
 <footer class="site-footer">
   <div class="container">
     <p class="powered-by">
@@ -439,6 +478,4 @@ When I entered the contest to categorize crimes that occurred in San Francisco, 
 
   </body>
 </html>
-
-
 
