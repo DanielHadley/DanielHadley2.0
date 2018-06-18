@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Daniel Hadley on Daniel Hadley</title>
-    <link>/</link>
+    <link>https://www.danielphadley.com/</link>
     <description>Recent content in Daniel Hadley on Daniel Hadley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,38 +11,11 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>15 Seasons of LeBron vs. Jordan</title>
-      <link>/lebron-v-jordan/</link>
-      <pubDate>Thu, 14 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/lebron-v-jordan/</guid>
-      <description>&lt;p&gt;The confetti has barely settled on the Golden State Warriors’ victory parade, and there are already people saying that the comparison is over: Michael Jordan is better than LeBron James at basketball. LeBron cannot be considered the Greatest Of All Time. Jordan left with six rings, while LeBron has only three.&lt;/p&gt;
-&lt;p&gt;My own feeling is that when the stats are this close, there is no objective way to pick a GOAT. We have a &lt;a href=&#34;https://en.wikipedia.org/wiki/Rubin_causal_model#The_fundamental_problem_of_causal_inference&#34;&gt;missing data problem&lt;/a&gt;: it’s impossible to see Jordan play on the 2005 Cavs, or watch LeBron go up against a team of space aliens. One must simply pick a side based on favorable stats from below, and then dig in.&lt;/p&gt;
-&lt;p&gt;Either way, now is an ideal time to compare the two. They have both played 15 seasons in the NBA. These are not advanced statistics - just a few season career totals of basic measures. The first, and arguably most important, is points. Here, Jordan edges out LeBron’s 31,038 with 32,292&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/lebron-v-jordan_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;It’s worth noting that while they played a similar number of minutes, Michael Jordan took a break for part of his 9th season to &lt;a href=&#34;https://www.tarheelblog.com/2018/6/15/17462422/michael-jordans-break-unc-tarheels-baseball-nba-basketball-legacy-questions-goat&#34;&gt;play baseball&lt;/a&gt;. All of the comparisons have this blip in the data.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/lebron-v-jordan_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Despite the difference in minutes, there is a clear winner in some of the individual categories.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/lebron-v-jordan_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/lebron-v-jordan_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/lebron-v-jordan_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/lebron-v-jordan_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/lebron-v-jordan_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/lebron-v-jordan_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;div id=&#34;conclusion&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;LeBron is better. At rebounds, assists, and threes. Jordan wins at scoring, steals, and turnovers. Lebron has 888 blocks and Jordan has 893, so that is a little too close for comfort. Like I said, pick a side and dig in.&lt;/p&gt;
-&lt;p&gt;The code to create this post is &lt;a href=&#34;https://github.com/DanielHadley/DanielHadley2.0/blob/master/content/post/lebron-v-jordan.Rmd&#34;&gt;here&lt;/a&gt;, and the data come from &lt;a href=&#34;https://www.basketball-reference.com/&#34;&gt;Basketball Reference&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Branding and Automating with R Markdown</title>
-      <link>/branding-rmarkdown/</link>
+      <link>https://www.danielphadley.com/branding-rmarkdown/</link>
       <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>/branding-rmarkdown/</guid>
+      <guid>https://www.danielphadley.com/branding-rmarkdown/</guid>
       <description>&lt;p&gt;At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://rpubs.com/jzadra/rconf2018&#34;&gt;Here&lt;/a&gt; are the slides&lt;/li&gt;
@@ -86,7 +59,7 @@
 &lt;p&gt;To remedy the problem, my colleague Jon created an R package with all of our branding and custom functions. This allowed us to take advantage of the &lt;code&gt;draft&lt;/code&gt; function and the &lt;a href=&#34;https://rmarkdown.rstudio.com/developer_document_templates.html&#34;&gt;RStudio features&lt;/a&gt; that support document templates.&lt;/p&gt;
 &lt;p&gt;This video shows how quickly and easily we can create a new report now:&lt;/p&gt;
 &lt;video width=&#34;320&#34; height=&#34;240&#34; controls&gt;
-&lt;source src=&#34;/img/draft_functions_large.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;source src=&#34;https://www.danielphadley.com/img/draft_functions_large.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 &lt;p&gt;With all of that in place, it is much easier to use a single template to create a series of reports. This &lt;code&gt;for&lt;/code&gt; loop is what we used when we were requested to build a unique report showing data trends in every county in Utah.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;for (county in unique(utah$County)) {
@@ -101,10 +74,10 @@
     
     <item>
       <title>Branding and automating your work with R Markdown</title>
-      <link>/talk/rstudio/</link>
+      <link>https://www.danielphadley.com/talk/rstudio/</link>
       <pubDate>Fri, 02 Feb 2018 00:00:00 -0700</pubDate>
       
-      <guid>/talk/rstudio/</guid>
+      <guid>https://www.danielphadley.com/talk/rstudio/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://rpubs.com/jzadra/rconf2018&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt; are the slides&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/Sorenson-Impact/rmarkdown-branding-talk/&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt; is the repo with a short and long version&lt;/li&gt;
@@ -116,10 +89,10 @@
     
     <item>
       <title>Branding your work with R Markdown</title>
-      <link>/talk/rug/</link>
+      <link>https://www.danielphadley.com/talk/rug/</link>
       <pubDate>Thu, 11 Jan 2018 00:00:00 -0700</pubDate>
       
-      <guid>/talk/rug/</guid>
+      <guid>https://www.danielphadley.com/talk/rug/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://rpubs.com/jzadra/rconf2018&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt; are the slides&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/Sorenson-Impact/rmarkdown-branding-talk/&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt; is the repo with a short and long version&lt;/li&gt;
@@ -130,10 +103,10 @@
     
     <item>
       <title>Bayes&#39; Puzzle Powers</title>
-      <link>/bayes-538/</link>
+      <link>https://www.danielphadley.com/bayes-538/</link>
       <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/bayes-538/</guid>
+      <guid>https://www.danielphadley.com/bayes-538/</guid>
       <description>&lt;p&gt;A while ago, the popular data journalism site 538 posted a challenging &lt;a href=&#34;http://fivethirtyeight.com/features/rock-paper-scissors-double-scissors/&#34;&gt;probability puzzle&lt;/a&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;On the table in front of you are two coins. They look and feel identical, but you know one of them has been doctored. The fair coin comes up heads half the time while the doctored coin comes up heads 60 percent of the time. How many flips — you must flip both coins at once, one with each hand — would you need to give yourself a 95 percent chance of correctly identifying the doctored coin?&lt;/p&gt;
@@ -148,7 +121,7 @@
 &lt;p&gt;This is not a trivial simulation. In theory, you could go on flipping the same side of both coins in perpetuity. Given that, and the subtle difference in the coins, I opted for a simulation that lasted 2 million games. Each game consisted of a speedy specter of Bayes, who flipped coins and updated probabilities until he was certain which one was fair.&lt;/p&gt;
 &lt;p&gt;As it turns out, this method took Bayes-bot an average of 74 flips. The cool thing, however, is that it is possible to be 96% confident in as few as eight flips, if the coins land a certain way. The median is 60, and the max in this simulation was 704.&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;/images/coin_flipping_hist.png&#34; /&gt;
+&lt;img src=&#34;https://www.danielphadley.com/images/coin_flipping_hist.png&#34; /&gt;
 
 &lt;/div&gt;
 &lt;p&gt;Notice that the correct answer to the original question is 134 flips, which are needed given that the distribution has a long right tail. But it’s neat to see how often in practice Bayes could beat the theoretical number of flips needed. In this case, 88% of the time, Bayes knew before 134 flips.&lt;/p&gt;
@@ -266,10 +239,10 @@ true_negatives &amp;lt;- sum(test_results &amp;lt; .004)
     
     <item>
       <title>Deranged X-Mas - a Gift Exchange Puzzle</title>
-      <link>/deranged-x-mas/</link>
+      <link>https://www.danielphadley.com/deranged-x-mas/</link>
       <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/deranged-x-mas/</guid>
+      <guid>https://www.danielphadley.com/deranged-x-mas/</guid>
       <description>&lt;p&gt;While planning a holiday gift exchange this week, my wife casually challenged me with a sort of tricky probability puzzle:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Sara and I were talking today and realized that we were off by one on the rotation because last year we went sledding instead of buying gifts.&lt;/p&gt;
@@ -344,19 +317,19 @@ sibling_mirror / nrow(ders)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Analyzing Criminal Justice Reform: the Case of Utah</title>
-      <link>/talk/dssg/</link>
+      <link>https://www.danielphadley.com/talk/dssg/</link>
       <pubDate>Sun, 29 Oct 2017 00:00:00 -0600</pubDate>
       
-      <guid>/talk/dssg/</guid>
+      <guid>https://www.danielphadley.com/talk/dssg/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rayid Ghani on Data Science for Social Good</title>
-      <link>/interview-rayid-ghani/</link>
+      <link>https://www.danielphadley.com/interview-rayid-ghani/</link>
       <pubDate>Fri, 25 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>/interview-rayid-ghani/</guid>
+      <guid>https://www.danielphadley.com/interview-rayid-ghani/</guid>
       <description>&lt;p&gt;I had a chance to sit down with Rayid Ghani, the Director of the Center for Data Science and Public Policy at the University of Chicago. I have admired Rayid’s work ever since he became the Chief Scientist for the 2012 Barack Obama campaign. His strategic use of analytics set the precedent for a new era of data science in political campaigns. At the time, others were trying to reverse engineer his tactics, which meant he was always one step ahead of the other campaigns. The fact that he has stayed in the field and used data to produce positive social outcomes is truly admirable.&lt;/p&gt;
 &lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/XHDuN_2WP7o&#34; frameborder=&#34;0&#34; allowfullscreen&gt;
 &lt;/iframe&gt;
@@ -365,13 +338,13 @@ sibling_mirror / nrow(ders)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>How to Add a Logo to ggplot by Magick</title>
-      <link>/ggplot-logo/</link>
+      <link>https://www.danielphadley.com/ggplot-logo/</link>
       <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>/ggplot-logo/</guid>
+      <guid>https://www.danielphadley.com/ggplot-logo/</guid>
       <description>&lt;p&gt;We recently wanted to brand several of our plots for publication in the local press. I looked around and found a &lt;a href=&#34;https://stackoverflow.com/questions/12463691/inserting-an-image-to-ggplot-outside-the-chart-area&#34;&gt;couple&lt;/a&gt; &lt;a href=&#34;https://stackoverflow.com/questions/41574732/how-to-add-logo-on-ggplot2-footer&#34;&gt;suggestions&lt;/a&gt; on how to add images to plots, but nothing that seemed modular or customizable. My colleague reccomended the relatively new &lt;a href=&#34;https://cran.r-project.org/web/packages/magick/vignettes/intro.html&#34;&gt;Magick package&lt;/a&gt;, which provided all of the functionality I needed (plus a lot more). Here is a simple example along with the code to replicate it:&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;/images/Cars.png&#34; /&gt;
+&lt;img src=&#34;https://www.danielphadley.com/images/Cars.png&#34; /&gt;
 
 &lt;/div&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
@@ -406,7 +379,7 @@ final_plot &amp;lt;- image_append(image_scale(c(plot, logo), &amp;quot;500&amp;q
 image_write(final_plot, paste0(here(&amp;quot;/&amp;quot;), last_plot()$labels$title, &amp;quot;.png&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You can see that this creates a logo centered on a grey background with an annotation originating in the northwest of the band. I wanted to put our logo on the bottom right, 538 style, so I added some superfulous canvas on the right of the png and then croped it to fit our plots with Magick. The point is, Magick is highly customizable and opens up a lot of options that were previously closed to all but the undaunted photoshoppers. Want Vincent Vega to point at your x-axis? Go for it! Now, if you’ll excuse me, I’m going to go home and have a heart attack.&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;/images/Cars_Travolta.gif&#34; /&gt;
+&lt;img src=&#34;https://www.danielphadley.com/images/Cars_Travolta.gif&#34; /&gt;
 
 &lt;/div&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Now call back the plot
@@ -427,20 +400,20 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>RecidiViz: Analyzing Reincarceration</title>
-      <link>/project/recidiviz/</link>
+      <link>https://www.danielphadley.com/project/recidiviz/</link>
       <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/project/recidiviz/</guid>
+      <guid>https://www.danielphadley.com/project/recidiviz/</guid>
       <description>&lt;p&gt;Recidivism is one of society&amp;rsquo;s most persistent yet misunderstood problems. Everyone from politicians to Supreme Court Justices seem to get it wrong. This model uses data from the Bureau of Justice Statistics to simulate 1,000 parolees released on the same day.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>The Prison Analyst&#39;s Dilemma - Using R to Model Recidivism</title>
-      <link>/recidiviz/</link>
+      <link>https://www.danielphadley.com/recidiviz/</link>
       <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/recidiviz/</guid>
+      <guid>https://www.danielphadley.com/recidiviz/</guid>
       <description>&lt;p&gt;Recidivism, the rate at which those released from incarceration return or commit new crimes, is one of society’s most difficult social problems. The official estimate is that 55% of former prisoners will return within 60 months.&lt;/p&gt;
 &lt;div class=&#34;figure&#34;&gt;
 &lt;img src=&#34;https://static1.squarespace.com/static/57e1fc9c20099e1414dc6070/t/592890393e00bedb90f8b8da/1495830599102/?format=1000w&#34; /&gt;
@@ -482,10 +455,10 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>Big Data to Solve Big Problems</title>
-      <link>/big-data-big-problems/</link>
+      <link>https://www.danielphadley.com/big-data-big-problems/</link>
       <pubDate>Mon, 17 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>/big-data-big-problems/</guid>
+      <guid>https://www.danielphadley.com/big-data-big-problems/</guid>
       <description>&lt;p&gt;In the marketing world, big data is used to answer ostensibly minute questions every day: are computer mouse movements predictive of purchasing? Does an orange background increase user engagement? In every &lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_places_with_%22Silicon%22_names&#34;&gt;place with Silicon in its name&lt;/a&gt;, there are teams of data scientists asking these questions.&lt;/p&gt;
 &lt;p&gt;In the social sector, by contrast, answering helpful questions is more difficult. For instance, is our program reducing homelessness? How is health spending distributed across the state? Part of the difficulty is the nature of the problems we are trying to solve. Lowering rates of recidivism is far more complex than driving ad clicks.&lt;/p&gt;
 &lt;p&gt;But there is another reason that governments, nonprofits, and philanthropists find it difficult to answer basic questions about social services: missing data. We simply do not have the infrastructure to collect and analyze data that reveals true social outcomes.&lt;/p&gt;
@@ -503,10 +476,10 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>A Dashboard with Weak AI</title>
-      <link>/project/dashboards/</link>
+      <link>https://www.danielphadley.com/project/dashboards/</link>
       <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>/project/dashboards/</guid>
+      <guid>https://www.danielphadley.com/project/dashboards/</guid>
       <description>&lt;p&gt;R has been the perfect language for the back end of &lt;a href=&#34;http://www.somervillema.gov/dashboard/daily.html&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; government data dashboard I am developing.&lt;/p&gt;
 
 &lt;ul&gt;
@@ -523,10 +496,10 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>From Jupyter Notebooks to R Markdown</title>
-      <link>/jupyter-to-rmarkdown/</link>
+      <link>https://www.danielphadley.com/jupyter-to-rmarkdown/</link>
       <pubDate>Thu, 08 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>/jupyter-to-rmarkdown/</guid>
+      <guid>https://www.danielphadley.com/jupyter-to-rmarkdown/</guid>
       <description>&lt;p&gt;Edit, 3/28/18: RStudio just announced Python interoperability through the &lt;a href=&#34;https://blog.rstudio.com/2018/03/26/reticulate-r-interface-to-python/&#34;&gt;reticulate package&lt;/a&gt;. Rmd Notebooks are unbeatable, in my opinion.&lt;/p&gt;
 &lt;div id=&#34;original-post&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Original Post:&lt;/h3&gt;
@@ -563,10 +536,10 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
     
     <item>
       <title>Lessons From My First Kaggle Contest</title>
-      <link>/kaggle-thoughts/</link>
+      <link>https://www.danielphadley.com/kaggle-thoughts/</link>
       <pubDate>Thu, 09 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>/kaggle-thoughts/</guid>
+      <guid>https://www.danielphadley.com/kaggle-thoughts/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://www.kaggle.com&#34;&gt;Kaggle&lt;/a&gt; is a forum for interacting with other data scientists and competing to see who can write code that will best predict features of data. It’s a way to test your skills at statistics and machine learning, and to do a lot of human learning in the process (sorry, bad pun).&lt;/p&gt;
 &lt;p&gt;When I entered the contest to categorize crimes that occurred in San Francisco, my initial goal was to do better than random chance. I had some domain expertise from my time working with the Somerville Police Department, but I still worried that I would not be able to beat basic benchmarks for crime prediction. Over time, my goals shifted from making it out of the bottom quartile, to scoring above the median, until I finally made it into the top 10% and set my sights on winning. In the end, I ranked 7th out of 2,335 competitors.&lt;/p&gt;
 &lt;p&gt;There was no prize money in this contest, and I borrowed liberally from others’ ideas, so more than the ranking, I got involved to learn new things about data science.&lt;/p&gt;
@@ -612,6 +585,116 @@ for (crime in 1:length(crime_categories)) {
 }&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In the final hours of the contest, I also combined the results of several different submissions. Together, they did better than any single submission.&lt;/p&gt;
 &lt;p&gt;I made a lot of mistakes along the way, from overfitting dozens of models to accidentally purchasing a surfeit of storage on Amazon Web Services. These were instructive, though, and I feel that the process gave me a more nuanced view of how computers learn from the code and data that we feed them.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to Build a Data Dashboard using R (knitr), HTML, and Javascript (e.g.,Highcharts)</title>
+      <link>https://www.danielphadley.com/how-to-dashboard-r/</link>
+      <pubDate>Fri, 05 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.danielphadley.com/how-to-dashboard-r/</guid>
+      <description>&lt;p&gt;R has been the perfect language for the back end of &lt;a href=&#34;http://www.somervillema.gov/dashboard/daily.html&#34;&gt;this&lt;/a&gt; government data dashboard I am developing.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It has excellent packages to pipe in data from every significant source&lt;/li&gt;
+&lt;li&gt;Tools like dplyr and tidyr make cleaning and munging data trivial&lt;/li&gt;
+&lt;li&gt;It is ideal for automating analysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days. (Today that happens to include an uptick in reports of dead animals on the streets and sidewalks, which is disgusting but useful to know).&lt;/p&gt;
+&lt;p&gt;The reason I am writing this tutorial is to outline a method in the “knitr” package that I want to share because it opens up dozens of new tech stack combinations. The basic idea is to perform all of the data manipulations and analysis in R, and then “weave” it into popular Javascript visualization tools, like Highcharts, D3, and Leaflet. This is in contrast to the more traditional way of developing an R dashboard using Shiny.&lt;/p&gt;
+&lt;p&gt;Here is an example in its simplest form. First, I will show some analysis in R, and then I will show how that fits into a .Rhtml file, which can be “woven” into HTML/Javascript and finally uploaded to your web server.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(knitr)
+
+
+# Load Data
+dates &amp;lt;- c(&amp;#39;Jan&amp;#39;, &amp;#39;Feb&amp;#39;, &amp;#39;Mar&amp;#39;, &amp;#39;Apr&amp;#39;, &amp;#39;May&amp;#39;, &amp;#39;Jun&amp;#39;, &amp;#39;Jul&amp;#39;, &amp;#39;Aug&amp;#39;, &amp;#39;Sep&amp;#39;, &amp;#39;Oct&amp;#39;, &amp;#39;Nov&amp;#39;, &amp;#39;Dec&amp;#39;)
+Tokyo &amp;lt;- c(7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6)
+London &amp;lt;- c(3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8)
+
+# Calculate an average
+mean_of_Tokyo &amp;lt;- mean(Tokyo)
+mean_of_London &amp;lt;- mean(London)
+
+
+## Now knit together the data and HTML ##
+knit(&amp;quot;./index.Rhtml&amp;quot;, output = &amp;quot;./index.html&amp;quot;)
+
+# Now you can upload index.html to your server &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now this is what your index.Rhtml file will look like, in it’s most basic form. Here I am using Highcharts, but this could just as easily be D3 or any other charting library.&lt;/p&gt;
+&lt;p&gt;{% highlight HTML %}&lt;/p&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;
+Page Title: Daily Dashboard
+&lt;/title&gt;
+&lt;!-- Highcharts scripts --&gt;
+&lt;script src=&#34;https://code.highcharts.com/highcharts.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://code.highcharts.com/modules/exporting.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;script&gt;
+$(function() {
+    $(&#39;#container&#39;).highcharts({
+        title: {
+            text: &#39;Monthly Average Temperature&#39;,
+            x: -20 //center
+        },
+        subtitle: {
+            text: &#39;Source: WorldClimate.com&#39;,
+            x: -20
+        },
+        xAxis: {
+            categories: [&lt;!--rinline I(shQuote(dates)) --&gt;]
+        },
+        yAxis: {
+            title: {
+                text: &#39;Temperature (°C)&#39;
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: &#39;#808080&#39;
+            }]
+        },
+        tooltip: {
+            valueSuffix: &#39;°C&#39;
+        },
+        legend: {
+            layout: &#39;vertical&#39;,
+            align: &#39;right&#39;,
+            verticalAlign: &#39;middle&#39;,
+            borderWidth: 0
+        },
+        series: [{
+            name: &#39;Tokyo&#39;,
+            data: [&lt;!--rinline I(Tokyo) --&gt;]
+        }, {
+            name: &#39;London&#39;,
+            data: [&lt;!--rinline I(London) --&gt;]
+        }]
+    });
+});  
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;
+This is a Heading: Check out These Average Temperatures!
+&lt;/h1&gt;
+&lt;p&gt;
+This is a paragraph. Check out this timeseries. Over the last 12 months, London had an average temperature of &lt;!--rinline I(mean_of_London) --&gt; while Tokyo had an average of &lt;!--rinline I(mean_of_Tokyo) --&gt;. Now here is a chart:
+&lt;/p&gt;
+&lt;div id=&#34;container&#34; style=&#34;min-width: 310px; height: 400px; margin: 0 auto&#34;&gt;
+
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;p&gt;```&lt;/p&gt;
+&lt;p&gt;The parts to pay attention to are the ones in the HTML that say &lt;code&gt;rinline I(X)&lt;/code&gt;. These are the values from your R analysis that will get “woven in” to regular HTML using the Rhtml file. &lt;a href=&#34;http://yihui.name/knitr/&#34;&gt;Yihui Xie&lt;/a&gt;, knitr’s heroic creator, describes this method &lt;a href=&#34;http://yihui.name/knitr/demo/output/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I created a repository &lt;a href=&#34;https://github.com/DanielHadley/DashboardTutorialR&#34;&gt;here&lt;/a&gt; that contains the simple example outlined above, plus the slightly redacted files that I use to power &lt;a href=&#34;http://www.somervillema.gov/dashboard/daily.html&#34;&gt;our dashboard&lt;/a&gt;. The great thing is that Yihui has created a system where you can easily combine the analytical horsepower of R with virtually any charting library.&lt;/p&gt;
+&lt;div id=&#34;bonus-automate-it&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bonus: Automate It&lt;/h2&gt;
+&lt;p&gt;So now you have an R file for the analysis, which ends by creating HTML and uploading it to your web server. There are, of course, dozens of ways to set things up so that your R script gets called each day, hour, or however often you want your dashboard to update. At home, I use cron on a Raspberry Pi. But at work, I have found that the Task Scheduler program on Windows accomplishes this painlessly. I just schedule it to run the following .bat file every night at around 2 am: “C:Files-3.1.2.exe” CMD BATCH –vanilla –slave “C:.R”&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

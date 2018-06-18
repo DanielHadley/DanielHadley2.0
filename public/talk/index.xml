@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Recent &amp; Upcoming Talks on Daniel Hadley</title>
-    <link>/talk/</link>
+    <link>https://www.danielphadley.com/talk/</link>
     <description>Recent content in Recent &amp; Upcoming Talks on Daniel Hadley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/talk/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.danielphadley.com/talk/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Branding and automating your work with R Markdown</title>
-      <link>/talk/rstudio/</link>
+      <link>https://www.danielphadley.com/talk/rstudio/</link>
       <pubDate>Fri, 02 Feb 2018 00:00:00 -0700</pubDate>
       
-      <guid>/talk/rstudio/</guid>
+      <guid>https://www.danielphadley.com/talk/rstudio/</guid>
       <description> Here are the slides Here is the repo with a short and long version Here is a video (complete with my cringeworthy Hadley joke) And here is the package we describe  </description>
     </item>
     
     <item>
       <title>Branding your work with R Markdown</title>
-      <link>/talk/rug/</link>
+      <link>https://www.danielphadley.com/talk/rug/</link>
       <pubDate>Thu, 11 Jan 2018 00:00:00 -0700</pubDate>
       
-      <guid>/talk/rug/</guid>
+      <guid>https://www.danielphadley.com/talk/rug/</guid>
       <description> Here are the slides Here is the repo with a short and long version And here is the package we describe  </description>
     </item>
     
     <item>
       <title>Analyzing Criminal Justice Reform: the Case of Utah</title>
-      <link>/talk/dssg/</link>
+      <link>https://www.danielphadley.com/talk/dssg/</link>
       <pubDate>Sun, 29 Oct 2017 00:00:00 -0600</pubDate>
       
-      <guid>/talk/dssg/</guid>
+      <guid>https://www.danielphadley.com/talk/dssg/</guid>
       <description></description>
     </item>
     
