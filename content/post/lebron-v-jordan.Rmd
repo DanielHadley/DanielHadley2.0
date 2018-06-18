@@ -172,3 +172,5 @@ total %>%
 
 # Conclusion
 LeBron is better. At rebounds, assists, and threes. Jordan wins at scoring, steals, and turnovers. Lebron has `r comma(totall$cumulative_blocks[15])` blocks and Jordan has `r comma(totalj$cumulative_blocks[15])`, so that is a little too close for comfort. Like I said, pick a side and dig in. 
+
+The code to create this post is [here](https://github.com/DanielHadley/DanielHadley2.0/blob/master/content/post/lebron-v-jordan.Rmd), and the data come from [Basketball Reference](https://www.basketball-reference.com/).
