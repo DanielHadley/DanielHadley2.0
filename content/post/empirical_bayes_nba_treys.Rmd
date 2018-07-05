@@ -1,0 +1,144 @@
+---
+title: "Empirical Bayes to Estimate NBA Treys"
+date: 2017-12-28
+categories: ["R"]
+tags: ["probability", "puzzle", "bayesian", "personal"]
+---
+
+```{r load_data, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ebbr)
+# library(splines)
+
+seasons <- read_csv("../../data/nba_seasons.csv") %>% 
+  filter(Rk != "Rk") %>% 
+  mutate_at(vars(Age, G:season), as.numeric) %>% 
+  mutate(birth_year = season - Age) %>% 
+  mutate(playoffs = FALSE)
+
+playoffs <- read_csv("../../data/nba_playoffs.csv") %>% 
+  filter(Rk != "Rk") %>% 
+  mutate_at(vars(Age, G:season), as.numeric) %>% 
+  mutate(birth_year = season - Age) %>% 
+  mutate(playoffs = TRUE)
+
+nba_data <- rbind(seasons, playoffs)
+
+# Get a unique player id
+player_ids <- nba_data %>% 
+  group_by(Player, birth_year) %>% 
+  count() %>% 
+  select(-n) %>% 
+  ungroup() %>% 
+  mutate(player_id = row_number())
+
+nba_data <- nba_data %>% 
+  left_join(player_ids)
+
+
+# Make new threes data
+threes <- nba_data %>% 
+  filter(season > 1979) %>%
+  rename(threes_attempted = `3PA`, threes_made = `3P`) %>% 
+  mutate(three_pct = threes_made / threes_attempted)
+```
+
+
+All sports statistics are imperfect measures of a player's performance. At best, they show relative differences in how well athletes shoot, steal, and rebound. At worst, they are marred by rule changes and outside factors that either exaggerate or handicap certain subgroups of players. 
+
+The NBA's measure for three-point accuracy is one of worst kinds of the latter. Between 1995 and 1997, the NBA changed the distance of the three-point line, biasing all future comparisons between generations of players. During those years, it was as though we changed the distance of marathons to 21 miles *and kept all of the fastest records*.
+
+What follows is an attemt to overcome this problem using a method called empirical Bayes estimation . Is Steph Curry really the most accurate three-point shooter of all time? This analysis suggests so. But I encourage you to read on to see if you trust the method enough to agree. 
+
+```{r first_graph, echo=FALSE, message=FALSE, warning=FALSE}
+no_line <- threes %>% 
+  mutate(line_change = case_when(season >= 1995 & season <= 1997 ~ "during",
+                                 season < 1995 ~ "before",
+                                 TRUE ~ "after")) %>% 
+  filter(line_change != "during") %>% 
+  group_by(player_id) %>% 
+  summarise(threes_made = sum(threes_made), threes_attempted = sum(threes_attempted),
+            Player = Player[1], season = round(mean(season))) %>% 
+  mutate(three_pct = threes_made / threes_attempted) %>% 
+  filter(threes_made >= 7) %>% 
+  add_ebb_estimate(threes_made, threes_attempted, method = "gamlss", 
+                   mu_predictors = ~ season + log10(threes_attempted)) 
+
+no_line %>%
+  arrange(-.fitted) %>% 
+  top_n(20, wt = .fitted) %>% 
+  mutate(rank = row_number()) %>% 
+  rename('Measured rate' = three_pct, 'Empirical Bayes estimate' = .fitted) %>% 
+  gather(type, rate, `Measured rate`, `Empirical Bayes estimate`) %>%
+  filter(type == 'Empirical Bayes estimate') %>% 
+  ggplot(aes(rate, reorder(Player, -rank))) +
+  geom_errorbarh(aes(xmin = .low, xmax = .high), color = "gray50") +
+  geom_point(size = 3) +
+  labs(x = "Three Point %",
+       y = NULL, title = "Bayesian Estimate of the NBA's Most Accurate 3-point Shooters",
+        subtitle = "dots = estimates, lines = 95% credible intervals") +
+  scale_x_continuous(labels = scales::percent) +
+  theme_minimal() +
+  theme(legend.title=element_blank())
+```
+
+
+```{r}
+basic <- threes %>% 
+  group_by(player_id) %>% 
+  summarise(threes_made = sum(threes_made), threes_attempted = sum(threes_attempted),
+            Player = Player[1]) %>% 
+  mutate(three_pct = threes_made / threes_attempted) %>% 
+  add_ebb_estimate(threes_made, threes_attempted, prior_subset = threes_made > 50)
+
+basic %>% 
+  ggplot(aes(.raw, .fitted, color = threes_attempted)) +
+  geom_point()
+
+basic %>%
+  arrange(-.fitted) %>% 
+  top_n(20, wt = .fitted) %>% 
+  mutate(rank = row_number()) %>% 
+  rename('Measured rate' = three_pct, 'Empirical Bayes estimate' = .fitted) %>% 
+  gather(type, rate, `Measured rate`, `Empirical Bayes estimate`) %>%
+  ggplot(aes(rate, reorder(Player, -rank), color = type)) +
+  geom_errorbarh(aes(xmin = .low, xmax = .high), color = "gray50") +
+  geom_point(size = 3) +
+  labs(x = "Three Point %",
+       y = NULL, title = "Measured Rates, Empirical Bayesian Estimates, and Credible Intervals") +  theme_minimal() +
+  theme(legend.title=element_blank())
+```
+
+```{r}
+no_line <- threes %>% 
+  mutate(line_change = case_when(season >= 1995 & season <= 1997 ~ "during",
+                                 season < 1995 ~ "before",
+                                 TRUE ~ "after")) %>% 
+  filter(line_change != "during") %>% 
+  group_by(player_id) %>% 
+  summarise(threes_made = sum(threes_made), threes_attempted = sum(threes_attempted),
+            Player = Player[1], season = round(mean(season))) %>% 
+  mutate(three_pct = threes_made / threes_attempted) %>% 
+  filter(threes_made >= 7) %>% 
+  add_ebb_estimate(threes_made, threes_attempted, method = "gamlss", 
+                   mu_predictors = ~ season + log10(threes_attempted)) 
+
+no_line %>% 
+  ggplot(aes(.raw, .fitted, color = threes_attempted)) +
+  geom_point()
+
+no_line %>%
+  arrange(-.fitted) %>% 
+  top_n(20, wt = .fitted) %>% 
+  mutate(rank = row_number()) %>% 
+  rename('Measured rate' = three_pct, 'Empirical Bayes estimate' = .fitted) %>% 
+  gather(type, rate, `Measured rate`, `Empirical Bayes estimate`) %>%
+  ggplot(aes(rate, reorder(Player, -rank), color = type)) +
+  geom_errorbarh(aes(xmin = .low, xmax = .high), color = "gray50") +
+  geom_point(size = 3) +
+  labs(x = "Three Point %",
+       y = NULL, title = "Measured Rates, Empirical Bayesian Estimates, and Credible Intervals") +  theme_minimal() +
+  theme(legend.title=element_blank())
+```
+
+

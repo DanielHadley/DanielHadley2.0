@@ -1,0 +1,68 @@
+---
+title: "Empirical Bayes to Estimate NBA Treys"
+date: 2017-12-28
+categories: ["R"]
+tags: ["probability", "puzzle", "bayesian", "personal"]
+---
+
+
+
+<p>All sports statistics are imperfect measures of a player’s performance. At best, they show relative differences in how well athletes shoot, steal, and rebound. At worst, they are marred by rule changes and outside factors that either exaggerate or handicap certain subgroups of players.</p>
+<p>The NBA’s measure for three-point accuracy is one of worst kinds of the latter. Between 1995 and 1997, the NBA changed the distance of the three-point line, biasing all future comparisons between generations of players. During those years, it was as though we changed the distance of marathons to 21 miles <em>and kept all of the fastest records</em>.</p>
+<p>What follows is an attemt to use a method called empirical Bayes estimation to rank the most accurate three-point shooters of all time. What makes this different, however, is that I base my estimation on all of the available data <em>except for the seasons where the line was changed</em>.</p>
+<p><img src="/post/empirical_bayes_nba_treys_files/figure-html/first_graph-1.png" width="672" /></p>
+<pre class="r"><code>basic &lt;- threes %&gt;% 
+  group_by(player_id) %&gt;% 
+  summarise(threes_made = sum(threes_made), threes_attempted = sum(threes_attempted),
+            Player = Player[1]) %&gt;% 
+  mutate(three_pct = threes_made / threes_attempted) %&gt;% 
+  add_ebb_estimate(threes_made, threes_attempted, prior_subset = threes_made &gt; 50)
+
+basic %&gt;% 
+  ggplot(aes(.raw, .fitted, color = threes_attempted)) +
+  geom_point()</code></pre>
+<pre><code>## Warning: Removed 387 rows containing missing values (geom_point).</code></pre>
+<p><img src="/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>basic %&gt;%
+  arrange(-.fitted) %&gt;% 
+  top_n(20, wt = .fitted) %&gt;% 
+  mutate(rank = row_number()) %&gt;% 
+  rename(&#39;Measured rate&#39; = three_pct, &#39;Empirical Bayes estimate&#39; = .fitted) %&gt;% 
+  gather(type, rate, `Measured rate`, `Empirical Bayes estimate`) %&gt;%
+  ggplot(aes(rate, reorder(Player, -rank), color = type)) +
+  geom_errorbarh(aes(xmin = .low, xmax = .high), color = &quot;gray50&quot;) +
+  geom_point(size = 3) +
+  labs(x = &quot;Three Point %&quot;,
+       y = NULL, title = &quot;Measured Rates, Empirical Bayesian Estimates, and Credible Intervals&quot;) +  theme_minimal() +
+  theme(legend.title=element_blank())</code></pre>
+<p><img src="/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<pre class="r"><code>no_line &lt;- threes %&gt;% 
+  mutate(line_change = case_when(season &gt;= 1995 &amp; season &lt;= 1997 ~ &quot;during&quot;,
+                                 season &lt; 1995 ~ &quot;before&quot;,
+                                 TRUE ~ &quot;after&quot;)) %&gt;% 
+  filter(line_change != &quot;during&quot;) %&gt;% 
+  group_by(player_id) %&gt;% 
+  summarise(threes_made = sum(threes_made), threes_attempted = sum(threes_attempted),
+            Player = Player[1], season = round(mean(season))) %&gt;% 
+  mutate(three_pct = threes_made / threes_attempted) %&gt;% 
+  filter(threes_made &gt;= 7) %&gt;% 
+  add_ebb_estimate(threes_made, threes_attempted, method = &quot;gamlss&quot;, 
+                   mu_predictors = ~ season + log10(threes_attempted)) 
+
+no_line %&gt;% 
+  ggplot(aes(.raw, .fitted, color = threes_attempted)) +
+  geom_point()</code></pre>
+<p><img src="/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>no_line %&gt;%
+  arrange(-.fitted) %&gt;% 
+  top_n(20, wt = .fitted) %&gt;% 
+  mutate(rank = row_number()) %&gt;% 
+  rename(&#39;Measured rate&#39; = three_pct, &#39;Empirical Bayes estimate&#39; = .fitted) %&gt;% 
+  gather(type, rate, `Measured rate`, `Empirical Bayes estimate`) %&gt;%
+  ggplot(aes(rate, reorder(Player, -rank), color = type)) +
+  geom_errorbarh(aes(xmin = .low, xmax = .high), color = &quot;gray50&quot;) +
+  geom_point(size = 3) +
+  labs(x = &quot;Three Point %&quot;,
+       y = NULL, title = &quot;Measured Rates, Empirical Bayesian Estimates, and Credible Intervals&quot;) +  theme_minimal() +
+  theme(legend.title=element_blank())</code></pre>
+<p><img src="/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
