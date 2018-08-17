@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 -0800</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 -0700</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -37,8 +37,7 @@
       <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>/empirical_bayes_nba_treys/</guid>
-      <description>All sports statistics are imperfect measures of a player’s performance. At best, they show relative differences in how well athletes shoot, steal, and rebound. At worst, they are marred by rule changes and outside factors that either exaggerate or handicap certain subgroups of players.
-The NBA’s measure for three-point accuracy is one of worst kinds of the latter. Between 1995 and 1997, the NBA changed the distance of the three-point line, biasing all future comparisons between generations of players.</description>
+      <description>In this post, I describe how I used Emprirical Bayesian methods to estimate the accuracy of NBA three-point shooters. This analysis closely follows the process outlined by David Robinson in his excellent book Introduction to Empirical Bayes: Examples from Baseball Statistics, and is performed using his ebbr package in R.^ The goal is to make a reasoned ranking of the top sharp shooters, despite insonsistent and imperfect records of how often players make the shots they attempt.</description>
     </item>
     
     <item>
