@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Automation on Daniel Hadley</title>
+    <link>/tags/automation/</link>
+    <description>Recent content in Automation on Daniel Hadley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Tue, 27 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Branding and Automating with R Markdown</title>
+      <link>/branding-rmarkdown/</link>
+      <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/branding-rmarkdown/</guid>
+      <description>At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,</description>
+    </item>
+    
+    <item>
+      <title>From Jupyter Notebooks to R Markdown</title>
+      <link>/jupyter-to-rmarkdown/</link>
+      <pubDate>Thu, 08 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/jupyter-to-rmarkdown/</guid>
+      <description>Edit, 3/28/18: RStudio just announced Python interoperability through the reticulate package. Rmd Notebooks are unbeatable, in my opinion.
+Original Post: I started using Jupyter Notebooks back when they were called IPython. I even remember having to set up a virtual Linux environment because they were not available on Windows. As much as I have enjoyed their functionality, I recently switched entirely to R Markdown in an RStudio environment. Here’s why.</description>
+    </item>
+    
+    <item>
+      <title>How to Build a Data Dashboard using R (knitr), HTML, and Javascript (e.g.,Highcharts)</title>
+      <link>/how-to-dashboard-r/</link>
+      <pubDate>Fri, 05 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/how-to-dashboard-r/</guid>
+      <description>R has been the perfect language for the back end of this government data dashboard I am developing.
+ It has excellent packages to pipe in data from every significant source Tools like dplyr and tidyr make cleaning and munging data trivial It is ideal for automating analysis  In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days.</description>
+    </item>
+    
+  </channel>
+</rss>

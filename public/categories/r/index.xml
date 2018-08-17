@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Daniel Hadley</title>
+    <link>/categories/r/</link>
+    <description>Recent content in R on Daniel Hadley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Tue, 27 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Branding and Automating with R Markdown</title>
+      <link>/branding-rmarkdown/</link>
+      <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/branding-rmarkdown/</guid>
+      <description>At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,</description>
+    </item>
+    
+    <item>
+      <title>Bayes&#39; Puzzle Powers</title>
+      <link>/bayes-538/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/bayes-538/</guid>
+      <description>A while ago, the popular data journalism site 538 posted a challenging probability puzzle:
+ On the table in front of you are two coins. They look and feel identical, but you know one of them has been doctored. The fair coin comes up heads half the time while the doctored coin comes up heads 60 percent of the time. How many flips — you must flip both coins at once, one with each hand — would you need to give yourself a 95 percent chance of correctly identifying the doctored coin?</description>
+    </item>
+    
+    <item>
+      <title>Empirical Bayes to Estimate NBA Treys</title>
+      <link>/empirical_bayes_nba_treys/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/empirical_bayes_nba_treys/</guid>
+      <description>In this post, I describe how I used Emprirical Bayesian methods to estimate the accuracy of NBA three-point shooters. This analysis closely follows the process outlined by David Robinson in his excellent book Introduction to Empirical Bayes: Examples from Baseball Statistics, and is performed using his ebbr package in R.^ The goal is to make a reasoned ranking of the top sharp shooters, despite insonsistent and imperfect records of how often players make the shots they attempt.</description>
+    </item>
+    
+    <item>
+      <title>Deranged X-Mas - a Gift Exchange Puzzle</title>
+      <link>/deranged-x-mas/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/deranged-x-mas/</guid>
+      <description>While planning a holiday gift exchange this week, my wife casually challenged me with a sort of tricky probability puzzle:
+ Sara and I were talking today and realized that we were off by one on the rotation because last year we went sledding instead of buying gifts.
+  It should actually be: * Sara gives to Jonny * Jimmy gives to Thurop * Amy gives to Lisa * Jonny gives to Sara * Thurop gives to Jimmy * Lisa gives to Amy</description>
+    </item>
+    
+    <item>
+      <title>How to Add a Logo to ggplot by Magick</title>
+      <link>/ggplot-logo/</link>
+      <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/ggplot-logo/</guid>
+      <description>We recently wanted to brand several of our plots for publication in the local press. I looked around and found a couple suggestions on how to add images to plots, but nothing that seemed modular or customizable. My colleague reccomended the relatively new Magick package, which provided all of the functionality I needed (plus a lot more). Here is a simple example along with the code to replicate it:
+ library(ggplot2) library(magick) library(here) # For making the script run without a wd library(magrittr) # For piping the logo # Make a simple plot and save it ggplot(mpg, aes(displ, hwy, colour = class)) + geom_point() + ggtitle(&amp;quot;Cars&amp;quot;) + ggsave(filename = paste0(here(&amp;quot;/&amp;quot;), last_plot()$labels$title, &amp;quot;.</description>
+    </item>
+    
+    <item>
+      <title>The Prison Analyst&#39;s Dilemma - Using R to Model Recidivism</title>
+      <link>/recidiviz/</link>
+      <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/recidiviz/</guid>
+      <description>Recidivism, the rate at which those released from incarceration return or commit new crimes, is one of society’s most difficult social problems. The official estimate is that 55% of former prisoners will return within 60 months.
+ Recidivism is also, I discovered, one of the most challenging things to model and understand statistically. In this blog post, I describe our efforts to build this simulation, including how we settled on some fairly basic control structures (for loops) without giving up too much in terms of efficiency and readability.</description>
+    </item>
+    
+    <item>
+      <title>From Jupyter Notebooks to R Markdown</title>
+      <link>/jupyter-to-rmarkdown/</link>
+      <pubDate>Thu, 08 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/jupyter-to-rmarkdown/</guid>
+      <description>Edit, 3/28/18: RStudio just announced Python interoperability through the reticulate package. Rmd Notebooks are unbeatable, in my opinion.
+Original Post: I started using Jupyter Notebooks back when they were called IPython. I even remember having to set up a virtual Linux environment because they were not available on Windows. As much as I have enjoyed their functionality, I recently switched entirely to R Markdown in an RStudio environment. Here’s why.</description>
+    </item>
+    
+    <item>
+      <title>Lessons From My First Kaggle Contest</title>
+      <link>/kaggle-thoughts/</link>
+      <pubDate>Thu, 09 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/kaggle-thoughts/</guid>
+      <description>Kaggle is a forum for interacting with other data scientists and competing to see who can write code that will best predict features of data. It’s a way to test your skills at statistics and machine learning, and to do a lot of human learning in the process (sorry, bad pun).
+When I entered the contest to categorize crimes that occurred in San Francisco, my initial goal was to do better than random chance.</description>
+    </item>
+    
+    <item>
+      <title>How to Build a Data Dashboard using R (knitr), HTML, and Javascript (e.g.,Highcharts)</title>
+      <link>/how-to-dashboard-r/</link>
+      <pubDate>Fri, 05 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/how-to-dashboard-r/</guid>
+      <description>R has been the perfect language for the back end of this government data dashboard I am developing.
+ It has excellent packages to pipe in data from every significant source Tools like dplyr and tidyr make cleaning and munging data trivial It is ideal for automating analysis  In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days.</description>
+    </item>
+    
+    <item>
+      <title>The Top Urban Planning Articles of 2014</title>
+      <link>/top-planning/</link>
+      <pubDate>Fri, 02 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/top-planning/</guid>
+      <description>For my job, I read a lot of articles on urban policy and planning. I believe that the best policies are usually borrowed from other cities rather than fabricated from nothing. In that spirit, I even borrowed from other top ten lists to create this post. I like to think that my list is more comprehensive than some of the others since I have no incentive to link to my own content.</description>
+    </item>
+    
+    <item>
+      <title>The Most Magazine Covers of All Time</title>
+      <link>/time-covers/</link>
+      <pubDate>Mon, 22 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/time-covers/</guid>
+      <description>Time is a weekly news magazine that was first published in New York City in 1923. After my last post, a generous redditor offered to share with me a dataset of every person who has appeared on the cover since its first issue. It turns out he had painstakingly collected this data for a very cool website he created called hugequiz.com, where there are multiple quizzes on this subject. Fortunately, I don’t think it will spoil any of the quizzes to see this chart of the most frequently featured people:</description>
+    </item>
+    
+    <item>
+      <title>Grammy Counts Favor Musicians From the Aughts</title>
+      <link>/grammys/</link>
+      <pubDate>Wed, 10 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/grammys/</guid>
+      <description>The 57th annual Grammy nominations were recently announced, cementing Beyonce as the most nominated female artist in history. She is now tied with Kanye for a career total of 53 nominations. This news made me curious enough to plot the top award winners of all time.
+ I did not recognize the knight at the top of the list (turns out he is an amazing conductor with a storied history as director of the CSO); but I sort of expected that.</description>
+    </item>
+    
+    <item>
+      <title>The most-viewed non-music YouTube videos</title>
+      <link>/youtube/</link>
+      <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/youtube/</guid>
+      <description>Randal Olson just posted a terrific explanation of the storage significance of Psy’s massive view count along with a chart of the top YouTube videos, which prompted a popular comment from u/promyy: “I’d love to see a chart of most viewed, non-music videos on YouTube.”
+
+ .adslot_1 { max-width: 720px;}     (adsbygoogle = window.adsbygoogle || []).push({});   
+I didn’t have a special coding solution for this; Instead, I just went through a list linked from the Wikipedia article and copy-pasted videos that I felt qualified.</description>
+    </item>
+    
+    <item>
+      <title>Data Analysis of the 2014 Mass. Gubernatorial Election</title>
+      <link>/mass-election-analysis/</link>
+      <pubDate>Sat, 15 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/mass-election-analysis/</guid>
+      <description>Coakley received a lot of votes from residents of Massachusetts’s major cities. This is evident in the maps I posted last week, and in the charts below. What may be surprising is how many votes Baker received in cities, including Boston:
+  Baker received nearly 10,000 more votes in Boston than he did in 2010. If those had gone to Coakley instead, the spread between them would have been cut roughly in half.</description>
+    </item>
+    
+    <item>
+      <title>How To Automate Map Making in R</title>
+      <link>/automate-map-making/</link>
+      <pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/automate-map-making/</guid>
+      <description>In my last post, I displayed a series of maps from the 2014 Massachusetts midterm election. In all, I created 17 maps, all with fewer than 20 lines of code. Here’s how…
+The basic idea is to use a For Loop with ggmap to iterate through columns of a data frame. In my example, the code for which can be found here, I first read shapefiles from MassGIS into R, and then combine them with election data.</description>
+    </item>
+    
+    <item>
+      <title>Maps of the 2014 Massachusetts Elections</title>
+      <link>/mass-election-maps/</link>
+      <pubDate>Thu, 06 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/mass-election-maps/</guid>
+      <description>Most of the maps I have seen so far color each city or town either red or blue based on the majority outcome. That works fine, for the most part, but I prefer to see the range of voting patterns. These heat maps go from light yellow to dark blue. The scale changes on each one in order to show the full spectrum. I managed to automate their creation in R.</description>
+    </item>
+    
+    <item>
+      <title>The Political and Public Opinion of Same-Sex Marriage, by State</title>
+      <link>/15-same-sex-marriage/</link>
+      <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/15-same-sex-marriage/</guid>
+      <description>According to polling data, this is a current map of popular support for same-sex marriage:
+ It is important to note that this map shows where people say they support same-sex marriage, but each state also contains a significant proportion of voters who are either indifferent or unsure.
+Compare that map to this one of political support in congress and the governor’s office:
+ As you would expect, political support is correlated to public opinion, but not perfectly.</description>
+    </item>
+    
+    <item>
+      <title>Using Machine Learning to Detect Stylometric Differences Between Nick and Amy in Gone Girl</title>
+      <link>/gone-girl-prediction/</link>
+      <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/gone-girl-prediction/</guid>
+      <description>I wanted to see if it was possible to train a model to detect the difference between two fictional authors created by the same novelist based only on the frequency of common stop words, e.g., “the.” It worked: The randomForest model correctly selected Nick 93% of the time and Amy 91%.
+Background When I first started using R for data analysis, I was mesmerized by all of the packages and what they made possible.</description>
+    </item>
+    
+  </channel>
+</rss>

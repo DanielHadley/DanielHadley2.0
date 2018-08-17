@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Optimization on Daniel Hadley</title>
+    <link>/tags/optimization/</link>
+    <description>Recent content in Optimization on Daniel Hadley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Thu, 05 Mar 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to Optimize Street Repair Spending</title>
+      <link>/optimize-street-repairs/</link>
+      <pubDate>Thu, 05 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/optimize-street-repairs/</guid>
+      <description>Here’s a problem governments are faced with every day: you have a limited amount of resources to maintain aging infrastructure, in this case streets. Do you spend more on crack sealing and preventive maintenance, or full depth reclamation? Which streets should you fix first?
+I am not an engineer (in fact, part of the reason I am writing this post is to get feedback from engineers); but I have thought a lot about this, and I think I have a decent method for prioritizing roadway repairs that anyone could implement using the open-source program R.</description>
+    </item>
+    
+  </channel>
+</rss>

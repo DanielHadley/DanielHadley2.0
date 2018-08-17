@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Science on Daniel Hadley</title>
+    <link>/categories/data-science/</link>
+    <description>Recent content in Data Science on Daniel Hadley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Fri, 25 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/data-science/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rayid Ghani on Data Science for Social Good</title>
+      <link>/interview-rayid-ghani/</link>
+      <pubDate>Fri, 25 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/interview-rayid-ghani/</guid>
+      <description>I had a chance to sit down with Rayid Ghani, the Director of the Center for Data Science and Public Policy at the University of Chicago. I have admired Rayid’s work ever since he became the Chief Scientist for the 2012 Barack Obama campaign. His strategic use of analytics set the precedent for a new era of data science in political campaigns. At the time, others were trying to reverse engineer his tactics, which meant he was always one step ahead of the other campaigns.</description>
+    </item>
+    
+    <item>
+      <title>Big Data to Solve Big Problems</title>
+      <link>/big-data-big-problems/</link>
+      <pubDate>Mon, 17 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/big-data-big-problems/</guid>
+      <description>In the marketing world, big data is used to answer ostensibly minute questions every day: are computer mouse movements predictive of purchasing? Does an orange background increase user engagement? In every place with Silicon in its name, there are teams of data scientists asking these questions.
+In the social sector, by contrast, answering helpful questions is more difficult. For instance, is our program reducing homelessness? How is health spending distributed across the state?</description>
+    </item>
+    
+    <item>
+      <title>The Top Urban Planning Articles of 2015</title>
+      <link>/top-planning-2016/</link>
+      <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/top-planning-2016/</guid>
+      <description>As I did last year, I went through several of my favorite sites and curated what I consider to be the best writing on urban issues from 2015. One thing I love about planning, and that drew me to the profession in the first place, is that it encompasses many skills and areas of interest. I think that diversity is reflected in this year’s list. Caveat emptor: I use the term planning loosely.</description>
+    </item>
+    
+    <item>
+      <title>Urban Planning in the Dawn of the Driverless Car</title>
+      <link>/planning-for-driverless/</link>
+      <pubDate>Wed, 25 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/planning-for-driverless/</guid>
+      <description>Mayor Curtatone and I recently returned from the Smart Cities Expo in Barcelona Spain, where we unveiled a new partnership between the City of Somerville and the car manufacturer Audi. We will be testing how autonomous vehicles work in an actual urban environment.
+Driverless cars predominating city streets is in the realm of what Steven Johnson calls the “adjacent possible.” Uber just made headlines by purchasing a large chunk of Carnegie Melon’s robotics department.</description>
+    </item>
+    
+    <item>
+      <title>What the Critics Got Wrong About Star Wars</title>
+      <link>/statwars/</link>
+      <pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/statwars/</guid>
+      <description>A friend recently emailed a group of us to say that his opinion is indeed backed up by data: Star Wars Episode 3, “Revenge of the Sith”, is better than Episode 6, “Return of the Jedi.”
+ Like most right-headed people, I disagree. While I am cautiously optimistic about Episode 7, I have not truly loved a Star Wars movie since the originals. And as it turns out, many of the millions of people on Rotten Tomatoes agree:</description>
+    </item>
+    
+    <item>
+      <title>Data Science vs City Rats</title>
+      <link>/data-science-vs-city-rats/</link>
+      <pubDate>Fri, 05 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/data-science-vs-city-rats/</guid>
+      <description>Somerville, MA has been fighting a war against rats for months, and now we have the data to show that it’s working: reported sightings have dropped 66% year-to-date; some of that is due to weather patterns and random fluctuation, but a Bayesian model of the data estimates that the City’s policies have reduced calls by 40%.
+Three years ago, the city where I work was dealing with an onslaught of rats.</description>
+    </item>
+    
+    <item>
+      <title>How to Optimize Street Repair Spending</title>
+      <link>/optimize-street-repairs/</link>
+      <pubDate>Thu, 05 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/optimize-street-repairs/</guid>
+      <description>Here’s a problem governments are faced with every day: you have a limited amount of resources to maintain aging infrastructure, in this case streets. Do you spend more on crack sealing and preventive maintenance, or full depth reclamation? Which streets should you fix first?
+I am not an engineer (in fact, part of the reason I am writing this post is to get feedback from engineers); but I have thought a lot about this, and I think I have a decent method for prioritizing roadway repairs that anyone could implement using the open-source program R.</description>
+    </item>
+    
+    <item>
+      <title>Putting the R in Government</title>
+      <link>/r-in-govt/</link>
+      <pubDate>Thu, 12 Feb 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/r-in-govt/</guid>
+      <description>When I first started as an analyst in local government, I wasted a lot of time repeating tasks that had been done dozens of times before in Excel. SomerStat, the office where I worked and later became director, is one of the oldest local government divisions dedicated to crunching data. Inspired by the CitiStat model, which itself was inspired by CompStat, the idea was to use data to improve efficiency. And yet here I was, with fairly inefficient work routines that included pulling data into spreadsheets, munging one step at a time, and then repeating it all for the next ‘stat’ meeting.</description>
+    </item>
+    
+    <item>
+      <title>How a New MIT Professor Spent His Year</title>
+      <link>/new-mit-prof/</link>
+      <pubDate>Mon, 19 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/new-mit-prof/</guid>
+      <description>Last year, my friend pulled 34 all-nighters, surfed 37 days, swam 62, helped to raise two kids, did 12,920 push ups, worked a total of 3,008 hours as a new poli-sci professor, and tracked all of it in a spreadsheet. He averaged 8.2 hours of work per day, including weekends and holidays. As this heatmap shows, though, his hours varied a lot compared to us regular nine-to-fivers:
+ It’s interesting to read this chart both left to right, as an indicator of what weekdays he works hardest, and top to bottom, to see the days when he would push hard against a deadline and then give himself some time off to surf.</description>
+    </item>
+    
+    <item>
+      <title>Hello World</title>
+      <link>/hello-world/</link>
+      <pubDate>Tue, 28 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/hello-world/</guid>
+      <description>For my inaugural post I just want to share a photo from TRAX, the light-rail system in Salt Lake City, UT.
+ </description>
+    </item>
+    
+  </channel>
+</rss>

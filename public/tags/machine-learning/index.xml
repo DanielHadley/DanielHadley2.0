@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine-learning on Daniel Hadley</title>
+    <link>/tags/machine-learning/</link>
+    <description>Recent content in Machine-learning on Daniel Hadley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Sat, 15 Oct 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A Dashboard with Weak AI</title>
+      <link>/project/dashboards/</link>
+      <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/project/dashboards/</guid>
+      <description>R has been the perfect language for the back end of this government data dashboard I am developing.
+ It has excellent packages to pipe in data from every significant source Tools like dplyr and tidyr make cleaning and munging data trivial It is ideal for automating analysis  In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days.</description>
+    </item>
+    
+    <item>
+      <title>Lessons From My First Kaggle Contest</title>
+      <link>/kaggle-thoughts/</link>
+      <pubDate>Thu, 09 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/kaggle-thoughts/</guid>
+      <description>Kaggle is a forum for interacting with other data scientists and competing to see who can write code that will best predict features of data. It’s a way to test your skills at statistics and machine learning, and to do a lot of human learning in the process (sorry, bad pun).
+When I entered the contest to categorize crimes that occurred in San Francisco, my initial goal was to do better than random chance.</description>
+    </item>
+    
+    <item>
+      <title>Can Machine Learning Tell Two Fictional Characters Apart?</title>
+      <link>/project/gone-model/</link>
+      <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/project/gone-model/</guid>
+      <description>I wanted to see if it was possible to train a model to detect the difference between two fictional authors created by the same novelist based only on the frequency of common stop words, e.g., &amp;ldquo;the.&amp;rdquo; It worked: The randomForest model correctly selected Nick 93% of the time and Amy 91%.
+Background When I first started using R for data analysis, I was mesmerized by all of the packages and what they made possible.</description>
+    </item>
+    
+    <item>
+      <title>Using Machine Learning to Detect Stylometric Differences Between Nick and Amy in Gone Girl</title>
+      <link>/gone-girl-prediction/</link>
+      <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/gone-girl-prediction/</guid>
+      <description>I wanted to see if it was possible to train a model to detect the difference between two fictional authors created by the same novelist based only on the frequency of common stop words, e.g., “the.” It worked: The randomForest model correctly selected Nick 93% of the time and Amy 91%.
+Background When I first started using R for data analysis, I was mesmerized by all of the packages and what they made possible.</description>
+    </item>
+    
+  </channel>
+</rss>

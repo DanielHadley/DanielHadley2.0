@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Work on Daniel Hadley</title>
+    <link>/tags/work/</link>
+    <description>Recent content in Work on Daniel Hadley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Tue, 27 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/work/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Branding and Automating with R Markdown</title>
+      <link>/branding-rmarkdown/</link>
+      <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/branding-rmarkdown/</guid>
+      <description>At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,</description>
+    </item>
+    
+    <item>
+      <title>Data Analysis of the 2014 Mass. Gubernatorial Election</title>
+      <link>/mass-election-analysis/</link>
+      <pubDate>Sat, 15 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/mass-election-analysis/</guid>
+      <description>Coakley received a lot of votes from residents of Massachusetts’s major cities. This is evident in the maps I posted last week, and in the charts below. What may be surprising is how many votes Baker received in cities, including Boston:
+  Baker received nearly 10,000 more votes in Boston than he did in 2010. If those had gone to Coakley instead, the spread between them would have been cut roughly in half.</description>
+    </item>
+    
+    <item>
+      <title>How To Automate Map Making in R</title>
+      <link>/automate-map-making/</link>
+      <pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/automate-map-making/</guid>
+      <description>In my last post, I displayed a series of maps from the 2014 Massachusetts midterm election. In all, I created 17 maps, all with fewer than 20 lines of code. Here’s how…
+The basic idea is to use a For Loop with ggmap to iterate through columns of a data frame. In my example, the code for which can be found here, I first read shapefiles from MassGIS into R, and then combine them with election data.</description>
+    </item>
+    
+    <item>
+      <title>Maps of the 2014 Massachusetts Elections</title>
+      <link>/mass-election-maps/</link>
+      <pubDate>Thu, 06 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/mass-election-maps/</guid>
+      <description>Most of the maps I have seen so far color each city or town either red or blue based on the majority outcome. That works fine, for the most part, but I prefer to see the range of voting patterns. These heat maps go from light yellow to dark blue. The scale changes on each one in order to show the full spectrum. I managed to automate their creation in R.</description>
+    </item>
+    
+    <item>
+      <title>Using Machine Learning to Detect Stylometric Differences Between Nick and Amy in Gone Girl</title>
+      <link>/gone-girl-prediction/</link>
+      <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/gone-girl-prediction/</guid>
+      <description>I wanted to see if it was possible to train a model to detect the difference between two fictional authors created by the same novelist based only on the frequency of common stop words, e.g., “the.” It worked: The randomForest model correctly selected Nick 93% of the time and Amy 91%.
+Background When I first started using R for data analysis, I was mesmerized by all of the packages and what they made possible.</description>
+    </item>
+    
+  </channel>
+</rss>

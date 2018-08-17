@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Simulation on Daniel Hadley</title>
+    <link>/tags/simulation/</link>
+    <description>Recent content in Simulation on Daniel Hadley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 31 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/simulation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>RecidiViz: Analyzing Reincarceration</title>
+      <link>/project/recidiviz/</link>
+      <pubDate>Wed, 31 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/project/recidiviz/</guid>
+      <description>Recidivism is one of society&amp;rsquo;s most persistent yet misunderstood problems. Everyone from politicians to Supreme Court Justices seem to get it wrong. This model uses data from the Bureau of Justice Statistics to simulate 1,000 parolees released on the same day.</description>
+    </item>
+    
+  </channel>
+</rss>

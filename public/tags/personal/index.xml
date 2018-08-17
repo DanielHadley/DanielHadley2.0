@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Personal on Daniel Hadley</title>
+    <link>/tags/personal/</link>
+    <description>Recent content in Personal on Daniel Hadley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Thu, 28 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/personal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Empirical Bayes to Estimate NBA Treys</title>
+      <link>/empirical_bayes_nba_treys/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/empirical_bayes_nba_treys/</guid>
+      <description>In this post, I describe how I used Emprirical Bayesian methods to estimate the accuracy of NBA three-point shooters. This analysis closely follows the process outlined by David Robinson in his excellent book Introduction to Empirical Bayes: Examples from Baseball Statistics, and is performed using his ebbr package in R.^ The goal is to make a reasoned ranking of the top sharp shooters, despite insonsistent and imperfect records of how often players make the shots they attempt.</description>
+    </item>
+    
+    <item>
+      <title>What the Critics Got Wrong About Star Wars</title>
+      <link>/statwars/</link>
+      <pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/statwars/</guid>
+      <description>A friend recently emailed a group of us to say that his opinion is indeed backed up by data: Star Wars Episode 3, “Revenge of the Sith”, is better than Episode 6, “Return of the Jedi.”
+ Like most right-headed people, I disagree. While I am cautiously optimistic about Episode 7, I have not truly loved a Star Wars movie since the originals. And as it turns out, many of the millions of people on Rotten Tomatoes agree:</description>
+    </item>
+    
+    <item>
+      <title>The most-viewed non-music YouTube videos</title>
+      <link>/youtube/</link>
+      <pubDate>Sat, 06 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/youtube/</guid>
+      <description>Randal Olson just posted a terrific explanation of the storage significance of Psy’s massive view count along with a chart of the top YouTube videos, which prompted a popular comment from u/promyy: “I’d love to see a chart of most viewed, non-music videos on YouTube.”
+
+ .adslot_1 { max-width: 720px;}     (adsbygoogle = window.adsbygoogle || []).push({});   
+I didn’t have a special coding solution for this; Instead, I just went through a list linked from the Wikipedia article and copy-pasted videos that I felt qualified.</description>
+    </item>
+    
+    <item>
+      <title>The Political and Public Opinion of Same-Sex Marriage, by State</title>
+      <link>/15-same-sex-marriage/</link>
+      <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/15-same-sex-marriage/</guid>
+      <description>According to polling data, this is a current map of popular support for same-sex marriage:
+ It is important to note that this map shows where people say they support same-sex marriage, but each state also contains a significant proportion of voters who are either indifferent or unsure.
+Compare that map to this one of political support in congress and the governor’s office:
+ As you would expect, political support is correlated to public opinion, but not perfectly.</description>
+    </item>
+    
+  </channel>
+</rss>

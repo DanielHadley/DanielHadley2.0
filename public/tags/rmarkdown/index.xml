@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rmarkdown on Daniel Hadley</title>
+    <link>/tags/rmarkdown/</link>
+    <description>Recent content in Rmarkdown on Daniel Hadley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Tue, 27 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/rmarkdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Branding and Automating with R Markdown</title>
+      <link>/branding-rmarkdown/</link>
+      <pubDate>Tue, 27 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/branding-rmarkdown/</guid>
+      <description>At the 2018 RStudio conference in San Diego, my colleague Jon and I gave a talk about how we use R Markdown to quickly go from nothing, to analysis, to a branded report that we can pass off to clients. This workflow took some time to set up, but like most automation tasks, has ultimately saved us more time and headache than it cost. If you want to skip to the talk,</description>
+    </item>
+    
+    <item>
+      <title>How to Add a Logo to ggplot by Magick</title>
+      <link>/ggplot-logo/</link>
+      <pubDate>Tue, 11 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/ggplot-logo/</guid>
+      <description>We recently wanted to brand several of our plots for publication in the local press. I looked around and found a couple suggestions on how to add images to plots, but nothing that seemed modular or customizable. My colleague reccomended the relatively new Magick package, which provided all of the functionality I needed (plus a lot more). Here is a simple example along with the code to replicate it:
+ library(ggplot2) library(magick) library(here) # For making the script run without a wd library(magrittr) # For piping the logo # Make a simple plot and save it ggplot(mpg, aes(displ, hwy, colour = class)) + geom_point() + ggtitle(&amp;quot;Cars&amp;quot;) + ggsave(filename = paste0(here(&amp;quot;/&amp;quot;), last_plot()$labels$title, &amp;quot;.</description>
+    </item>
+    
+    <item>
+      <title>From Jupyter Notebooks to R Markdown</title>
+      <link>/jupyter-to-rmarkdown/</link>
+      <pubDate>Thu, 08 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/jupyter-to-rmarkdown/</guid>
+      <description>Edit, 3/28/18: RStudio just announced Python interoperability through the reticulate package. Rmd Notebooks are unbeatable, in my opinion.
+Original Post: I started using Jupyter Notebooks back when they were called IPython. I even remember having to set up a virtual Linux environment because they were not available on Windows. As much as I have enjoyed their functionality, I recently switched entirely to R Markdown in an RStudio environment. Here’s why.</description>
+    </item>
+    
+  </channel>
+</rss>
