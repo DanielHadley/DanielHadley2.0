@@ -8,6 +8,7 @@ tags: ["probability", "puzzle", "bayesian", "personal"]
 ```{r load_data, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(ebbr)
+library(knitr)
 # library(splines)
 
 seasons <- read_csv("../../data/nba_seasons.csv") %>% 
@@ -33,7 +34,8 @@ player_ids <- nba_data %>%
   mutate(player_id = row_number())
 
 nba_data <- nba_data %>% 
-  left_join(player_ids)
+  left_join(player_ids) %>% 
+  mutate(Player = stringr::str_replace(Player, '\\*', ''))
 
 
 # Make new threes data
@@ -43,12 +45,9 @@ threes <- nba_data %>%
   mutate(three_pct = threes_made / threes_attempted)
 ```
 
+In this post, I describe how I used Emprirical Bayesian methods to estimate the accuracy of NBA three-point shooters. This analysis closely follows the process outlined by David Robinson in his excellent book [Introduction to Empirical Bayes: Examples from Baseball Statistics](http://varianceexplained.org/r/empirical-bayes-book/), and is performed using his [ebbr](https://github.com/dgrtwo/ebbr) package in R.^ The goal is to make a reasoned ranking of the top sharp shooters, despite insonsistent and imperfect records of how often players make the shots they attempt.  
 
-All sports statistics are imperfect measures of a player's performance. At best, they show relative differences in how well athletes shoot, steal, and rebound. At worst, they are marred by rule changes and outside factors that either exaggerate or handicap certain subgroups of players. 
-
-The NBA's measure for three-point accuracy is one of worst kinds of the latter. Between 1995 and 1997, the NBA changed the distance of the three-point line, biasing all future comparisons between generations of players. During those years, it was as though we changed the distance of marathons to 21 miles *and kept all of the fastest records*.
-
-What follows is an attemt to overcome this problem using a method called empirical Bayes estimation . Is Steph Curry really the most accurate three-point shooter of all time? This analysis suggests so. But I encourage you to read on to see if you trust the method enough to agree. 
+To create the following chart, I utilize data from both regular season and playoff records going back to 1980. As I describe below, however, I systematically drop three seasons of records in order to correct for a time when the three-point line was moved closer to the basket. Empirical Bayes is relatively robust to issues like these because estimates are created using data from the larger group: in this case, the entire history of NBA three-point shooters. 
 
 ```{r first_graph, echo=FALSE, message=FALSE, warning=FALSE}
 no_line <- threes %>% 
@@ -76,12 +75,55 @@ no_line %>%
   geom_point(size = 3) +
   labs(x = "Three Point %",
        y = NULL, title = "Bayesian Estimate of the NBA's Most Accurate 3-point Shooters",
-        subtitle = "dots = estimates, lines = 95% credible intervals") +
+        subtitle = "excluding 1995 - 1997 seasons") +
   scale_x_continuous(labels = scales::percent) +
   theme_minimal() +
   theme(legend.title=element_blank())
 ```
 
+
+NBA fans will quickly recognize Steph Curry at the top of this chart. He is the undisputed king of threes, but not neccesarily because of his accuracy so much as his quantity. Steph's placement makes more sense in that context. Empirical Bayes effectively shrinks outliers towards a mean or trend; but the shrinking is less significant in cases where there are more observarions. In this case, Steph's copious threes make us confident in his accuracy, which can be observed in the small error bar. 
+
+On the other hand, NBA fans with a little more historical knowledge will wonder why the erstwhile player Steve Kerr is not up there with the three-point prodigy he currently coaches. Is Steph Curry really the most accurate three-point shooter of all time? This analysis suggests so. But I encourage you to read on to see if you agree.
+
+
+## More than three ways
+There are many ways to measure three-point accuracy. We could do the most straight forward: divide the number of makes by the number of attempts: 
+
+```{r}
+threes %>% 
+  group_by(player_id) %>% 
+  summarise(threes_attempted = sum(threes_attempted), threes_made = sum(threes_made),
+            Player = Player[1]) %>%
+  mutate(three_pct = threes_made / threes_attempted) %>% 
+  top_n(5, wt = three_pct) %>%
+  select(Player, threes_made, threes_attempted, three_pct) %>% 
+  head() %>% 
+  kable()
+```
+
+This has an obvious problem. Most record books overcome it by coming up with a seemingly arbitrary filter and then redoing the calculation. 
+
+```{r}
+threes %>% 
+  group_by(player_id) %>% 
+  summarise(threes_attempted = sum(threes_attempted), threes_made = sum(threes_made),
+            Player = Player[1]) %>%
+  # Only players with more than 200 threes made in their careers
+  filter(threes_made > 200) %>% 
+  mutate(three_pct = threes_made / threes_attempted) %>% 
+  top_n(10, wt = three_pct) %>%
+  select(Player, threes_made, threes_attempted, three_pct) %>%
+  arrange(-three_pct) %>%
+  mutate(three_pct = paste0((round(three_pct * 100, 2)),"%")) %>% 
+  kable()
+```
+
+This method has its own problems. For one, there will always be decent players on the other side of the artbitrary line. Less obviously, there are players with relatively short careers who made a high number of threes, but not enough to inspire confidence that their record would continue through a longer career. 
+
+Emprical Bayes can overcome these problems by generating a "prior" that is informed by all of the players, and then updating with each player's actual data. A prior is a defensible estimate we would make before seeing an individual's three-point data. Updating is a simple yet robust way of combining our first empirical guess with the data. 
+
+In Dr. Robinson's *ebbr* package, this can be done with one function: `add_ebb_estimate()` 
 
 ```{r}
 basic <- threes %>% 
@@ -90,11 +132,11 @@ basic <- threes %>%
             Player = Player[1]) %>% 
   mutate(three_pct = threes_made / threes_attempted) %>% 
   add_ebb_estimate(threes_made, threes_attempted, prior_subset = threes_made > 50)
+```
 
-basic %>% 
-  ggplot(aes(.raw, .fitted, color = threes_attempted)) +
-  geom_point()
+Plotting both the measured rate and the EB estimate shows that some players are shrunken more towards the mean than others. (Hat tip to Julia Silge, from whom I cribbed the clean looking ggplot code). 
 
+```{r}
 basic %>%
   arrange(-.fitted) %>% 
   top_n(20, wt = .fitted) %>% 
@@ -105,9 +147,55 @@ basic %>%
   geom_errorbarh(aes(xmin = .low, xmax = .high), color = "gray50") +
   geom_point(size = 3) +
   labs(x = "Three Point %",
-       y = NULL, title = "Measured Rates, Empirical Bayesian Estimates, and Credible Intervals") +  theme_minimal() +
+       y = NULL, title = "Bayesian Estimate of the NBA's Most Accurate 3-point Shooters") +
+  scale_x_continuous(labels = scales::percent) +
+  theme_minimal() +
   theme(legend.title=element_blank())
 ```
+
+Steph's brother Seth, for instance, has a record of hitting almost 44% of his threes, yet we estimate his rate at closer to 41%. This is fundamental to Bayesian anaysis: extreme results require more data before we bet on them at Vegas. In the meantime, we lean more on the prior and draw a larger "credible interval," which is the region where we very confident that the true value lies.
+
+At this point, one might wonder why shrink at all? Why not just trust that Seth, Drazen, and others are as accurate as their records suggest they are? The answer is that they are on the far right tail of a fairly consistent density curve. If they got there on the basis of sparse data, it's only logical to question whether we are seeing a consistent trend or statistical noise.    
+
+```{r, message=FALSE, warning=FALSE}
+threes %>% 
+  group_by(player_id) %>% 
+  summarise(threes_attempted = sum(threes_attempted), threes_made = sum(threes_made),
+            Player = Player[1]) %>%
+  # Put filter on it to avoid crazy outliers
+  filter(threes_made > 100) %>% 
+  mutate(three_pct = threes_made / threes_attempted) %>%
+  ggplot(aes(x = three_pct)) +
+  geom_histogram() +
+  labs(x = "Three Point %",
+       y = NULL, title = "Histogram of all Career 3-point Averages",
+       subtitle = "for players with more than 100 3s made") +
+  scale_x_continuous(labels = scales::percent) +
+  theme_minimal() +
+  theme(legend.title=element_blank())
+```
+
+
+
+## The Trouble with Threes
+All sports statistics are imperfect measures of a player's performance. At best, they show relative differences in how well athletes shoot, steal, and rebound. At worst, they are marred by rule changes and outside factors that either exaggerate or handicap certain subgroups of players. 
+
+The NBA's measure for three-point accuracy is one of worst kinds of the latter. Between 1995 and 1997, the NBA changed the distance of the three-point line, biasing all future comparisons between generations of players. During those years, it was as though we changed the distance of marathons to 21 miles *and kept all of the fastest records*. You can see the record jump significantly in 1995. 
+
+```{r}
+threes %>% 
+  group_by(season) %>% 
+  ggplot(aes(x = season, y = three_pct, group = season)) +
+  geom_boxplot() +
+  labs(x = "Season",
+       y = NULL, title = "Box Plot of 3% by Season") +
+  scale_y_continuous(labels = scales::percent) +
+  theme_minimal()
+```
+
+
+To correct for this, I repeated the steps above, but this time I filtered out the years when the line was changed. I also made some important corrections to the prior probabilities similar to ones that Dr. Robinson describes in [this post](http://varianceexplained.org/r/hierarchical_bayes_baseball/). Specifically, I made each player's prior dependent on the log number of his attempts and the average year he played.
+
 
 ```{r}
 no_line <- threes %>% 
@@ -122,11 +210,11 @@ no_line <- threes %>%
   filter(threes_made >= 7) %>% 
   add_ebb_estimate(threes_made, threes_attempted, method = "gamlss", 
                    mu_predictors = ~ season + log10(threes_attempted)) 
+```
 
-no_line %>% 
-  ggplot(aes(.raw, .fitted, color = threes_attempted)) +
-  geom_point()
+The result is the ranking that I started this post with.  
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 no_line %>%
   arrange(-.fitted) %>% 
   top_n(20, wt = .fitted) %>% 
@@ -137,8 +225,17 @@ no_line %>%
   geom_errorbarh(aes(xmin = .low, xmax = .high), color = "gray50") +
   geom_point(size = 3) +
   labs(x = "Three Point %",
-       y = NULL, title = "Measured Rates, Empirical Bayesian Estimates, and Credible Intervals") +  theme_minimal() +
+       y = NULL, title = "Bayesian Estimate of the NBA's Most Accurate 3-point Shooters",
+       subtitle = "excluding 1995 - 1997 seasons") +
+  scale_x_continuous(labels = scales::percent) +
+  theme_minimal() +
   theme(legend.title=element_blank())
 ```
 
 
+## The Kerr Conundrum 
+Overall, I am fairly satisfied with the way this ranking turned out. Steph gets the benefit of the doubt, while Jason Kapono's record gets treated with a little more skepticism. There are a few quibbles I have - most notably, Steve Kerr.
+
+Kerr had some of his best years during the line change. It's difficult to reconcile that with the need to compare fairly across generations. The good thing about this method is that it takes all of the available data, including from Kerr's cohorts. The challenge is that including data from 1995-1997 would bias both the prior and posterior estimates. Moreover, Kerr was an anomaly, even compared to other players from his generation. Therefore, his estimate was shrunken a little more than I am comfortable with. I think he belongs somewhere above the bayesian estimate, but below the top five. 
+
+^ I am indebted to Dr. Robinson both for his lucid explanations of Bayesian statistics and his *ebbr* package in R. This post describes a toy example of using Bayesian methods to estimate proportions from hierarchical data, but I have used the same principles in real-world applications. I have worked through a few books on Bayesian data analysis, but none are as as engaging and clear. 
