@@ -5,13 +5,13 @@ categories: ["R"]
 tags: ["machine-learning", "language"]
 ---
 
-Last night as I was dozing off, a thought struck me: I could use machine learning and natural language processing to help identify the anonymous New York Times op-ed author. I've had some success in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years. 
+Last night as I was dozing off, I had a sudden inclination to try and add to the [attempts](http://varianceexplained.org/r/op-ed-text-analysis/) that have been made to identify the anonymous [New York Times op-ed](https://www.nytimes.com/2018/09/05/opinion/trump-white-house-anonymous-resistance.html) writer. I've had [some success](https://www.danielphadley.com/gone-girl-prediction/) in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years. 
 
 By 2:00 am I was convinced the data had singled out Mike Pence. I even started to wonder what the ethical thing to do is when one has hard evidence about the source of text whose author wished to remain anonymous. 
 
 By 3:00 I was starting to question whether Jon Huntsman was the author. And at 4:00 I finally went to bed, discouraged by the data. I now believe that the text of the op-ed is too short, and that the models are too sensitive to small differences in vocabulary and style to arrive at any solid conclusions. 
 
-I considered scrapping all of this, but there are enough data scientists who also had this thought (hopefully not at midnight), that my friend Jon convinced me to share my failures. So I will now open the file drawer.
+I considered scrapping all of this, but there are enough data scientists who also had this thought (hopefully not at midnight), that my friend Jon convinced me to share my failures. So I will now open [the file drawer](http://blogs.discovermagazine.com/neuroskeptic/2016/03/17/open-the-file-drawer/).
 
 
 ## Imposters and the Stylo Package
@@ -20,7 +20,7 @@ The most recent version of the "stylo" package [has a method](https://computatio
 
 The main difference in this case is that there is not much useful data to train on. We only have 957 words from the op-ed, and it's likely that even these have been edited. Moreover, we do not have many documents from the candidate group that we *know* were written by them. More searching may turn up better training material, but I was only able to find an op-ed and a few speeches from Huntsman, a press briefing from John Kelly, and several old blog articles from Mike Pence. 
 
-With that in mind, I compiled the material and ran it through the General Impostors method (GI). I kept the candidate list small, at first, to see if this was going to be worth losing another hour of sleep. I included Pence and Kelly because they are frequently mentioned, and Huntsman because Slate published a compelling article implicating him.   
+With that in mind, I compiled the material and ran it through the General Impostors method (GI). I kept the candidate list small, at first, to see if this was going to be worth losing another hour of sleep. I included Pence and Kelly because they are frequently mentioned, and Huntsman because Slate published a [compelling article](https://slate.com/news-and-politics/2018/09/new-york-times-op-ed-anonymous-writer-trump.html) implicating him.   
 
 
 ```{r analysis, message=FALSE, warning=FALSE}
@@ -57,7 +57,7 @@ data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
 imposters(reference.set = data[-c(1),], test = data[1,])
 ```
 
-The first analysis relied on a larger vocabulary, including several words that were not in the op-ed. Simply by limiting the data to stop-words and basic terms, I have identified Huntsman as the most likely author. The variance is disconcerting.
+The first analysis relied on a larger vocabulary, including several words that were not in the op-ed. Simply by limiting the data to stop-words and basic terms, I have identified Huntsman as the most likely author. The variance is disconcerting, to say the least.
 
 This is further evident when one uses n-grams instead of single words. 
 

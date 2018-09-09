@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 -0600</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
@@ -16,15 +16,15 @@
       <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
       
       <guid>/op-ed-author/</guid>
-      <description>&lt;p&gt;Last night as I was dozing off, a thought struck me: I could use machine learning and natural language processing to help identify the anonymous New York Times op-ed author. I’ve had some success in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years.&lt;/p&gt;
+      <description>&lt;p&gt;Last night as I was dozing off, I had a sudden inclination to try and add to the &lt;a href=&#34;http://varianceexplained.org/r/op-ed-text-analysis/&#34;&gt;attempts&lt;/a&gt; that have been made to identify the anonymous &lt;a href=&#34;https://www.nytimes.com/2018/09/05/opinion/trump-white-house-anonymous-resistance.html&#34;&gt;New York Times op-ed&lt;/a&gt; writer. I’ve had &lt;a href=&#34;https://www.danielphadley.com/gone-girl-prediction/&#34;&gt;some success&lt;/a&gt; in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years.&lt;/p&gt;
 &lt;p&gt;By 2:00 am I was convinced the data had singled out Mike Pence. I even started to wonder what the ethical thing to do is when one has hard evidence about the source of text whose author wished to remain anonymous.&lt;/p&gt;
 &lt;p&gt;By 3:00 I was starting to question whether Jon Huntsman was the author. And at 4:00 I finally went to bed, discouraged by the data. I now believe that the text of the op-ed is too short, and that the models are too sensitive to small differences in vocabulary and style to arrive at any solid conclusions.&lt;/p&gt;
-&lt;p&gt;I considered scrapping all of this, but there are enough data scientists who also had this thought (hopefully not at midnight), that my friend Jon convinced me to share my failures. So I will now open the file drawer.&lt;/p&gt;
+&lt;p&gt;I considered scrapping all of this, but there are enough data scientists who also had this thought (hopefully not at midnight), that my friend Jon convinced me to share my failures. So I will now open &lt;a href=&#34;http://blogs.discovermagazine.com/neuroskeptic/2016/03/17/open-the-file-drawer/&#34;&gt;the file drawer&lt;/a&gt;.&lt;/p&gt;
 &lt;div id=&#34;imposters-and-the-stylo-package&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Imposters and the Stylo Package&lt;/h2&gt;
 &lt;p&gt;The most recent version of the “stylo” package &lt;a href=&#34;https://computationalstylistics.github.io/blog/imposters/&#34;&gt;has a method&lt;/a&gt; for identifying a text’s likely author relative to a group of “impostors,” i.e., authors who were unlikely to have written it. By comparing the text in question against a candidate corpus, the algorithm seeks to find the most similar set of texts. This method was used, for example, to study Julius Caesar’s disputed writings, and to ascribe authorship of “The Cuckoo’s Calling” to JK Rowling.&lt;/p&gt;
 &lt;p&gt;The main difference in this case is that there is not much useful data to train on. We only have 957 words from the op-ed, and it’s likely that even these have been edited. Moreover, we do not have many documents from the candidate group that we &lt;em&gt;know&lt;/em&gt; were written by them. More searching may turn up better training material, but I was only able to find an op-ed and a few speeches from Huntsman, a press briefing from John Kelly, and several old blog articles from Mike Pence.&lt;/p&gt;
-&lt;p&gt;With that in mind, I compiled the material and ran it through the General Impostors method (GI). I kept the candidate list small, at first, to see if this was going to be worth losing another hour of sleep. I included Pence and Kelly because they are frequently mentioned, and Huntsman because Slate published a compelling article implicating him.&lt;/p&gt;
+&lt;p&gt;With that in mind, I compiled the material and ran it through the General Impostors method (GI). I kept the candidate list small, at first, to see if this was going to be worth losing another hour of sleep. I included Pence and Kelly because they are frequently mentioned, and Huntsman because Slate published a &lt;a href=&#34;https://slate.com/news-and-politics/2018/09/new-york-times-op-ed-anonymous-writer-trump.html&#34;&gt;compelling article&lt;/a&gt; implicating him.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stylo)
 
 # loading the files from a specified directory:
@@ -47,7 +47,7 @@ data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
 
 imposters(reference.set = data[-c(1),], test = data[1,])&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## huntsman    kelly    pence 
-##     0.19     0.00     1.00&lt;/code&gt;&lt;/pre&gt;
+##     0.07     0.00     0.97&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Holy moly!! The GI algorithm scores candidates on a 0-1 scale, and Pence has just received a perfect score. Do I call the media? Bury my laptop and take an oath of silence?! Not so fast, because next I started to subtract words from the test.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# loading the files from a specified directory:
 tokenized.texts = load.corpus.and.parse(files = &amp;quot;all&amp;quot;, corpus.dir = &amp;quot;../../data/2018 corpus/&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
@@ -70,8 +70,8 @@ data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
 
 imposters(reference.set = data[-c(1),], test = data[1,])&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## huntsman    kelly    pence 
-##     0.94     0.05     0.40&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The first analysis relied on a larger vocabulary, including several words that were not in the op-ed. Simply by limiting the data to stop-words and basic terms, I have identified Huntsman as the most likely author. The variance is disconcerting.&lt;/p&gt;
+##     0.95     0.03     0.39&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The first analysis relied on a larger vocabulary, including several words that were not in the op-ed. Simply by limiting the data to stop-words and basic terms, I have identified Huntsman as the most likely author. The variance is disconcerting, to say the least.&lt;/p&gt;
 &lt;p&gt;This is further evident when one uses n-grams instead of single words.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# loading the files from a specified directory:
 tokenized.texts = load.corpus.and.parse(files = &amp;quot;all&amp;quot;, corpus.dir = &amp;quot;../../data/2018 corpus/&amp;quot;, ngram.size = 2)&lt;/code&gt;&lt;/pre&gt;
@@ -94,7 +94,7 @@ data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
 
 imposters(reference.set = data[-c(1),], test = data[1,])&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## huntsman    kelly    pence 
-##     0.56     0.27     0.77&lt;/code&gt;&lt;/pre&gt;
+##     0.43     0.23     0.72&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
@@ -170,7 +170,7 @@ imposters(reference.set = data[-c(1),], test = data[1,])&lt;/code&gt;&lt;/pre&gt
     <item>
       <title>Branding and automating your work with R Markdown</title>
       <link>/talk/rstudio/</link>
-      <pubDate>Fri, 02 Feb 2018 00:00:00 -0500</pubDate>
+      <pubDate>Fri, 02 Feb 2018 00:00:00 -0700</pubDate>
       
       <guid>/talk/rstudio/</guid>
       <description>&lt;ul&gt;
@@ -185,7 +185,7 @@ imposters(reference.set = data[-c(1),], test = data[1,])&lt;/code&gt;&lt;/pre&gt
     <item>
       <title>Branding your work with R Markdown</title>
       <link>/talk/rug/</link>
-      <pubDate>Thu, 11 Jan 2018 00:00:00 -0500</pubDate>
+      <pubDate>Thu, 11 Jan 2018 00:00:00 -0700</pubDate>
       
       <guid>/talk/rug/</guid>
       <description>&lt;ul&gt;
@@ -652,7 +652,7 @@ sibling_mirror / nrow(ders)&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Analyzing Criminal Justice Reform: the Case of Utah</title>
       <link>/talk/dssg/</link>
-      <pubDate>Sun, 29 Oct 2017 00:00:00 -0400</pubDate>
+      <pubDate>Sun, 29 Oct 2017 00:00:00 -0600</pubDate>
       
       <guid>/talk/dssg/</guid>
       <description></description>

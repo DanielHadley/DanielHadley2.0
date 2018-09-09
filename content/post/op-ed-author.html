@@ -7,15 +7,15 @@ tags: ["machine-learning", "language"]
 
 
 
-<p>Last night as I was dozing off, a thought struck me: I could use machine learning and natural language processing to help identify the anonymous New York Times op-ed author. I’ve had some success in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years.</p>
+<p>Last night as I was dozing off, I had a sudden inclination to try and add to the <a href="http://varianceexplained.org/r/op-ed-text-analysis/">attempts</a> that have been made to identify the anonymous <a href="https://www.nytimes.com/2018/09/05/opinion/trump-white-house-anonymous-resistance.html">New York Times op-ed</a> writer. I’ve had <a href="https://www.danielphadley.com/gone-girl-prediction/">some success</a> in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years.</p>
 <p>By 2:00 am I was convinced the data had singled out Mike Pence. I even started to wonder what the ethical thing to do is when one has hard evidence about the source of text whose author wished to remain anonymous.</p>
 <p>By 3:00 I was starting to question whether Jon Huntsman was the author. And at 4:00 I finally went to bed, discouraged by the data. I now believe that the text of the op-ed is too short, and that the models are too sensitive to small differences in vocabulary and style to arrive at any solid conclusions.</p>
-<p>I considered scrapping all of this, but there are enough data scientists who also had this thought (hopefully not at midnight), that my friend Jon convinced me to share my failures. So I will now open the file drawer.</p>
+<p>I considered scrapping all of this, but there are enough data scientists who also had this thought (hopefully not at midnight), that my friend Jon convinced me to share my failures. So I will now open <a href="http://blogs.discovermagazine.com/neuroskeptic/2016/03/17/open-the-file-drawer/">the file drawer</a>.</p>
 <div id="imposters-and-the-stylo-package" class="section level2">
 <h2>Imposters and the Stylo Package</h2>
 <p>The most recent version of the “stylo” package <a href="https://computationalstylistics.github.io/blog/imposters/">has a method</a> for identifying a text’s likely author relative to a group of “impostors,” i.e., authors who were unlikely to have written it. By comparing the text in question against a candidate corpus, the algorithm seeks to find the most similar set of texts. This method was used, for example, to study Julius Caesar’s disputed writings, and to ascribe authorship of “The Cuckoo’s Calling” to JK Rowling.</p>
 <p>The main difference in this case is that there is not much useful data to train on. We only have 957 words from the op-ed, and it’s likely that even these have been edited. Moreover, we do not have many documents from the candidate group that we <em>know</em> were written by them. More searching may turn up better training material, but I was only able to find an op-ed and a few speeches from Huntsman, a press briefing from John Kelly, and several old blog articles from Mike Pence.</p>
-<p>With that in mind, I compiled the material and ran it through the General Impostors method (GI). I kept the candidate list small, at first, to see if this was going to be worth losing another hour of sleep. I included Pence and Kelly because they are frequently mentioned, and Huntsman because Slate published a compelling article implicating him.</p>
+<p>With that in mind, I compiled the material and ran it through the General Impostors method (GI). I kept the candidate list small, at first, to see if this was going to be worth losing another hour of sleep. I included Pence and Kelly because they are frequently mentioned, and Huntsman because Slate published a <a href="https://slate.com/news-and-politics/2018/09/new-york-times-op-ed-anonymous-writer-trump.html">compelling article</a> implicating him.</p>
 <pre class="r"><code>library(stylo)
 
 # loading the files from a specified directory:
@@ -38,7 +38,7 @@ data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
 
 imposters(reference.set = data[-c(1),], test = data[1,])</code></pre>
 <pre><code>## huntsman    kelly    pence 
-##     0.19     0.00     1.00</code></pre>
+##     0.07     0.00     0.97</code></pre>
 <p>Holy moly!! The GI algorithm scores candidates on a 0-1 scale, and Pence has just received a perfect score. Do I call the media? Bury my laptop and take an oath of silence?! Not so fast, because next I started to subtract words from the test.</p>
 <pre class="r"><code># loading the files from a specified directory:
 tokenized.texts = load.corpus.and.parse(files = &quot;all&quot;, corpus.dir = &quot;../../data/2018 corpus/&quot;)</code></pre>
@@ -61,8 +61,8 @@ data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
 
 imposters(reference.set = data[-c(1),], test = data[1,])</code></pre>
 <pre><code>## huntsman    kelly    pence 
-##     0.94     0.05     0.40</code></pre>
-<p>The first analysis relied on a larger vocabulary, including several words that were not in the op-ed. Simply by limiting the data to stop-words and basic terms, I have identified Huntsman as the most likely author. The variance is disconcerting.</p>
+##     0.95     0.03     0.39</code></pre>
+<p>The first analysis relied on a larger vocabulary, including several words that were not in the op-ed. Simply by limiting the data to stop-words and basic terms, I have identified Huntsman as the most likely author. The variance is disconcerting, to say the least.</p>
 <p>This is further evident when one uses n-grams instead of single words.</p>
 <pre class="r"><code># loading the files from a specified directory:
 tokenized.texts = load.corpus.and.parse(files = &quot;all&quot;, corpus.dir = &quot;../../data/2018 corpus/&quot;, ngram.size = 2)</code></pre>
@@ -85,7 +85,7 @@ data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
 
 imposters(reference.set = data[-c(1),], test = data[1,])</code></pre>
 <pre><code>## huntsman    kelly    pence 
-##     0.56     0.27     0.77</code></pre>
+##     0.43     0.23     0.72</code></pre>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
