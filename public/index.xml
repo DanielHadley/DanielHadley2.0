@@ -7,8 +7,103 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 15 Oct 2017 00:00:00 -0400</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Another Failed Attempt to Find the Op-Ed&#39;s Author with Data Science</title>
+      <link>/op-ed-author/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/op-ed-author/</guid>
+      <description>&lt;p&gt;Last night as I was dozing off, a thought struck me: I could use machine learning and natural language processing to help identify the anonymous New York Times op-ed author. I’ve had some success in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years.&lt;/p&gt;
+&lt;p&gt;By 2:00 am I was convinced the data had singled out Mike Pence. I even started to wonder what the ethical thing to do is when one has hard evidence about the source of text whose author wished to remain anonymous.&lt;/p&gt;
+&lt;p&gt;By 3:00 I was starting to question whether Jon Huntsman was the author. And at 4:00 I finally went to bed, discouraged by the data. I now believe that the text of the op-ed is too short, and that the models are too sensitive to small differences in vocabulary and style to arrive at any solid conclusions.&lt;/p&gt;
+&lt;p&gt;I considered scrapping all of this, but there are enough data scientists who also had this thought (hopefully not at midnight), that my friend Jon convinced me to share my failures. So I will now open the file drawer.&lt;/p&gt;
+&lt;div id=&#34;imposters-and-the-stylo-package&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Imposters and the Stylo Package&lt;/h2&gt;
+&lt;p&gt;The most recent version of the “stylo” package &lt;a href=&#34;https://computationalstylistics.github.io/blog/imposters/&#34;&gt;has a method&lt;/a&gt; for identifying a text’s likely author relative to a group of “impostors,” i.e., authors who were unlikely to have written it. By comparing the text in question against a candidate corpus, the algorithm seeks to find the most similar set of texts. This method was used, for example, to study Julius Caesar’s disputed writings, and to ascribe authorship of “The Cuckoo’s Calling” to JK Rowling.&lt;/p&gt;
+&lt;p&gt;The main difference in this case is that there is not much useful data to train on. We only have 957 words from the op-ed, and it’s likely that even these have been edited. Moreover, we do not have many documents from the candidate group that we &lt;em&gt;know&lt;/em&gt; were written by them. More searching may turn up better training material, but I was only able to find an op-ed and a few speeches from Huntsman, a press briefing from John Kelly, and several old blog articles from Mike Pence.&lt;/p&gt;
+&lt;p&gt;With that in mind, I compiled the material and ran it through the General Impostors method (GI). I kept the candidate list small, at first, to see if this was going to be worth losing another hour of sleep. I included Pence and Kelly because they are frequently mentioned, and Huntsman because Slate published a compelling article implicating him.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stylo)
+
+# loading the files from a specified directory:
+tokenized.texts = load.corpus.and.parse(files = &amp;quot;all&amp;quot;, corpus.dir = &amp;quot;../../data/2018 corpus/&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## loading anon_oped    ...
+## loading huntsman_innaguration    ...
+## loading huntsman_outgoing    ...
+## loading huntsman_trib    ...
+## loading kelly    ...
+## loading pence_clinton-speech ...
+## loading pence_schools    ...
+## loading pence_titanic    ...
+## slicing input text into tokens...
+## turning words into features, e.g. char n-grams (if applicable)...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# computing a list of most frequent words (trimmed to top 200 items):
+features = make.frequency.list(tokenized.texts, head = 200)
+
+# producing a table of relative frequencies:
+data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
+
+imposters(reference.set = data[-c(1),], test = data[1,])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## huntsman    kelly    pence 
+##     0.19     0.00     1.00&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Holy moly!! The GI algorithm scores candidates on a 0-1 scale, and Pence has just received a perfect score. Do I call the media? Bury my laptop and take an oath of silence?! Not so fast, because next I started to subtract words from the test.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# loading the files from a specified directory:
+tokenized.texts = load.corpus.and.parse(files = &amp;quot;all&amp;quot;, corpus.dir = &amp;quot;../../data/2018 corpus/&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## loading anon_oped    ...
+## loading huntsman_innaguration    ...
+## loading huntsman_outgoing    ...
+## loading huntsman_trib    ...
+## loading kelly    ...
+## loading pence_clinton-speech ...
+## loading pence_schools    ...
+## loading pence_titanic    ...
+## slicing input text into tokens...
+## turning words into features, e.g. char n-grams (if applicable)...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# computing a list of most frequent words (this time only the top 50):
+features = make.frequency.list(tokenized.texts, head = 25)
+
+# producing a table of relative frequencies:
+data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
+
+
+imposters(reference.set = data[-c(1),], test = data[1,])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## huntsman    kelly    pence 
+##     0.94     0.05     0.40&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The first analysis relied on a larger vocabulary, including several words that were not in the op-ed. Simply by limiting the data to stop-words and basic terms, I have identified Huntsman as the most likely author. The variance is disconcerting.&lt;/p&gt;
+&lt;p&gt;This is further evident when one uses n-grams instead of single words.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# loading the files from a specified directory:
+tokenized.texts = load.corpus.and.parse(files = &amp;quot;all&amp;quot;, corpus.dir = &amp;quot;../../data/2018 corpus/&amp;quot;, ngram.size = 2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## loading anon_oped    ...
+## loading huntsman_innaguration    ...
+## loading huntsman_outgoing    ...
+## loading huntsman_trib    ...
+## loading kelly    ...
+## loading pence_clinton-speech ...
+## loading pence_schools    ...
+## loading pence_titanic    ...
+## slicing input text into tokens...
+## turning words into features, e.g. char n-grams (if applicable)...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# computing a list of most frequent words (this time only the top 50):
+features = make.frequency.list(tokenized.texts, head = 75)
+
+# producing a table of relative frequencies:
+data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
+
+
+imposters(reference.set = data[-c(1),], test = data[1,])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## huntsman    kelly    pence 
+##     0.56     0.27     0.77&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Huntsman and Pence collaborated to write the op-ed.&lt;/p&gt;
+&lt;p&gt;Just kidding. It’s clear to me that, just as David Robinson showed, the small training text means that an analysis of this sort is likely to be sensitive to even small differences in the frequency of words.&lt;/p&gt;
+&lt;p&gt;I still think that if someone were to spend more time finding appropriate training data, using more than one method, fine-tuning the parameters, and incorporating other outside evidence, she could probably bring more clarity to the discussion. Ultimately, however, I am not convinced that the now famous 957 words comprise a smoking gun.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Branding and Automating with R Markdown</title>
@@ -75,7 +170,7 @@
     <item>
       <title>Branding and automating your work with R Markdown</title>
       <link>/talk/rstudio/</link>
-      <pubDate>Fri, 02 Feb 2018 00:00:00 -0700</pubDate>
+      <pubDate>Fri, 02 Feb 2018 00:00:00 -0500</pubDate>
       
       <guid>/talk/rstudio/</guid>
       <description>&lt;ul&gt;
@@ -90,7 +185,7 @@
     <item>
       <title>Branding your work with R Markdown</title>
       <link>/talk/rug/</link>
-      <pubDate>Thu, 11 Jan 2018 00:00:00 -0700</pubDate>
+      <pubDate>Thu, 11 Jan 2018 00:00:00 -0500</pubDate>
       
       <guid>/talk/rug/</guid>
       <description>&lt;ul&gt;
@@ -557,7 +652,7 @@ sibling_mirror / nrow(ders)&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Analyzing Criminal Justice Reform: the Case of Utah</title>
       <link>/talk/dssg/</link>
-      <pubDate>Sun, 29 Oct 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 29 Oct 2017 00:00:00 -0400</pubDate>
       
       <guid>/talk/dssg/</guid>
       <description></description>
@@ -769,61 +864,6 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
 &lt;div id=&#34;unknown-unknowns&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Unknown Unknowns&lt;/h3&gt;
 &lt;p&gt;I’m certain there are a lot of great features of both platforms that I am totally unaware of. And I still think Jupyter is doing more to integrate the various data science languages. It’s possible I will switch back, but for now I seem to be getting more locked in to RStudio. At the moment I am researching how to convert my website into R Markdown. It just works really well.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Lessons From My First Kaggle Contest</title>
-      <link>/kaggle-thoughts/</link>
-      <pubDate>Thu, 09 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/kaggle-thoughts/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://www.kaggle.com&#34;&gt;Kaggle&lt;/a&gt; is a forum for interacting with other data scientists and competing to see who can write code that will best predict features of data. It’s a way to test your skills at statistics and machine learning, and to do a lot of human learning in the process (sorry, bad pun).&lt;/p&gt;
-&lt;p&gt;When I entered the contest to categorize crimes that occurred in San Francisco, my initial goal was to do better than random chance. I had some domain expertise from my time working with the Somerville Police Department, but I still worried that I would not be able to beat basic benchmarks for crime prediction. Over time, my goals shifted from making it out of the bottom quartile, to scoring above the median, until I finally made it into the top 10% and set my sights on winning. In the end, I ranked 7th out of 2,335 competitors.&lt;/p&gt;
-&lt;p&gt;There was no prize money in this contest, and I borrowed liberally from others’ ideas, so more than the ranking, I got involved to learn new things about data science.&lt;/p&gt;
-&lt;div id=&#34;feature-engineering&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Feature Engineering&lt;/h3&gt;
-&lt;p&gt;Put simply, this is the process of taking rows and columns of data, and making new ones that make the predictive models more powerful. For example, one of the most important features in the contest to categorize crime is when it was reported. Did it take place on a week, or weekend? Was it reported at the same time as another crime? Did it occur during the day, or at night? Answers to these questions were hiding in rows and columns of data, and my most productive time was spent discovering them.&lt;/p&gt;
-&lt;p&gt;It’s cliche, but feature engineering ended up mattering much more than model selection or parameter tuning. This is also where I had a slight edge, having sat through dozens of CompStat meetings with the Chief, his command staff, and a really good crime analyst.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;models&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Models&lt;/h3&gt;
-&lt;p&gt;In the end, I broke my task up into two R scripts:&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;engineer_features.R&lt;/li&gt;
-&lt;li&gt;build_models.R&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;XGBoost (which a work friend pointed out sounds like a bad energy drink) ended up being every bit as powerful and simple as many data scientists describe it. From the time I started to use it instead of other popular algorithms, my errors started to decrease significantly.&lt;/p&gt;
-&lt;p&gt;I created a method of iterating through a list of each crime and building a separate model to predict only that crime. This would often work better than the models that I trained on the entire set of categories. Here is some pseudocode to demonstrate the concept:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# The list to iterate over
-crime_categories &amp;lt;- c(levels(train$Category))
-
-for (crime in 1:length(crime_categories)) {
-  
-  category_to_model &amp;lt;- crime_categories[crime]
-  
-  # Get it ready for the model
-  train_final %&amp;gt;% 
-    mutate(category_binary = ifelse(Category == category_to_model, 1, 0))
-    
-  
-  xgboost_model &amp;lt;- xgboost(param = param, data = train_final[, -c(26)], label = train_final[, c(26)], 
-                           nrounds = nrounds_vector[crime])
-  
-  # Predict
-  pred &amp;lt;- predict(xgboost_model, test_final)
-  
-  prob &amp;lt;- matrix(pred, ncol = 1, byrow = T)
-  prob &amp;lt;- as.data.frame(prob)
-  colnames(prob)  &amp;lt;- category_to_model
-  prob$Id &amp;lt;- as.numeric(seq(1 : 884262) -1)
-  
-  final_predictions[,crime + 1] &amp;lt;- prob[,1]
-  
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In the final hours of the contest, I also combined the results of several different submissions. Together, they did better than any single submission.&lt;/p&gt;
-&lt;p&gt;I made a lot of mistakes along the way, from overfitting dozens of models to accidentally purchasing a surfeit of storage on Amazon Web Services. These were instructive, though, and I feel that the process gave me a more nuanced view of how computers learn from the code and data that we feed them.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

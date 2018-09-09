@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.43" />
+  
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="Last night as I was dozing off, a thought struck me: I could use machine learning and natural language processing to help identify the anonymous New York Times op-ed author. I’ve had some success in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years.
+By 2:00 am I was convinced the data had singled out Mike Pence. I even started to wonder what the ethical thing to do is when one has hard evidence about the source of text whose author wished to remain anonymous.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/op-ed-author/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+      
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-56284042-1', 'auto');
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Daniel Hadley">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Daniel Hadley">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/op-ed-author/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@danielphadley">
+  <meta property="twitter:creator" content="@danielphadley">
+  
+  <meta property="og:site_name" content="Daniel Hadley">
+  <meta property="og:url" content="/op-ed-author/">
+  <meta property="og:title" content="Another Failed Attempt to Find the Op-Ed&#39;s Author with Data Science | Daniel Hadley">
+  <meta property="og:description" content="Last night as I was dozing off, a thought struck me: I could use machine learning and natural language processing to help identify the anonymous New York Times op-ed author. I’ve had some success in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years.
+By 2:00 am I was convinced the data had singled out Mike Pence. I even started to wonder what the ethical thing to do is when one has hard evidence about the source of text whose author wished to remain anonymous.">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2018-09-08T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2018-09-08T00:00:00&#43;00:00">
+  
+
+  
+
+  <title>Another Failed Attempt to Find the Op-Ed&#39;s Author with Data Science | Daniel Hadley</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">Daniel Hadley</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#press">
+            
+            <span>Press</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Another Failed Attempt to Find the Op-Ed&#39;s Author with Data Science</h1>
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2018-09-08 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      Sep 8, 2018
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/r">R</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Another%20Failed%20Attempt%20to%20Find%20the%20Op-Ed%27s%20Author%20with%20Data%20Science&amp;url=%2fop-ed-author%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fop-ed-author%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fop-ed-author%2f&amp;title=Another%20Failed%20Attempt%20to%20Find%20the%20Op-Ed%27s%20Author%20with%20Data%20Science"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fop-ed-author%2f&amp;title=Another%20Failed%20Attempt%20to%20Find%20the%20Op-Ed%27s%20Author%20with%20Data%20Science"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Another%20Failed%20Attempt%20to%20Find%20the%20Op-Ed%27s%20Author%20with%20Data%20Science&amp;body=%2fop-ed-author%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <p>Last night as I was dozing off, a thought struck me: I could use machine learning and natural language processing to help identify the anonymous New York Times op-ed author. I’ve had some success in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years.</p>
+<p>By 2:00 am I was convinced the data had singled out Mike Pence. I even started to wonder what the ethical thing to do is when one has hard evidence about the source of text whose author wished to remain anonymous.</p>
+<p>By 3:00 I was starting to question whether Jon Huntsman was the author. And at 4:00 I finally went to bed, discouraged by the data. I now believe that the text of the op-ed is too short, and that the models are too sensitive to small differences in vocabulary and style to arrive at any solid conclusions.</p>
+<p>I considered scrapping all of this, but there are enough data scientists who also had this thought (hopefully not at midnight), that my friend Jon convinced me to share my failures. So I will now open the file drawer.</p>
+<div id="imposters-and-the-stylo-package" class="section level2">
+<h2>Imposters and the Stylo Package</h2>
+<p>The most recent version of the “stylo” package <a href="https://computationalstylistics.github.io/blog/imposters/">has a method</a> for identifying a text’s likely author relative to a group of “impostors,” i.e., authors who were unlikely to have written it. By comparing the text in question against a candidate corpus, the algorithm seeks to find the most similar set of texts. This method was used, for example, to study Julius Caesar’s disputed writings, and to ascribe authorship of “The Cuckoo’s Calling” to JK Rowling.</p>
+<p>The main difference in this case is that there is not much useful data to train on. We only have 957 words from the op-ed, and it’s likely that even these have been edited. Moreover, we do not have many documents from the candidate group that we <em>know</em> were written by them. More searching may turn up better training material, but I was only able to find an op-ed and a few speeches from Huntsman, a press briefing from John Kelly, and several old blog articles from Mike Pence.</p>
+<p>With that in mind, I compiled the material and ran it through the General Impostors method (GI). I kept the candidate list small, at first, to see if this was going to be worth losing another hour of sleep. I included Pence and Kelly because they are frequently mentioned, and Huntsman because Slate published a compelling article implicating him.</p>
+<pre class="r"><code>library(stylo)
+
+# loading the files from a specified directory:
+tokenized.texts = load.corpus.and.parse(files = &quot;all&quot;, corpus.dir = &quot;../../data/2018 corpus/&quot;)</code></pre>
+<pre><code>## loading anon_oped    ...
+## loading huntsman_innaguration    ...
+## loading huntsman_outgoing    ...
+## loading huntsman_trib    ...
+## loading kelly    ...
+## loading pence_clinton-speech ...
+## loading pence_schools    ...
+## loading pence_titanic    ...
+## slicing input text into tokens...
+## turning words into features, e.g. char n-grams (if applicable)...</code></pre>
+<pre class="r"><code># computing a list of most frequent words (trimmed to top 200 items):
+features = make.frequency.list(tokenized.texts, head = 200)
+
+# producing a table of relative frequencies:
+data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
+
+imposters(reference.set = data[-c(1),], test = data[1,])</code></pre>
+<pre><code>## huntsman    kelly    pence 
+##     0.19     0.00     1.00</code></pre>
+<p>Holy moly!! The GI algorithm scores candidates on a 0-1 scale, and Pence has just received a perfect score. Do I call the media? Bury my laptop and take an oath of silence?! Not so fast, because next I started to subtract words from the test.</p>
+<pre class="r"><code># loading the files from a specified directory:
+tokenized.texts = load.corpus.and.parse(files = &quot;all&quot;, corpus.dir = &quot;../../data/2018 corpus/&quot;)</code></pre>
+<pre><code>## loading anon_oped    ...
+## loading huntsman_innaguration    ...
+## loading huntsman_outgoing    ...
+## loading huntsman_trib    ...
+## loading kelly    ...
+## loading pence_clinton-speech ...
+## loading pence_schools    ...
+## loading pence_titanic    ...
+## slicing input text into tokens...
+## turning words into features, e.g. char n-grams (if applicable)...</code></pre>
+<pre class="r"><code># computing a list of most frequent words (this time only the top 50):
+features = make.frequency.list(tokenized.texts, head = 25)
+
+# producing a table of relative frequencies:
+data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
+
+
+imposters(reference.set = data[-c(1),], test = data[1,])</code></pre>
+<pre><code>## huntsman    kelly    pence 
+##     0.94     0.05     0.40</code></pre>
+<p>The first analysis relied on a larger vocabulary, including several words that were not in the op-ed. Simply by limiting the data to stop-words and basic terms, I have identified Huntsman as the most likely author. The variance is disconcerting.</p>
+<p>This is further evident when one uses n-grams instead of single words.</p>
+<pre class="r"><code># loading the files from a specified directory:
+tokenized.texts = load.corpus.and.parse(files = &quot;all&quot;, corpus.dir = &quot;../../data/2018 corpus/&quot;, ngram.size = 2)</code></pre>
+<pre><code>## loading anon_oped    ...
+## loading huntsman_innaguration    ...
+## loading huntsman_outgoing    ...
+## loading huntsman_trib    ...
+## loading kelly    ...
+## loading pence_clinton-speech ...
+## loading pence_schools    ...
+## loading pence_titanic    ...
+## slicing input text into tokens...
+## turning words into features, e.g. char n-grams (if applicable)...</code></pre>
+<pre class="r"><code># computing a list of most frequent words (this time only the top 50):
+features = make.frequency.list(tokenized.texts, head = 75)
+
+# producing a table of relative frequencies:
+data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
+
+
+imposters(reference.set = data[-c(1),], test = data[1,])</code></pre>
+<pre><code>## huntsman    kelly    pence 
+##     0.56     0.27     0.77</code></pre>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>Huntsman and Pence collaborated to write the op-ed.</p>
+<p>Just kidding. It’s clear to me that, just as David Robinson showed, the small training text means that an analysis of this sort is likely to be sensitive to even small differences in the frequency of words.</p>
+<p>I still think that if someone were to spend more time finding appropriate training data, using more than one method, fine-tuning the parameters, and incorporating other outside evidence, she could probably bring more clarity to the discussion. Ultimately, however, I am not convinced that the now famous 957 words comprise a smoking gun.</p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/machine-learning">machine-learning</a>
+  
+  <a class="btn btn-primary btn-outline" href="/tags/language">language</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/gone-girl-prediction/">Using Machine Learning to Detect Stylometric Differences Between Nick and Amy in Gone Girl</a></li>
+        
+        <li><a href="/project/dashboards/">A Dashboard with Weak AI</a></li>
+        
+        <li><a href="/kaggle-thoughts/">Lessons From My First Kaggle Contest</a></li>
+        
+        <li><a href="/project/gone-model/">Can Machine Learning Tell Two Fictional Characters Apart?</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+

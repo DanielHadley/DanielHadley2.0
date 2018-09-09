@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>/op-ed-author/</loc>
+      <lastmod>2018-09-08T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/branding-rmarkdown/</loc>
       <lastmod>2018-03-27T00:00:00+00:00</lastmod>
     </url>
@@ -15,7 +24,7 @@
     <url>
     
       <loc>/talk/rstudio/</loc>
-      <lastmod>2018-02-02T00:00:00-07:00</lastmod>
+      <lastmod>2018-02-02T00:00:00-05:00</lastmod>
     </url>
     
   
@@ -24,7 +33,7 @@
     <url>
     
       <loc>/talk/rug/</loc>
-      <lastmod>2018-01-11T00:00:00-07:00</lastmod>
+      <lastmod>2018-01-11T00:00:00-05:00</lastmod>
     </url>
     
   
@@ -60,7 +69,7 @@
     <url>
     
       <loc>/talk/dssg/</loc>
-      <lastmod>2017-10-29T00:00:00-06:00</lastmod>
+      <lastmod>2017-10-29T00:00:00-04:00</lastmod>
     </url>
     
   
@@ -105,7 +114,7 @@
     <url>
     
       <loc>/post/</loc>
-      <lastmod>2017-01-01T00:00:00-07:00</lastmod>
+      <lastmod>2017-01-01T00:00:00-05:00</lastmod>
     </url>
     
   
@@ -397,7 +406,7 @@
     <url>
     
       <loc>/</loc>
-      <lastmod>2017-10-15T00:00:00-06:00</lastmod>
+      <lastmod>2017-10-15T00:00:00-04:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -436,8 +445,18 @@
     
     <url>
     
+      <loc>/tags/language/</loc>
+      <lastmod>2018-09-08T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/machine-learning/</loc>
-      <lastmod>2016-10-15T00:00:00+00:00</lastmod>
+      <lastmod>2018-09-08T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -556,7 +575,7 @@
     <url>
     
       <loc>/categories/r/</loc>
-      <lastmod>2018-03-27T00:00:00+00:00</lastmod>
+      <lastmod>2018-09-08T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

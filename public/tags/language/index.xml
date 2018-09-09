@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Language on Daniel Hadley</title>
+    <link>/tags/language/</link>
+    <description>Recent content in Language on Daniel Hadley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Sat, 08 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/language/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Another Failed Attempt to Find the Op-Ed&#39;s Author with Data Science</title>
+      <link>/op-ed-author/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/op-ed-author/</guid>
+      <description>Last night as I was dozing off, a thought struck me: I could use machine learning and natural language processing to help identify the anonymous New York Times op-ed author. I’ve had some success in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years.
+By 2:00 am I was convinced the data had singled out Mike Pence. I even started to wonder what the ethical thing to do is when one has hard evidence about the source of text whose author wished to remain anonymous.</description>
+    </item>
+    
+    <item>
+      <title>Using Machine Learning to Detect Stylometric Differences Between Nick and Amy in Gone Girl</title>
+      <link>/gone-girl-prediction/</link>
+      <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/gone-girl-prediction/</guid>
+      <description>I wanted to see if it was possible to train a model to detect the difference between two fictional authors created by the same novelist based only on the frequency of common stop words, e.g., “the.” It worked: The randomForest model correctly selected Nick 93% of the time and Amy 91%.
+Background When I first started using R for data analysis, I was mesmerized by all of the packages and what they made possible.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,83 @@
+---
+title: "Another Failed Attempt to Find the Op-Ed's Author with Data Science"
+date: 2018-09-08
+categories: ["R"]
+tags: ["machine-learning", "language"]
+---
+
+Last night as I was dozing off, a thought struck me: I could use machine learning and natural language processing to help identify the anonymous New York Times op-ed author. I've had some success in the past with machine learning and stylometry. And this is one of the most intriguing authorship questions in years. 
+
+By 2:00 am I was convinced the data had singled out Mike Pence. I even started to wonder what the ethical thing to do is when one has hard evidence about the source of text whose author wished to remain anonymous. 
+
+By 3:00 I was starting to question whether Jon Huntsman was the author. And at 4:00 I finally went to bed, discouraged by the data. I now believe that the text of the op-ed is too short, and that the models are too sensitive to small differences in vocabulary and style to arrive at any solid conclusions. 
+
+I considered scrapping all of this, but there are enough data scientists who also had this thought (hopefully not at midnight), that my friend Jon convinced me to share my failures. So I will now open the file drawer.
+
+
+## Imposters and the Stylo Package
+
+The most recent version of the "stylo" package [has a method](https://computationalstylistics.github.io/blog/imposters/) for identifying a text's likely author relative to a group of "impostors," i.e., authors who were unlikely to have written it. By comparing the text in question against a candidate corpus, the algorithm seeks to find the most similar set of texts. This method was used, for example, to study Julius Caesar’s disputed writings, and to ascribe authorship of “The Cuckoo’s Calling” to JK Rowling. 
+
+The main difference in this case is that there is not much useful data to train on. We only have 957 words from the op-ed, and it's likely that even these have been edited. Moreover, we do not have many documents from the candidate group that we *know* were written by them. More searching may turn up better training material, but I was only able to find an op-ed and a few speeches from Huntsman, a press briefing from John Kelly, and several old blog articles from Mike Pence. 
+
+With that in mind, I compiled the material and ran it through the General Impostors method (GI). I kept the candidate list small, at first, to see if this was going to be worth losing another hour of sleep. I included Pence and Kelly because they are frequently mentioned, and Huntsman because Slate published a compelling article implicating him.   
+
+
+```{r analysis, message=FALSE, warning=FALSE}
+library(stylo)
+
+# loading the files from a specified directory:
+tokenized.texts = load.corpus.and.parse(files = "all", corpus.dir = "../../data/2018 corpus/")
+
+# computing a list of most frequent words (trimmed to top 200 items):
+features = make.frequency.list(tokenized.texts, head = 200)
+
+# producing a table of relative frequencies:
+data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
+
+imposters(reference.set = data[-c(1),], test = data[1,])
+
+```
+
+
+Holy moly!! The GI algorithm scores candidates on a 0-1 scale, and Pence has just received a perfect score. Do I call the media? Bury my laptop and take an oath of silence?! Not so fast, because next I started to subtract words from the test. 
+
+
+```{r analysis_two, message=FALSE, warning=FALSE}
+# loading the files from a specified directory:
+tokenized.texts = load.corpus.and.parse(files = "all", corpus.dir = "../../data/2018 corpus/")
+
+# computing a list of most frequent words (this time only the top 50):
+features = make.frequency.list(tokenized.texts, head = 25)
+
+# producing a table of relative frequencies:
+data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
+
+
+imposters(reference.set = data[-c(1),], test = data[1,])
+```
+
+The first analysis relied on a larger vocabulary, including several words that were not in the op-ed. Simply by limiting the data to stop-words and basic terms, I have identified Huntsman as the most likely author. The variance is disconcerting.
+
+This is further evident when one uses n-grams instead of single words. 
+
+```{r analysis_three, message=FALSE, warning=FALSE}
+# loading the files from a specified directory:
+tokenized.texts = load.corpus.and.parse(files = "all", corpus.dir = "../../data/2018 corpus/", ngram.size = 2)
+
+# computing a list of most frequent words (this time only the top 50):
+features = make.frequency.list(tokenized.texts, head = 75)
+
+# producing a table of relative frequencies:
+data = make.table.of.frequencies(tokenized.texts, features, relative = TRUE)
+
+
+imposters(reference.set = data[-c(1),], test = data[1,])
+```
+
+## Conclusion
+Huntsman and Pence collaborated to write the op-ed.
+
+Just kidding. It's clear to me that, just as David Robinson showed, the small training text means that an analysis of this sort is likely to be sensitive to even small differences in the frequency of words. 
+
+I still think that if someone were to spend more time finding appropriate training data, using more than one method, fine-tuning the parameters, and incorporating other outside evidence, she could probably bring more clarity to the discussion. Ultimately, however, I am not convinced that the now famous 957 words comprise a smoking gun.  

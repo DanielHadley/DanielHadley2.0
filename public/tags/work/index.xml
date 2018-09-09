@@ -50,15 +50,5 @@ The basic idea is to use a For Loop with ggmap to iterate through columns of a d
       <description>Most of the maps I have seen so far color each city or town either red or blue based on the majority outcome. That works fine, for the most part, but I prefer to see the range of voting patterns. These heat maps go from light yellow to dark blue. The scale changes on each one in order to show the full spectrum. I managed to automate their creation in R.</description>
     </item>
     
-    <item>
-      <title>Using Machine Learning to Detect Stylometric Differences Between Nick and Amy in Gone Girl</title>
-      <link>/gone-girl-prediction/</link>
-      <pubDate>Sun, 02 Nov 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/gone-girl-prediction/</guid>
-      <description>I wanted to see if it was possible to train a model to detect the difference between two fictional authors created by the same novelist based only on the frequency of common stop words, e.g., “the.” It worked: The randomForest model correctly selected Nick 93% of the time and Amy 91%.
-Background When I first started using R for data analysis, I was mesmerized by all of the packages and what they made possible.</description>
-    </item>
-    
   </channel>
 </rss>
