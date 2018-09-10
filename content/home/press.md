@@ -15,6 +15,8 @@ weight = 60
 
 +++
 
+["Having trouble finding a place to live in Salt Lake City? This online tool offers rents and other data by neighborhood — and it explains how hard it is out there."](https://www.sltrib.com/news/2018/09/09/having-trouble-finding/), the Salt Lake Tribune, September 10, 2018.
+
 ["What This Salt Lake City Heatmap Tells Us About Drug Crime"](https://www.citylab.com/equity/2017/08/what-this-map-of-salt-lake-citys-drug-hotspot-really-show/536214/), CityLab, August 11, 2017.
 
 ["Is Utah's prison reform working?"](http://www.deseretnews.com/article/865686173/Is-Utahs-prison-reform-working.html), Deseret News, August 5th, 2017.
