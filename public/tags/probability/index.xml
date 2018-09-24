@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Thu, 28 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/probability/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Empirical Bayes to Estimate NBA Treys</title>
+      <link>/empirical_bayes_nba_treys/</link>
+      <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/empirical_bayes_nba_treys/</guid>
+      <description>In this post, I describe how I used Empirical Bayesian methods to estimate the accuracy of NBA three-point shooters. This analysis closely follows the process outlined by David Robinson in his excellent book Introduction to Empirical Bayes: Examples from Baseball Statistics, and is performed using his ebbr package in R.^ The goal is to make a reasoned ranking of the top sharp shooters, despite inconsistent and imperfect records of how often players make the shots they attempt.</description>
+    </item>
     
     <item>
       <title>Bayes&#39; Puzzle Powers</title>
@@ -20,15 +29,6 @@
       <guid>/bayes-538/</guid>
       <description>A while ago, the popular data journalism site 538 posted a challenging probability puzzle:
  On the table in front of you are two coins. They look and feel identical, but you know one of them has been doctored. The fair coin comes up heads half the time while the doctored coin comes up heads 60 percent of the time. How many flips — you must flip both coins at once, one with each hand — would you need to give yourself a 95 percent chance of correctly identifying the doctored coin?</description>
-    </item>
-    
-    <item>
-      <title>Empirical Bayes to Estimate NBA Treys</title>
-      <link>/empirical_bayes_nba_treys/</link>
-      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/empirical_bayes_nba_treys/</guid>
-      <description>In this post, I describe how I used Emprirical Bayesian methods to estimate the accuracy of NBA three-point shooters. This analysis closely follows the process outlined by David Robinson in his excellent book Introduction to Empirical Bayes: Examples from Baseball Statistics, and is performed using his ebbr package in R.^ The goal is to make a reasoned ranking of the top sharp shooters, despite insonsistent and imperfect records of how often players make the shots they attempt.</description>
     </item>
     
     <item>

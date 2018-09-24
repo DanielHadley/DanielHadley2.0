@@ -1,16 +1,16 @@
 ---
 title: "Empirical Bayes to Estimate NBA Treys"
-date: 2017-12-28
+date: 2018-09-25
 categories: ["R"]
-tags: ["probability", "puzzle", "bayesian", "personal"]
+tags: ["probability", "bayesian"]
 ---
 
 
 
-<p>In this post, I describe how I used Emprirical Bayesian methods to estimate the accuracy of NBA three-point shooters. This analysis closely follows the process outlined by David Robinson in his excellent book <a href="http://varianceexplained.org/r/empirical-bayes-book/">Introduction to Empirical Bayes: Examples from Baseball Statistics</a>, and is performed using his <a href="https://github.com/dgrtwo/ebbr">ebbr</a> package in R.^ The goal is to make a reasoned ranking of the top sharp shooters, despite insonsistent and imperfect records of how often players make the shots they attempt.</p>
+<p>In this post, I describe how I used Empirical Bayesian methods to estimate the accuracy of NBA three-point shooters. This analysis closely follows the process outlined by David Robinson in his excellent book <a href="http://varianceexplained.org/r/empirical-bayes-book/">Introduction to Empirical Bayes: Examples from Baseball Statistics</a>, and is performed using his <a href="https://github.com/dgrtwo/ebbr">ebbr</a> package in R.^ The goal is to make a reasoned ranking of the top sharp shooters, despite inconsistent and imperfect records of how often players make the shots they attempt.</p>
 <p>To create the following chart, I utilize data from both regular season and playoff records going back to 1980. As I describe below, however, I systematically drop three seasons of records in order to correct for a time when the three-point line was moved closer to the basket. Empirical Bayes is relatively robust to issues like these because estimates are created using data from the larger group: in this case, the entire history of NBA three-point shooters.</p>
 <p><img src="/post/empirical_bayes_nba_treys_files/figure-html/first_graph-1.png" width="672" /></p>
-<p>NBA fans will quickly recognize Steph Curry at the top of this chart. He is the undisputed king of threes, but not neccesarily because of his accuracy so much as his quantity. Steph’s placement makes more sense in that context. Empirical Bayes effectively shrinks outliers towards a mean or trend; but the shrinking is less significant in cases where there are more observarions. In this case, Steph’s copious threes make us confident in his accuracy, which can be observed in the small error bar.</p>
+<p>NBA fans will quickly recognize Steph Curry at the top of this chart. He is the undisputed king of threes, but not necessarily because of his accuracy so much as his quantity. Steph’s placement makes more sense in that context. Empirical Bayes effectively shrinks outliers towards a mean or trend; but the shrinking is less significant in cases where there are more observations. In this case, Steph’s copious threes make us confident in his accuracy, which can be observed in the small error bar.</p>
 <p>On the other hand, NBA fans with a little more historical knowledge will wonder why the erstwhile player Steve Kerr is not up there with the three-point prodigy he currently coaches. Is Steph Curry really the most accurate three-point shooter of all time? This analysis suggests so. But I encourage you to read on to see if you agree.</p>
 <div id="more-than-three-ways" class="section level2">
 <h2>More than three ways</h2>
@@ -157,8 +157,8 @@ tags: ["probability", "puzzle", "bayesian", "personal"]
 </tr>
 </tbody>
 </table>
-<p>This method has its own problems. For one, there will always be decent players on the other side of the artbitrary line. Less obviously, there are players with relatively short careers who made a high number of threes, but not enough to inspire confidence that their record would continue through a longer career.</p>
-<p>Emprical Bayes can overcome these problems by generating a “prior” that is informed by all of the players, and then updating with each player’s actual data. A prior is a defensible estimate we would make before seeing an individual’s three-point data. Updating is a simple yet robust way of combining our first empirical guess with the data.</p>
+<p>This method has its own problems. For one, there will always be decent players on the other side of the arbitrary line. Less obviously, there are players with relatively short careers who made a high number of threes, but not enough to inspire confidence that their record would continue through a longer career.</p>
+<p>Empirical Bayes can overcome these problems by generating a “prior” that is informed by all of the players, and then updating with each player’s actual data. A prior is a defensible estimate we would make before seeing an individual’s three-point data. Updating is a simple yet robust way of combining our first empirical guess with the data.</p>
 <p>In Dr. Robinson’s <em>ebbr</em> package, this can be done with one function: <code>add_ebb_estimate()</code></p>
 <pre class="r"><code>basic &lt;- threes %&gt;% 
   group_by(player_id) %&gt;% 
@@ -182,7 +182,7 @@ tags: ["probability", "puzzle", "bayesian", "personal"]
   theme_minimal() +
   theme(legend.title=element_blank())</code></pre>
 <p><img src="/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Steph’s brother Seth, for instance, has a record of hitting almost 44% of his threes, yet we estimate his rate at closer to 41%. This is fundamental to Bayesian anaysis: extreme results require more data before we bet on them at Vegas. In the meantime, we lean more on the prior and draw a larger “credible interval,” which is the region where we very confident that the true value lies.</p>
+<p>Steph’s brother Seth, for instance, has a record of hitting almost 44% of his threes, yet we estimate his rate at closer to 41%. This is fundamental to Bayesian analysis: extreme results require more data before we bet on them at Vegas. In the meantime, we lean more on the prior and draw a larger “credible interval,” which is the region where we very confident that the true value lies.</p>
 <p>At this point, one might wonder why shrink at all? Why not just trust that Seth, Drazen, and others are as accurate as their records suggest they are? The answer is that they are on the far right tail of a fairly consistent density curve. If they got there on the basis of sparse data, it’s only logical to question whether we are seeing a consistent trend or statistical noise.</p>
 <pre class="r"><code>threes %&gt;% 
   group_by(player_id) %&gt;% 
@@ -234,6 +234,6 @@ tags: ["probability", "puzzle", "bayesian", "personal"]
 <div id="the-kerr-conundrum" class="section level2">
 <h2>The Kerr Conundrum</h2>
 <p>Overall, I am fairly satisfied with the way this ranking turned out. Steph gets the benefit of the doubt, while Jason Kapono’s record gets treated with a little more skepticism. There are a few quibbles I have - most notably, Steve Kerr.</p>
-<p>Kerr had some of his best years during the line change. It’s difficult to reconcile that with the need to compare fairly across generations. The good thing about this method is that it takes all of the available data, including from Kerr’s cohorts. The challenge is that including data from 1995-1997 would bias both the prior and posterior estimates. Moreover, Kerr was an anomaly, even compared to other players from his generation. Therefore, his estimate was shrunken a little more than I am comfortable with. I think he belongs somewhere above the bayesian estimate, but below the top five.</p>
+<p>Kerr had some of his best years during the line change. It’s difficult to reconcile that with the need to compare fairly across generations. The good thing about this method is that it takes all of the available data, including from Kerr’s cohorts. The challenge is that including data from 1995-1997 would bias both the prior and posterior estimates. Moreover, Kerr was an anomaly, even compared to other players from his generation. Therefore, his estimate was shrunken a little more than I am comfortable with. I think he belongs somewhere above the Bayesian estimate, but below the top five.</p>
 <p>^ I am indebted to Dr. Robinson both for his lucid explanations of Bayesian statistics and his <em>ebbr</em> package in R. This post describes a toy example of using Bayesian methods to estimate proportions from hierarchical data, but I have used the same principles in real-world applications. I have worked through a few books on Bayesian data analysis, but none are as as engaging and clear.</p>
 </div>

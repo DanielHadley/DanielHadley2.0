@@ -7,19 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Thu, 28 Dec 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2015 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/personal/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Empirical Bayes to Estimate NBA Treys</title>
-      <link>/empirical_bayes_nba_treys/</link>
-      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/empirical_bayes_nba_treys/</guid>
-      <description>In this post, I describe how I used Emprirical Bayesian methods to estimate the accuracy of NBA three-point shooters. This analysis closely follows the process outlined by David Robinson in his excellent book Introduction to Empirical Bayes: Examples from Baseball Statistics, and is performed using his ebbr package in R.^ The goal is to make a reasoned ranking of the top sharp shooters, despite insonsistent and imperfect records of how often players make the shots they attempt.</description>
-    </item>
     
     <item>
       <title>What the Critics Got Wrong About Star Wars</title>

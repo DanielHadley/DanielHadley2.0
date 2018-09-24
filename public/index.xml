@@ -11,6 +11,245 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Empirical Bayes to Estimate NBA Treys</title>
+      <link>/empirical_bayes_nba_treys/</link>
+      <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/empirical_bayes_nba_treys/</guid>
+      <description>&lt;p&gt;In this post, I describe how I used Empirical Bayesian methods to estimate the accuracy of NBA three-point shooters. This analysis closely follows the process outlined by David Robinson in his excellent book &lt;a href=&#34;http://varianceexplained.org/r/empirical-bayes-book/&#34;&gt;Introduction to Empirical Bayes: Examples from Baseball Statistics&lt;/a&gt;, and is performed using his &lt;a href=&#34;https://github.com/dgrtwo/ebbr&#34;&gt;ebbr&lt;/a&gt; package in R.^ The goal is to make a reasoned ranking of the top sharp shooters, despite inconsistent and imperfect records of how often players make the shots they attempt.&lt;/p&gt;
+&lt;p&gt;To create the following chart, I utilize data from both regular season and playoff records going back to 1980. As I describe below, however, I systematically drop three seasons of records in order to correct for a time when the three-point line was moved closer to the basket. Empirical Bayes is relatively robust to issues like these because estimates are created using data from the larger group: in this case, the entire history of NBA three-point shooters.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/empirical_bayes_nba_treys_files/figure-html/first_graph-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;NBA fans will quickly recognize Steph Curry at the top of this chart. He is the undisputed king of threes, but not necessarily because of his accuracy so much as his quantity. Steph’s placement makes more sense in that context. Empirical Bayes effectively shrinks outliers towards a mean or trend; but the shrinking is less significant in cases where there are more observations. In this case, Steph’s copious threes make us confident in his accuracy, which can be observed in the small error bar.&lt;/p&gt;
+&lt;p&gt;On the other hand, NBA fans with a little more historical knowledge will wonder why the erstwhile player Steve Kerr is not up there with the three-point prodigy he currently coaches. Is Steph Curry really the most accurate three-point shooter of all time? This analysis suggests so. But I encourage you to read on to see if you agree.&lt;/p&gt;
+&lt;div id=&#34;more-than-three-ways&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;More than three ways&lt;/h2&gt;
+&lt;p&gt;There are many ways to measure three-point accuracy. We could do the most straight forward: divide the number of makes by the number of attempts:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threes %&amp;gt;% 
+  group_by(player_id) %&amp;gt;% 
+  summarise(threes_attempted = sum(threes_attempted), threes_made = sum(threes_made),
+            Player = Player[1]) %&amp;gt;%
+  mutate(three_pct = threes_made / threes_attempted) %&amp;gt;% 
+  top_n(5, wt = three_pct) %&amp;gt;%
+  select(Player, threes_made, threes_attempted, three_pct) %&amp;gt;% 
+  head() %&amp;gt;% 
+  kable()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Player&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;threes_made&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;threes_attempted&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;three_pct&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Alonzo Bradley&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Alvin Sims&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Coty Clarke&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Eddy Curry&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Eric Anderson&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Eric White&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This has an obvious problem. Most record books overcome it by coming up with a seemingly arbitrary filter and then redoing the calculation.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threes %&amp;gt;% 
+  group_by(player_id) %&amp;gt;% 
+  summarise(threes_attempted = sum(threes_attempted), threes_made = sum(threes_made),
+            Player = Player[1]) %&amp;gt;%
+  # Only players with more than 200 threes made in their careers
+  filter(threes_made &amp;gt; 200) %&amp;gt;% 
+  mutate(three_pct = threes_made / threes_attempted) %&amp;gt;% 
+  top_n(10, wt = three_pct) %&amp;gt;%
+  select(Player, threes_made, threes_attempted, three_pct) %&amp;gt;%
+  arrange(-three_pct) %&amp;gt;%
+  mutate(three_pct = paste0((round(three_pct * 100, 2)),&amp;quot;%&amp;quot;)) %&amp;gt;% 
+  kable()&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Player&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;threes_made&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;threes_attempted&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;three_pct&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Steve Kerr&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;816&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1852&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;44.06%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Hubert Davis&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;837&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1906&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;43.91%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Jason Kapono&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;472&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1082&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;43.62%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Steve Novak&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;637&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1468&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;43.39%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Stephen Curry&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2507&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5807&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;43.17%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Kyle Korver&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2723&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6391&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;42.61%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Steve Nash&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1863&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4377&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;42.56%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Drazen Petrovic&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;289&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;682&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;42.38%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;B.J. Armstrong&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;503&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1189&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;42.3%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Tim Legler&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;282&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;669&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;42.15%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This method has its own problems. For one, there will always be decent players on the other side of the arbitrary line. Less obviously, there are players with relatively short careers who made a high number of threes, but not enough to inspire confidence that their record would continue through a longer career.&lt;/p&gt;
+&lt;p&gt;Empirical Bayes can overcome these problems by generating a “prior” that is informed by all of the players, and then updating with each player’s actual data. A prior is a defensible estimate we would make before seeing an individual’s three-point data. Updating is a simple yet robust way of combining our first empirical guess with the data.&lt;/p&gt;
+&lt;p&gt;In Dr. Robinson’s &lt;em&gt;ebbr&lt;/em&gt; package, this can be done with one function: &lt;code&gt;add_ebb_estimate()&lt;/code&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;basic &amp;lt;- threes %&amp;gt;% 
+  group_by(player_id) %&amp;gt;% 
+  summarise(threes_made = sum(threes_made), threes_attempted = sum(threes_attempted),
+            Player = Player[1]) %&amp;gt;% 
+  mutate(three_pct = threes_made / threes_attempted) %&amp;gt;% 
+  add_ebb_estimate(threes_made, threes_attempted, prior_subset = threes_made &amp;gt; 50)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plotting both the measured rate and the EB estimate shows that some players are shrunken more towards the mean than others. (Hat tip to Julia Silge, from whom I cribbed the clean looking ggplot code).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;basic %&amp;gt;%
+  arrange(-.fitted) %&amp;gt;% 
+  top_n(20, wt = .fitted) %&amp;gt;% 
+  mutate(rank = row_number()) %&amp;gt;% 
+  rename(&amp;#39;Measured rate&amp;#39; = three_pct, &amp;#39;Empirical Bayes estimate&amp;#39; = .fitted) %&amp;gt;% 
+  gather(type, rate, `Measured rate`, `Empirical Bayes estimate`) %&amp;gt;%
+  ggplot(aes(rate, reorder(Player, -rank), color = type)) +
+  geom_errorbarh(aes(xmin = .low, xmax = .high), color = &amp;quot;gray50&amp;quot;) +
+  geom_point(size = 3) +
+  labs(x = &amp;quot;Three Point %&amp;quot;,
+       y = NULL, title = &amp;quot;Bayesian Estimate of the NBA&amp;#39;s Most Accurate 3-point Shooters&amp;quot;) +
+  scale_x_continuous(labels = scales::percent) +
+  theme_minimal() +
+  theme(legend.title=element_blank())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Steph’s brother Seth, for instance, has a record of hitting almost 44% of his threes, yet we estimate his rate at closer to 41%. This is fundamental to Bayesian analysis: extreme results require more data before we bet on them at Vegas. In the meantime, we lean more on the prior and draw a larger “credible interval,” which is the region where we very confident that the true value lies.&lt;/p&gt;
+&lt;p&gt;At this point, one might wonder why shrink at all? Why not just trust that Seth, Drazen, and others are as accurate as their records suggest they are? The answer is that they are on the far right tail of a fairly consistent density curve. If they got there on the basis of sparse data, it’s only logical to question whether we are seeing a consistent trend or statistical noise.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threes %&amp;gt;% 
+  group_by(player_id) %&amp;gt;% 
+  summarise(threes_attempted = sum(threes_attempted), threes_made = sum(threes_made),
+            Player = Player[1]) %&amp;gt;%
+  # Put filter on it to avoid crazy outliers
+  filter(threes_made &amp;gt; 100) %&amp;gt;% 
+  mutate(three_pct = threes_made / threes_attempted) %&amp;gt;%
+  ggplot(aes(x = three_pct)) +
+  geom_histogram() +
+  labs(x = &amp;quot;Three Point %&amp;quot;,
+       y = NULL, title = &amp;quot;Histogram of all Career 3-point Averages&amp;quot;,
+       subtitle = &amp;quot;for players with more than 100 3s made&amp;quot;) +
+  scale_x_continuous(labels = scales::percent) +
+  theme_minimal() +
+  theme(legend.title=element_blank())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-trouble-with-threes&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The Trouble with Threes&lt;/h2&gt;
+&lt;p&gt;All sports statistics are imperfect measures of a player’s performance. At best, they show relative differences in how well athletes shoot, steal, and rebound. At worst, they are marred by rule changes and outside factors that either exaggerate or handicap certain subgroups of players.&lt;/p&gt;
+&lt;p&gt;The NBA’s measure for three-point accuracy is one of worst kinds of the latter. Between 1995 and 1997, the NBA changed the distance of the three-point line, biasing all future comparisons between generations of players. During those years, it was as though we changed the distance of marathons to 21 miles &lt;em&gt;and kept all of the fastest records&lt;/em&gt;. You can see the record jump significantly in 1995.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threes %&amp;gt;% 
+  group_by(season) %&amp;gt;% 
+  ggplot(aes(x = season, y = three_pct, group = season)) +
+  geom_boxplot() +
+  labs(x = &amp;quot;Season&amp;quot;,
+       y = NULL, title = &amp;quot;Box Plot of 3% by Season&amp;quot;) +
+  scale_y_continuous(labels = scales::percent) +
+  theme_minimal()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Removed 6148 rows containing non-finite values (stat_boxplot).&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;To correct for this, I repeated the steps above, but this time I filtered out the years when the line was changed. I also made some important corrections to the prior probabilities similar to ones that Dr. Robinson describes in &lt;a href=&#34;http://varianceexplained.org/r/hierarchical_bayes_baseball/&#34;&gt;this post&lt;/a&gt;. Specifically, I made each player’s prior dependent on the log number of his attempts and the average year he played.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;no_line &amp;lt;- threes %&amp;gt;% 
+  mutate(line_change = case_when(season &amp;gt;= 1995 &amp;amp; season &amp;lt;= 1997 ~ &amp;quot;during&amp;quot;,
+                                 season &amp;lt; 1995 ~ &amp;quot;before&amp;quot;,
+                                 TRUE ~ &amp;quot;after&amp;quot;)) %&amp;gt;% 
+  filter(line_change != &amp;quot;during&amp;quot;) %&amp;gt;% 
+  group_by(player_id) %&amp;gt;% 
+  summarise(threes_made = sum(threes_made), threes_attempted = sum(threes_attempted),
+            Player = Player[1], season = round(mean(season))) %&amp;gt;% 
+  mutate(three_pct = threes_made / threes_attempted) %&amp;gt;% 
+  filter(threes_made &amp;gt;= 7) %&amp;gt;% 
+  add_ebb_estimate(threes_made, threes_attempted, method = &amp;quot;gamlss&amp;quot;, 
+                   mu_predictors = ~ season + log10(threes_attempted)) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The result is the ranking that I started this post with.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-kerr-conundrum&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The Kerr Conundrum&lt;/h2&gt;
+&lt;p&gt;Overall, I am fairly satisfied with the way this ranking turned out. Steph gets the benefit of the doubt, while Jason Kapono’s record gets treated with a little more skepticism. There are a few quibbles I have - most notably, Steve Kerr.&lt;/p&gt;
+&lt;p&gt;Kerr had some of his best years during the line change. It’s difficult to reconcile that with the need to compare fairly across generations. The good thing about this method is that it takes all of the available data, including from Kerr’s cohorts. The challenge is that including data from 1995-1997 would bias both the prior and posterior estimates. Moreover, Kerr was an anomaly, even compared to other players from his generation. Therefore, his estimate was shrunken a little more than I am comfortable with. I think he belongs somewhere above the Bayesian estimate, but below the top five.&lt;/p&gt;
+&lt;p&gt;^ I am indebted to Dr. Robinson both for his lucid explanations of Bayesian statistics and his &lt;em&gt;ebbr&lt;/em&gt; package in R. This post describes a toy example of using Bayesian methods to estimate proportions from hierarchical data, but I have used the same principles in real-world applications. I have worked through a few books on Bayesian data analysis, but none are as as engaging and clear.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Another Failed Attempt to Find the Op-Ed&#39;s Author with Data Science</title>
       <link>/op-ed-author/</link>
       <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
@@ -328,245 +567,6 @@ true_negatives &amp;lt;- sum(test_results &amp;lt; .004)
 (true_negatives + true_positivies) / n_tests
 
 # !It works 96% of the time&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Empirical Bayes to Estimate NBA Treys</title>
-      <link>/empirical_bayes_nba_treys/</link>
-      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/empirical_bayes_nba_treys/</guid>
-      <description>&lt;p&gt;In this post, I describe how I used Emprirical Bayesian methods to estimate the accuracy of NBA three-point shooters. This analysis closely follows the process outlined by David Robinson in his excellent book &lt;a href=&#34;http://varianceexplained.org/r/empirical-bayes-book/&#34;&gt;Introduction to Empirical Bayes: Examples from Baseball Statistics&lt;/a&gt;, and is performed using his &lt;a href=&#34;https://github.com/dgrtwo/ebbr&#34;&gt;ebbr&lt;/a&gt; package in R.^ The goal is to make a reasoned ranking of the top sharp shooters, despite insonsistent and imperfect records of how often players make the shots they attempt.&lt;/p&gt;
-&lt;p&gt;To create the following chart, I utilize data from both regular season and playoff records going back to 1980. As I describe below, however, I systematically drop three seasons of records in order to correct for a time when the three-point line was moved closer to the basket. Empirical Bayes is relatively robust to issues like these because estimates are created using data from the larger group: in this case, the entire history of NBA three-point shooters.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/empirical_bayes_nba_treys_files/figure-html/first_graph-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;NBA fans will quickly recognize Steph Curry at the top of this chart. He is the undisputed king of threes, but not neccesarily because of his accuracy so much as his quantity. Steph’s placement makes more sense in that context. Empirical Bayes effectively shrinks outliers towards a mean or trend; but the shrinking is less significant in cases where there are more observarions. In this case, Steph’s copious threes make us confident in his accuracy, which can be observed in the small error bar.&lt;/p&gt;
-&lt;p&gt;On the other hand, NBA fans with a little more historical knowledge will wonder why the erstwhile player Steve Kerr is not up there with the three-point prodigy he currently coaches. Is Steph Curry really the most accurate three-point shooter of all time? This analysis suggests so. But I encourage you to read on to see if you agree.&lt;/p&gt;
-&lt;div id=&#34;more-than-three-ways&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;More than three ways&lt;/h2&gt;
-&lt;p&gt;There are many ways to measure three-point accuracy. We could do the most straight forward: divide the number of makes by the number of attempts:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threes %&amp;gt;% 
-  group_by(player_id) %&amp;gt;% 
-  summarise(threes_attempted = sum(threes_attempted), threes_made = sum(threes_made),
-            Player = Player[1]) %&amp;gt;%
-  mutate(three_pct = threes_made / threes_attempted) %&amp;gt;% 
-  top_n(5, wt = three_pct) %&amp;gt;%
-  select(Player, threes_made, threes_attempted, three_pct) %&amp;gt;% 
-  head() %&amp;gt;% 
-  kable()&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th align=&#34;left&#34;&gt;Player&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;threes_made&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;threes_attempted&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;three_pct&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Alonzo Bradley&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Alvin Sims&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Coty Clarke&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Eddy Curry&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Eric Anderson&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Eric White&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;This has an obvious problem. Most record books overcome it by coming up with a seemingly arbitrary filter and then redoing the calculation.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threes %&amp;gt;% 
-  group_by(player_id) %&amp;gt;% 
-  summarise(threes_attempted = sum(threes_attempted), threes_made = sum(threes_made),
-            Player = Player[1]) %&amp;gt;%
-  # Only players with more than 200 threes made in their careers
-  filter(threes_made &amp;gt; 200) %&amp;gt;% 
-  mutate(three_pct = threes_made / threes_attempted) %&amp;gt;% 
-  top_n(10, wt = three_pct) %&amp;gt;%
-  select(Player, threes_made, threes_attempted, three_pct) %&amp;gt;%
-  arrange(-three_pct) %&amp;gt;%
-  mutate(three_pct = paste0((round(three_pct * 100, 2)),&amp;quot;%&amp;quot;)) %&amp;gt;% 
-  kable()&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th align=&#34;left&#34;&gt;Player&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;threes_made&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;threes_attempted&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;three_pct&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Steve Kerr&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;816&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1852&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;44.06%&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Hubert Davis&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;837&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1906&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;43.91%&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Jason Kapono&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;472&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1082&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;43.62%&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Steve Novak&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;637&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1468&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;43.39%&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Stephen Curry&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2507&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;5807&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;43.17%&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Kyle Korver&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2723&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;6391&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;42.61%&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Steve Nash&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1863&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;4377&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;42.56%&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Drazen Petrovic&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;289&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;682&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;42.38%&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;B.J. Armstrong&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;503&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1189&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;42.3%&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Tim Legler&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;282&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;669&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;42.15%&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;This method has its own problems. For one, there will always be decent players on the other side of the artbitrary line. Less obviously, there are players with relatively short careers who made a high number of threes, but not enough to inspire confidence that their record would continue through a longer career.&lt;/p&gt;
-&lt;p&gt;Emprical Bayes can overcome these problems by generating a “prior” that is informed by all of the players, and then updating with each player’s actual data. A prior is a defensible estimate we would make before seeing an individual’s three-point data. Updating is a simple yet robust way of combining our first empirical guess with the data.&lt;/p&gt;
-&lt;p&gt;In Dr. Robinson’s &lt;em&gt;ebbr&lt;/em&gt; package, this can be done with one function: &lt;code&gt;add_ebb_estimate()&lt;/code&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;basic &amp;lt;- threes %&amp;gt;% 
-  group_by(player_id) %&amp;gt;% 
-  summarise(threes_made = sum(threes_made), threes_attempted = sum(threes_attempted),
-            Player = Player[1]) %&amp;gt;% 
-  mutate(three_pct = threes_made / threes_attempted) %&amp;gt;% 
-  add_ebb_estimate(threes_made, threes_attempted, prior_subset = threes_made &amp;gt; 50)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Plotting both the measured rate and the EB estimate shows that some players are shrunken more towards the mean than others. (Hat tip to Julia Silge, from whom I cribbed the clean looking ggplot code).&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;basic %&amp;gt;%
-  arrange(-.fitted) %&amp;gt;% 
-  top_n(20, wt = .fitted) %&amp;gt;% 
-  mutate(rank = row_number()) %&amp;gt;% 
-  rename(&amp;#39;Measured rate&amp;#39; = three_pct, &amp;#39;Empirical Bayes estimate&amp;#39; = .fitted) %&amp;gt;% 
-  gather(type, rate, `Measured rate`, `Empirical Bayes estimate`) %&amp;gt;%
-  ggplot(aes(rate, reorder(Player, -rank), color = type)) +
-  geom_errorbarh(aes(xmin = .low, xmax = .high), color = &amp;quot;gray50&amp;quot;) +
-  geom_point(size = 3) +
-  labs(x = &amp;quot;Three Point %&amp;quot;,
-       y = NULL, title = &amp;quot;Bayesian Estimate of the NBA&amp;#39;s Most Accurate 3-point Shooters&amp;quot;) +
-  scale_x_continuous(labels = scales::percent) +
-  theme_minimal() +
-  theme(legend.title=element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Steph’s brother Seth, for instance, has a record of hitting almost 44% of his threes, yet we estimate his rate at closer to 41%. This is fundamental to Bayesian anaysis: extreme results require more data before we bet on them at Vegas. In the meantime, we lean more on the prior and draw a larger “credible interval,” which is the region where we very confident that the true value lies.&lt;/p&gt;
-&lt;p&gt;At this point, one might wonder why shrink at all? Why not just trust that Seth, Drazen, and others are as accurate as their records suggest they are? The answer is that they are on the far right tail of a fairly consistent density curve. If they got there on the basis of sparse data, it’s only logical to question whether we are seeing a consistent trend or statistical noise.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threes %&amp;gt;% 
-  group_by(player_id) %&amp;gt;% 
-  summarise(threes_attempted = sum(threes_attempted), threes_made = sum(threes_made),
-            Player = Player[1]) %&amp;gt;%
-  # Put filter on it to avoid crazy outliers
-  filter(threes_made &amp;gt; 100) %&amp;gt;% 
-  mutate(three_pct = threes_made / threes_attempted) %&amp;gt;%
-  ggplot(aes(x = three_pct)) +
-  geom_histogram() +
-  labs(x = &amp;quot;Three Point %&amp;quot;,
-       y = NULL, title = &amp;quot;Histogram of all Career 3-point Averages&amp;quot;,
-       subtitle = &amp;quot;for players with more than 100 3s made&amp;quot;) +
-  scale_x_continuous(labels = scales::percent) +
-  theme_minimal() +
-  theme(legend.title=element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;the-trouble-with-threes&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;The Trouble with Threes&lt;/h2&gt;
-&lt;p&gt;All sports statistics are imperfect measures of a player’s performance. At best, they show relative differences in how well athletes shoot, steal, and rebound. At worst, they are marred by rule changes and outside factors that either exaggerate or handicap certain subgroups of players.&lt;/p&gt;
-&lt;p&gt;The NBA’s measure for three-point accuracy is one of worst kinds of the latter. Between 1995 and 1997, the NBA changed the distance of the three-point line, biasing all future comparisons between generations of players. During those years, it was as though we changed the distance of marathons to 21 miles &lt;em&gt;and kept all of the fastest records&lt;/em&gt;. You can see the record jump significantly in 1995.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;threes %&amp;gt;% 
-  group_by(season) %&amp;gt;% 
-  ggplot(aes(x = season, y = three_pct, group = season)) +
-  geom_boxplot() +
-  labs(x = &amp;quot;Season&amp;quot;,
-       y = NULL, title = &amp;quot;Box Plot of 3% by Season&amp;quot;) +
-  scale_y_continuous(labels = scales::percent) +
-  theme_minimal()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Warning: Removed 6148 rows containing non-finite values (stat_boxplot).&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;To correct for this, I repeated the steps above, but this time I filtered out the years when the line was changed. I also made some important corrections to the prior probabilities similar to ones that Dr. Robinson describes in &lt;a href=&#34;http://varianceexplained.org/r/hierarchical_bayes_baseball/&#34;&gt;this post&lt;/a&gt;. Specifically, I made each player’s prior dependent on the log number of his attempts and the average year he played.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;no_line &amp;lt;- threes %&amp;gt;% 
-  mutate(line_change = case_when(season &amp;gt;= 1995 &amp;amp; season &amp;lt;= 1997 ~ &amp;quot;during&amp;quot;,
-                                 season &amp;lt; 1995 ~ &amp;quot;before&amp;quot;,
-                                 TRUE ~ &amp;quot;after&amp;quot;)) %&amp;gt;% 
-  filter(line_change != &amp;quot;during&amp;quot;) %&amp;gt;% 
-  group_by(player_id) %&amp;gt;% 
-  summarise(threes_made = sum(threes_made), threes_attempted = sum(threes_attempted),
-            Player = Player[1], season = round(mean(season))) %&amp;gt;% 
-  mutate(three_pct = threes_made / threes_attempted) %&amp;gt;% 
-  filter(threes_made &amp;gt;= 7) %&amp;gt;% 
-  add_ebb_estimate(threes_made, threes_attempted, method = &amp;quot;gamlss&amp;quot;, 
-                   mu_predictors = ~ season + log10(threes_attempted)) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The result is the ranking that I started this post with.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/empirical_bayes_nba_treys_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;the-kerr-conundrum&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;The Kerr Conundrum&lt;/h2&gt;
-&lt;p&gt;Overall, I am fairly satisfied with the way this ranking turned out. Steph gets the benefit of the doubt, while Jason Kapono’s record gets treated with a little more skepticism. There are a few quibbles I have - most notably, Steve Kerr.&lt;/p&gt;
-&lt;p&gt;Kerr had some of his best years during the line change. It’s difficult to reconcile that with the need to compare fairly across generations. The good thing about this method is that it takes all of the available data, including from Kerr’s cohorts. The challenge is that including data from 1995-1997 would bias both the prior and posterior estimates. Moreover, Kerr was an anomaly, even compared to other players from his generation. Therefore, his estimate was shrunken a little more than I am comfortable with. I think he belongs somewhere above the bayesian estimate, but below the top five.&lt;/p&gt;
-&lt;p&gt;^ I am indebted to Dr. Robinson both for his lucid explanations of Bayesian statistics and his &lt;em&gt;ebbr&lt;/em&gt; package in R. This post describes a toy example of using Bayesian methods to estimate proportions from hierarchical data, but I have used the same principles in real-world applications. I have worked through a few books on Bayesian data analysis, but none are as as engaging and clear.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
