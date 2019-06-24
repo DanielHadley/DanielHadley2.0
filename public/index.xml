@@ -11,6 +11,19 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>The Past, Present, and Future of Using Data for Good</title>
+      <link>/talk/utou/</link>
+      <pubDate>Wed, 08 May 2019 00:00:00 -0600</pubDate>
+      
+      <guid>/talk/utou/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://giving.utah.edu/uupci/the-past-present-and-future-of-using-data-for-good/&#34; target=&#34;_blank&#34;&gt;Here&lt;/a&gt; is the website&lt;/li&gt;
+&lt;li&gt;And &lt;a href=&#34;https://vimeo.com/336403538&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt; is the video&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Empirical Bayes to Estimate NBA Treys</title>
       <link>/empirical_bayes_nba_treys/</link>
       <pubDate>Tue, 25 Sep 2018 00:00:00 +0000</pubDate>
@@ -825,46 +838,6 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
 &lt;p&gt;In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days. (Today that happens to include an uptick in reports of dead animals on the streets and sidewalks, which is disgusting but useful to know).&lt;/p&gt;
 
 &lt;p&gt;This blogpost describes the technical details, and the dashboard&amp;rsquo;s repository is &lt;a href=&#34;https://github.com/cityofsomerville/SomervilleSystems&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>From Jupyter Notebooks to R Markdown</title>
-      <link>/jupyter-to-rmarkdown/</link>
-      <pubDate>Thu, 08 Sep 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/jupyter-to-rmarkdown/</guid>
-      <description>&lt;p&gt;Edit, 3/28/18: RStudio just announced Python interoperability through the &lt;a href=&#34;https://blog.rstudio.com/2018/03/26/reticulate-r-interface-to-python/&#34;&gt;reticulate package&lt;/a&gt;. Rmd Notebooks are unbeatable, in my opinion.&lt;/p&gt;
-&lt;div id=&#34;original-post&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Original Post:&lt;/h3&gt;
-&lt;p&gt;I started using Jupyter Notebooks back when they were called IPython. I even remember having to set up a virtual Linux environment because they were not available on Windows. As much as I have enjoyed their functionality, I recently switched entirely to R Markdown in an RStudio environment. Here’s why.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;exporting-to-github&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Exporting to Github&lt;/h3&gt;
-&lt;p&gt;The &lt;a href=&#34;http://rmarkdown.rstudio.com/github_document_format.html&#34;&gt;github_document&lt;/a&gt; option in R Markdown is the perfect way to share your analysis over the web. Just write the markdown with R chunks, “knit” it, and commit everything to a repository, and RStudio will create a directory with all plots and outputs ready to view. One advantage Jupyter Notebooks used to hold was the aesthetic formatting of tables and dataframes on Github. But with the kable function in the knitr package, I have been able to output HTML tables that look just as clean.&lt;/p&gt;
-&lt;p&gt;I updated a previous Gist to show how this works &lt;a href=&#34;https://github.com/DanielHadley/Example-R-Markdown-on-Github/blob/master/Example.md&#34;&gt;on Github&lt;/a&gt;. Compare that finished product with the raw code &lt;a href=&#34;https://raw.githubusercontent.com/DanielHadley/Example-R-Markdown-on-Github/master/Example.Rmd&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;exporting-to-word-is-a-breeze&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Exporting to Word is a breeze&lt;/h3&gt;
-&lt;p&gt;A lot of my analysis is for non-technical clients, many of whom are most comfortable with a Word doc. I have found the process of translating code to .docx to be exquisitely easy. The hardest part was inserting page breaks, but thankfully someone come up with a &lt;a href=&#34;https://scriptsandstatistics.wordpress.com/2015/12/18/rmarkdown-how-to-inserts-page-breaks-in-a-ms-word-document/&#34;&gt;clever hack&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;version-control&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Version control&lt;/h3&gt;
-&lt;p&gt;As &lt;a href=&#34;http://opiateforthemass.es/articles/why-i-dont-like-jupyter-fka-ipython-notebook/&#34;&gt;others&lt;/a&gt; have pointed out, version control of a Jupyther Notebook is not a straightforward process. R Markdown is all plain text, so changes are easy to track in Git. For the first time, I feel in control of changes made to my Word documents.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;rstudio&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;RStudio&lt;/h3&gt;
-&lt;p&gt;I had the R kernel working nicely in Jupyter Notebooks. I did not encounter a lot of errors. But the entire time I was developing, I missed all of the features of RStudio. In particular, I missed having tab completion and the correct indentation on dplyr chains. But I also missed the layout with my environment, history, console, etc., not to mention the View() function on dataframes, and running code line-by-line. RStudio has become an amazing, feature-rich IDE, which I am not anxious to trade for another environment.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;python-is-here-sort-of&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Python is here (sort of)&lt;/h3&gt;
-&lt;p&gt;At least since &lt;a href=&#34;https://ironholds.org/blog/python-now-in-rstudio/&#34;&gt;2004&lt;/a&gt;, it is possible to run Python scripts in RStudio. There is even syntax highlighting and other IDE features. The nice thing is, the knitr library has support for &lt;a href=&#34;http://yihui.name/knitr/demo/engines/&#34;&gt;other languages&lt;/a&gt;, so you can include Python chunks in, for example, your Word doc.&lt;/p&gt;
-&lt;p&gt;There are problems with this, as &lt;a href=&#34;https://www.reddit.com/r/rstats/comments/51tzcb/why_i_switched_from_jupyter_notebooks_to_r/d7k3zvd&#34;&gt;u/_Wintermute noted&lt;/a&gt;. Apparently, the variables do not transfer between “chunks,” let alone languages. The docs for the Python &lt;a href=&#34;http://rmarkdown.rstudio.com/authoring_knitr_engines.html&#34;&gt;language engine&lt;/a&gt; describe a data exchange, which is exciting, but it looks like you have to write the dataframe in one language and then read it in the other. These are not exactly seamless transitions.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;unknown-unknowns&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Unknown Unknowns&lt;/h3&gt;
-&lt;p&gt;I’m certain there are a lot of great features of both platforms that I am totally unaware of. And I still think Jupyter is doing more to integrate the various data science languages. It’s possible I will switch back, but for now I seem to be getting more locked in to RStudio. At the moment I am researching how to convert my website into R Markdown. It just works really well.&lt;/p&gt;
-&lt;/div&gt;
 </description>
     </item>
     
