@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sat, 08 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/language/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Book Review: Irreversible Things</title>
+      <link>/irreversible-things-review/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/irreversible-things-review/</guid>
+      <description>Book Title: Irreversible Things Author: Lisa Van Orman Hadley
+I should begin this review with a caveat: I am Lisa’s husband, and make no pretensions to describe her work impartially or devoid of context. To my surprise, the character who resembles me is portrayed sparingly, but more than generously. I have no axe to grind! Instead of hiding my biases, therefore, I will lean in to them a bit, and give a sense of how my reading of Irreversible Things was made richer by the details I know about Lisa and her family.</description>
+    </item>
     
     <item>
       <title>Another Failed Attempt to Find the Op-Ed&#39;s Author with Data Science</title>

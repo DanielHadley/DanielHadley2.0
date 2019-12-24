@@ -11,6 +11,25 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Book Review: Irreversible Things</title>
+      <link>/irreversible-things-review/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/irreversible-things-review/</guid>
+      <description>&lt;p&gt;Book Title: &lt;a href=&#34;https://www.spdbooks.org/Products/9780996195256/irreversible-things.aspx&#34;&gt;Irreversible Things&lt;/a&gt;
+Author: Lisa Van Orman Hadley&lt;/p&gt;
+&lt;p&gt;I should begin this review with a caveat: I am Lisa’s husband, and make no pretensions to describe her work impartially or devoid of context. To my surprise, the character who resembles me is portrayed sparingly, but more than generously. I have no axe to grind! Instead of hiding my biases, therefore, I will lean in to them a bit, and give a sense of how my reading of Irreversible Things was made richer by the details I know about Lisa and her family.&lt;/p&gt;
+&lt;p&gt;The first thing I will say, however, is that I believe I would have loved this book even if it had been written by a stranger. Lisa’s collection of stories has a universal appeal, with rave reviews from both children and literary critics. The book is redolent of childhood in the 80s, but contains a spectrum of emotional valence that anyone can relate to. Lisa’s writing, rewriting, editing, and further rewriting crates a palimpsest, where stories are able to simultaneously make you cry, make your child laugh, and give you pause to think, “beautiful.”&lt;/p&gt;
+&lt;p&gt;My favorite story, the Red Tide, illustrates this layering of beauty, sadness, humor, and human interest. In it, the narrator is on the cusp of leaving Florida for Utah, a move which also marks her passage into adolescence. The narrator, her best friend, and three other characters play truth or dare while eating pizza and watching HBO. On the face of it, this is as mundane to 80s kids as walking to school. But glances to the beach augur a deeper set of emotions: “Even the ocean, usually so clear that I can see the little grains of salt suspended in it, is cloudy and off-color. And the sand, usually white and fine as cake powder, is littered with long knots of seaweed and something that looks like motor-oil.”&lt;/p&gt;
+&lt;p&gt;As the game progresses, the narrator’s anxiety ratchets up. This crescendo is punctured by a hilarious prank call to the Show-N-Tail and punctuated by a courageous dare. Throughout the story, however, the narrator also reveals the future of her friends. In short, salient snippets, we see how they later marry, have children, live, and die. When it’s the narrator’s turn, she muses on the inevitability of everything, and then breaks the fourth wall to say, “you already know my future.”&lt;/p&gt;
+&lt;p&gt;Like the Red Tide, the rest of the novel follows a rough ordering of the narrator’s life, but is also atemporal at points. Lisa’s playfulness with time and chronology is most felt in the novel’s eponymous story, Irreversible Things, which moves backwards from the aftermath of a tragic murder. In another story, Lisa invites readers to choose their own adventure. Divorced from 80s- and 90s-era children’s books, this convention shows how both time and truth are relative. Before presenting the adventure options, the narrator remarks, “what I remember is a simultaneity of possible outcomes instead of a sequence of actual events.” Reading the novel is like entering Schrödinger’s box and finding a woman who is depressed yet happy, humorous yet scared, and young but alive to the richness of her stories.&lt;/p&gt;
+&lt;p&gt;As promised, here are some things I noticed because of my closeness to the Van Ormans: most of the significant events are true, even if the details take a more magical form. Irreversible Things is not billed as memoir, but Lisa’s life is closely correlated to the narrator’s. To this point, I can attest that her family is as generous, kind, adventurous, and loving as they seem in the novel. I’ve had friends say, “I wish that were my mom growing up,” and I am sure many readers would agree.&lt;/p&gt;
+&lt;p&gt;But if you really want a glimpse into Lisa’s personality–and I mean the deepest part that drives a lot of her day-to-day thoughts and actions–you needn’t look further than the puns. As a wordsmith, Lisa loves puns; and they are everywhere in this book. Many times I’ve caught her chuckling to herself, only to find out that she was remembering a pun she made earlier in the day. Knowing this, I also chuckled at the many times she snuck them in. This one is hidden in a story about an interaction with her mother that happens in a bathroom: “as an adult, I can fix almost anything that goes wrong with the toilet from all the hours I spent plumbing its depths as a kid.”&lt;/p&gt;
+&lt;p&gt;It’s impossible to say how Lisa’s story will end. Irreversible Things ends on a joyful note. Time flies like an arrow, as they say, but fruit flies like a banana.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>The Past, Present, and Future of Using Data for Good</title>
       <link>/talk/utou/</link>
       <pubDate>Wed, 08 May 2019 00:00:00 -0600</pubDate>
@@ -818,26 +837,6 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
 &lt;p&gt;At the risk of sounding like techno-utopians, we think this approach of using big data tools has the potential to help solve some of our biggest social problems. One can imagine employing Artificial Neural Networks to identify the parolees who are most in need of social work, or the students who need advanced tutoring. At the very least, we can use packages in the programming languages Python and R to transfer and merge data so that it is useful to service providers.&lt;/p&gt;
 &lt;p&gt;If this work sounds appealing to you, please reach out. We are hiring data scientists.&lt;/p&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A Dashboard with Weak AI</title>
-      <link>/project/dashboards/</link>
-      <pubDate>Sat, 15 Oct 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/project/dashboards/</guid>
-      <description>&lt;p&gt;R has been the perfect language for the back end of &lt;a href=&#34;http://www.somervillema.gov/dashboard/daily.html&#34; target=&#34;_blank&#34;&gt;this&lt;/a&gt; government data dashboard I am developing.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;It has excellent packages to pipe in data from every significant source&lt;/li&gt;
-&lt;li&gt;Tools like dplyr and tidyr make cleaning and munging data trivial&lt;/li&gt;
-&lt;li&gt;It is ideal for automating analysis&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In the R script that powers my dashboard, I have everything from simple averages and frequency tables, to a complex algorithm that converts timeseries figures to Z-Scores and then selects the top 3 variables to display based on standard scores from the last 7 days. (Today that happens to include an uptick in reports of dead animals on the streets and sidewalks, which is disgusting but useful to know).&lt;/p&gt;
-
-&lt;p&gt;This blogpost describes the technical details, and the dashboard&amp;rsquo;s repository is &lt;a href=&#34;https://github.com/cityofsomerville/SomervilleSystems&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
