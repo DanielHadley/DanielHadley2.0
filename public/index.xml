@@ -11,24 +11,25 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Bootstrap ALL the Statistics with Tyidmodels</title>
+      <title>Bootstrap Statistics with Tidymodels to Compare Bicycle Helmets</title>
       <link>/bootstrap_tutto/</link>
       <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/bootstrap_tutto/</guid>
       <description>&lt;p&gt;Bootstrapping has long been one of my favorite statistical procedures. The nonparametric version requires few assumptions, and it shares attributes with both simulation and common &lt;a href=&#34;http://www.sumsar.net/blog/2015/04/the-non-parametric-bootstrap-as-a-bayesian-model/&#34;&gt;Bayesian models&lt;/a&gt;, both of which I love. At the end of the day I wonder, why settle for a point estimate and two values for the confidence intervals when you can create a distribution and &lt;em&gt;visualize&lt;/em&gt; your CIs? When my friend Rich first introduced me to bootstrapping, he said that if statistics had been invented in the computer age, this is where most classes would start. I agree.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.tidymodels.org/&#34;&gt;Tidymodels&lt;/a&gt; has provided an excellent framework for applying bootstrapping using tidyverse principles. The rsample package will be the focus of this post.&lt;/p&gt;
-&lt;p&gt;I scraped data from Virginia Tech’s &lt;a href=&#34;https://helmet.beam.vt.edu/&#34;&gt;helmet ratings&lt;/a&gt;. The motivating example is to estimate the affect of a new helmet technolgy called &lt;a href=&#34;https://www.trekbikes.com/us/en_US/wavecel/&#34;&gt;WaveCel&lt;/a&gt;, which is claimed to significantly reduce the probability of a concussion by absorbing angled impacts better. As it happens, I have already crashed twice in a WaveCel helmet while riding my mountain bike (I know, I know. I’ve dialed it back since then). In both cases, I avoided what may have been a more serious brain injury. But what do the test data say?&lt;/p&gt;
+&lt;p&gt;I scraped data from Virginia Tech’s &lt;a href=&#34;https://helmet.beam.vt.edu/&#34;&gt;helmet ratings&lt;/a&gt;. I’m sincerely grateful that they not only release this data, but have also answered my questions about methodology. If all test labs adopted VT’s open-source ethos, consumers would be much more confident about the safety of their helmets.&lt;/p&gt;
+&lt;p&gt;The motivating example is to estimate the affect of a new helmet technology called &lt;a href=&#34;https://www.trekbikes.com/us/en_US/wavecel/&#34;&gt;WaveCel&lt;/a&gt;, which is claimed to significantly reduce the probability of a concussion by absorbing angled impacts better. As it happens, I have already crashed twice in a WaveCel helmet while riding my mountain bike (I know, I know. I’ve dialed it back since then). In both cases, I avoided what may have been a more serious brain injury. But what do the test data say?&lt;/p&gt;
 &lt;p&gt;Virginia Tech assigns scores to helmets based on a testing methodology that accounts for the frequency and severity of impacts. A lower score in their system represents a reduced probability of common injuries. Importantly for our analysis, the scores are not normally distributed.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/bootstrap_tutto_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;I am most interested in the difference between two technologies, WaveCel and MIPS, both of which reduce torsional impacts. WaveCel is such a new technology that there are only four helmets that use it currently on the market–a small sample size, to be sure. Fortunately, all four have been tested by VT; and their scores are smiliar enough that it is possible to see the difference between WaveCel, its more established rival MIPS, and the standard helmets that mostly protect against linear impacts.&lt;/p&gt;
+&lt;p&gt;I am most interested in the difference between two technologies, WaveCel and MIPS, both of which reduce torsional impacts. WaveCel is such a new technology that there are only four helmets that use it currently on the market–a small sample size, to be sure. Fortunately, all four have been tested by VT; and their scores are similar enough that it is possible to see the difference between WaveCel, its more established rival MIPS, and the standard helmets that mostly protect against linear impacts.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/bootstrap_tutto_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;What is obvious in this plot is that MIPS and WaveCel are right on par with each other, and that both technologies test better than regular helmets. &lt;a href=&#34;https://helmets.org/vatechstar.htm&#34;&gt;Some say&lt;/a&gt; that VT’s testing protocols favor MIPS and WaveCel by coupling the headform more tightly to the helmet. It would be great if other labs released their data. But for now this is the most comprehensive way to compare helmets.&lt;/p&gt;
 &lt;p&gt;I could perform a simple t-test of the means, which would show WaveCel with a slight edge over MIPS. But I wanted to go a step further and control for the helmet types, which affect test performance too.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/bootstrap_tutto_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;div id=&#34;bootstrap-the-tidy-way&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bootstrap the Tidy Way&lt;/h2&gt;
-&lt;p&gt;Tidymodels is a collection of packages that automate common modeling practices, simplify many processes, and make it easier to store outputs in a tidy format. I find that the unique nomenclature can be confusing (am I &lt;code&gt;baking&lt;/code&gt; this thing, or &lt;code&gt;juicing&lt;/code&gt; it?), but in general love how it streamlines everything from data preperation to model tuning.&lt;/p&gt;
+&lt;p&gt;Tidymodels is a collection of packages that automate common modeling practices, simplify tuning and training, and make it easier to store outputs in a tidy format. I find that the unique nomenclature can be confusing (am I &lt;code&gt;baking&lt;/code&gt; this thing, or &lt;code&gt;juicing&lt;/code&gt; it?), but in general love how it streamlines everything from data preparation to cross validation.&lt;/p&gt;
 &lt;p&gt;For this problem, I begin by setting up a bootstrap of 3,000 resamples. Each split is the same length of the original, but with random samples taken with replacement, such that any given helmet could be included more than once.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1876)
 helmet_bootraps &amp;lt;- bootstraps(helmets, times = 3e3, apparent = TRUE)&lt;/code&gt;&lt;/pre&gt;
@@ -48,7 +49,7 @@ helmet_bootraps &amp;lt;- bootstraps(helmets, times = 3e3, apparent = TRUE)&lt;/
 &lt;p&gt;Now for the cool part: because the splits are stored as lists within a &lt;code&gt;tibble&lt;/code&gt;, you can easily &lt;code&gt;map&lt;/code&gt; any type of function to the data. For this example, I’ve written three functions:&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;The mean of MIPS scores&lt;/li&gt;
-&lt;li&gt;A linear model with type and technolgoy as independent variables&lt;/li&gt;
+&lt;li&gt;A linear model with type and technology as independent variables&lt;/li&gt;
 &lt;li&gt;The difference between the coefficients for MIPS and WaveCel in that model&lt;/li&gt;
 &lt;/ol&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#1
@@ -95,7 +96,7 @@ head(helmet_stats)&lt;/code&gt;&lt;/pre&gt;
 ## 4 &amp;lt;split [99/37]&amp;gt; Bootstrap0004 &amp;lt;tibble [1 × 3]&amp;gt; &amp;lt;tibble [6 × 5… &amp;lt;tibble [1 × 3…
 ## 5 &amp;lt;split [99/39]&amp;gt; Bootstrap0005 &amp;lt;tibble [1 × 3]&amp;gt; &amp;lt;tibble [6 × 5… &amp;lt;tibble [1 × 3…
 ## 6 &amp;lt;split [99/35]&amp;gt; Bootstrap0006 &amp;lt;tibble [1 × 3]&amp;gt; &amp;lt;tibble [6 × 5… &amp;lt;tibble [1 × 3…&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With this meta-tibble, I can make us of handy functions from the &lt;code&gt;rsample&lt;/code&gt; package to calculate things like perentile intervals, T-intervals, and BCa, which are useful for obtaining confidence intervals of boostrapped statistics.&lt;/p&gt;
+&lt;p&gt;With this meta-tibble, I can make us of handy functions from the &lt;code&gt;rsample&lt;/code&gt; package to calculate things like percentile intervals, T-intervals, and BCa, which are useful for obtaining confidence intervals of bootstrapped statistics.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;int_pctl(helmet_stats, mips_mean)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
 ##   term  .lower .estimate .upper .alpha .method   
@@ -115,7 +116,7 @@ helmet_coefs %&amp;gt;%
          y = &amp;quot;Count /3k Bootstrapped Models&amp;quot;,
          title = &amp;quot;WaveCel is better, but there is overlap&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/bootstrap_tutto_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;This plot is why I appreciate boostrapping. It’s a visual representation of thousands of model coefficients, each from a different sample of the original data, showing the range of outcomes for both technologies.&lt;/p&gt;
+&lt;p&gt;This plot is why I appreciate bootstrapping. It’s a visual representation of thousands of model coefficients, each from a different sample of the original data, showing the range of outcomes for both technologies.&lt;/p&gt;
 &lt;p&gt;To get an intuition of what’s happening, imagine taking data from one of the more extreme results, say the far left tail on WaveCel.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;extreme_result &amp;lt;- helmet_coefs %&amp;gt;% 
   filter(term == &amp;quot;wavecelTRUE&amp;quot;) %&amp;gt;%
@@ -135,13 +136,13 @@ as_tibble(extreme_result$splits[[1]]) %&amp;gt;%
 &lt;/div&gt;
 &lt;div id=&#34;bootstrapping-the-differences&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Bootstrapping the Differences&lt;/h3&gt;
-&lt;p&gt;To get a final estimate of the &lt;em&gt;difference&lt;/em&gt; between MIPS and WaveCel, I will use the percentile interval on the delta between the coefficients. That’s a lot of nouns. What I mean is, for each bootstrap sample I run a regression and subtract the WaveCel effect from the MIPS effect (controlling for helmet type). The percentile interval is a way to show an upper and lower bound that countain about 95% of those values.&lt;/p&gt;
+&lt;p&gt;To get a final estimate of the &lt;em&gt;difference&lt;/em&gt; between MIPS and WaveCel, I will use the percentile interval on the delta between the coefficients. That’s a lot of nouns. What I mean is, for each bootstrap sample I run a regression and subtract the WaveCel effect from the MIPS effect (controlling for helmet type). The percentile interval is a way to show an upper and lower bound that contain about 95% of those values.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;int_pctl(helmet_stats, coef_diff)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
 ##   term              .lower .estimate .upper .alpha .method   
 ##   &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;     
 ## 1 diff_mips_wavecel  -2.55     -1.18  0.274   0.05 percentile&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Based on this, WaveCel is probably better at VT’s tests. This shows an upper value that is above zero, however, so we cannot rule out the possibility that MIPS is better. Once again, having a tidy tibble is nice, becuase I can filter the data to values in the 95% interval and see what portion of those are below zero (i.e., favor WaveCel).&lt;/p&gt;
+&lt;p&gt;Based on this, WaveCel is probably better at VT’s tests. This shows an upper value that is above zero, however, so we cannot rule out the possibility that MIPS is better. Once again, having a tidy tibble is nice, because I can filter the data to values in the 95% interval and see what portion of those are below zero (i.e., favor WaveCel).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;proportion &amp;lt;- helmet_stats %&amp;gt;%
   unnest(coef_diff) %&amp;gt;% 
   filter(estimate &amp;gt;= -2.551318 &amp;amp; estimate &amp;lt;= 0.2744458) %&amp;gt;% 
@@ -156,7 +157,7 @@ sum(proportion$neg) / nrow(proportion)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I estimate that WaveCel is equal to a 1.17 point advantage on Virginia Tech’s tests relative to MIPS. Based on my read of their methodology, this translates to about a 2.5% increase in safety (they appear to have a scale of 0 - 47.4). This does not seem like much. Indeed, seperate tests led by WaveCel’s inventors showed a much larger effect. When it comes to preventing brain injury, however, even small gains are within my region of practical significance.&lt;/p&gt;
+&lt;p&gt;Bootstrapping suggests that WaveCel is equal to a 1.17 point advantage on Virginia Tech’s tests relative to MIPS. Based on my read of VT’s methodology, this translates to about a 2.5% decrease in the probability of a concussion (they appear to have a scale of 0 - 47.4 representing common impacts). This does not seem like much. Indeed, separate tests led by WaveCel’s inventors showed a much larger effect. When it comes to preventing brain injury, however, even small gains are within my region of practical significance.&lt;/p&gt;
 &lt;p&gt;In any case, bootstrapping is a useful tool for visualizing and estimating how confident to be in model results. Tidymodels, and specifically the &lt;code&gt;rsample&lt;/code&gt; package, provide an easy platform for working with bootstrapped samples.&lt;/p&gt;
 &lt;/div&gt;
 </description>
