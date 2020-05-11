@@ -1,0 +1,100 @@
+V1,id,score,style,mips,wavecel
+Fox Dropframe Pro (MIPS),1,8.9, Mountain,TRUE,FALSE
+Lazer G1 MIPS,2,9.2, Road,TRUE,FALSE
+Bontrager Rally MIPS,3,9.3, Mountain,TRUE,FALSE
+Troy Lee Designs A2 MIPS Decoy,4,10, Mountain,TRUE,FALSE
+Lazer Century MIPS,5,10, Road,TRUE,FALSE
+Lazer Cyclone MIPS,6,10.5, Multi-sport,TRUE,FALSE
+SCOTT ARX PLUS (MIPS) 2020,7,10.7, Multi-sport,TRUE,FALSE
+Bontrager Specter WaveCel,8,10.8, Road,FALSE,TRUE
+Fox Speedframe Pro (MIPS),9,10.8, Mountain,TRUE,FALSE
+Bontrager Ballista MIPS,10,10.9, Road,TRUE,FALSE
+Lazer Anverz NTA MIPS,11,11, Urban,TRUE,FALSE
+Giro Tyrant MIPS SP,12,11.2, Mountain,TRUE,FALSE
+Bell Z20 MIPS,13,11.2, Road,TRUE,FALSE
+Troy Lee Designs A1 Classic MIPS,14,11.7, Mountain,TRUE,FALSE
+POC Tectal Race Spin,15,11.7, Mountain,FALSE,FALSE
+Bontrager XXX WaveCel,16,11.8, Road,FALSE,TRUE
+Bell Formula MIPS,17,11.9, Road,TRUE,FALSE
+Lazer Z1 MIPS,18,12.2, Road,TRUE,FALSE
+Specialized Echelon II MIPS,19,12.2, Road,TRUE,FALSE
+Rudy Project Racemaster MIPS,20,12.3, Road,TRUE,FALSE
+Lazer BLADE+ MIPS,21,12.3, Road,TRUE,FALSE
+Louis Garneau Raid MIPS,22,12.3, Mountain,TRUE,FALSE
+Bell Z20 Aero MIPS,23,12.4, Road,TRUE,FALSE
+Giro Aether MIPS SP,24,12.5, Road,TRUE,FALSE
+Bern Union MIPS,25,12.6, Urban,TRUE,FALSE
+Specialized S-Works Prevail II (MIPS),26,12.7, Road,TRUE,FALSE
+Bell Stratus MIPS,27,12.9, Road,TRUE,FALSE
+Giro Synthe MIPS,28,13, Road,TRUE,FALSE
+Lazer Chiru MIPS,29,13, Mountain,TRUE,FALSE
+Specialized Chamonix MIPS,30,13.1, Multi-sport,TRUE,FALSE
+Bontrager Blaze WaveCel,31,13.2, Mountain,FALSE,TRUE
+Giro Syntax MIPS,32,13.4, Road,TRUE,FALSE
+Bontrager Charge WaveCel,33,13.6, Urban,FALSE,TRUE
+Giro Chronicle MIPS,34,13.7, Mountain,TRUE,FALSE
+Lazer Impala MIPS,35,13.8, Mountain,TRUE,FALSE
+Specialized Ambush (MIPS),36,14, Mountain,TRUE,FALSE
+Smith Route MIPS,37,14, Road,TRUE,FALSE
+Bontrager Circuit MIPS,38,14, Road,TRUE,FALSE
+Giro Caden MIPS,39,14.2, Urban,TRUE,FALSE
+SCOTT ARX PLUS (MIPS),40,14.3, Road,TRUE,FALSE
+Bontrager Quantum MIPS,41,14.3, Multi-sport,TRUE,FALSE
+Specialized S-Works Evade II (MIPS),42,14.4, Road,TRUE,FALSE
+Bell Annex MIPS,43,14.5, Urban,TRUE,FALSE
+Lazer Coyote MIPS,44,14.8, Mountain,TRUE,FALSE
+Specialized Centro (MIPS),45,14.8, Multi-sport,TRUE,FALSE
+Specialized S-Works Prevail II,46,14.8, Road,FALSE,FALSE
+Smith Optics Overtake,47,15, Road,FALSE,FALSE
+SCOTT Vivo PLUS (MIPS),48,15.4, Mountain,TRUE,FALSE
+Catlike Whisper,49,15.4, Road,FALSE,FALSE
+Giro Savant,50,15.5, Road,FALSE,FALSE
+Bell Sixer MIPS,51,15.6, Mountain,TRUE,FALSE
+Cannondale Ryker AM (MIPS),52,15.6, Mountain,TRUE,FALSE
+Bell Draft MIPS,53,15.6, Road,TRUE,FALSE
+Specialized Ambush (non-MIPS),54,15.7, Mountain,TRUE,FALSE
+POC Octal,55,16.1, Road,FALSE,FALSE
+POC Tectal,56,16.4, Mountain,FALSE,FALSE
+Giro Foray MIPS,57,16.5, Road,TRUE,FALSE
+Louis Garneau Course,58,16.8, Road,FALSE,FALSE
+Schwinn Intercept,59,16.9, Multi-sport,FALSE,FALSE
+Giro Synthe,60,17, Road,FALSE,FALSE
+Giro Register,61,17.1, Multi-sport,FALSE,FALSE
+SCOTT Cadence PLUS (MIPS),62,17.2, Road,TRUE,FALSE
+6D ATB-1T EVO,63,17.4, Mountain,FALSE,FALSE
+Giro Fixture MIPS,64,17.8, Mountain,TRUE,FALSE
+Giro Sutton MIPS,65,18.1, Urban,TRUE,FALSE
+Kali Therapy,66,18.2, Road,FALSE,FALSE
+LEATT DBX 3.0 All Mountain V19.2,67,18.3, Mountain,FALSE,FALSE
+Specialized S-Works Evade II,68,18.5, Road,FALSE,FALSE
+Smith Optics Forefront,69,18.6, Mountain,FALSE,FALSE
+Louis Garneau Le Tour II,70,18.8, Multi-sport,FALSE,FALSE
+Bell Adrenaline,71,18.9, Multi-sport,FALSE,FALSE
+Triple 8 Dual Certified MIPS,72,19, Urban,TRUE,FALSE
+Garneau Eagle,73,19.1, Multi-sport,FALSE,FALSE
+Lazer Blade,74,19.2, Road,FALSE,FALSE
+Troy Lee Designs A1 Drone,75,19.3, Mountain,FALSE,FALSE
+Schwinn Excursion,76,19.4, Multi-sport,FALSE,FALSE
+Bern Allston,77,19.4, Urban,FALSE,FALSE
+Giro Hex,78,19.5, Mountain,FALSE,FALSE
+Kask Valegro,79,19.6, Road,FALSE,FALSE
+Kali Interceptor,80,19.6, Mountain,FALSE,FALSE
+Kali Maya 2.0,81,19.7, Mountain,FALSE,FALSE
+Bell Reflex,82,19.9, Multi-sport,FALSE,FALSE
+Bontrager Solstice,83,19.9, Multi-sport,FALSE,FALSE
+Bern Brentwood,84,19.9, Urban,FALSE,FALSE
+Bell Division,85,20.1, Urban,FALSE,FALSE
+Schwinn Thrasher,86,20.1, Multi-sport,FALSE,FALSE
+Giro Revel,87,20.9, Multi-sport,FALSE,FALSE
+Schwinn Flash,88,21, Multi-sport,FALSE,FALSE
+Smith Holt,89,22, Urban,FALSE,FALSE
+Kali Tava,90,22.3, Road,FALSE,FALSE
+Kali City,91,22.5, Urban,FALSE,FALSE
+Nutcase Street,92,22.7, Urban,FALSE,FALSE
+Specialized Centro,93,22.8, Multi-sport,FALSE,FALSE
+Schwinn Chic,94,22.9, Urban,FALSE,FALSE
+Electra Helmet,95,23.3, Urban,FALSE,FALSE
+Cannondale Quick,96,24.2, Multi-sport,FALSE,FALSE
+Lazer Genesis,97,24.3, Road,FALSE,FALSE
+Specialized Echelon II,98,25.2, Road,FALSE,FALSE
+Bern Watts,99,25.3, Urban,FALSE,FALSE

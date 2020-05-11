@@ -1,0 +1,205 @@
+---
+title: "Bootstrap ALL the Statistics with Tyidmodels"
+date: 2020-05-08
+categories: ["R"]
+tags: ["probability", "prediction"]
+---
+
+```{r load_data, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+
+# I copied this from VT and tidied it in R
+helmets <- read_csv("../../data/helmets.csv") 
+```
+
+Bootstrapping has long been one of my favorite statistical procedures. The nonparametric version requires few assumptions, and it shares attributes with both simulation and common [Bayesian models](http://www.sumsar.net/blog/2015/04/the-non-parametric-bootstrap-as-a-bayesian-model/), both of which I love. At the end of the day I wonder, why settle for a point estimate and two values for the confidence intervals when you can create a distribution and *visualize* your CIs? When my friend Rich first introduced me to bootstrapping, he said that if statistics had been invented in the computer age, this is where most classes would start. I agree.          
+
+[Tidymodels](https://www.tidymodels.org/) has provided an excellent framework for applying bootstrapping using tidyverse principles. The rsample package will be the focus of this post.
+
+I scraped data from Virginia Tech's [helmet ratings](https://helmet.beam.vt.edu/). The motivating example is to estimate the affect of a new helmet technolgy called [WaveCel](https://www.trekbikes.com/us/en_US/wavecel/), which is claimed to significantly reduce the probability of a concussion by absorbing angled impacts better. As it happens, I have already crashed twice in a WaveCel helmet while riding my mountain bike (I know, I know. I've dialed it back since then). In both cases, I avoided what may have been a more serious brain injury. But what do the test data say?
+
+Virginia Tech assigns scores to helmets based on a testing methodology that accounts for the frequency and severity of impacts. A lower score in their system represents a reduced probability of common injuries. Importantly for our analysis, the scores are not normally distributed.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+helmets %>% 
+  ggplot(aes(score)) +
+  geom_histogram(bins = 20) +
+  labs(x = "Virginia Tech's Helmet Scores",
+         y = "Density",
+         title = "Helmet ratings are non-normal",
+         subtitle = "Lower is better")
+```
+
+I am most interested in the difference between two technologies, WaveCel and MIPS, both of which reduce torsional impacts. WaveCel is such a new technology that there are only four helmets that use it currently on the market--a small sample size, to be sure. Fortunately, all four have been tested by VT; and their scores are smiliar enough that it is possible to see the difference between WaveCel, its more established rival MIPS, and the standard helmets that mostly protect against linear impacts. 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+helmets %>% 
+  mutate(type = case_when(mips ~ "MIPS",
+                          wavecel ~ "WaveCel",
+                          TRUE ~ "none")) %>% 
+  ggplot(aes(type, score)) +
+  geom_boxplot() +
+  labs(x = "Tech",
+         y = "Score",
+         title = "MIPS and WaveCel perform much better",
+         subtitle = "...at VT's tests")
+```
+
+What is obvious in this plot is that MIPS and WaveCel are right on par with each other, and that both technologies test better than regular helmets. [Some say](https://helmets.org/vatechstar.htm) that VT's testing protocols favor MIPS and WaveCel by coupling the headform more tightly to the helmet. It would be great if other labs released their data. But for now this is the most comprehensive way to compare helmets.   
+
+I could perform a simple t-test of the means, which would show WaveCel with a slight edge over MIPS. But I wanted to go a step further and control for the helmet types, which affect test performance too.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+helmets %>% 
+  # filter(mips) %>% 
+  ggplot(aes(style, score)) +
+  geom_boxplot() +
+  labs(x = "Type",
+         y = "Score",
+         title = "The design of a helmet affects its score")
+```
+
+## Bootstrap the Tidy Way
+
+Tidymodels is a collection of packages that automate common modeling practices, simplify many processes, and make it easier to store outputs in a tidy format. I find that the unique nomenclature can be confusing (am I `baking` this thing, or `juicing` it?), but in general love how it streamlines everything from data preperation to model tuning.    
+
+For this problem, I begin by setting up a bootstrap of 3,000 resamples. Each split is the same length of the original, but with random samples taken with replacement, such that any given helmet could be included more than once. 
+
+```{r, message=FALSE, warning=FALSE}
+set.seed(1876)
+helmet_bootraps <- bootstraps(helmets, times = 3e3, apparent = TRUE)
+```
+
+You can access any of the splits and examine how it differs from the original data.
+
+```{r, message=FALSE, warning=FALSE}
+head(as_tibble(helmet_bootraps$splits[[55]]))
+```
+
+### Map Functions
+
+Now for the cool part: because the splits are stored as lists within a `tibble`, you can easily `map` any type of function to the data. For this example, I've written three functions: 
+
+1. The mean of MIPS scores
+2. A linear model with type and technolgoy as independent variables
+3. The difference between the coefficients for MIPS and WaveCel in that model
+
+
+```{r, message=FALSE, warning=FALSE}
+#1
+calc_mips_mean <- function(split){
+  dat <- analysis(split) %>% 
+    filter(mips) %>% 
+    pull(score)
+  # Put it in this tidy format to use int_pctl
+  return(tibble(
+    term = "mean",
+    estimate = mean(dat),
+    std.err = sd(dat)/sqrt(length(dat))))
+}
+
+# 2
+base_model <- function(split){
+  lm(score ~ style + mips + wavecel, data = analysis(split)) %>% 
+    tidy()
+}
+
+# 3
+beta_diff <- function(split){
+  model <- lm(score ~ style + mips + wavecel, data = analysis(split)) 
+  # Put it in this tidy format to use int_pctl
+  return(tibble(
+    term = "diff_mips_wavecel",
+    estimate = model$coefficients["wavecelTRUE"] - model$coefficients["mipsTRUE"],
+    std.err = NA_real_))
+}
+```
+
+And, as I described above, now it's just a matter of mapping these to the data, which will add three new tibbles to each of the bootstraps.
+
+```{r, message=FALSE, warning=FALSE}
+helmet_stats <- helmet_bootraps %>%
+  mutate(
+    mips_mean = map(splits, calc_mips_mean),
+    coef_info = map(splits, base_model),
+    coef_diff = map(splits, beta_diff))
+
+head(helmet_stats)
+```
+
+With this meta-tibble, I can make us of handy functions from the `rsample` package to calculate things like perentile intervals, T-intervals, and BCa, which are useful for obtaining confidence intervals of boostrapped statistics.   
+
+```{r, message=FALSE, warning=FALSE}
+int_pctl(helmet_stats, mips_mean)
+```
+
+Finally, I unnsest the data to visualize it. 
+
+```{r, message=FALSE, warning=FALSE}
+helmet_coefs <- helmet_stats %>%
+  unnest(coef_info)
+
+helmet_coefs %>%
+  select(estimate, term) %>% 
+  filter(term %in% c("wavecelTRUE", "mipsTRUE")) %>% 
+  ggplot(aes(estimate, fill = term)) +
+  geom_histogram(alpha = 0.7, position="identity") +
+  scale_fill_manual(values=c("#999999", "#E69F00")) +
+  labs(x = "Estimated Impact of the Technology",
+         y = "Count /3k Bootstrapped Models",
+         title = "WaveCel is better, but there is overlap")
+```
+
+This plot is why I appreciate boostrapping. It's a visual representation of thousands of model coefficients, each from a different sample of the original data, showing the range of outcomes for both technologies. 
+
+To get an intuition of what's happening, imagine taking data from one of the more extreme results, say the far left tail on WaveCel. 
+
+```{r}
+extreme_result <- helmet_coefs %>% 
+  filter(term == "wavecelTRUE") %>%
+  arrange(estimate) %>% 
+  slice(1) 
+
+as_tibble(extreme_result$splits[[1]]) %>% 
+  filter(wavecel) %>% 
+  head()
+```
+
+In this unusual case, the data randomly contained three Specter models, which is the best performing WaveCel helmet. In most cases, however, the data will contain a balanced mix of representative models and types. WaveCel is more dispersed because of the small original sample, which underlies subsequent resamples. 
+
+
+### Bootstrapping the Differences
+
+To get a final estimate of the *difference* between MIPS and WaveCel, I will use the percentile interval on the delta between the coefficients. That's a lot of nouns. What I mean is, for each bootstrap sample I run a regression and subtract the WaveCel effect from the MIPS effect (controlling for helmet type). The percentile interval is a way to show an upper and lower bound that countain about 95% of those values. 
+
+```{r, message=FALSE, warning=FALSE}
+int_pctl(helmet_stats, coef_diff)
+```
+
+Based on this, WaveCel is probably better at VT's tests. This shows an upper value that is above zero, however, so we cannot rule out the possibility that MIPS is better. Once again, having a tidy tibble is nice, becuase I can filter the data to values in the 95% interval and see what portion of those are below zero (i.e., favor WaveCel).
+
+```{r, message=FALSE, warning=FALSE}
+proportion <- helmet_stats %>%
+  unnest(coef_diff) %>% 
+  filter(estimate >= -2.551318 & estimate <= 0.2744458) %>% 
+  group_by(id) %>% 
+  mutate(pos = sum(estimate > 0),
+         neg = sum(estimate < 0)) 
+
+sum(proportion$neg) / nrow(proportion)
+```
+
+This shows that WaveCel held an edge in 98% of the models under consideration.
+
+## Conclusion
+I estimate that WaveCel is equal to a 1.17 point advantage on Virginia Tech's tests relative to MIPS. Based on my read of their methodology, this translates to about a 2.5% increase in safety (they appear to have a scale of 0 - 47.4). This does not seem like much. Indeed, seperate tests led by WaveCel's inventors showed a much larger effect. When it comes to preventing brain injury, however, even small gains are within my region of practical significance. 
+
+In any case, bootstrapping is a useful tool for visualizing and estimating how confident to be in model results. Tidymodels, and specifically the `rsample` package, provide an easy platform for working with bootstrapped samples.    
+
+
+
+
+
+
+
