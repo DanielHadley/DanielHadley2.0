@@ -13,6 +13,15 @@
     
     
     <item>
+      <title>Bootstrap ALL the Statistics with Tyidmodels</title>
+      <link>/bootstrap_tutto/</link>
+      <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/bootstrap_tutto/</guid>
+      <description>Bootstrapping has long been one of my favorite statistical procedures. The nonparametric version requires few assumptions, and it shares attributes with both simulation and common Bayesian models, both of which I love. At the end of the day I wonder, why settle for a point estimate and two values for the confidence intervals when you can create a distribution and visualize your CIs? When my friend Rich first introduced me to bootstrapping, he said that if statistics had been invented in the computer age, this is where most classes would start.</description>
+    </item>
+    
+    <item>
       <title>Book Review: Irreversible Things</title>
       <link>/irreversible-things-review/</link>
       <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>

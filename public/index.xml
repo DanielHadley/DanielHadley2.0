@@ -11,6 +11,158 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Bootstrap ALL the Statistics with Tyidmodels</title>
+      <link>/bootstrap_tutto/</link>
+      <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/bootstrap_tutto/</guid>
+      <description>&lt;p&gt;Bootstrapping has long been one of my favorite statistical procedures. The nonparametric version requires few assumptions, and it shares attributes with both simulation and common &lt;a href=&#34;http://www.sumsar.net/blog/2015/04/the-non-parametric-bootstrap-as-a-bayesian-model/&#34;&gt;Bayesian models&lt;/a&gt;, both of which I love. At the end of the day I wonder, why settle for a point estimate and two values for the confidence intervals when you can create a distribution and &lt;em&gt;visualize&lt;/em&gt; your CIs? When my friend Rich first introduced me to bootstrapping, he said that if statistics had been invented in the computer age, this is where most classes would start. I agree.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.tidymodels.org/&#34;&gt;Tidymodels&lt;/a&gt; has provided an excellent framework for applying bootstrapping using tidyverse principles. The rsample package will be the focus of this post.&lt;/p&gt;
+&lt;p&gt;I scraped data from Virginia Tech’s &lt;a href=&#34;https://helmet.beam.vt.edu/&#34;&gt;helmet ratings&lt;/a&gt;. The motivating example is to estimate the affect of a new helmet technolgy called &lt;a href=&#34;https://www.trekbikes.com/us/en_US/wavecel/&#34;&gt;WaveCel&lt;/a&gt;, which is claimed to significantly reduce the probability of a concussion by absorbing angled impacts better. As it happens, I have already crashed twice in a WaveCel helmet while riding my mountain bike (I know, I know. I’ve dialed it back since then). In both cases, I avoided what may have been a more serious brain injury. But what do the test data say?&lt;/p&gt;
+&lt;p&gt;Virginia Tech assigns scores to helmets based on a testing methodology that accounts for the frequency and severity of impacts. A lower score in their system represents a reduced probability of common injuries. Importantly for our analysis, the scores are not normally distributed.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/bootstrap_tutto_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I am most interested in the difference between two technologies, WaveCel and MIPS, both of which reduce torsional impacts. WaveCel is such a new technology that there are only four helmets that use it currently on the market–a small sample size, to be sure. Fortunately, all four have been tested by VT; and their scores are smiliar enough that it is possible to see the difference between WaveCel, its more established rival MIPS, and the standard helmets that mostly protect against linear impacts.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/bootstrap_tutto_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;What is obvious in this plot is that MIPS and WaveCel are right on par with each other, and that both technologies test better than regular helmets. &lt;a href=&#34;https://helmets.org/vatechstar.htm&#34;&gt;Some say&lt;/a&gt; that VT’s testing protocols favor MIPS and WaveCel by coupling the headform more tightly to the helmet. It would be great if other labs released their data. But for now this is the most comprehensive way to compare helmets.&lt;/p&gt;
+&lt;p&gt;I could perform a simple t-test of the means, which would show WaveCel with a slight edge over MIPS. But I wanted to go a step further and control for the helmet types, which affect test performance too.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/bootstrap_tutto_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;bootstrap-the-tidy-way&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Bootstrap the Tidy Way&lt;/h2&gt;
+&lt;p&gt;Tidymodels is a collection of packages that automate common modeling practices, simplify many processes, and make it easier to store outputs in a tidy format. I find that the unique nomenclature can be confusing (am I &lt;code&gt;baking&lt;/code&gt; this thing, or &lt;code&gt;juicing&lt;/code&gt; it?), but in general love how it streamlines everything from data preperation to model tuning.&lt;/p&gt;
+&lt;p&gt;For this problem, I begin by setting up a bootstrap of 3,000 resamples. Each split is the same length of the original, but with random samples taken with replacement, such that any given helmet could be included more than once.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1876)
+helmet_bootraps &amp;lt;- bootstraps(helmets, times = 3e3, apparent = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can access any of the splits and examine how it differs from the original data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(as_tibble(helmet_bootraps$splits[[55]]))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 6
+##   V1                           id score style       mips  wavecel
+##   &amp;lt;chr&amp;gt;                     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;lgl&amp;gt; &amp;lt;lgl&amp;gt;  
+## 1 Lazer Blade                  74  19.2 Road        FALSE FALSE  
+## 2 Nutcase Street               92  22.7 Urban       FALSE FALSE  
+## 3 Giro Revel                   87  20.9 Multi-sport FALSE FALSE  
+## 4 Bell Draft MIPS              53  15.6 Road        TRUE  FALSE  
+## 5 Schwinn Chic                 94  22.9 Urban       FALSE FALSE  
+## 6 Bontrager Specter WaveCel     8  10.8 Road        FALSE TRUE&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;map-functions&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Map Functions&lt;/h3&gt;
+&lt;p&gt;Now for the cool part: because the splits are stored as lists within a &lt;code&gt;tibble&lt;/code&gt;, you can easily &lt;code&gt;map&lt;/code&gt; any type of function to the data. For this example, I’ve written three functions:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The mean of MIPS scores&lt;/li&gt;
+&lt;li&gt;A linear model with type and technolgoy as independent variables&lt;/li&gt;
+&lt;li&gt;The difference between the coefficients for MIPS and WaveCel in that model&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#1
+calc_mips_mean &amp;lt;- function(split){
+  dat &amp;lt;- analysis(split) %&amp;gt;% 
+    filter(mips) %&amp;gt;% 
+    pull(score)
+  # Put it in this tidy format to use int_pctl
+  return(tibble(
+    term = &amp;quot;mean&amp;quot;,
+    estimate = mean(dat),
+    std.err = sd(dat)/sqrt(length(dat))))
+}
+
+# 2
+base_model &amp;lt;- function(split){
+  lm(score ~ style + mips + wavecel, data = analysis(split)) %&amp;gt;% 
+    tidy()
+}
+
+# 3
+beta_diff &amp;lt;- function(split){
+  model &amp;lt;- lm(score ~ style + mips + wavecel, data = analysis(split)) 
+  # Put it in this tidy format to use int_pctl
+  return(tibble(
+    term = &amp;quot;diff_mips_wavecel&amp;quot;,
+    estimate = model$coefficients[&amp;quot;wavecelTRUE&amp;quot;] - model$coefficients[&amp;quot;mipsTRUE&amp;quot;],
+    std.err = NA_real_))
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And, as I described above, now it’s just a matter of mapping these to the data, which will add three new tibbles to each of the bootstraps.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;helmet_stats &amp;lt;- helmet_bootraps %&amp;gt;%
+  mutate(
+    mips_mean = map(splits, calc_mips_mean),
+    coef_info = map(splits, base_model),
+    coef_diff = map(splits, beta_diff))
+
+head(helmet_stats)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 5
+##   splits          id            mips_mean        coef_info       coef_diff      
+## * &amp;lt;list&amp;gt;          &amp;lt;chr&amp;gt;         &amp;lt;list&amp;gt;           &amp;lt;list&amp;gt;          &amp;lt;list&amp;gt;         
+## 1 &amp;lt;split [99/30]&amp;gt; Bootstrap0001 &amp;lt;tibble [1 × 3]&amp;gt; &amp;lt;tibble [6 × 5… &amp;lt;tibble [1 × 3…
+## 2 &amp;lt;split [99/31]&amp;gt; Bootstrap0002 &amp;lt;tibble [1 × 3]&amp;gt; &amp;lt;tibble [6 × 5… &amp;lt;tibble [1 × 3…
+## 3 &amp;lt;split [99/37]&amp;gt; Bootstrap0003 &amp;lt;tibble [1 × 3]&amp;gt; &amp;lt;tibble [6 × 5… &amp;lt;tibble [1 × 3…
+## 4 &amp;lt;split [99/37]&amp;gt; Bootstrap0004 &amp;lt;tibble [1 × 3]&amp;gt; &amp;lt;tibble [6 × 5… &amp;lt;tibble [1 × 3…
+## 5 &amp;lt;split [99/39]&amp;gt; Bootstrap0005 &amp;lt;tibble [1 × 3]&amp;gt; &amp;lt;tibble [6 × 5… &amp;lt;tibble [1 × 3…
+## 6 &amp;lt;split [99/35]&amp;gt; Bootstrap0006 &amp;lt;tibble [1 × 3]&amp;gt; &amp;lt;tibble [6 × 5… &amp;lt;tibble [1 × 3…&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With this meta-tibble, I can make us of handy functions from the &lt;code&gt;rsample&lt;/code&gt; package to calculate things like perentile intervals, T-intervals, and BCa, which are useful for obtaining confidence intervals of boostrapped statistics.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;int_pctl(helmet_stats, mips_mean)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
+##   term  .lower .estimate .upper .alpha .method   
+##   &amp;lt;chr&amp;gt;  &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;     
+## 1 mean    12.6      13.2   13.9   0.05 percentile&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, I unnsest the data to visualize it.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;helmet_coefs &amp;lt;- helmet_stats %&amp;gt;%
+  unnest(coef_info)
+
+helmet_coefs %&amp;gt;%
+  select(estimate, term) %&amp;gt;% 
+  filter(term %in% c(&amp;quot;wavecelTRUE&amp;quot;, &amp;quot;mipsTRUE&amp;quot;)) %&amp;gt;% 
+  ggplot(aes(estimate, fill = term)) +
+  geom_histogram(alpha = 0.7, position=&amp;quot;identity&amp;quot;) +
+  scale_fill_manual(values=c(&amp;quot;#999999&amp;quot;, &amp;quot;#E69F00&amp;quot;)) +
+  labs(x = &amp;quot;Estimated Impact of the Technology&amp;quot;,
+         y = &amp;quot;Count /3k Bootstrapped Models&amp;quot;,
+         title = &amp;quot;WaveCel is better, but there is overlap&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/bootstrap_tutto_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This plot is why I appreciate boostrapping. It’s a visual representation of thousands of model coefficients, each from a different sample of the original data, showing the range of outcomes for both technologies.&lt;/p&gt;
+&lt;p&gt;To get an intuition of what’s happening, imagine taking data from one of the more extreme results, say the far left tail on WaveCel.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;extreme_result &amp;lt;- helmet_coefs %&amp;gt;% 
+  filter(term == &amp;quot;wavecelTRUE&amp;quot;) %&amp;gt;%
+  arrange(estimate) %&amp;gt;% 
+  slice(1) 
+
+as_tibble(extreme_result$splits[[1]]) %&amp;gt;% 
+  filter(wavecel) %&amp;gt;% 
+  head()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 3 x 6
+##   V1                           id score style mips  wavecel
+##   &amp;lt;chr&amp;gt;                     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;lgl&amp;gt; &amp;lt;lgl&amp;gt;  
+## 1 Bontrager Specter WaveCel     8  10.8 Road  FALSE TRUE   
+## 2 Bontrager Specter WaveCel     8  10.8 Road  FALSE TRUE   
+## 3 Bontrager Specter WaveCel     8  10.8 Road  FALSE TRUE&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this unusual case, the data randomly contained three Specter models, which is the best performing WaveCel helmet. In most cases, however, the data will contain a balanced mix of representative models and types. WaveCel is more dispersed because of the small original sample, which underlies subsequent resamples.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bootstrapping-the-differences&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Bootstrapping the Differences&lt;/h3&gt;
+&lt;p&gt;To get a final estimate of the &lt;em&gt;difference&lt;/em&gt; between MIPS and WaveCel, I will use the percentile interval on the delta between the coefficients. That’s a lot of nouns. What I mean is, for each bootstrap sample I run a regression and subtract the WaveCel effect from the MIPS effect (controlling for helmet type). The percentile interval is a way to show an upper and lower bound that countain about 95% of those values.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;int_pctl(helmet_stats, coef_diff)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
+##   term              .lower .estimate .upper .alpha .method   
+##   &amp;lt;chr&amp;gt;              &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;     
+## 1 diff_mips_wavecel  -2.55     -1.18  0.274   0.05 percentile&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Based on this, WaveCel is probably better at VT’s tests. This shows an upper value that is above zero, however, so we cannot rule out the possibility that MIPS is better. Once again, having a tidy tibble is nice, becuase I can filter the data to values in the 95% interval and see what portion of those are below zero (i.e., favor WaveCel).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;proportion &amp;lt;- helmet_stats %&amp;gt;%
+  unnest(coef_diff) %&amp;gt;% 
+  filter(estimate &amp;gt;= -2.551318 &amp;amp; estimate &amp;lt;= 0.2744458) %&amp;gt;% 
+  group_by(id) %&amp;gt;% 
+  mutate(pos = sum(estimate &amp;gt; 0),
+         neg = sum(estimate &amp;lt; 0)) 
+
+sum(proportion$neg) / nrow(proportion)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9782918&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This shows that WaveCel held an edge in 98% of the models under consideration.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I estimate that WaveCel is equal to a 1.17 point advantage on Virginia Tech’s tests relative to MIPS. Based on my read of their methodology, this translates to about a 2.5% increase in safety (they appear to have a scale of 0 - 47.4). This does not seem like much. Indeed, seperate tests led by WaveCel’s inventors showed a much larger effect. When it comes to preventing brain injury, however, even small gains are within my region of practical significance.&lt;/p&gt;
+&lt;p&gt;In any case, bootstrapping is a useful tool for visualizing and estimating how confident to be in model results. Tidymodels, and specifically the &lt;code&gt;rsample&lt;/code&gt; package, provide an easy platform for working with bootstrapped samples.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Book Review: Irreversible Things</title>
       <link>/irreversible-things-review/</link>
       <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
@@ -815,27 +967,6 @@ image_write(animation, &amp;quot;~/Cars_Travolta.gif&amp;quot;)&lt;/code&gt;&lt;
 &lt;p&gt;I like this quote by the abolitionist Elizur Wright, “while nothing is more uncertain than a single life, nothing is more certain than the average duration of a thousand lives.” Recidivism trends are not as predictable, but I think that the same principle applies. That is why I like to build models that begin with very simple and uncertain functions, but that build to more tangible outcomes.&lt;/p&gt;
 &lt;p&gt;I know that for loops do not come close to capturing the complexity inherent in social systems, but I like that that they mimic the hierarchy, from agents to averages.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/Sorenson-Impact/Recidivism_App&#34;&gt;Code&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Big Data to Solve Big Problems</title>
-      <link>/big-data-big-problems/</link>
-      <pubDate>Mon, 17 Oct 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/big-data-big-problems/</guid>
-      <description>&lt;p&gt;In the marketing world, big data is used to answer ostensibly minute questions every day: are computer mouse movements predictive of purchasing? Does an orange background increase user engagement? In every &lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_places_with_%22Silicon%22_names&#34;&gt;place with Silicon in its name&lt;/a&gt;, there are teams of data scientists asking these questions.&lt;/p&gt;
-&lt;p&gt;In the social sector, by contrast, answering helpful questions is more difficult. For instance, is our program reducing homelessness? How is health spending distributed across the state? Part of the difficulty is the nature of the problems we are trying to solve. Lowering rates of recidivism is far more complex than driving ad clicks.&lt;/p&gt;
-&lt;p&gt;But there is another reason that governments, nonprofits, and philanthropists find it difficult to answer basic questions about social services: missing data. We simply do not have the infrastructure to collect and analyze data that reveals true social outcomes.&lt;/p&gt;
-&lt;p&gt;We at the Sorenson Impact Center are excited to help address this problem. Alongside &lt;a href=&#34;http://news.stanford.edu/2016/10/17/center-poverty-inequality-lead-program-measure-success-social-programs/&#34;&gt;Raj Chetty&lt;/a&gt; and some excellent organizations, we received a federal grant to help free up, merge, and analyze data to create better social policies. As part of the &lt;a href=&#34;https://nationalservice.tumblr.com/post/151761667357/how-data-and-innovation-can-help-people&#34;&gt;Pay for Success initiative&lt;/a&gt;, the White House has challenged us to assist service providers who will be paid &lt;em&gt;only if&lt;/em&gt; they produce good outcomes.&lt;/p&gt;
-&lt;p&gt;The exciting part, from our perspective, is the possibility of using the same tools that were created to optimize things like ad performance in a totally different context. Silicon Valley’s emphasis on data science has led to a proliferation of free, open-source software, a great deal of which can be repurposed in support of Pay for Success projects. The trick is to know how to work with it.&lt;/p&gt;
-&lt;p&gt;For instance, data scientists at Google, Twitter and Airbnb have released software that can help &lt;a href=&#34;https://google.github.io/CausalImpact/CausalImpact.html&#34;&gt;estimate causal impacts&lt;/a&gt;, &lt;a href=&#34;https://github.com/twitter/AnomalyDetection&#34;&gt;detect anomalies in time series data&lt;/a&gt;, and interactively &lt;a href=&#34;https://github.com/airbnb/caravel&#34;&gt;visualize large datasets&lt;/a&gt;, respectively. This is part of a broader movement to share code and create tools that others can use. Ultimately, this movement towards open source could give cash-strapped governments and nonprofits access to the same software resources as billion-dollar tech companies.&lt;/p&gt;
-&lt;div id=&#34;the-bazaar&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;The Bazaar&lt;/h3&gt;
-&lt;p&gt;Open-source software has been described as a &lt;a href=&#34;https://en.wikipedia.org/wiki/The_Cathedral_and_the_Bazaar&#34;&gt;metaphorical bazaar&lt;/a&gt;. As opposed to a Cathedral — where top-down decisions drive proprietary software — the Bazaar is a place where people from all over the globe can help fix bugs and generate a final product that is free thereafter. In our proposal to the federal government, we volunteered to serve as “guides to the Bazaar,” helping governments and nonprofits identify and learn how to utilize these rich resources.&lt;/p&gt;
-&lt;p&gt;At the risk of sounding like techno-utopians, we think this approach of using big data tools has the potential to help solve some of our biggest social problems. One can imagine employing Artificial Neural Networks to identify the parolees who are most in need of social work, or the students who need advanced tutoring. At the very least, we can use packages in the programming languages Python and R to transfer and merge data so that it is useful to service providers.&lt;/p&gt;
-&lt;p&gt;If this work sounds appealing to you, please reach out. We are hiring data scientists.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
